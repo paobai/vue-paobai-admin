@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+dist/
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+

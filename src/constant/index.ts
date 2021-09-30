@@ -1,0 +1,6 @@
+import dictConfigMap from './dictConfigMap'
+export let grantTypePassword = 'password'
+export let grantTypeRefreshToken = 'refresh_token'
+export let clientId = 'test'
+export let clientSecret = 'test'
+export let previewServerUrl = 'http://36.133.83.121:8012/onlinePreview?url='
