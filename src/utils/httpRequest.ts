@@ -203,7 +203,7 @@ export const postRequest = (url: string, data: any, params: any, type = 'json') 
   }
 }
 
-export const getRequest = (url: string, params: any) => {
+export const getRequest = (url: string, params: any = null) : any => {
   url = http.adornUrl(url) as string
   return http({
     method: 'get',

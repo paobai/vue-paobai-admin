@@ -31,7 +31,7 @@ const plugins = debug ? [createLogger({})] : []
 // Plug in session storage based persistence
 // plugins.push(createPersistedState({ storage: window.sessionStorage }))
 
-export const store = createStore({
+export const store: Store = createStore({
   plugins,
   modules: {
     app,

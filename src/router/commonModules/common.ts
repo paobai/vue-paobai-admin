@@ -10,7 +10,7 @@ import { RouteRecordRaw } from 'vue-router'
 const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/views/common/login.vue')
   }
 ]
