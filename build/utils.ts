@@ -28,7 +28,6 @@ export function loadEnv(): ViteEnv {
       realName = Boolean(realName);
     }
     if (envName === 'VITE_PROXY') {
-      console.log('1111111111---------------------')
       try {
         realName = JSON.parse(realName);
       } catch (error) { }
