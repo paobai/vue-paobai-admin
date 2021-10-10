@@ -1,7 +1,6 @@
 <template>
   <div>
     123123
-    {{language}}
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
   </div>
 </template>
@@ -18,10 +17,7 @@ export default defineComponent({
   },
   setup(){
     let store = useStore()
-    const language = computed(() => {
-      return store.state.app.language
-    })
-    return { language }
+    return {  }
   }
 })
 </script>

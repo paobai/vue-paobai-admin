@@ -1,8 +1,6 @@
 import { RouterOptions, RouteRecordRaw, Router } from 'vue-router'
 import { isURL } from '@/utils/validate'
 
-const _import = require('./import-' + process.env.NODE_ENV)
-
 export declare interface MyRouterOptions extends RouterOptions{
     isAddDynamicMenuRoutes?: Boolean
 }
@@ -45,9 +43,9 @@ export function fnAddDynamicMenuRoutes (menuList:any[] = [], routes:any[] = []) 
                 try {
                     let distComponent = null
                     // 先看直接目录有没有
-                    try { distComponent = _import(`modules/${menuList[i].path}`) } catch (e) {}
+                    try { distComponent = import.meta.glob(`/src/views/${menuList[i].path}`) } catch (e) {}
                     // 没有的话就去该目录的index文件看看有没有
-                    if (!distComponent) distComponent = _import(`modules/${menuList[i].path}/index`) || null
+                    if (!distComponent) distComponent = import.meta.glob(`/src/views/${menuList[i].path}/index`) || null
                     route['component'] = distComponent
                 } catch (e) {}
             }

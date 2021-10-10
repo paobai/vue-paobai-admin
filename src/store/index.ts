@@ -12,18 +12,20 @@ import { store as settings, SettingStore, SettingsState } from '@/store/modules/
 import { store as permission, PermissionStore, PermissionState } from '@/store/modules/permission'
 import { store as user, UserStore, UserState } from '@/store/modules/user'
 import { store as tagViews, TagsStore, TagsViewState } from '@/store/modules/tagsview'
+import { store as main, MainState, MainStore } from "@/store/modules/paobai";
 
 export interface RootState {
     app: AppState
     settings: SettingsState
     permission: PermissionState
     user: UserState
-    tagViews: TagsViewState
+    tagViews: TagsViewState,
+    main: MainState
 }
 
 export type Store = AppStore<Pick<RootState, 'app'>> & SettingStore<Pick<RootState, 'settings'>>
 & PermissionStore<Pick<RootState, 'permission'>> & UserStore<Pick<RootState, 'user'>>
-& TagsStore<Pick<RootState, 'tagViews'>>
+& TagsStore<Pick<RootState, 'tagViews'>> & MainStore<Pick<RootState, 'main'>>
 
 // Plug in logger when in development environment
 const debug = process.env.NODE_ENV !== 'production'
@@ -34,7 +36,8 @@ const plugins = debug ? [createLogger({})] : []
 export const store: Store = createStore({
   plugins,
   modules: {
-    app,
+      main
+    // app,
     // settings,
     // permission,
     // user,

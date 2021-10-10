@@ -5,11 +5,13 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-27 20:10:59
  */
-import { createRouter, createWebHashHistory, RouteRecordRaw, Router } from 'vue-router'
-import { MyRouterOptions, fnCurrentRouteType, fixMenu, MyRouter } from "@/router/routerConfig";
+import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import {fixMenu, fnCurrentRouteType, MyRouter, MyRouterOptions} from "@/router/routerConfig";
 import Layout from '@/layout/Index.vue'
-import { getCurrentUserTree as getCurrentUserTreeApi } from '@/api/upms-api'
-import { useStore } from '@/store'
+import {getCurrentUserTree as getCurrentUserTreeApi} from '@/api/upms-api'
+import {useStore} from '@/store'
+import {LoginType} from "@/store/modules/paobai/state";
+
 const store = useStore()
 
 const commonFiles = import.meta.globEager('./commonModules/*.ts')
@@ -75,26 +77,33 @@ router.beforeEach((to, from, next) => {
   if (router.options.isAddDynamicMenuRoutes || fnCurrentRouteType(to, commonModules) === 'global') {
     next()
   } else {
-    getCurrentUserTreeApi().then((res) => {
-      console.log(res)
-      if (res && res.code === 0) {
-        let menus = res.data
-        let fixRes = fixMenu(menus)
-        router.options.isAddDynamicMenuRoutes = true
-        // let btPerms = fixRes.btPerms.map(item => item.menuKey)
-        // store.commit('user/updateBtPerms', btPerms)
-        sessionStorage.setItem('menuList', JSON.stringify(menus || '[]'))
-        // sessionStorage.setItem('permissions', JSON.stringify(res.data.permissions || '[]'))
-        next({ ...to, replace: true })
-      } else {
-        sessionStorage.setItem('menuList', '[]')
-        // sessionStorage.setItem('permissions', '[]')
-        next()
-      }
-    }).catch((e) => {
-      console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+    if (store.state.main.loginState === LoginType.HadLogin) {
+      // TODO 获取路由
+      // getCurrentUserTreeApi().then((res) => {
+      //   console.log(res)
+      //   if (res && res.code === 0) {
+      //     let menus = res.data
+      //     let fixRes = fixMenu(menus)
+      //     router.options.isAddDynamicMenuRoutes = true
+      //     // let btPerms = fixRes.btPerms.map(item => item.menuKey)
+      //     // store.commit('user/updateBtPerms', btPerms)
+      //     sessionStorage.setItem('menuList', JSON.stringify(menus || '[]'))
+      //     // sessionStorage.setItem('permissions', JSON.stringify(res.data.permissions || '[]'))
+      //     next({ ...to, replace: true })
+      //   } else {
+      //     sessionStorage.setItem('menuList', '[]')
+      //     // sessionStorage.setItem('permissions', '[]')
+      //     next()
+      //   }
+      // }).catch((e) => {
+      //   console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+      //   router.push({ name: 'login' })
+      // })
+      next()
+    } else {
       router.push({ name: 'login' })
-    })
+    }
+
   }
 })
 
