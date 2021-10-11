@@ -46,7 +46,7 @@ export function fnAddDynamicMenuRoutes (menuList:any[] = [], routes:any[] = []) 
                     try { distComponent = import.meta.glob(`/src/views/${menuList[i].path}`) } catch (e) {}
                     // 没有的话就去该目录的index文件看看有没有
                     if (!distComponent) distComponent = import.meta.glob(`/src/views/${menuList[i].path}/index`) || null
-                    route['component'] = distComponent
+                    route['component'] = distComponent as any
                 } catch (e) {}
             }
             routes.push(route)
@@ -116,4 +116,22 @@ export function addRouterToMainRouter(routes: any, router: any, mainRoutes: any)
         { path: '*', redirect: { name: '404' } }
     ])
     sessionStorage.setItem('dynamicMenuRoutes', JSON.stringify(mainRoutes.children || '[]'))
+}
+
+export interface GetRouteStructure {
+    path: string
+    name: string
+    component: any
+    meta: object
+}
+
+export function buildRouter(item: GetRouteStructure, modulesRoutes: any) {
+    let componentPath = `/src/views${item.path}.vue`
+    return {
+        path: item.path,
+        name: item.name,
+        component: modulesRoutes[componentPath],
+        meta: {
+        }
+    }
 }

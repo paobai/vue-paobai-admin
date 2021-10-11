@@ -33,12 +33,17 @@ export const actions: ActionTree<MainState, RootState> & Actions  = {
             return new Promise(function(resolve, reject){
                 //做一些异步操作
                 setTimeout(function(){
-                    resolve({data : {userInfo: {name: 'paobai'}}});
+                    if (username === 'admin' && password === 'admin') resolve({data : {userInfo: {name: 'paobai'}}, code: 1});
+                    else resolve({data : null, code: 0})
                 }, 2000);
             })
         }
         let res = await loginFun()
-        commit(MainMutationTypes.SET_USERINFO, res.data.userInfo)
-        commit(MainMutationTypes.SET_LOGIN_STATE, LoginType.HadLogin)
+        if (res.code === 1) {
+            commit(MainMutationTypes.SET_USERINFO, res.data.userInfo)
+            commit(MainMutationTypes.SET_LOGIN_STATE, LoginType.HadLogin)
+        } else {
+            alert('账号或密码出错')
+        }
     }
 }

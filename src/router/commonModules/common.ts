@@ -12,6 +12,13 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/common/login.vue')
+  },
+  {
+    path: "/error/404",
+    name: "404",
+    component: () => import('@/views/common/404.vue'),
+    meta: {
+    }
   }
 ]
 export default UserManagerRouter
