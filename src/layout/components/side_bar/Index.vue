@@ -40,7 +40,7 @@
 import { computed, defineComponent } from 'vue'
 import SidebarItem from './SidebarItem.vue'
 import SidebarLogo from './SidebarLogo.vue'
-import variables from '@/styles/_variables.scss'
+// import variables from '@/styles/_variables.scss'
 import { useStore } from '@/store'
 import { useRoute } from 'vue-router'
 
@@ -61,6 +61,11 @@ export default defineComponent({
     const showLogo = computed(() => {
       return store.state.settings.showSidebarLogo
     })
+    let variables = {
+      menuBg: '#fff',
+      menuText: '#162B64',
+      menuActiveText: '#435EBE',
+    }
 
     const menuActiveTextColor = computed(() => {
       console.log(store.state.settings.sidebarTextTheme)

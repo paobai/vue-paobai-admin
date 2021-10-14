@@ -70,7 +70,7 @@ import { useI18n } from 'vue-i18n'
 import ScrollPane from './ScrollPane.vue'
 export default defineComponent({
   components: {
-    ScrollPane
+    // ScrollPane
   },
   setup() {
     const store = useStore()
@@ -170,7 +170,8 @@ export default defineComponent({
     const visitedViews = computed(() => {
       return store.state.tagViews.visitedViews
     })
-    const routes = computed(() => store.state.permission.routes)
+    // const routes = computed(() => store.state.permission.routes)
+    const routes = computed(() => [])
 
     const filterAffixTags = (routes: RouteRecordRaw[], basePath = '/') => {
       let tags: TagView[] = []

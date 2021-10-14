@@ -19,3 +19,5 @@ export function isImgURL (fileUrl: string) {
         return true
     }
 }
+
+export const isExternal = (path: string) => /^(https?:|mailto:|tel:)/.test(path)

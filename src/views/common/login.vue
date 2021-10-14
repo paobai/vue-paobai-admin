@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="test">
+    <h1>{{isLogin }}</h1>
     <h1>login page demo</h1>
     账号<input v-model="userName"><br>
     密码<input v-model="password" type="password"><br>
@@ -8,7 +9,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import { useStore } from '../../store'
 import { MainActionTypes } from "../../store/modules/paobai/action-types";
 import {UserActionTypes} from "../../store/modules/user/action-types";
@@ -26,7 +27,15 @@ export default {
         router.push({name: 'main'})
       }
     }
-    return {userName, password, commit}
+    let isLogin = computed(() => {
+      return store.state.main.loginState === LoginType.HadLogin
+    })
+    return {userName, password, commit, isLogin}
   }
 }
 </script>
+<style lang="scss">
+.test{
+  //width: $sideBarWidth;
+}
+</style>

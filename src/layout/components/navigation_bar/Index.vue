@@ -114,7 +114,7 @@ export default {
       return store.state.app.device.toString()
     })
     const avatar = computed(() => {
-      return store.state.user.avatar
+      return ''
     })
     const state = reactive({
       toggleSideBar: () => {

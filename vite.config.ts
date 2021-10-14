@@ -42,6 +42,13 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     resolve: {
       alias,
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "./src/styles/_mixins.scss";@import "./src/styles/_variables.scss";'
+        }
+      },
+    },
     // 服务端渲染
     server: {
       // 是否开启 https

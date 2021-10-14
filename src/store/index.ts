@@ -36,12 +36,12 @@ const plugins = debug ? [createLogger({})] : []
 export const store: Store = createStore({
   plugins,
   modules: {
-      main
-    // app,
-    // settings,
+    main,
+    app,
+    settings,
     // permission,
     // user,
-    // tagViews
+    tagViews
   }
 })
 

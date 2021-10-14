@@ -125,13 +125,20 @@ export interface GetRouteStructure {
     meta: object
 }
 
+import Layout from '@/layout/Index.vue'
 export function buildRouter(item: GetRouteStructure, modulesRoutes: any) {
     let componentPath = `/src/views${item.path}.vue`
     return {
-        path: item.path,
-        name: item.name,
-        component: modulesRoutes[componentPath],
-        meta: {
-        }
+        path: '/home',
+        component: Layout,
+        name: 'normal-layout',
+        children: [{
+            path: item.path,
+            name: item.name,
+            component: modulesRoutes[componentPath],
+            meta: {
+                }
+            }
+        ]
     }
 }
