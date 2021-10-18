@@ -21,9 +21,11 @@
     "vxe-table": "^4.0.21",
     "screenfull": "^5.0.2",
     "element-plus": "1.1.0-beta.19",
-    "element-resize-detector": "^1.2.3"
+    "element-resize-detector": "^1.2.3",
+    "clipboard": "^2.0.6"
   },
   "devDependencies": {
+    "@types/clipboard": "^2.0.1",
     "@types/file-saver": "^2.0.3",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.172",

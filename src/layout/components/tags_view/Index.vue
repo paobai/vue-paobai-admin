@@ -70,7 +70,7 @@ import { useI18n } from 'vue-i18n'
 import ScrollPane from './ScrollPane.vue'
 export default defineComponent({
   components: {
-    // ScrollPane
+    ScrollPane
   },
   setup() {
     const store = useStore()

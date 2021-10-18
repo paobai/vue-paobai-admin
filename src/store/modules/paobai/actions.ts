@@ -5,6 +5,7 @@ import {LoginType, MainState} from './state'
 import {Mutations} from './mutations'
 import {MainMutationTypes} from './mutation-types'
 import {MainActionTypes} from './action-types'
+import Cookies from 'js-cookie'
 
 
 type AugmentedActionContext = {
@@ -29,19 +30,20 @@ export const actions: ActionTree<MainState, RootState> & Actions  = {
         let { username, password } = loginInfo
         username = username.trim()
         // TODO: login Main
-        async function loginFun () {
+        async function loginFun (): Promise<{data?: {userInfo: object, token: string}, code: number}> {
             return new Promise(function(resolve, reject){
                 //做一些异步操作
                 setTimeout(function(){
-                    if (username === 'admin' && password === 'admin') resolve({data : {userInfo: {name: 'paobai'}}, code: 1});
-                    else resolve({data : null, code: 0})
+                    if (username === 'admin' && password === 'admin') resolve({data : {userInfo: {name: 'paobai'}, token: 'token'}, code: 1});
+                    else resolve({data: undefined, code: 0})
                 }, 2000);
             })
         }
         let res = await loginFun()
-        if (res.code === 1) {
+        if (res.code === 1 && res.data) {
             commit(MainMutationTypes.SET_USERINFO, res.data.userInfo)
             commit(MainMutationTypes.SET_LOGIN_STATE, LoginType.HadLogin)
+            Cookies.set('token', res.data.token)
         } else {
             alert('账号或密码出错')
         }
