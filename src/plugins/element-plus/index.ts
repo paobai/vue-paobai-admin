@@ -1,4 +1,6 @@
 import { App, Component } from "vue";
+import 'element-plus/theme-chalk/index.css'
+// import 'element-plus/dist/index.css'
 import {
   ElTag,
   ElAffix,
@@ -76,7 +78,7 @@ const plugins = [ElLoading];
 
 export function useElementPlus(app: App) {
   components.forEach((component: Component) => {
-    app.component(component.name, component);
+    app.component(component.name as string, component);
   });
   plugins.forEach(plugin => {
     app.use(plugin);

@@ -37,10 +37,12 @@
  *  3.放开babel.config 注释
  */
 import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
+import 'element-plus/theme-chalk/index.css'
+// import 'element-plus/dist/index.css'
 import i18n from '@/locales'
 import { useStore } from '@/store'
-export default function loadComponent(app: any) {
+import { App, Component } from "vue";
+export default function loadComponent(app: App) {
   app.use(ElementPlus, { size: useStore().state.app.size, i18n: i18n.global.t })
   // app.use(ElButton)
   // app.use(ElSelect)

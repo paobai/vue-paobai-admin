@@ -19,6 +19,7 @@ import {getCurrentUserTree as getCurrentUserTreeApi} from '@/api/upms-api'
 import {useStore} from '@/store'
 import {LoginType} from "@/store/modules/paobai/state";
 import Cookies from 'js-cookie'
+import {PermissionActionType} from "@/store/modules/permission/action-types";
 
 const modulesRoutes = import.meta.glob("/src/views/*/*.vue");
 
@@ -30,6 +31,11 @@ Object.keys(commonFiles).forEach((key) => {
   if (key === './index.ts') return
   commonModules = commonModules.concat(commonFiles[key].default)
 })
+// const otherFiles = import.meta.globEager('./permissionModules/*.ts')
+// Object.keys(otherFiles).forEach((key) => {
+//   if (key === './index.ts') return
+//   commonModules = commonModules.concat(otherFiles[key].default)
+// })
 
 
 // 主入口路由(需嵌套上左右整体布局)
@@ -102,10 +108,13 @@ router.beforeEach((to, from, next) => {
       if (res.code === 1) {
         let newRoute: Array<GetRouteStructure> = res.data as any
         newRoute.forEach(item => {
-          let buildRoute = buildRouter(item, modulesRoutes)
-          console.log('buildRoute', buildRoute, modulesRoutes)
-          router.addRoute(buildRoute)
+          buildRouter(item, modulesRoutes, router)
+          // Dynamically add accessible routes
         })
+        // store.state.permission.dynamicRoutes.forEach((route) => {
+        //   router.addRoute(route)
+        // })
+        store.dispatch(PermissionActionType.ACTION_SET_ROUTES, newRoute)
       }
       next()
       // console.log(res)

@@ -24,7 +24,7 @@
         :active-text-color="menuActiveTextColor"
         mode="vertical"
       >
-        <SidebarItem
+        <sidebar-item
           v-for="route in routes"
           :key="route.path"
           :item="route"
@@ -43,6 +43,7 @@ import SidebarLogo from './SidebarLogo.vue'
 // import variables from '@/styles/_variables.scss'
 import { useStore } from '@/store'
 import { useRoute } from 'vue-router'
+import Layout from "@/layout/index.vue";
 
 export default defineComponent({
   components: {
@@ -56,8 +57,8 @@ export default defineComponent({
       return store.state.app.sidebar
     })
     const routes = computed(() => {
-      // return store.state.permission.routes
-      return []
+      const routes =  store.state.permission.routes
+      return routes
     })
     const showLogo = computed(() => {
       return store.state.settings.showSidebarLogo
@@ -86,7 +87,7 @@ export default defineComponent({
           return meta.activeMenu
         }
       }
-      return path
+      return '2'
     })
 
     const isCollapse = computed(() => {

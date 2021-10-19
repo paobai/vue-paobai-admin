@@ -123,13 +123,20 @@ export interface GetRouteStructure {
     name: string
     component: any
     meta: object
+    children?: GetRouteStructure[]
 }
 
 import Layout from '@/layout/Index.vue'
-export function buildRouter(item: GetRouteStructure, modulesRoutes: any) {
+export function buildRouter(item: GetRouteStructure, modulesRoutes: any, route: Router){
+    if (item.children && item.children.length > 0) {
+        item.children.forEach(child => {
+            buildRouter(child, modulesRoutes, route)
+        })
+        return
+    }
     let componentPath = `/src/views${item.path}.vue`
-    return {
-        path: '/home',
+    let distComponent =  {
+        path: '/',
         component: Layout,
         name: 'normal-layout',
         children: [{
@@ -141,4 +148,5 @@ export function buildRouter(item: GetRouteStructure, modulesRoutes: any) {
             }
         ]
     }
+    route.addRoute(distComponent)
 }

@@ -39,7 +39,7 @@ export const store: Store = createStore({
     main,
     app,
     settings,
-    // permission,
+    permission,
     // user,
     tagViews
   }

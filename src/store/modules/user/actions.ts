@@ -96,7 +96,7 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
     commit(UserMutationTypes.SET_TOKEN, token)
     setToken(token)
     await store.dispatch(UserActionTypes.ACTION_GET_USER_INFO, undefined)
-    store.dispatch(PermissionActionType.ACTION_SET_ROUTES, state.roles)
+    // store.dispatch(PermissionActionType.ACTION_SET_ROUTES, state.roles)
     store.state.permission.dynamicRoutes.forEach((item: RouteRecordRaw) => {
       router.addRoute(item)
     })

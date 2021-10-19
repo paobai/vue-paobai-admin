@@ -4,8 +4,8 @@ import App from './App.vue'
 import router from './router'
 import { store } from './store'
 // import { loadAllPlugins } from './plugins'
-import { i18n } from "./plugins/i18n/index.ts";
-import { useElementPlus } from "../src/plugins/element-plus";
+import { i18n } from '@/plugins/i18n';
+import { useElementPlus } from "@/plugins/element-plus";
 import * as directives from '@/directives'
 import '@/assets/iconfont/iconfont.css'
 

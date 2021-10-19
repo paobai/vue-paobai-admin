@@ -34,31 +34,31 @@ export default defineComponent({
   },
   props: {
     value: {
-      type!: Array,
+      type: Array,
       required: true
     },
     url: {
-      type!: String,
+      type: String,
       required: true
     },
     field: {
-      type!: String,
+      type: String,
       required: true
     },
     width: {
-      type!: Number,
+      type: Number,
       default: 300
     },
     height: {
-      type!: Number,
+      type: Number,
       default: 300
     },
     params: {
-      type!: Object,
+      type: Object,
       default: () => null
     },
     headers: {
-      type!: Object,
+      type: Object,
       default: () => null
     }
   },

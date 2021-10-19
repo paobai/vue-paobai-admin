@@ -19,10 +19,10 @@
     >
       <SidebarItemLink
         v-if="theOnlyOneChild.meta"
-        :to="resolvePath(theOnlyOneChild.path)"
+        :to="theOnlyOneChild.path"
       >
         <el-menu-item
-          :index="resolvePath(theOnlyOneChild.path)"
+          :index="theOnlyOneChild.meta.id"
           :class="{'submenu-title-noDropdown': isFirstLevel}"
         >
           <svg
@@ -34,14 +34,14 @@
             <use :xlink:href="theOnlyOneChild.meta.icon" />
           </svg>
           <span v-if="theOnlyOneChild.meta.title">{{
-            t("route." + theOnlyOneChild.meta.title)
+            theOnlyOneChild.meta.title
           }}</span>
         </el-menu-item>
       </SidebarItemLink>
     </template>
-    <el-submenu
+    <el-sub-menu
       v-else
-      :index="resolvePath(item.path)"
+      :index="item.meta.id"
       popper-append-to-body
     >
       <template #title>
@@ -54,7 +54,7 @@
           <use :xlink:href="item.meta.icon" />
         </svg>
         <span v-if="item.meta && item.meta.title">{{
-          t("route." + item.meta.title)
+          item.meta.title
         }}</span>
       </template>
       <template v-if="item.children">
@@ -68,7 +68,7 @@
           class="nest-menu"
         />
       </template>
-    </el-submenu>
+    </el-sub-menu>
   </div>
 </template>
 
@@ -79,6 +79,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import SidebarItemLink from './SidebarItemLink.vue'
 import { useI18n } from 'vue-i18n'
+import {type} from "os";
 export default defineComponent({
   props: {
     item: {
@@ -137,7 +138,7 @@ export default defineComponent({
       }
       // If there is no children, return itself with path removed,
       // because this.basePath already conatins item's path information
-      return { ...props.item, path: '' }
+      return { ...props.item }
     })
 
     const resolvePath = (routePath: string) => {
@@ -147,7 +148,8 @@ export default defineComponent({
       if (isExternal(props.basePath)) {
         return props.basePath
       }
-      return path.resolve(props.basePath, routePath)
+      // return path.resolve(props.basePath, routePath)
+      return routePath
     }
     const { t } = useI18n()
 
