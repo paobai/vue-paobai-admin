@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     123123
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>

@@ -8,20 +8,20 @@
 
 <template>
   <el-color-picker
-    v-model="theme"
-    :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d']"
-    class="theme-picker"
-    popper-class="theme-picker-dropdown"
+      v-model="theme"
+      :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d']"
+      class="theme-picker"
+      popper-class="theme-picker-dropdown"
   />
 </template>
 
 <script lang="ts">
 import { useStore } from '@/store'
 import { computed, defineComponent, getCurrentInstance, reactive, toRefs, watch } from 'vue'
-import Loading from '@/utils/loading.ts'
+import Loading from '@/utils/loading'
 import { useI18n } from 'vue-i18n'
-// let version = import.meta.globEager('element-plus/package.json').version // element-ui version from node_modules
-let version = '1.1.0-beta.19'
+import data from 'element-plus/package.json'
+let version = data.version
 const ORIGINAL_THEME = '#409EFF' // default color
 
 export default defineComponent({
@@ -104,11 +104,12 @@ export default defineComponent({
         const oldValue = state.chalk ? state.theme : ORIGINAL_THEME
         const themeCluster = getThemeCluster(value.replace('#', ''))
         const originalCluster = getThemeCluster(oldValue.replace('#', ''))
-        const loadingInstance = loading(t('theme.loading'))
-        if (!state.chalk) {
-          const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
-          await getCSSString(url, 'chalk')
-        }
+        const loadingInstance = loading('改变颜色中')
+        console.log('state.chalk', state.chalk)
+        // if (!state.chalk) {
+        //   const url = `https://unpkg.com/element-plus@${version}/lib/theme-chalk/index.css`
+        //   await getCSSString(url, 'chalk')
+        // }
         const getHandler = (variable: string, id: string) => {
           return () => {
             const originalCluster = getThemeCluster(ORIGINAL_THEME.replace('#', ''))

@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-01-20 16:59:15
  */
 
-import elementVariables from '@/styles/element-variables.scss'
+import elementVariables from '@/styles/element-variables.module.scss'
 import layoutSettings from '@/config/default/layout'
 export interface SettingsState {
   theme: string
