@@ -4,7 +4,9 @@
     <h1>login page demo</h1>
     账号<input v-model="userName"><br>
     密码<input v-model="password" type="password"><br>
-    <button @click="commit">loginbt</button>
+<!--    <button>loginbt</button>-->
+    <el-button></el-button>
+    <a-button type="primary"  @click="commit">loginbt</a-button>
   </div>
 </template>
 

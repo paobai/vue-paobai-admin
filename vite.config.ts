@@ -46,6 +46,8 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
       preprocessorOptions: {
         scss: {
           additionalData: '@import "./src/styles/_mixins.scss";@import "./src/styles/_variables.scss";'
+        },
+        less: {
         }
       },
     },

@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@arco-design/web-vue": "^2.0.2",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "file-saver": "^2.0.5",
