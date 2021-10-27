@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.0.2",
@@ -27,17 +29,23 @@
     "vue-image-crop-upload": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^12.19.0",
     "@types/clipboard": "^2.0.1",
     "@types/file-saver": "^2.0.3",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.172",
+    "@types/node": "^12.19.0",
     "@types/qs": "^6.9.7",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
     "@vitejs/plugin-vue": "^1.6.0",
     "@vitejs/plugin-vue-jsx": "^1.1.7",
     "@vue/compiler-sfc": "^3.0.5",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^7.17.0",
     "node-sass": "^4.13.1",
+    "prettier-eslint": "^13.0.0",
     "sass": "^1.38.0",
     "sass-loader": "^12.1.0",
     "typescript": "^4.3.2",
@@ -45,6 +53,10 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "^1.2.1",
     "vite-svg-loader": "^2.2.0",
-    "vue-tsc": "^0.2.2"
+    "vue-tsc": "^0.2.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "stylelint-config-prettier": "^8.0.2"
   }
 }
