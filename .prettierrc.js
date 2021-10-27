@@ -1,4 +1,8 @@
 module.exports = {
-    singleQuote: true,  // 使用单引号
+    bracketSpacing: true,
+    jsxBracketSameLine: true,
+    singleQuote: false,
+    arrowParens: 'avoid',
+    trailingComma: 'none',
     semi: false  // 句尾不使用分号
   }

@@ -7,20 +7,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { defineComponent, computed } from "vue"
+import { useRoute } from "vue-router"
+import HelloWorld from "@/components/HelloWorld.vue"
 // import { useStore } from '@/store'
-import router from '@/router'
+import router from "@/router"
 export default defineComponent({
-  name: 'App',
-  components:{
+  name: "App",
+  components: {
     HelloWorld
   },
-  setup(){
+  setup() {
     // let store = useStore()
     let goHome = function () {
-      router.push({name: 'home'})
+      router.push({ name: "home" })
     }
     return { goHome }
   }
