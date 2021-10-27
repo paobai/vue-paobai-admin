@@ -7,17 +7,9 @@
 -->
 <template>
   <div>
-    <el-dropdown
-      id="size-select"
-      trigger="click"
-      @command="handleSetSize"
-    >
+    <el-dropdown id="size-select" trigger="click" @command="handleSetSize">
       <div>
-        <svg
-          class="icon"
-          aria-hidden="true"
-          font-size="40px"
-        >
+        <svg class="icon" aria-hidden="true" font-size="40px">
           <use xlink:href="#iconshiliangzhinengduixiang" />
         </svg>
       </div>
@@ -26,11 +18,10 @@
           <el-dropdown-item
             v-for="item of sizeOptions"
             :key="item.value"
-            :disabled="size===item.value"
+            :disabled="size === item.value"
             :command="item.value"
           >
-            {{
-              item.label }}
+            {{ item.label }}
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -40,36 +31,39 @@
 </template>
 
 <script lang="ts">
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { TagsActionTypes } from '@/store/modules/tagsview/action-types'
-import { defineComponent, reactive, nextTick, toRefs, computed } from 'vue'
-import { ElMessage } from 'element-plus'
-import { useRoute, useRouter } from 'vue-router'
+import { useStore } from "@/store"
+import { AppActionTypes } from "@/store/modules/app/action-types"
+import { TagsActionTypes } from "@/store/modules/tagsview/action-types"
+import { defineComponent, reactive, nextTick, toRefs, computed } from "vue"
+import { ElMessage } from "element-plus"
+import { useRoute, useRouter } from "vue-router"
 
 export default defineComponent({
   setup() {
     const { fullPath } = useRoute()
     const router = useRouter()
     function refreshView() {
-      useStore().dispatch(TagsActionTypes.ACTION_DEL_ALL_CACHED_VIEWS, undefined)
+      useStore().dispatch(
+        TagsActionTypes.ACTION_DEL_ALL_CACHED_VIEWS,
+        undefined
+      )
       nextTick(() => {
-        router.replace({ path: '/redirect' + fullPath }).catch((err) => {
+        router.replace({ path: "/redirect" + fullPath }).catch(err => {
           console.warn(err)
         })
       })
     }
     const state = reactive({
       sizeOptions: [
-        { label: 'Default', value: 'default' },
-        { label: 'Medium', value: 'medium' },
-        { label: 'Small', value: 'small' },
-        { label: 'Mini', value: 'mini' }
+        { label: "Default", value: "default" },
+        { label: "Medium", value: "medium" },
+        { label: "Small", value: "small" },
+        { label: "Mini", value: "mini" }
       ],
       handleSetSize: (size: string) => {
         useStore().dispatch(AppActionTypes.ACTION_SET_SIZE, size)
         refreshView()
-        ElMessage.success('Switch Size Success')
+        ElMessage.success("Switch Size Success")
       }
     })
     const size = computed(() => {

@@ -7,26 +7,18 @@
 -->
 
 <template>
-  <a
-    v-if="isExternal(to)"
-    :href="to"
-    target="_blank"
-    rel="noopener"
-  >
+  <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
     <slot />
   </a>
-  <div
-    v-else
-    @click="push"
-  >
+  <div v-else @click="push">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { isExternal } from '@/utils/validate'
-import { useRouter } from 'vue-router'
+import { defineComponent } from "vue"
+import { isExternal } from "@/utils/validate"
+import { useRouter } from "vue-router"
 export default defineComponent({
   props: {
     to: {
@@ -38,7 +30,7 @@ export default defineComponent({
     const router = useRouter()
     const push = () => {
       console.log(props.to)
-      router.push(props.to).catch((err) => {
+      router.push(props.to).catch(err => {
         console.log(err)
       })
     }

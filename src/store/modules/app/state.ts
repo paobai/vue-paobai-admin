@@ -5,12 +5,12 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-23 10:30:35
  */
-import { getSidebarStatus, getSize } from '@/utils/cookies'
-import { getLocale } from '@/locales'
+import { getSidebarStatus, getSize } from "@/utils/cookies"
+import { getLocale } from "@/locales"
 
 export enum DeviceType {
   Mobile,
-  Desktop,
+  Desktop
 }
 
 export interface AppState {
@@ -26,9 +26,9 @@ export interface AppState {
 export const state: AppState = {
   device: DeviceType.Desktop,
   sidebar: {
-    opened: getSidebarStatus() !== 'closed',
+    opened: getSidebarStatus() !== "closed",
     withoutAnimation: false
   },
   language: getLocale(),
-  size: getSize() || 'medium'
+  size: getSize() || "medium"
 }

@@ -9,32 +9,16 @@
 <template>
   <div
     class="sidebar-logo-container"
-    :class="[collapse ? 'collapse': 'notitle']"
+    :class="[collapse ? 'collapse' : 'notitle']"
   >
     <transition name="sidebarLogoFade">
-      <router-link
-        v-if="false"
-        key="collapse"
-        class="sidebar-logo-link"
-        to="/"
-      >
-        <img
-          src="favicon.ico"
-          class="sidebar-logo"
-        >
+      <router-link v-if="false" key="collapse" class="sidebar-logo-link" to="/">
+        <img src="favicon.ico" class="sidebar-logo" />
       </router-link>
-      <router-link
-        v-else
-        key="expand"
-        class="sidebar-logo-link"
-        to="/"
-      >
-        <img
-          class="sidebar-logo"
-          :src="Logo"
-        >
+      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
+        <img class="sidebar-logo" :src="Logo" />
         <h1 class="sidebar-title">
-          Vue<span style="color:#57CAEB">3</span>管理后台
+          Vue<span style="color: #57caeb">3</span>管理后台
         </h1>
       </router-link>
     </transition>
@@ -42,9 +26,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 // import settings from '@/config/default/setting.config'
-import Logo from '@/assets/images/home/logo.png'
+import Logo from "@/assets/images/home/logo.png"
 export default defineComponent({
   props: {
     collapse: {
@@ -53,7 +37,7 @@ export default defineComponent({
     }
   },
   setup() {
-    const title = 'Vue3管理后台'
+    const title = "Vue3管理后台"
     return {
       title,
       Logo
@@ -98,7 +82,7 @@ export default defineComponent({
     & .sidebar-title {
       display: inline-block;
       margin: 0;
-      color: #435EBE;
+      color: #435ebe;
       font-weight: 600;
       line-height: 50px;
       font-size: 24px;
@@ -112,11 +96,11 @@ export default defineComponent({
       margin-right: 12px;
     }
   }
-  &.notitle{
-    .sidebar-title{
+  &.notitle {
+    .sidebar-title {
       display: none;
     }
-       & .sidebar-logo {
+    & .sidebar-logo {
       height: 60%;
     }
   }

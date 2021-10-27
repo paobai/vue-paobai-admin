@@ -1,15 +1,8 @@
 <template>
   <div class="draggableList">
-    <div
-      :style="{width: list1width}"
-      class="draggableList-list"
-    >
+    <div :style="{ width: list1width }" class="draggableList-list">
       <h3>{{ list1Title }}</h3>
-      <draggable
-        :list="list1"
-        group="article"
-        class="dragArea"
-      >
+      <draggable :list="list1" group="article" class="dragArea">
         <div
           v-for="element in list1"
           :key="element.id"
@@ -18,39 +11,26 @@
           <div class="list-complete-item-handle">
             {{ element.id }}[{{ element.author }}] {{ element.title }}
           </div>
-          <div style="position:absolute;right:0px;">
+          <div style="position: absolute; right: 0px">
             <span
               @click="deleteEle(element)"
-              style="float: right ;margin-top: -20px;margin-right:5px;"
+              style="float: right; margin-top: -20px; margin-right: 5px"
             >
-              <i
-                style="color:#ff4949"
-                class="el-icon-delete"
-              />
+              <i style="color: #ff4949" class="el-icon-delete" />
             </span>
           </div>
         </div>
       </draggable>
     </div>
-    <div
-      :style="{width: list2width}"
-      class="draggableList-list"
-    >
+    <div :style="{ width: list2width }" class="draggableList-list">
       <h3>{{ list2Title }}</h3>
-      <draggable
-        :list="list2"
-        group="article"
-        class="dragArea"
-      >
+      <draggable :list="list2" group="article" class="dragArea">
         <div
           v-for="element in list2"
           :key="element.id"
           class="list-complete-item"
         >
-          <div
-            @click="pushEle(element)"
-            class="list-complete-item-handle2"
-          >
+          <div @click="pushEle(element)" class="list-complete-item-handle2">
             {{ element.id }} [{{ element.author }}] {{ element.title }}
           </div>
         </div>
@@ -60,9 +40,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { VueDraggableNext } from 'vue-draggable-next'
-import { ArticleModel } from '@/model/articleModel'
+import { defineComponent, PropType } from "vue"
+import { VueDraggableNext } from "vue-draggable-next"
+import { ArticleModel } from "@/model/articleModel"
 export default defineComponent({
   components: {
     draggable: VueDraggableNext
@@ -82,19 +62,19 @@ export default defineComponent({
     },
     list1Title: {
       type: String,
-      default: 'list1'
+      default: "list1"
     },
     list2Title: {
       type: String,
-      default: 'list2'
+      default: "list2"
     },
     list1width: {
       type: String,
-      default: '48%'
+      default: "48%"
     },
     list2width: {
       type: String,
-      default: '48%'
+      default: "48%"
     }
   },
   setup(props) {
@@ -140,7 +120,6 @@ export default defineComponent({
     }
   }
 })
-
 </script>
 
 <style lang="scss" scoped>
@@ -195,11 +174,11 @@ export default defineComponent({
 }
 
 .list-complete-item.sortable-chosen {
-  background: #4AB7BD;
+  background: #4ab7bd;
 }
 
 .list-complete-item.sortable-ghost {
-  background: #30B08F;
+  background: #30b08f;
 }
 
 .list-complete-enter,

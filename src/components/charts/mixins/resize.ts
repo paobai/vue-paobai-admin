@@ -6,8 +6,8 @@
  * @LastEditTime: 2021-01-14 16:34:24
  */
 
-import { ref } from 'vue'
-export default function() {
+import { ref } from "vue"
+export default function () {
   const chart = ref<any>()
   const sidebarElm = ref<Element>()
 
@@ -18,29 +18,35 @@ export default function() {
   }
 
   const sidebarResizeHandler = (e: TransitionEvent) => {
-    if (e.propertyName === 'width') {
+    if (e.propertyName === "width") {
       chartResizeHandler()
     }
   }
 
   const initResizeEvent = () => {
-    window.addEventListener('resize', chartResizeHandler)
+    window.addEventListener("resize", chartResizeHandler)
   }
 
   const destroyResizeEvent = () => {
-    window.removeEventListener('resize', chartResizeHandler)
+    window.removeEventListener("resize", chartResizeHandler)
   }
 
   const initSidebarResizeEvent = () => {
-    sidebarElm.value = document.getElementsByClassName('sidebar-container')[0]
+    sidebarElm.value = document.getElementsByClassName("sidebar-container")[0]
     if (sidebarElm.value) {
-      sidebarElm.value.addEventListener('transitionend', sidebarResizeHandler as EventListener)
+      sidebarElm.value.addEventListener(
+        "transitionend",
+        sidebarResizeHandler as EventListener
+      )
     }
   }
 
   const destroySidebarResizeEvent = () => {
     if (sidebarElm.value) {
-      sidebarElm.value.removeEventListener('transitionend', sidebarResizeHandler as EventListener)
+      sidebarElm.value.removeEventListener(
+        "transitionend",
+        sidebarResizeHandler as EventListener
+      )
     }
   }
 

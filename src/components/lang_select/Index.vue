@@ -12,7 +12,7 @@
         class="icon"
         aria-hidden="true"
         font-size="45px"
-        :class="{'svg-color': isWhite}"
+        :class="{ 'svg-color': isWhite }"
       >
         <use xlink:href="#iconzhongyingwen" />
       </svg>
@@ -21,7 +21,7 @@
           <el-dropdown-item
             v-for="item in languages"
             :key="item.value"
-            :disabled="language===item.value"
+            :disabled="language === item.value"
           >
             <span @click="handleSetLanguage(item.value)">{{ item.name }}</span>
           </el-dropdown-item>
@@ -32,14 +32,14 @@
 </template>
 
 <script lang="ts">
-import { useStore } from '@/store'
-import { computed, defineComponent, reactive, toRefs } from 'vue'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { useI18n } from 'vue-i18n'
-import { ElMessage } from 'element-plus'
+import { useStore } from "@/store"
+import { computed, defineComponent, reactive, toRefs } from "vue"
+import { AppActionTypes } from "@/store/modules/app/action-types"
+import { useI18n } from "vue-i18n"
+import { ElMessage } from "element-plus"
 type Language = {
-    name: string
-    value: string
+  name: string
+  value: string
 }
 
 export default defineComponent({
@@ -54,13 +54,16 @@ export default defineComponent({
     const { locale } = useI18n()
 
     const state = reactive({
-      languages: [{ name: 'en', value: 'en' }, { name: '中文', value: 'zh-cn' }] as Array<Language>,
+      languages: [
+        { name: "en", value: "en" },
+        { name: "中文", value: "zh-cn" }
+      ] as Array<Language>,
       handleSetLanguage: (lang: string) => {
         locale.value = lang
         store.dispatch(AppActionTypes.ACTION_SET_LANGUAGE, lang)
         ElMessage({
-          message: 'Switch Language Success',
-          type: 'success'
+          message: "Switch Language Success",
+          type: "success"
         })
       }
     })
@@ -73,11 +76,10 @@ export default defineComponent({
     }
   }
 })
-
 </script>
 
 <style lang="scss" scoped>
-.svg-color{
+.svg-color {
   fill: white;
 }
 </style>

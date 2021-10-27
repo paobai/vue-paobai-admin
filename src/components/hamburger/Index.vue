@@ -7,22 +7,15 @@
 -->
 
 <template>
-  <div
-    :class="[{'is-active': isActive}]"
-    @click="toggleClick"
-  >
-    <svg
-      class="icon"
-      aria-hidden="true"
-      font-size="20px"
-    >
+  <div :class="[{ 'is-active': isActive }]" @click="toggleClick">
+    <svg class="icon" aria-hidden="true" font-size="20px">
       <use xlink:href="#iconhamburger" />
     </svg>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 export default defineComponent({
   props: {
     isActive: {
@@ -30,10 +23,10 @@ export default defineComponent({
       default: false
     }
   },
-  emits: ['toggle-click'],
+  emits: ["toggle-click"],
   setup(_, context) {
     const toggleClick = () => {
-      context.emit('toggle-click')
+      context.emit("toggle-click")
     }
     return {
       toggleClick

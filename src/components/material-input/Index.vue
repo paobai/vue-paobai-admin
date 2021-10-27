@@ -1,10 +1,7 @@
 /* eslint-disable vue/no-mutating-props */
 <template>
-  <div
-    :class="computedClasses()"
-    class="material-input__component"
-  >
-    <div :class="{iconClass: icon}">
+  <div :class="computedClasses()" class="material-input__component">
+    <div :class="{ iconClass: icon }">
       <i
         v-if="icon"
         :class="['el-icon-' + icon]"
@@ -25,7 +22,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <input
         v-if="type === 'url'"
         :id="id"
@@ -41,7 +38,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <input
         v-if="type === 'number'"
         :id="id"
@@ -62,7 +59,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <input
         v-if="type === 'password'"
         :id="id"
@@ -81,7 +78,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <input
         v-if="type === 'tel'"
         :id="id"
@@ -97,12 +94,11 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <input
         v-if="type === 'text'"
         :id="id"
         :value="title"
-
         type="text"
         class="material-input"
         :name="name"
@@ -116,7 +112,7 @@
         @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput"
-      >
+      />
       <span class="material-input-bar" />
       <label class="material-label">
         <slot />
@@ -127,7 +123,7 @@
 
 <script lang="ts">
 // Source: https://github.com/wemake-services/vue-material-input/blob/master/src/components/MaterialInput.vue
-import { defineComponent, getCurrentInstance, reactive, toRefs } from 'vue'
+import { defineComponent, getCurrentInstance, reactive, toRefs } from "vue"
 export default defineComponent({
   props: {
     title: {
@@ -136,23 +132,23 @@ export default defineComponent({
     },
     type: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     id: {
       type: String,
-      default: ''
+      default: ""
     },
     icon: {
       type: String,
-      default: ''
+      default: ""
     },
     name: {
       type: String,
-      default: ''
+      default: ""
     },
     placeholder: {
       type: String,
-      default: ''
+      default: ""
     },
     readonly: {
       type: Boolean,
@@ -168,7 +164,7 @@ export default defineComponent({
     },
     autoComplete: {
       type: String,
-      default: 'off'
+      default: "off"
     },
     min: {
       type: Number,
@@ -195,9 +191,9 @@ export default defineComponent({
       default: true
     }
   },
-  emits: ['inputVal', 'el.form.change', 'focus', 'blur'],
+  emits: ["inputVal", "el.form.change", "focus", "blur"],
   setup(props, contex) {
-    console.log(props.title, 'propspropspropspropsprops')
+    console.log(props.title, "propspropspropspropsprops")
     const state = reactive({
       focus: false
     })
@@ -208,8 +204,8 @@ export default defineComponent({
 
     const computedClasses = () => {
       return {
-        'material--active': state.focus,
-        'material--disabled': props.disabled
+        "material--active": state.focus,
+        "material--disabled": props.disabled
         // 'material--raised': Boolean(state.focus || state.valueCopy)
       }
     }
@@ -218,29 +214,29 @@ export default defineComponent({
       if (state.focus) {
         return props.placeholder
       }
-      return ''
+      return ""
     }
     const handleInput = (event: KeyboardEvent) => {
       const value = (event.target as HTMLInputElement).value
-      contex.emit('inputVal', value)
-      if (ctx.$parent.$options.name === 'ElFormItem') {
+      contex.emit("inputVal", value)
+      if (ctx.$parent.$options.name === "ElFormItem") {
         if (props.validateEvent) {
           // See https://github.com/ElemeFE/element/blob/dev/packages/form/src/form-item.vue#L293
           // eslint-disable-next-line vue/custom-event-name-casing
-          contex.emit('el.form.change', [value])
+          contex.emit("el.form.change", [value])
         }
       }
     }
 
     const handleFocus = (event: FocusEvent) => {
       state.focus = true
-      contex.emit('focus', event)
+      contex.emit("focus", event)
     }
 
     const handleBlur = (event: FocusEvent) => {
       state.focus = false
-      contex.emit('blur', event)
-      if (ctx.$parent.$options.name === 'ElFormItem') {
+      contex.emit("blur", event)
+      if (ctx.$parent.$options.name === "ElFormItem") {
         if (props.validateEvent) {
           // See https://github.com/ElemeFE/element/blob/dev/packages/form/src/form-item.vue#L292
           // eslint-disable-next-line vue/custom-event-name-casing
@@ -275,15 +271,15 @@ $index-has-icon: 30px;
 
 // Theme:
 $color-white: white;
-$color-grey: #9E9E9E;
-$color-grey-light: #E0E0E0;
-$color-blue: #2196F3;
-$color-red: #F44336;
+$color-grey: #9e9e9e;
+$color-grey-light: #e0e0e0;
+$color-blue: #2196f3;
+$color-red: #f44336;
 $color-black: black;
 
 // Base clases:
 %base-bar-pseudo {
-  content: '';
+  content: "";
   height: 1px;
   width: 0;
   bottom: 0;
@@ -293,7 +289,7 @@ $color-black: black;
 
 // Mixins:
 @mixin slided-top() {
-  top: - ($font-size-base + $spacer);
+  top: -($font-size-base + $spacer);
   left: 0;
   font-size: $font-size-base;
   font-weight: $font-weight-bold;

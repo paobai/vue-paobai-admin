@@ -1,7 +1,7 @@
-import * as echarts from "echarts/core";
+import * as echarts from "echarts/core"
 
-import { PieChart, BarChart, LineChart } from "echarts/charts";
-import { SVGRenderer } from "echarts/renderers";
+import { PieChart, BarChart, LineChart } from "echarts/charts"
+import { SVGRenderer } from "echarts/renderers"
 
 import {
   GridComponent,
@@ -11,9 +11,9 @@ import {
   TooltipComponent,
   DataZoomComponent,
   VisualMapComponent
-} from "echarts/components";
+} from "echarts/components"
 
-const { use, registerTheme } = echarts;
+const { use, registerTheme } = echarts
 
 use([
   PieChart,
@@ -27,10 +27,10 @@ use([
   TooltipComponent,
   DataZoomComponent,
   VisualMapComponent
-]);
+])
 
 // 自定义主题
-import theme from "./theme.json";
-registerTheme("ovilia-green", theme);
+import theme from "./theme.json"
+registerTheme("ovilia-green", theme)
 
-export default echarts;
+export default echarts

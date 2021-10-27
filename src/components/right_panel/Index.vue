@@ -9,8 +9,8 @@
 <template>
   <div
     class="handle-button"
-    :style="{'top': buttonTop+'px','backgroundColor': theme}"
-    @click="show= true"
+    :style="{ top: buttonTop + 'px', backgroundColor: theme }"
+    @click="show = true"
   >
     <i class="el-icon-setting" />
   </div>
@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { useStore } from '@/store'
-import { computed, defineComponent, ref } from 'vue'
+import { useStore } from "@/store"
+import { computed, defineComponent, ref } from "vue"
 export default defineComponent({
   props: {
     buttonTop: {
@@ -50,7 +50,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 .handle-button {
   width: 48px;
   height: 48px;

@@ -1,5 +1,5 @@
-import { App, Component } from "vue";
-import 'element-plus/theme-chalk/index.css'
+import { App, Component } from "vue"
+import "element-plus/theme-chalk/index.css"
 // import 'element-plus/dist/index.css'
 import {
   ElTag,
@@ -38,7 +38,7 @@ import {
   ElDescriptionsItem,
   ElColorPicker,
   ElSwitch
-} from "element-plus";
+} from "element-plus"
 
 const components = [
   ElTag,
@@ -76,15 +76,15 @@ const components = [
   ElDescriptionsItem,
   ElColorPicker,
   ElSwitch
-];
+]
 
-const plugins = [ElLoading];
+const plugins = [ElLoading]
 
 export function useElementPlus(app: App) {
   components.forEach((component: Component) => {
-    app.component(component.name as string, component);
-  });
+    app.component(component.name as string, component)
+  })
   plugins.forEach(plugin => {
-    app.use(plugin);
-  });
+    app.use(plugin)
+  })
 }

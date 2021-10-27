@@ -6,5 +6,5 @@
  * @LastEditTime: 2020-12-28 14:07:34
  */
 
-const whiteList = ['/login', '/auth-redirect']
-export default  whiteList
+const whiteList = ["/login", "/auth-redirect"]
+export default whiteList

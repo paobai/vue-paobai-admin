@@ -7,61 +7,32 @@
 -->
 <template>
   <div class="app-container">
-    <el-button
-      type="primary"
-      @click="handleCreateRole"
-    >
+    <el-button type="primary" @click="handleCreateRole">
       {{ t("permission.createRole") }}
     </el-button>
 
-    <el-table
-      :data="rolesList"
-      style="width: 100%;margin-top:30px;"
-      border
-    >
-      <el-table-column
-        align="center"
-        label="Role Key"
-        width="220"
-      >
-        <template #default="{row}">
+    <el-table :data="rolesList" style="width: 100%; margin-top: 30px" border>
+      <el-table-column align="center" label="Role Key" width="220">
+        <template #default="{ row }">
           {{ row.key }}
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        label="Role Name"
-        width="220"
-      >
-        <template #default="{row}">
+      <el-table-column align="center" label="Role Name" width="220">
+        <template #default="{ row }">
           {{ row.name }}
         </template>
       </el-table-column>
-      <el-table-column
-        align="header-center"
-        label="Description"
-      >
-        <template #default="{row}">
+      <el-table-column align="header-center" label="Description">
+        <template #default="{ row }">
           {{ row.description }}
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        label="Operations"
-      >
+      <el-table-column align="center" label="Operations">
         <template #default="scope">
-          <el-button
-            type="primary"
-            size="small"
-            @click="handleEdit(scope)"
-          >
+          <el-button type="primary" size="small" @click="handleEdit(scope)">
             {{ t("permission.editPermission") }}
           </el-button>
-          <el-button
-            type="danger"
-            size="small"
-            @click="handleDelete(scope)"
-          >
+          <el-button type="danger" size="small" @click="handleDelete(scope)">
             {{ t("permission.delete") }}
           </el-button>
         </template>
@@ -72,21 +43,14 @@
       v-model="dialogVisible"
       :title="dialogType === 'edit' ? 'Edit Role' : 'New Role'"
     >
-      <el-form
-        :model="role"
-        label-width="80px"
-        label-position="left"
-      >
+      <el-form :model="role" label-width="80px" label-position="left">
         <el-form-item label="Name">
-          <el-input
-            v-model="role.name"
-            placeholder="Role Name"
-          />
+          <el-input v-model="role.name" placeholder="Role Name" />
         </el-form-item>
         <el-form-item label="Desc">
           <el-input
             v-model="role.description"
-            :autosize="{minRows: 2, maxRows: 4}"
+            :autosize="{ minRows: 2, maxRows: 4 }"
             type="textarea"
             placeholder="Role Description"
           />
@@ -103,17 +67,11 @@
           />
         </el-form-item>
       </el-form>
-      <div style="text-align:right;">
-        <el-button
-          type="danger"
-          @click="dialogVisible = false"
-        >
+      <div style="text-align: right">
+        <el-button type="danger" @click="dialogVisible = false">
           {{ t("permission.cancel") }}
         </el-button>
-        <el-button
-          type="primary"
-          @click="confirmRole"
-        >
+        <el-button type="primary" @click="confirmRole">
           {{ t("permission.confirm") }}
         </el-button>
       </div>
@@ -122,13 +80,28 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeMount, reactive, toRefs, ref, nextTick, getCurrentInstance } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
-import { getRoutes, getRoles, delRole, updateRole, createRole } from '@/apis/roles'
-import { resolve } from 'path'
-import { useI18n } from 'vue-i18n'
-import editRole from './editRole'
-import { cloneDeep } from 'lodash'
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  reactive,
+  toRefs,
+  ref,
+  nextTick,
+  getCurrentInstance
+} from "vue"
+import { RouteRecordRaw } from "vue-router"
+import {
+  getRoutes,
+  getRoles,
+  delRole,
+  updateRole,
+  createRole
+} from "@/apis/roles"
+import { resolve } from "path"
+import { useI18n } from "vue-i18n"
+import editRole from "./editRole"
+import { cloneDeep } from "lodash"
 interface Role {
   key: number
   name: string
@@ -144,22 +117,26 @@ interface RoutesTreeData {
 
 const defaultRole: Role = {
   key: 0,
-  name: '',
-  description: '',
+  name: "",
+  description: "",
   routes: []
 }
 
 export default defineComponent({
-
   setup() {
     const { ctx } = getCurrentInstance() as any
     const treeRef = ref<HTMLInputElement | null>(null)
     const { t } = useI18n()
     const { flattenRoutes } = editRole()
 
-    const onlyOneShowingChildFunc = (children: RouteRecordRaw[] = [], parent: RouteRecordRaw) => {
+    const onlyOneShowingChildFunc = (
+      children: RouteRecordRaw[] = [],
+      parent: RouteRecordRaw
+    ) => {
       let onlyOneChild = null
-      const showingChild = children.filter(item => !item.meta || !item.meta.hidden)
+      const showingChild = children.filter(
+        item => !item.meta || !item.meta.hidden
+      )
       // When there is only one child route, the child route is displayed by default
       if (showingChild.length === 1) {
         onlyOneChild = showingChild[0]
@@ -169,22 +146,29 @@ export default defineComponent({
 
       // Show parent if there are no child route to display
       if (showingChild.length === 0) {
-        onlyOneChild = { ...parent, path: '' }
+        onlyOneChild = { ...parent, path: "" }
         return onlyOneChild
       }
       return false
     }
 
     // Reshape the routes structure so that it looks the same as the sidebar
-    const getReshapeRoutes = (routes: RouteRecordRaw[], basePath = '/') => {
+    const getReshapeRoutes = (routes: RouteRecordRaw[], basePath = "/") => {
       const reshapeRoutes: RouteRecordRaw[] = []
       for (let route of routes) {
         // Skip hidden routes
         if (route.meta && route.meta.hidden) {
           continue
         }
-        const onlyOneShowingChild = onlyOneShowingChildFunc(route.children, route)
-        if (route.children && onlyOneShowingChild && (!route.meta || !route.meta.alwaysShow)) {
+        const onlyOneShowingChild = onlyOneShowingChildFunc(
+          route.children,
+          route
+        )
+        if (
+          route.children &&
+          onlyOneShowingChild &&
+          (!route.meta || !route.meta.alwaysShow)
+        ) {
           route = onlyOneShowingChild
         }
 
@@ -208,10 +192,10 @@ export default defineComponent({
       for (const route of routes) {
         const tmp: RoutesTreeData = {
           children: [],
-          title: '',
-          path: ''
+          title: "",
+          path: ""
         }
-        tmp.title = route.meta ? t(`route.${route.meta.title}`).toString() : ''
+        tmp.title = route.meta ? t(`route.${route.meta.title}`).toString() : ""
         tmp.path = route.path
         if (route.children) {
           tmp.children = generateTreeData(route.children)
@@ -221,7 +205,11 @@ export default defineComponent({
       return data
     }
 
-    const generateTree = (routes: RouteRecordRaw[], basePath = '/', checkedKeys: string[]) => {
+    const generateTree = (
+      routes: RouteRecordRaw[],
+      basePath = "/",
+      checkedKeys: string[]
+    ) => {
       const res: RouteRecordRaw[] = []
       for (const route of routes) {
         const routePath = resolve(basePath, route.path)
@@ -229,7 +217,10 @@ export default defineComponent({
         if (route.children) {
           route.children = generateTree(route.children, routePath, checkedKeys)
         }
-        if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
+        if (
+          checkedKeys.includes(routePath) ||
+          (route.children && route.children.length >= 1)
+        ) {
           res.push(route)
         }
       }
@@ -242,32 +233,34 @@ export default defineComponent({
       serviceRoutes: [] as RouteRecordRaw[],
       rolesList: [] as Role[],
       dialogVisible: false,
-      dialogType: 'new',
+      dialogType: "new",
       checkStrictly: false,
       defaultProps: {
-        children: 'children',
-        label: 'title'
+        children: "children",
+        label: "title"
       },
       handleCreateRole: () => {
         state.role = Object.assign({}, defaultRole)
         if (treeRef.value) {
-          (treeRef.value as any).setCheckedKeys([])
+          ;(treeRef.value as any).setCheckedKeys([])
         }
-        state.dialogType = 'new'
+        state.dialogType = "new"
         state.dialogVisible = true
       },
       handleEdit: (scope: any) => {
-        state.dialogType = 'edit'
+        state.dialogType = "edit"
         state.dialogVisible = true
         state.checkStrictly = true
         state.role = cloneDeep(scope.row)
         nextTick(() => {
-          const routes = flattenRoutes(getReshapeRoutes(state.role.routes as any as RouteRecordRaw[]))
+          const routes = flattenRoutes(
+            getReshapeRoutes(state.role.routes as any as RouteRecordRaw[])
+          )
           const treeData = generateTreeData(routes)
           const treeDataKeys = treeData.map(t => {
             return t.path
           })
-          const tree = (treeRef.value as any)
+          const tree = treeRef.value as any
           tree.setCheckedKeys(treeDataKeys)
           // set checked state of a node not affects its father and child nodes
           state.checkStrictly = false
@@ -275,37 +268,45 @@ export default defineComponent({
       },
       handleDelete: (scope: any) => {
         const { $index, row } = scope
-        ctx.$confirm('Confirm to remove the role?', 'Warning', {
-          confirmButtonText: 'Confirm',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(async() => {
-          delRole(row.key).then((res) => {
-            state.rolesList.splice($index, 1)
-            ctx.$message({
-              type: 'success',
-              message: res?.data
+        ctx
+          .$confirm("Confirm to remove the role?", "Warning", {
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+            type: "warning"
+          })
+          .then(async () => {
+            delRole(row.key).then(res => {
+              state.rolesList.splice($index, 1)
+              ctx.$message({
+                type: "success",
+                message: res?.data
+              })
             })
           })
-        })
       }
     })
 
-    const confirmRole = async() => {
-      const isEdit = state.dialogType === 'edit'
+    const confirmRole = async () => {
+      const isEdit = state.dialogType === "edit"
       const checkedKeys = (treeRef.value as any).getCheckedKeys()
-      state.role.routes = generateTree(cloneDeep(state.serviceRoutes as RouteRecordRaw[]), '/', checkedKeys)
+      state.role.routes = generateTree(
+        cloneDeep(state.serviceRoutes as RouteRecordRaw[]),
+        "/",
+        checkedKeys
+      )
       if (isEdit) {
-        await updateRole(state.role.key, { role: state.role }).then(async() => {
-          for (let index = 0; index < state.rolesList.length; index++) {
-            if (state.rolesList[index].key === state.role.key) {
-              state.rolesList.splice(index, 1, Object.assign({}, state.role))
-              break
+        await updateRole(state.role.key, { role: state.role }).then(
+          async () => {
+            for (let index = 0; index < state.rolesList.length; index++) {
+              if (state.rolesList[index].key === state.role.key) {
+                state.rolesList.splice(index, 1, Object.assign({}, state.role))
+                break
+              }
             }
           }
-        })
+        )
       } else {
-        await createRole({ role: state.role }).then(async(res) => {
+        await createRole({ role: state.role }).then(async res => {
           state.role.key = res?.data.key
           state.rolesList.push(state.role)
         })
@@ -314,26 +315,28 @@ export default defineComponent({
       const { description, key, name } = state.role
       state.dialogVisible = false
       ctx.$notify({
-        title: 'Success',
+        title: "Success",
         dangerouslyUseHTMLString: true,
         message: `
           <div>Role Key: ${key}</div>
           <div>Role Name: ${name}</div>
           <div>Description: ${description}</div>
         `,
-        type: 'success'
+        type: "success"
       })
     }
 
     const getServiceRoutes = () => {
-      getRoutes().then((res) => {
+      getRoutes().then(res => {
         state.serviceRoutes = res?.data.routes as any as RouteRecordRaw[]
-        state.reshapedRoutes = getReshapeRoutes(res?.data.routes as any as RouteRecordRaw[])
+        state.reshapedRoutes = getReshapeRoutes(
+          res?.data.routes as any as RouteRecordRaw[]
+        )
       })
     }
 
     const getRolesList = () => {
-      getRoles().then((res) => {
+      getRoles().then(res => {
         state.rolesList = res?.data.items as any as Role[]
       })
     }
@@ -343,7 +346,9 @@ export default defineComponent({
       getRolesList()
     })
 
-    const routesTreeData = computed(() => generateTreeData(state.reshapedRoutes as any as RouteRecordRaw[]))
+    const routesTreeData = computed(() =>
+      generateTreeData(state.reshapedRoutes as any as RouteRecordRaw[])
+    )
 
     return {
       t,

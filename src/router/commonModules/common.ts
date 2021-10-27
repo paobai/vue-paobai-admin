@@ -5,16 +5,16 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-21 18:04:55
  */
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw } from "vue-router"
 
 const UserManagerRouter: Array<RouteRecordRaw> = [
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/common/login.vue'),
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/common/login.vue"),
     meta: {
-      title: '登录',
-      icon: '#icondashboard'
+      title: "登录",
+      icon: "#icondashboard"
     }
   }
 ]

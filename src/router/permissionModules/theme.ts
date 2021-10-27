@@ -5,22 +5,23 @@
  * @LastEditors: scy
  * @LastEditTime: 2021-01-21 21:24:27
  */
-import { RouteRecordRaw } from 'vue-router'
-import Layout from '@/layout/Index.vue'
+import { RouteRecordRaw } from "vue-router"
+import Layout from "@/layout/Index.vue"
 
 const ThemeRouter: Array<RouteRecordRaw> = [
   {
-    path: '/theme',
+    path: "/theme",
     component: Layout,
-    redirect: 'noredirect',
+    redirect: "noredirect",
     children: [
       {
-        path: 'index',
-        component: () => import(/* webpackChunkName: "theme" */ '@/views/theme/index.vue'),
-        name: 'Theme',
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "theme" */ "@/views/theme/index.vue"),
+        name: "Theme",
         meta: {
-          title: 'theme',
-          icon: '#iconhuanfu'
+          title: "theme",
+          icon: "#iconhuanfu"
         }
       }
     ]

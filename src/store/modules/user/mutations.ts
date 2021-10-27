@@ -5,9 +5,9 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-28 11:45:02
  */
-import { MutationTree } from 'vuex'
-import { UserState } from './state'
-import { UserMutationTypes } from './mutation-types'
+import { MutationTree } from "vuex"
+import { UserState } from "./state"
+import { UserMutationTypes } from "./mutation-types"
 
 export type Mutations<S = UserState> = {
   [UserMutationTypes.SET_TOKEN](state: S, token: string): void
@@ -42,5 +42,4 @@ export const mutations: MutationTree<UserState> & Mutations = {
   [UserMutationTypes.SET_EMAIL](state: UserState, email: string) {
     state.email = email
   }
-
 }

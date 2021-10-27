@@ -1,32 +1,37 @@
-
-import { RouteRecordRaw } from 'vue-router'
-import Layout from '@/layout/index.vue'
+import { RouteRecordRaw } from "vue-router"
+import Layout from "@/layout/index.vue"
 
 const ExampleRouter: Array<RouteRecordRaw> = [
   {
-    path: '/error',
+    path: "/error",
     component: Layout,
-    redirect: 'noredirect',
+    redirect: "noredirect",
     meta: {
-      title: '错误页面',
-      icon: '#icon404'
+      title: "错误页面",
+      icon: "#icon404"
     },
     children: [
       {
-        path: '401',
-        component: () => import(/* webpackChunkName: "error-page-401" */ '@/views/error-page/401.vue'),
-        name: 'Page401',
+        path: "401",
+        component: () =>
+          import(
+            /* webpackChunkName: "error-page-401" */ "@/views/error-page/401.vue"
+          ),
+        name: "Page401",
         meta: {
-          title: 'page401',
+          title: "page401",
           noCache: true
         }
       },
       {
-        path: '404',
-        component: () => import(/* webpackChunkName: "error-page-404" */ '@/views/error-page/404.vue'),
-        name: 'Page404',
+        path: "404",
+        component: () =>
+          import(
+            /* webpackChunkName: "error-page-404" */ "@/views/error-page/404.vue"
+          ),
+        name: "Page404",
         meta: {
-          title: 'page404',
+          title: "page404",
           noCache: true
         }
       }

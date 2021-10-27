@@ -6,11 +6,17 @@
  * @LastEditTime: 2021-01-25 19:58:42
  */
 
-import { Language, Environment, RouterSource, RouterMode, TokenStorageName } from '@/constant/settings'
+import {
+  Language,
+  Environment,
+  RouterSource,
+  RouterMode,
+  TokenStorageName
+} from "@/constant/settings"
 
-export interface Settings{
+export interface Settings {
   //项目中页面显示的名称
-  title:string
+  title: string
   //基础url
   baseURL?: string
   // pro版本copyright可随意修改
@@ -54,17 +60,17 @@ export interface Settings{
   // 代码生成机生成在view下的文件夹名称
   templateFolder?: string
   // 画廊布局和综合布局时，是否点击一级菜单默认开启第一个二级菜单
-  openFirstMenu?: boolean,
+  openFirstMenu?: boolean
   version: string
 }
 
 const settings: Settings = {
   //项目中页面显示的名称
-  title:'Vue3管理后台',
+  title: "Vue3管理后台",
   //基础url
   baseURL: process.env.VUE_APP_BASE_API,
   // pro版本copyright可随意修改
-  copyright: 'zy',
+  copyright: "zy",
   // 缓存路由的最大数量
   keepAliveMaxNum: 99,
   // 路由模式，可选值为 history 或 hash
@@ -72,17 +78,17 @@ const settings: Settings = {
   // 不经过token校验的路由
   routesWhiteList: [],
   // 加载时显示文字
-  loadingText: 'loading',
+  loadingText: "loading",
   // token名称
-  tokenName: 'token',
+  tokenName: "token",
   // token在localStorage、sessionStorage、cookie存储的key的名称
-  tokenTableName: 'token',
+  tokenTableName: "token",
   // token存储位置localStorage sessionStorage cookie
   storage: TokenStorageName.LocalStorage,
   // token失效回退到登录页时是否记录本次的路由
   recordRoute: true,
   // 是否显示logo，不显示时设置false，显示时请填写remixIcon图标名称，暂时只支持设置remixIcon
-  logo: '',
+  logo: "",
   // 语言类型zh、en
   i18n: Language.Zh,
   // 在哪些环境下显示高亮错误
@@ -98,14 +104,14 @@ const settings: Settings = {
   // vertical gallery comprehensive common布局时是否只保持一个子菜单的展开
   uniqueOpened: false,
   // vertical布局时默认展开的菜单path，使用逗号隔开建议只展开一个
-  defaultOpeneds: ['/vab'],
+  defaultOpeneds: ["/vab"],
   // 需要加loading层的请求，防止重复提交
-  debounce: ['doEdit'],
+  debounce: ["doEdit"],
   // 代码生成机生成在view下的文件夹名称
-  templateFolder: 'project',
+  templateFolder: "project",
   // 画廊布局和综合布局时，是否点击一级菜单默认开启第一个二级菜单
   openFirstMenu: true,
-  version: '1.0'
+  version: "1.0"
 }
 
 export default settings

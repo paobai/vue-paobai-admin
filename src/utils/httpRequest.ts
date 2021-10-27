@@ -1,25 +1,28 @@
-import Vue from 'vue'
-import {ElMessage } from 'element-plus';
-import axios, {AxiosInstance, AxiosRequestConfig, Method} from 'axios'
-import router from '@/router'
-import qs from 'qs'
-import { cloneDeep, merge } from 'lodash'
-import {clearLoginInfo} from '@/utils'
-import {login} from '@/api/auth-api'
-import {clientId, clientSecret, grantTypeRefreshToken} from '@/constant'
-import {saveAs} from 'file-saver'
-import Cookies from 'js-cookie'
+import Vue from "vue"
+import { ElMessage } from "element-plus"
+import axios, { AxiosInstance, AxiosRequestConfig, Method } from "axios"
+import router from "@/router"
+import qs from "qs"
+import { cloneDeep, merge } from "lodash"
+import { clearLoginInfo } from "@/utils"
+import { login } from "@/api/auth-api"
+import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
+import { saveAs } from "file-saver"
+import Cookies from "js-cookie"
 
 enum ContentType {
-  JSON = 'json',
-  FORM = 'form'
+  JSON = "json",
+  FORM = "form"
 }
 
-interface HttpMore extends AxiosInstance{
+interface HttpMore extends AxiosInstance {
   adornUrl(actionName: string): String
   adornParams(params: any, openDefaultParams: boolean): String
-  adornData(data : any, openDefaultParams: boolean, contentType :ContentType): String
-
+  adornData(
+    data: any,
+    openDefaultParams: boolean,
+    contentType: ContentType
+  ): String
 }
 
 // @ts-ignore
@@ -27,7 +30,7 @@ const http: HttpMore = axios.create({
   timeout: 1000 * 30,
   withCredentials: false,
   headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    "Content-Type": "application/json; charset=utf-8"
   }
 })
 
@@ -38,7 +41,11 @@ const http: HttpMore = axios.create({
 http.adornUrl = (actionName: string) => {
   // 非生产环境 && 开启代理, 接口前缀统一使用[/proxyApi/]前缀做代理拦截!
   // @ts-ignore
-  return (process.env.NODE_ENV !== 'production' && process.env.OPEN_PROXY ? '/proxyApi/' : window.SITE_CONFIG.baseUrl) + actionName
+  return (
+    (process.env.NODE_ENV !== "production" && process.env.OPEN_PROXY
+      ? "/proxyApi/"
+      : window.SITE_CONFIG.baseUrl) + actionName
+  )
 }
 
 /**
@@ -47,12 +54,11 @@ http.adornUrl = (actionName: string) => {
  * @param {*} openDefaultParams 是否开启默认参数?
  */
 http.adornParams = (params = {}, openDefaultParams = true) => {
-  var defaults = {
-    't': new Date().getTime()
+  const defaults = {
+    t: new Date().getTime()
   }
   return openDefaultParams ? merge(defaults, params) : params
 }
-
 
 /**
  * post请求数据处理
@@ -62,26 +68,35 @@ http.adornParams = (params = {}, openDefaultParams = true) => {
  *  json: 'application/json; charset=utf-8'
  *  form: 'application/x-www-form-urlencoded; charset=utf-8'
  */
-http.adornData = (data = {}, openDefaultParams = true, contentType= ContentType.JSON) => {
-  var defaults = {
-    't': new Date().getTime()
+http.adornData = (
+  data = {},
+  openDefaultParams = true,
+  contentType = ContentType.JSON
+) => {
+  const defaults = {
+    t: new Date().getTime()
   }
   data = openDefaultParams ? merge(defaults, data) : data
-  return contentType === ContentType.JSON ? JSON.stringify(data) : qs.stringify(data)
+  return contentType === ContentType.JSON
+    ? JSON.stringify(data)
+    : qs.stringify(data)
 }
 
 /**
  * 请求拦截
  */
-http.interceptors.request.use(config => {
-  config.headers['X-STEINS-TOKEN'] = 'Bearer ' + Cookies.get('access_token') // 请求头带上token
-  // config.headers['Access-Control-Allow-Origin'] = '*'
-  // config.headers['Access-Control-Allow-Methods'] = '*'
-  config.headers['X-STEINS-TENANT-ID'] = '1'
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+http.interceptors.request.use(
+  config => {
+    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get("access_token") // 请求头带上token
+    // config.headers['Access-Control-Allow-Origin'] = '*'
+    // config.headers['Access-Control-Allow-Methods'] = '*'
+    config.headers["X-STEINS-TENANT-ID"] = "1"
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 let isRefreshing = true
 
@@ -92,121 +107,137 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   }
   isRefreshing = false
   // 将token刷新成功后的回调请求缓存
-  const retryOriginalRequest = new Promise((resolve) => {
+  const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers['X-STEINS-TOKEN'] = 'Bearer ' + Cookies.get('access_token')
+      httpConfig.headers["X-STEINS-TOKEN"] =
+        "Bearer " + Cookies.get("access_token")
       resolve(http(httpConfig))
     })
   })
   return retryOriginalRequest
 }
 let subscribers: any[] = []
-function onAccessTokenFetched () {
-  subscribers.forEach((callback) => {
+function onAccessTokenFetched() {
+  subscribers.forEach(callback => {
     callback()
   })
   subscribers = []
 }
 
-function addSubscriber (callback: () => void) {
+function addSubscriber(callback: () => void) {
   subscribers.push(callback)
 }
 
-function referToken () {
-  let refreshToken = Cookies.get('refresh_token')
+function referToken() {
+  const refreshToken = Cookies.get("refresh_token")
   login({
-    'grant_type': grantTypeRefreshToken,
-    'client_id': clientId,
-    'client_secret': clientSecret,
-    'refresh_token': refreshToken
-  }).then(res => {
-    Cookies.set('access_token', res.data.access_token)
-    Cookies.set('refresh_token', res.data.refresh_token)
-    onAccessTokenFetched()
-  }).catch(() => {
-    errorLogin()
-  }).finally(() => {
-    // 延迟几秒再将刷新token的开关放开，不然偶尔还是会重复提交刷新token的请求
-    setTimeout(() => {
-      isRefreshing = true
-    }, 3000)
+    grant_type: grantTypeRefreshToken,
+    client_id: clientId,
+    client_secret: clientSecret,
+    refresh_token: refreshToken
   })
+    .then(res => {
+      Cookies.set("access_token", res.data.access_token)
+      Cookies.set("refresh_token", res.data.refresh_token)
+      onAccessTokenFetched()
+    })
+    .catch(() => {
+      errorLogin()
+    })
+    .finally(() => {
+      // 延迟几秒再将刷新token的开关放开，不然偶尔还是会重复提交刷新token的请求
+      setTimeout(() => {
+        isRefreshing = true
+      }, 3000)
+    })
 }
 
-function errorLogin () {
+function errorLogin() {
   clearLoginInfo()
-  ElMessage.error('登录失效')
+  ElMessage.error("登录失效")
   // router.push({ name: 'login' })
   // @ts-ignore
-  window.location.href = window.SITE_CONFIG['loginPage']
+  window.location.href = window.SITE_CONFIG["loginPage"]
 }
 /**
  * 响应拦截
  */
-http.interceptors.response.use(response => {
-  response.data.__headers = response.headers
-  return response.data
-}, async error => {
-  let response = error.response
-  console.log('error resoponse', response)
-  // 401, token失效
-  if (response.data && response.status === 401 && response.data.code === 10250) {
-    // Bad client错误流程
-    if (response.data.msg === 'Bad client credentials') {
+http.interceptors.response.use(
+  response => {
+    response.data.__headers = response.headers
+    return response.data
+  },
+  async error => {
+    const response = error.response
+    console.log("error resoponse", response)
+    // 401, token失效
+    if (
+      response.data &&
+      response.status === 401 &&
+      response.data.code === 10250
+    ) {
+      // Bad client错误流程
+      if (response.data.msg === "Bad client credentials") {
+        errorLogin()
+        ElMessage.error("认证失败,client错误,请联系管理员。")
+        return Promise.reject(error.response.data)
+      }
+
+      console.log("clearLoginInfo")
+      // 不需要刷新token直接跳到登录页
       errorLogin()
-      ElMessage.error('认证失败,client错误,请联系管理员。')
-      return Promise.reject(error.response.data)
+      // let refreshToken = Cookies.get('refresh_token')
+      // if (!refreshToken) {
+      //   // 没有refreshToken情况直接返回不需要提示。
+      //   errorLogin()
+      //   return
+      // } else {
+      //   return new Promise((resolve) => {
+      //     checkStatus(response.config).then(res => {
+      //       resolve(res)
+      //     })
+      //   })
+      // }
     }
-
-    console.log('clearLoginInfo')
-    // 不需要刷新token直接跳到登录页
-    errorLogin()
-    // let refreshToken = Cookies.get('refresh_token')
-    // if (!refreshToken) {
-    //   // 没有refreshToken情况直接返回不需要提示。
-    //   errorLogin()
-    //   return
-    // } else {
-    //   return new Promise((resolve) => {
-    //     checkStatus(response.config).then(res => {
-    //       resolve(res)
-    //     })
-    //   })
-    // }
+    if (error.response.data.code === 10250) {
+      ElMessage.error("登录失效,请先登录")
+    } else if (error.response.data.code === 10251) {
+    } else ElMessage.error(error.response.data.msg)
+    return Promise.reject(error.response.data)
   }
-  if (error.response.data.code === 10250) {
-    ElMessage.error('登录失效,请先登录')
-  } else if (error.response.data.code === 10251) {
-  } else ElMessage.error(error.response.data.msg)
-  return Promise.reject(error.response.data)
-})
+)
 
-export const postRequest = (url: string, data: any, params: any, type = 'json') => {
+export const postRequest = (
+  url: string,
+  data: any,
+  params: any,
+  type = "json"
+) => {
   url = http.adornUrl(url) as string
-  if (type === 'json') {
+  if (type === "json") {
     return http({
-      method: 'post',
+      method: "post",
       url: `${url}`,
       data: JSON.stringify(data),
       params: params
     })
   } else {
     return http({
-      method: 'post',
+      method: "post",
       url: `${url}`,
       data: qs.stringify(data),
       params: params,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        "Content-Type": "application/x-www-form-urlencoded"
       }
     })
   }
 }
 
-export const getRequest = (url: string, params: any = null) : any => {
+export const getRequest = (url: string, params: any = null): any => {
   url = http.adornUrl(url) as string
   return http({
-    method: 'get',
+    method: "get",
     url: `${url}`,
     params: params
   })
@@ -215,7 +246,7 @@ export const getRequest = (url: string, params: any = null) : any => {
 export const putRequest = (url: any, data: any, params: string) => {
   url = http.adornUrl(url)
   return http({
-    method: 'put',
+    method: "put",
     url: `${url}`,
     data: data,
     params: params
@@ -225,7 +256,7 @@ export const putRequest = (url: any, data: any, params: string) => {
 export const deleteRequest = (url: any, params: string, data: any) => {
   url = http.adornUrl(url)
   return http({
-    method: 'delete',
+    method: "delete",
     url: `${url}`,
     params: params,
     data: data
@@ -233,7 +264,12 @@ export const deleteRequest = (url: any, params: string, data: any) => {
 }
 
 // 下载文件方法
-export function downloadFile (url: any, params: any, method = 'get', fileName = undefined) {
+export function downloadFile(
+  url: any,
+  params: any,
+  method = "get",
+  fileName = undefined
+) {
   url = http.adornUrl(url)
   return new Promise((resolve, reject) => {
     http({
@@ -241,28 +277,35 @@ export function downloadFile (url: any, params: any, method = 'get', fileName = 
       url: url,
       params: params,
       data: params,
-      responseType: 'blob'
+      responseType: "blob"
     }).then(res => {
-      let fileName = 'download'
-      let contentDisposition = (res as any).__headers['content-disposition'] || (res as any).__headers['Content-disposition']
+      let fileName = "download"
+      const contentDisposition =
+        (res as any).__headers["content-disposition"] ||
+        (res as any).__headers["Content-disposition"]
       if (contentDisposition) {
         fileName = window.decodeURI(contentDisposition.split("''")[1])
       }
-      let blob = new Blob([(res as any)], {type: 'application/vnd.ms-excel'})
+      const blob = new Blob([res as any], { type: "application/vnd.ms-excel" })
       saveAs(blob, fileName)
     })
   })
 }
 
 // 上传文件方法
-export function uploadFile (url: string, data: any, method = 'post', fileName = undefined) {
+export function uploadFile(
+  url: string,
+  data: any,
+  method = "post",
+  fileName = undefined
+) {
   url = http.adornUrl(url) as string
   return http({
     method: method as Method,
     url: url,
     data: data,
     headers: {
-      'Content-Type': 'multipart/form-data'
+      "Content-Type": "multipart/form-data"
     }
   })
 }

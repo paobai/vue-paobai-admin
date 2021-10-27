@@ -6,10 +6,7 @@
  * @LastEditTime: 2021-01-25 13:29:33
 -->
 <template>
-  <div
-    :style="{height: height, zIndex: zIndex}"
-    class="sticky"
-  >
+  <div :style="{ height: height, zIndex: zIndex }" class="sticky">
     <div
       :class="className"
       :style="{
@@ -28,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { defineComponent, onMounted, reactive, toRefs } from "vue"
 
 export default defineComponent({
   props: {
@@ -42,27 +39,27 @@ export default defineComponent({
     },
     className: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   setup(props) {
     const state = reactive({
       active: false,
-      position: '',
+      position: "",
       isSticky: false,
-      width: 'auto',
-      height: 'auto'
+      width: "auto",
+      height: "auto"
     })
     onMounted(() => {
       state.height =
         document
-          .querySelector('.sticky')
+          .querySelector(".sticky")
           ?.getBoundingClientRect()
-          .height.toString() + 'px'
+          .height.toString() + "px"
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      window.addEventListener('scroll', handleScroll)
+      window.addEventListener("scroll", handleScroll)
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      window.addEventListener('resize', handleResize)
+      window.addEventListener("resize", handleResize)
     })
     const activated = () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -70,17 +67,17 @@ export default defineComponent({
     }
     const destroyed = () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener("scroll", handleScroll)
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
     const sticky = () => {
       if (state.active) {
         return
       }
-      state.position = 'fixed'
+      state.position = "fixed"
       state.active = true
-      state.width = state.width + 'px'
+      state.width = state.width + "px"
       state.isSticky = true
     }
 
@@ -88,18 +85,19 @@ export default defineComponent({
       if (!state.active) {
         return
       }
-      state.position = ''
-      state.width = 'auto'
+      state.position = ""
+      state.width = "auto"
       state.active = false
       state.isSticky = false
     }
 
     const handleScroll = () => {
-      const width = document.querySelector('.sticky')?.getBoundingClientRect()
-        .width
-      state.width = width?.toString() + 'px' || 'auto'
+      const width = document
+        .querySelector(".sticky")
+        ?.getBoundingClientRect().width
+      state.width = width?.toString() + "px" || "auto"
       const offsetTop = document
-        .querySelector('.sticky')
+        .querySelector(".sticky")
         ?.getBoundingClientRect().top
 
       if (offsetTop) {
@@ -114,7 +112,11 @@ export default defineComponent({
 
     const handleResize = () => {
       if (state.isSticky) {
-        state.width = document.querySelector('.sticky')?.getBoundingClientRect().width.toString() + 'px'
+        state.width =
+          document
+            .querySelector(".sticky")
+            ?.getBoundingClientRect()
+            .width.toString() + "px"
       }
     }
 

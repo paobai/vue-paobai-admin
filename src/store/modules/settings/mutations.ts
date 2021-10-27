@@ -5,35 +5,40 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-20 17:12:28
  */
-import { MutationTree } from 'vuex'
-import { SettingsState } from './state'
-import { SettingsMutationTypes } from './mutation-types'
+import { MutationTree } from "vuex"
+import { SettingsState } from "./state"
+import { SettingsMutationTypes } from "./mutation-types"
 
 export type Mutations<S = SettingsState> = {
-  [SettingsMutationTypes.CHANGE_SETTING](state: S, payload: { key: string, value: any }): void
-
+  [SettingsMutationTypes.CHANGE_SETTING](
+    state: S,
+    payload: { key: string; value: any }
+  ): void
 }
 
 export const mutations: MutationTree<SettingsState> & Mutations = {
-  [SettingsMutationTypes.CHANGE_SETTING](state: SettingsState, payload: { key: string, value: any }) {
+  [SettingsMutationTypes.CHANGE_SETTING](
+    state: SettingsState,
+    payload: { key: string; value: any }
+  ) {
     const { key, value } = payload
     switch (key) {
-      case 'theme':
+      case "theme":
         state.theme = value
         break
-      case 'fixedHeader':
+      case "fixedHeader":
         state.fixedHeader = value
         break
-      case 'showSettings':
+      case "showSettings":
         state.showSettings = value
         break
-      case 'showSidebarLogo':
+      case "showSidebarLogo":
         state.showSidebarLogo = value
         break
-      case 'showTagsView':
+      case "showTagsView":
         state.showTagsView = value
         break
-      case 'sidebarTextTheme':
+      case "sidebarTextTheme":
         state.sidebarTextTheme = value
         break
       default:

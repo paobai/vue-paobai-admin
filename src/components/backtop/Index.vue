@@ -14,11 +14,7 @@
       class="back-to-ceiling"
       @click="backToTop"
     >
-      <svg
-        class="icon"
-        aria-hidden="true"
-        font-size="20px"
-      >
+      <svg class="icon" aria-hidden="true" font-size="20px">
         <use xlink:href="#iconbacktotop" />
       </svg>
     </div>
@@ -26,7 +22,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  toRefs
+} from "vue"
 
 export default defineComponent({
   props: {
@@ -38,7 +40,7 @@ export default defineComponent({
     },
     transitionName: {
       type: String,
-      default: 'fade'
+      default: "fade"
     },
     backPosition: {
       type: Number,
@@ -79,11 +81,11 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      window.addEventListener('scroll', handleScroll)
+      window.addEventListener("scroll", handleScroll)
     })
 
     onBeforeUnmount(() => {
-      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener("scroll", handleScroll)
     })
 
     return {

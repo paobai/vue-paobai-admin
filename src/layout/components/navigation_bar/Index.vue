@@ -13,10 +13,7 @@
       class="hamburger-container"
       @toggle-click="toggleSideBar"
     />
-    <BreadCrumb
-      id="breadcrumb-container"
-      class="breadcrumb-container"
-    />
+    <BreadCrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
         <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
@@ -38,7 +35,7 @@
           <img
             :src="'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'"
             class="user-avatar"
-          >
+          />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -66,11 +63,8 @@
             >
               <el-dropdown-item>Docs</el-dropdown-item>
             </a>
-            <el-dropdown-item
-              divided
-              @click="logout"
-            >
-              <span style="display:block;">
+            <el-dropdown-item divided @click="logout">
+              <span style="display: block">
                 {{ t("navbar.logOut") }}
               </span>
             </el-dropdown-item>
@@ -82,18 +76,18 @@
 </template>
 
 <script>
-import BreadCrumb from '@/components/bread-crumb/Index.vue'
-import Hamburger from '@/components/hamburger/Index.vue'
-import Screenfull from '@/components/screenfull/Index.vue'
-import LangSelect from '@/components/lang_select/Index.vue'
-import SizeSelect from '@/components/size_select/Index.vue'
+import BreadCrumb from "@/components/bread-crumb/Index.vue"
+import Hamburger from "@/components/hamburger/Index.vue"
+import Screenfull from "@/components/screenfull/Index.vue"
+import LangSelect from "@/components/lang_select/Index.vue"
+import SizeSelect from "@/components/size_select/Index.vue"
 
-import { computed, reactive, toRefs } from 'vue'
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { useI18n } from 'vue-i18n'
-import { UserActionTypes } from '@/store/modules/user/action-types'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, reactive, toRefs } from "vue"
+import { useStore } from "@/store"
+import { AppActionTypes } from "@/store/modules/app/action-types"
+import { useI18n } from "vue-i18n"
+import { UserActionTypes } from "@/store/modules/user/action-types"
+import { useRoute, useRouter } from "vue-router"
 export default {
   components: {
     BreadCrumb,
@@ -114,7 +108,7 @@ export default {
       return store.state.app.device.toString()
     })
     const avatar = computed(() => {
-      return ''
+      return ""
     })
     const state = reactive({
       toggleSideBar: () => {

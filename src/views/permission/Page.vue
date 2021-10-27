@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useRouter } from 'vue-router'
-import SwitchRoles from './components/SwitchRoles.vue'
+import { defineComponent } from "vue"
+import { useRouter } from "vue-router"
+import SwitchRoles from "./components/SwitchRoles.vue"
 export default defineComponent({
   components: {
     SwitchRoles
@@ -22,7 +22,7 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const handleRolesChange = () => {
-      router.push({ path: '/?' + +new Date() }).catch(err => {
+      router.push({ path: "/?" + +new Date() }).catch(err => {
         console.warn(err)
       })
     }

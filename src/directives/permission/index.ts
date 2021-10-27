@@ -5,8 +5,8 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-28 13:46:23
  */
-import { useStore } from '@/store'
-import { Directive } from 'vue'
+import { useStore } from "@/store"
+import { Directive } from "vue"
 
 export const permission: Directive = {
   mounted(el, binding) {
@@ -18,10 +18,10 @@ export const permission: Directive = {
         return permissionRoles.includes(role)
       })
       if (!hasPermission) {
-        el.style.display = 'none'
+        el.style.display = "none"
       }
     } else {
-      throw new Error('need roles! Like v-permission="[\'admin\',\'editor\']"')
+      throw new Error("need roles! Like v-permission=\"['admin','editor']\"")
     }
   }
 }

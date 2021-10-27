@@ -1,6 +1,6 @@
 // 响应式storage
-import { App } from "vue";
-import Storage from "responsive-storage";
+import { App } from "vue"
+import Storage from "responsive-storage"
 
 export const injectResponsiveStorage = (app: App, config: ServerConfigs) => {
   app.use(Storage, {
@@ -34,5 +34,5 @@ export const injectResponsiveStorage = (app: App, config: ServerConfigs) => {
         layout: config.Layout
       }
     }
-  });
-};
+  })
+}

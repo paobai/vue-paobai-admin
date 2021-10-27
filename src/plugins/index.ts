@@ -5,7 +5,7 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-23 16:49:30
  */
-import { createApp } from 'vue'
+import { createApp } from "vue"
 
 /**
  * @description 加载所有 Plugins
@@ -13,10 +13,10 @@ import { createApp } from 'vue'
  */
 export function loadAllPlugins(app: ReturnType<typeof createApp>) {
   // const files = require.context('.', true, /\.ts$/)
-  const files = import.meta.globEager('./*.ts')
+  const files = import.meta.globEager("./*.ts")
   files.keys().forEach(key => {
-    if (typeof files(key).default === 'function') {
-      if (key !== './index.ts') files(key).default(app)
+    if (typeof files(key).default === "function") {
+      if (key !== "./index.ts") files(key).default(app)
     }
   })
 }

@@ -6,10 +6,7 @@
  * @LastEditTime: 2021-03-19 17:10:38
 -->
 <template>
-  <div
-    id="tags-view-container"
-    class="tags-view-container"
-  >
+  <div id="tags-view-container" class="tags-view-container">
     <ScrollPane
       ref="scrollPaneRef"
       class="tags-view-wrapper"
@@ -20,13 +17,13 @@
         ref="tag"
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
-        :to="{path: tag.path, query: tag.query, fullPath: tag.fullPath}"
+        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         tag="span"
         class="tags-view-item"
-        @click.middle="!isAffix(tag)?closeSelectedTag(tag):''"
+        @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
         @contextmenu.prevent="openMenu(tag, $event)"
       >
-        {{ t('route.' + tag.meta.title) }}
+        {{ t("route." + tag.meta.title) }}
         <span
           v-if="!isAffix(tag)"
           class="el-icon-close"
@@ -36,38 +33,44 @@
     </ScrollPane>
     <ul
       v-show="visible"
-      :style="{left: left+'px', top: top+'px'}"
+      :style="{ left: left + 'px', top: top + 'px' }"
       class="contextmenu"
     >
       <li @click="refreshSelectedTag(selectedTag)">
-        {{ t('tagsView.refresh') }}
+        {{ t("tagsView.refresh") }}
       </li>
-      <li
-        v-if="!isAffix(selectedTag)"
-        @click="closeSelectedTag(selectedTag)"
-      >
-        {{
-          t('tagsView.close') }}
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
+        {{ t("tagsView.close") }}
       </li>
       <li @click="closeOthersTags">
-        {{ t('tagsView.closeOthers') }}
+        {{ t("tagsView.closeOthers") }}
       </li>
       <li @click="closeAllTags(selectedTag)">
-        {{ t('tagsView.closeAll') }}
+        {{ t("tagsView.closeAll") }}
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import path from 'path'
-import { useStore } from '@/store'
-import { TagsActionTypes } from '@/store/modules/tagsview/action-types'
-import { TagView } from '@/store/modules/tagsview/state'
-import { computed, defineComponent, getCurrentInstance, nextTick, onBeforeMount, reactive, ref, toRefs, watch } from 'vue'
-import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import ScrollPane from './ScrollPane.vue'
+import path from "path"
+import { useStore } from "@/store"
+import { TagsActionTypes } from "@/store/modules/tagsview/action-types"
+import { TagView } from "@/store/modules/tagsview/state"
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  nextTick,
+  onBeforeMount,
+  reactive,
+  ref,
+  toRefs,
+  watch
+} from "vue"
+import { RouteRecordRaw, useRoute, useRouter } from "vue-router"
+import { useI18n } from "vue-i18n"
+import ScrollPane from "./ScrollPane.vue"
 export default defineComponent({
   components: {
     ScrollPane
@@ -88,14 +91,14 @@ export default defineComponent({
           console.warn(err)
         })
       } else {
-      // Default redirect to the home page if there is no tags-view, adjust it if you want
-        if (view.name === 'Dashboard') {
-        // to reload home page
-          router.push({ path: '/redirect' + view.fullPath }).catch(err => {
+        // Default redirect to the home page if there is no tags-view, adjust it if you want
+        if (view.name === "Dashboard") {
+          // to reload home page
+          router.push({ path: "/redirect" + view.fullPath }).catch(err => {
             console.warn(err)
           })
         } else {
-          router.push('/').catch(err => {
+          router.push("/").catch(err => {
             console.warn(err)
           })
         }
@@ -118,7 +121,7 @@ export default defineComponent({
         store.dispatch(TagsActionTypes.ACTION_DEL_CACHED_VIEW, view)
         const { fullPath } = view
         nextTick(() => {
-          router.replace({ path: '/redirect' + fullPath }).catch(err => {
+          router.replace({ path: "/redirect" + fullPath }).catch(err => {
             console.warn(err)
           })
         })
@@ -130,12 +133,18 @@ export default defineComponent({
         }
       },
       closeOthersTags: () => {
-        if (state.selectedTag.fullPath !== currentRoute.path && state.selectedTag.fullPath !== undefined) {
+        if (
+          state.selectedTag.fullPath !== currentRoute.path &&
+          state.selectedTag.fullPath !== undefined
+        ) {
           router.push(state.selectedTag.fullPath).catch(err => {
             console.log(err)
           })
         }
-        store.dispatch(TagsActionTypes.ACTION_DEL_OTHER_VIEW, state.selectedTag as TagView)
+        store.dispatch(
+          TagsActionTypes.ACTION_DEL_OTHER_VIEW,
+          state.selectedTag as TagView
+        )
       },
       closeAllTags: (view: TagView) => {
         store.dispatch(TagsActionTypes.ACTION_DEL_ALL_VIEWS, undefined)
@@ -173,7 +182,7 @@ export default defineComponent({
     // const routes = computed(() => store.state.permission.routes)
     const routes = computed(() => [])
 
-    const filterAffixTags = (routes: RouteRecordRaw[], basePath = '/') => {
+    const filterAffixTags = (routes: RouteRecordRaw[], basePath = "/") => {
       let tags: TagView[] = []
 
       routes.forEach(route => {
@@ -202,14 +211,20 @@ export default defineComponent({
       for (const tag of state.affixTags) {
         // Must have tag name
         if (tag.name) {
-          store.dispatch(TagsActionTypes.ACTION_ADD_VISITED_VIEW, tag as TagView)
+          store.dispatch(
+            TagsActionTypes.ACTION_ADD_VISITED_VIEW,
+            tag as TagView
+          )
         }
       }
     }
 
     const addTags = () => {
       if (currentRoute.name) {
-        console.log(currentRoute.name, 'currentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.name')
+        console.log(
+          currentRoute.name,
+          "currentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.namecurrentRoute.name"
+        )
         store.dispatch(TagsActionTypes.ACTION_ADD_VIEW, currentRoute)
       }
       return false
@@ -218,25 +233,33 @@ export default defineComponent({
     const moveToCurrentTag = () => {
       const tags = instance?.refs.tag as any[]
       nextTick(() => {
-        if (tags === null || tags === undefined || !Array.isArray(tags)) { return }
+        if (tags === null || tags === undefined || !Array.isArray(tags)) {
+          return
+        }
         for (const tag of tags) {
           if ((tag.to as TagView).path === currentRoute.path) {
-            (scrollPaneRef.value as any).moveToCurrentTag(tag)
+            ;(scrollPaneRef.value as any).moveToCurrentTag(tag)
             // When query is different then update
             if ((tag.to as TagView).fullPath !== currentRoute.fullPath) {
-              store.dispatch(TagsActionTypes.ACTION_UPDATE_VISITED_VIEW, currentRoute)
+              store.dispatch(
+                TagsActionTypes.ACTION_UPDATE_VISITED_VIEW,
+                currentRoute
+              )
             }
           }
         }
       })
     }
 
-    watch(() => currentRoute.name, () => {
-      if (currentRoute.name !== 'Login') {
-        addTags()
-        moveToCurrentTag()
+    watch(
+      () => currentRoute.name,
+      () => {
+        if (currentRoute.name !== "Login") {
+          addTags()
+          moveToCurrentTag()
+        }
       }
-    })
+    )
 
     // watch(state.visible.value, (value) => {
     //   if (value) {
@@ -264,7 +287,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 // Reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
@@ -305,8 +327,8 @@ export default defineComponent({
       cursor: pointer;
       height: 26px;
       line-height: 25px;
-   border: 1px solid rgba(124,141,181,.3);
-border-radius: 4px;
+      border: 1px solid rgba(124, 141, 181, 0.3);
+      border-radius: 4px;
       color: #495060;
       background: #fff;
       padding: 0 8px;
@@ -324,7 +346,7 @@ border-radius: 4px;
       }
 
       &.active {
-        background-color: #5DDAB4;
+        background-color: #5ddab4;
         color: #fff;
       }
     }

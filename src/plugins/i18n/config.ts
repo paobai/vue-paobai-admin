@@ -1,11 +1,11 @@
 // 菜单国际化配置
 // vxe-table组件国际化
-import zhVxeTable from "vxe-table/lib/locale/lang/zh-CN";
-import enVxeTable from "vxe-table/lib/locale/lang/en-US";
+import zhVxeTable from "vxe-table/lib/locale/lang/zh-CN"
+import enVxeTable from "vxe-table/lib/locale/lang/en-US"
 
 // element-plus国际化
-import enLocale from "element-plus/lib/locale/lang/en";
-import zhLocale from "element-plus/lib/locale/lang/zh-cn";
+import enLocale from "element-plus/lib/locale/lang/en"
+import zhLocale from "element-plus/lib/locale/lang/zh-cn"
 
 // 导航菜单配置
 export const menusConfig = {
@@ -81,7 +81,7 @@ export const menusConfig = {
       externalLink: "External Link"
     }
   }
-};
+}
 
 // 按钮配置
 export const buttonConfig = {
@@ -133,7 +133,7 @@ export const buttonConfig = {
       hscloseAllTabs: "Close AllTabs"
     }
   }
-};
+}
 
 // 配置
 // export const xxxx = {
@@ -145,7 +145,7 @@ export const buttonConfig = {
 //   },
 // };
 
-const localesList = [menusConfig, buttonConfig];
+const localesList = [menusConfig, buttonConfig]
 
 export const localesConfigs = {
   zh: {
@@ -158,4 +158,4 @@ export const localesConfigs = {
     ...enVxeTable,
     ...enLocale
   }
-};
+}

@@ -5,9 +5,9 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-08 17:26:27
  */
-import { MutationTree } from 'vuex'
-import { TagsViewState, TagView } from './state'
-import { TagsMutationTypes } from './mutation-types'
+import { MutationTree } from "vuex"
+import { TagsViewState, TagView } from "./state"
+import { TagsMutationTypes } from "./mutation-types"
 
 export type Mutations<S = TagsViewState> = {
   [TagsMutationTypes.ADD_VISITED_VIEW](state: S, view: TagView): void
@@ -26,7 +26,7 @@ export const mutations: MutationTree<TagsViewState> & Mutations = {
     if (state.visitedViews.some(v => v.path === view.path)) return
     state.visitedViews.push(
       Object.assign({}, view, {
-        title: view.meta?.title || 'no-name'
+        title: view.meta?.title || "no-name"
       })
     )
   },
@@ -50,12 +50,18 @@ export const mutations: MutationTree<TagsViewState> & Mutations = {
     const index = state.cachedViews.indexOf(view.name?.toString())
     index > -1 && state.cachedViews.splice(index, 1)
   },
-  [TagsMutationTypes.DEL_OTHERS_VISITED_VIEWS](state: TagsViewState, view: TagView) {
+  [TagsMutationTypes.DEL_OTHERS_VISITED_VIEWS](
+    state: TagsViewState,
+    view: TagView
+  ) {
     state.visitedViews = state.visitedViews.filter(v => {
       return v.meta?.affix || v.path === view.path
     })
   },
-  [TagsMutationTypes.DEL_OTHERS_CACHED_VIEWS](state: TagsViewState, view: TagView) {
+  [TagsMutationTypes.DEL_OTHERS_CACHED_VIEWS](
+    state: TagsViewState,
+    view: TagView
+  ) {
     if (view.name === null) return
     const index = state.cachedViews.indexOf(view.name?.toString())
     if (index > -1) {
@@ -81,5 +87,4 @@ export const mutations: MutationTree<TagsViewState> & Mutations = {
       }
     }
   }
-
 }

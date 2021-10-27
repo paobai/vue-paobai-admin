@@ -10,19 +10,21 @@ import {
   CommitOptions,
   DispatchOptions,
   Module
-} from 'vuex'
+} from "vuex"
 
 // TODO: How to surpass cyclical dependency linting errors cleanly?
-import { RootState } from '@/store'
-import { state } from './state'
-import { mutations, Mutations } from './mutations'
-import { actions, Actions } from './actions'
-import type { SettingsState } from './state'
+import { RootState } from "@/store"
+import { state } from "./state"
+import { mutations, Mutations } from "./mutations"
+import { actions, Actions } from "./actions"
+import type { SettingsState } from "./state"
 
 export { SettingsState }
 
-export type SettingStore<S = SettingsState> = Omit<VuexStore<S>, 'getters' | 'commit' | 'dispatch'>
-& {
+export type SettingStore<S = SettingsState> = Omit<
+  VuexStore<S>,
+  "getters" | "commit" | "dispatch"
+> & {
   commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
     key: K,
     payload: P,
@@ -34,7 +36,7 @@ export type SettingStore<S = SettingsState> = Omit<VuexStore<S>, 'getters' | 'co
     payload: Parameters<Actions[K]>[1],
     options?: DispatchOptions
   ): ReturnType<Actions[K]>
-};
+}
 export const store: Module<SettingsState, RootState> = {
   state,
   mutations,

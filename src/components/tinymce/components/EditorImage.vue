@@ -1,7 +1,7 @@
 <template>
   <div class="upload-container">
     <el-button
-      :style="{background: color, borderColor: color}"
+      :style="{ background: color, borderColor: color }"
       icon="el-icon-upload"
       size="mini"
       type="primary"
@@ -9,10 +9,7 @@
     >
       上传
     </el-button>
-    <el-dialog
-      v-model="dialogVisible"
-      :modal-append-to-body="false"
-    >
+    <el-dialog v-model="dialogVisible" :modal-append-to-body="false">
       <el-upload
         :multiple="true"
         :file-list="defaultFileList"
@@ -24,30 +21,17 @@
         action="https://httpbin.org/post"
         list-type="picture-card"
       >
-        <el-button
-          size="small"
-          type="primary"
-        >
-          Click upload
-        </el-button>
+        <el-button size="small" type="primary"> Click upload </el-button>
       </el-upload>
-      <el-button @click="dialogVisible = false">
-        Cancel
-      </el-button>
-      <el-button
-        type="primary"
-        @click="handleSubmit"
-      >
-        Confirm
-      </el-button>
+      <el-button @click="dialogVisible = false"> Cancel </el-button>
+      <el-button type="primary" @click="handleSubmit"> Confirm </el-button>
     </el-dialog>
   </div>
 </template>
 
 <script lang="ts">
-
-import { reactive, defineComponent, toRefs } from 'vue'
-import { ElMessage } from 'element-plus'
+import { reactive, defineComponent, toRefs } from "vue"
+import { ElMessage } from "element-plus"
 export interface UploadObject {
   hasSuccess: boolean
   uid: number
@@ -59,11 +43,10 @@ export default defineComponent({
   props: {
     color: {
       type: String,
-      default: ''
+      default: ""
     }
-
   },
-  emits: ['success-callback'],
+  emits: ["success-callback"],
   setup(_, ctx) {
     let listObj: { [key: string]: UploadObject } = {}
     const dataMap = reactive({
@@ -75,9 +58,11 @@ export default defineComponent({
       handleSubmi: () => {
         const arr = Object.keys(listObj).map(v => listObj[v])
         if (!dataMap.checkAllSuccess()) {
-          ElMessage.success('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
+          ElMessage.success(
+            "Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!"
+          )
         }
-        ctx.emit('success-callback', arr)
+        ctx.emit("success-callback", arr)
         listObj = {}
         dataMap.defaultFileList = []
         dataMap.dialogVisible = false
@@ -113,7 +98,7 @@ export default defineComponent({
           listObj[fileName] = {
             hasSuccess: false,
             uid: file.uid,
-            url: '',
+            url: "",
             width: img.width,
             height: img.height
           }
@@ -122,10 +107,12 @@ export default defineComponent({
       handleSubmit() {
         const arr = Object.keys(listObj).map(v => listObj[v])
         if (!dataMap.checkAllSuccess()) {
-          ElMessage.warning('Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!')
+          ElMessage.warning(
+            "Please wait for all images to be uploaded successfully. If there is a network problem, please refresh the page and upload again!"
+          )
           return
         }
-        ctx.emit('success-callback', arr)
+        ctx.emit("success-callback", arr)
         listObj = {}
         dataMap.defaultFileList = []
         dataMap.dialogVisible = false

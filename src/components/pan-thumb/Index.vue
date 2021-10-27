@@ -8,7 +8,7 @@
 
 <template>
   <div
-    :style="{zIndex: zIndex, height: height, width: width}"
+    :style="{ zIndex: zIndex, height: height, width: width }"
     class="pan-item"
   >
     <div class="pan-info">
@@ -16,18 +16,15 @@
         <slot />
       </div>
     </div>
-    <div
-      :style="{backgroundImage: `url(${image})`}"
-      class="pan-thumb"
-    />
+    <div :style="{ backgroundImage: `url(${image})` }" class="pan-thumb" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 
 export default defineComponent({
-  name: 'PanThumb',
+  name: "PanThumb",
   props: {
     image: {
       type: String,
@@ -36,12 +33,12 @@ export default defineComponent({
     width: {
       type: String,
       required: true,
-      default: '150px'
+      default: "150px"
     },
     height: {
       type: String,
       required: true,
-      default: '150px'
+      default: "150px"
     },
     zIndex: {
       type: Number,
@@ -93,7 +90,7 @@ export default defineComponent({
     margin: 0 60px;
     padding: 22px 0 0 0;
     height: 85px;
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: "Open Sans", Arial, sans-serif;
     text-shadow: 0 0 1px #fff, 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
@@ -120,9 +117,10 @@ export default defineComponent({
       letter-spacing: 1px;
       padding-top: 24px;
       margin: 7px auto 0;
-      font-family: 'Open Sans', Arial, sans-serif;
+      font-family: "Open Sans", Arial, sans-serif;
       opacity: 0;
-      transition: transform 0.3s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.2s, background 0.2s linear 0s;
+      transition: transform 0.3s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.2s,
+        background 0.2s linear 0s;
       transform: translateX(60px) rotate(90deg);
 
       &:hover {

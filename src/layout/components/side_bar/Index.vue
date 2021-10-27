@@ -6,14 +6,8 @@
  * @LastEditTime: 2021-04-06 14:16:03
 -->
 <template>
-  <div
-    :class="{'has-logo': showLogo}"
-    class="sideWrap"
-  >
-    <SidebarLogo
-      v-if="showLogo"
-      :collapse="isCollapse"
-    />
+  <div :class="{ 'has-logo': showLogo }" class="sideWrap">
+    <SidebarLogo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :collapse="!isCollapse"
@@ -37,13 +31,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import SidebarItem from './SidebarItem.vue'
-import SidebarLogo from './SidebarLogo.vue'
+import { computed, defineComponent } from "vue"
+import SidebarItem from "./SidebarItem.vue"
+import SidebarLogo from "./SidebarLogo.vue"
 // import variables from '@/styles/_variables.scss'
-import { useStore } from '@/store'
-import { useRoute } from 'vue-router'
-import Layout from "@/layout/index.vue";
+import { useStore } from "@/store"
+import { useRoute } from "vue-router"
+import Layout from "@/layout/index.vue"
 
 export default defineComponent({
   components: {
@@ -57,23 +51,23 @@ export default defineComponent({
       return store.state.app.sidebar
     })
     const routes = computed(() => {
-      const routes =  store.state.permission.routes
+      const routes = store.state.permission.routes
       return routes
     })
     const showLogo = computed(() => {
       return store.state.settings.showSidebarLogo
     })
     let variables = {
-      menuBg: '#fff',
-      menuText: '#162B64',
-      menuActiveText: '#435EBE',
+      menuBg: "#fff",
+      menuText: "#162B64",
+      menuActiveText: "#435EBE"
     }
 
     const menuActiveTextColor = computed(() => {
       console.log(store.state.settings.sidebarTextTheme)
 
       if (store.state.settings.sidebarTextTheme) {
-        return '#57CAEB'
+        return "#57CAEB"
         // return store.state.settings.theme
       } else {
         return variables.menuActiveText
@@ -87,7 +81,7 @@ export default defineComponent({
           return meta.activeMenu
         }
       }
-      return '2'
+      return "2"
     })
 
     const isCollapse = computed(() => {

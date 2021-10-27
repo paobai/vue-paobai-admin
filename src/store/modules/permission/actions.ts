@@ -6,21 +6,21 @@
  * @LastEditTime: 2021-01-11 21:05:18
  */
 
-import { ActionTree, ActionContext } from 'vuex'
-import { RootState } from '@/store'
-import { PermissionState } from './state'
-import { Mutations } from './mutations'
-import { PermissionMutationType } from './mutation-types'
-import { PermissionActionType } from './action-types'
-import { constantRoutes as asyncRoutes } from '@/router'
-import { RouteRecordRaw } from 'vue-router'
+import { ActionTree, ActionContext } from "vuex"
+import { RootState } from "@/store"
+import { PermissionState } from "./state"
+import { Mutations } from "./mutations"
+import { PermissionMutationType } from "./mutation-types"
+import { PermissionActionType } from "./action-types"
+import { constantRoutes as asyncRoutes } from "@/router"
+import { RouteRecordRaw } from "vue-router"
 
 type AugmentedActionContext = {
-    commit<K extends keyof Mutations>(
-      key: K,
-      payload: Parameters<Mutations[K]>[1],
-    ): ReturnType<Mutations[K]>
-} & Omit<ActionContext<PermissionState, RootState>, 'commit'>
+  commit<K extends keyof Mutations>(
+    key: K,
+    payload: Parameters<Mutations[K]>[1]
+  ): ReturnType<Mutations[K]>
+} & Omit<ActionContext<PermissionState, RootState>, "commit">
 
 const hasPermission = (roles: string[], route: RouteRecordRaw) => {
   if (route.meta && route.meta.roles) {
@@ -34,7 +34,10 @@ const hasPermission = (roles: string[], route: RouteRecordRaw) => {
   }
 }
 
-export const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
+export const filterAsyncRoutes = (
+  routes: RouteRecordRaw[],
+  roles: string[]
+) => {
   const res: RouteRecordRaw[] = []
   routes.forEach(route => {
     const r = { ...route }
@@ -49,16 +52,18 @@ export const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => 
 }
 
 export interface Actions {
-    [PermissionActionType.ACTION_SET_ROUTES](
-      { commit }: AugmentedActionContext
-      , routes: RouteRecordRaw[]): void
+  [PermissionActionType.ACTION_SET_ROUTES](
+    { commit }: AugmentedActionContext,
+    routes: RouteRecordRaw[]
+  ): void
 }
 
 export const actions: ActionTree<PermissionState, RootState> & Actions = {
   [PermissionActionType.ACTION_SET_ROUTES](
-    { commit }: AugmentedActionContext
-    , routes: RouteRecordRaw[]) {
-    console.log('~~~~~~', routes)
+    { commit }: AugmentedActionContext,
+    routes: RouteRecordRaw[]
+  ) {
+    console.log("~~~~~~", routes)
     commit(PermissionMutationType.SET_ROUTES, routes)
   }
 }

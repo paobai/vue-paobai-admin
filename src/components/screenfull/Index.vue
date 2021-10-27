@@ -8,27 +8,13 @@
 
 <template>
   <div id="screenfull">
-    <div
-      v-if="isFullscreen"
-      @click="click"
-    >
-      <svg
-        class="icon"
-        aria-hidden="true"
-        font-size="40px"
-      >
+    <div v-if="isFullscreen" @click="click">
+      <svg class="icon" aria-hidden="true" font-size="40px">
         <use xlink:href="#iconshiliangzhinengduixiang1" />
       </svg>
     </div>
-    <div
-      @click="click"
-      v-else
-    >
-      <svg
-        class="icon"
-        aria-hidden="true"
-        font-size="40px"
-      >
+    <div @click="click" v-else>
+      <svg class="icon" aria-hidden="true" font-size="40px">
         <use xlink:href="#iconshiliangzhinengduixiang1" />
       </svg>
     </div>
@@ -36,9 +22,15 @@
 </template>
 
 <script lang="ts">
-import screenfull from 'screenfull'
-import { defineComponent, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import { ElMessage } from 'element-plus'
+import screenfull from "screenfull"
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  toRefs
+} from "vue"
+import { ElMessage } from "element-plus"
 
 const sf = screenfull
 export default defineComponent({
@@ -48,8 +40,8 @@ export default defineComponent({
       click: () => {
         if (!sf.isEnabled) {
           ElMessage({
-            message: 'you browser can not work',
-            type: 'warning'
+            message: "you browser can not work",
+            type: "warning"
           })
           return false
         }
@@ -63,13 +55,13 @@ export default defineComponent({
     }
     onMounted(() => {
       if (sf.isEnabled) {
-        sf.on('change', change)
+        sf.on("change", change)
       }
     })
 
     onBeforeUnmount(() => {
       if (sf.isEnabled) {
-        sf.off('change', change)
+        sf.off("change", change)
       }
     })
 
@@ -78,5 +70,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>

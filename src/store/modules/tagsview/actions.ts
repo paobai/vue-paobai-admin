@@ -5,26 +5,24 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-11 11:19:12
  */
-import { ActionTree, ActionContext } from 'vuex'
+import { ActionTree, ActionContext } from "vuex"
 
 // eslint-disable-next-line import/no-cycle
-import { RootState } from '@/store'
-import { TagsViewState, TagView } from './state'
-import { Mutations } from './mutations'
-import { TagsMutationTypes } from './mutation-types'
-import { TagsActionTypes } from './action-types'
+import { RootState } from "@/store"
+import { TagsViewState, TagView } from "./state"
+import { Mutations } from "./mutations"
+import { TagsMutationTypes } from "./mutation-types"
+import { TagsActionTypes } from "./action-types"
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
-    payload: Parameters<Mutations[K]>[1],
+    payload: Parameters<Mutations[K]>[1]
   ): ReturnType<Mutations[K]>
-} & Omit<ActionContext<TagsViewState, RootState>, 'commit'>
+} & Omit<ActionContext<TagsViewState, RootState>, "commit">
 
 type NoAugmentedActionContext = {
-  commit<K extends keyof Mutations>(
-    key: K,
-  ): ReturnType<Mutations[K]>
-} & Omit<ActionContext<TagsViewState, RootState>, 'commit'>
+  commit<K extends keyof Mutations>(key: K): ReturnType<Mutations[K]>
+} & Omit<ActionContext<TagsViewState, RootState>, "commit">
 
 export interface Actions {
   [TagsActionTypes.ACTION_ADD_VIEW](
@@ -51,12 +49,12 @@ export interface Actions {
     { commit }: AugmentedActionContext,
     view: TagView
   ): void
-  [TagsActionTypes.ACTION_DEL_ALL_VIEWS](
-    { commit }: NoAugmentedActionContext
-  ): void
-  [TagsActionTypes.ACTION_DEL_ALL_CACHED_VIEWS](
-    { commit }: NoAugmentedActionContext,
-  ): void
+  [TagsActionTypes.ACTION_DEL_ALL_VIEWS]({
+    commit
+  }: NoAugmentedActionContext): void
+  [TagsActionTypes.ACTION_DEL_ALL_CACHED_VIEWS]({
+    commit
+  }: NoAugmentedActionContext): void
   [TagsActionTypes.ACTION_UPDATE_VISITED_VIEW](
     { commit }: AugmentedActionContext,
     view: TagView
@@ -96,5 +94,4 @@ export const actions: ActionTree<TagsViewState, RootState> & Actions = {
   [TagsActionTypes.ACTION_UPDATE_VISITED_VIEW]({ commit }, view: TagView) {
     commit(TagsMutationTypes.UPDATE_VISITED_VIEW, view)
   }
-
 }

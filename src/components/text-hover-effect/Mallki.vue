@@ -6,11 +6,7 @@
  * @LastEditTime: 2021-01-22 14:57:45
 -->
 <template>
-  <a
-    :class="className"
-    class="link--mallki"
-    href="#"
-  >
+  <a :class="className" class="link--mallki" href="#">
     {{ text }}
     <span :data-letters="text" />
     <span :data-letters="text" />
@@ -18,16 +14,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue"
 export default defineComponent({
   props: {
     className: {
       type: String,
-      default: ''
+      default: ""
     },
     text: {
       type: String,
-      default: 'vue3-compisition-admin'
+      default: "vue3-compisition-admin"
     }
   }
 })
@@ -39,7 +35,7 @@ export default defineComponent({
 .link--mallki {
   font-weight: 800;
   color: #4dd9d5;
-  font-family: 'Dosis', sans-serif;
+  font-family: "Dosis", sans-serif;
   -webkit-transition: color 0.5s 0.25s;
   transition: color 0.5s 0.25s;
   overflow: hidden;
@@ -61,7 +57,7 @@ export default defineComponent({
   }
 
   &::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 6px;
     margin: -3px 0 0 0;

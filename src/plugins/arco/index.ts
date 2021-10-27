@@ -1,6 +1,6 @@
-import '@arco-design/web-vue/dist/arco.css';
-import ArcoVue from '@arco-design/web-vue';
-import {App, Component} from "vue";
+import "@arco-design/web-vue/dist/arco.css"
+import ArcoVue from "@arco-design/web-vue"
+import { App, Component } from "vue"
 
 // import {
 //     Button
@@ -10,13 +10,13 @@ import {App, Component} from "vue";
 //     Button
 // ]
 // const plugins = [];
-let componentPrefix =  'A'
+const componentPrefix = "A"
 export function useArco(app: App) {
-    // components.forEach((component: Component) => {
-    //     app.component(( componentPrefix + component.name) as string, component);
-    // });
-    // plugins.forEach(plugin => {
-    //     app.use(plugin);
-    // });
-    app.use(ArcoVue, {componentPrefix})
+  // components.forEach((component: Component) => {
+  //     app.component(( componentPrefix + component.name) as string, component);
+  // });
+  // plugins.forEach(plugin => {
+  //     app.use(plugin);
+  // });
+  app.use(ArcoVue, { componentPrefix })
 }

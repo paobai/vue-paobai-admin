@@ -6,21 +6,15 @@
 <!-- * @LastEditTime: 2021-04-06 14:47:00-->
 <!--&ndash;&gt;-->
 <template>
-  <div
-      :class="classObj"
-      class="app-wrapper"
-  >
+  <div :class="classObj" class="app-wrapper">
     <div
-        v-if="classObj.mobile && sidebar.opened"
-        class="drawer-bg"
-        @click="handleClickOutside"
+      v-if="classObj.mobile && sidebar.opened"
+      class="drawer-bg"
+      @click="handleClickOutside"
     />
     <Sidebar class="sidebar-container" />
-    <div
-        :class="{hasTagsView: showTagsView}"
-        class="main-container"
-    >
-      <div :class="{'fixed-header': fixedHeader}">
+    <div :class="{ hasTagsView: showTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
         <Navbar />
         <TagsView v-if="showTagsView" />
       </div>
@@ -33,17 +27,25 @@
 </template>
 
 <script lang="ts">
-import { DeviceType } from '@/store/modules/app/state'
-import { computed, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, toRefs } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { AppMain, Navbar, TagsView, Settings, Sidebar } from './components'
+import { DeviceType } from "@/store/modules/app/state"
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  toRefs
+} from "vue"
+import { useI18n } from "vue-i18n"
+import { useStore } from "@/store"
+import { AppActionTypes } from "@/store/modules/app/action-types"
+import { AppMain, Navbar, TagsView, Settings, Sidebar } from "./components"
 // import { AppMain, Navbar, TagsView } from './components'
-import RightPanel from '@/components/right_panel/Index.vue'
-import resize from './resize'
+import RightPanel from "@/components/right_panel/Index.vue"
+import resize from "./resize"
 export default defineComponent({
-  name: 'Layout',
+  name: "Layout",
   components: {
     AppMain,
     Navbar,
@@ -55,7 +57,14 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const store = useStore()
-    const { sidebar, device, addEventListenerOnResize, resizeMounted, removeEventListenerResize, watchRouter } = resize()
+    const {
+      sidebar,
+      device,
+      addEventListenerOnResize,
+      resizeMounted,
+      removeEventListenerResize,
+      watchRouter
+    } = resize()
     const state = reactive({
       handleClickOutside: () => {
         store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
@@ -126,7 +135,7 @@ export default defineComponent({
 
 .main-container {
   min-height: 100%;
-  transition: margin-left .28s;
+  transition: margin-left 0.28s;
   margin-left: $sideBarWidth;
   position: relative;
 }
@@ -164,7 +173,7 @@ export default defineComponent({
   }
 
   .fixed-header {
-    width: calc(100% - 54px)
+    width: calc(100% - 54px);
   }
 }
 
@@ -175,7 +184,7 @@ export default defineComponent({
   }
 
   .sidebar-container {
-    transition: transform .28s;
+    transition: transform 0.28s;
     width: $sideBarWidth !important;
   }
 
@@ -203,5 +212,4 @@ export default defineComponent({
     transition: none;
   }
 }
-
 </style>

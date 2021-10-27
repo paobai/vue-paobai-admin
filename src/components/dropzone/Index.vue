@@ -15,10 +15,7 @@
       @vdropzone-success="dropzoneSuccess"
     >
       <div class="dropzone-custom-content">
-        <h3
-          class="dropzone-custom-title"
-          :style="{color: themeColor}"
-        >
+        <h3 class="dropzone-custom-title" :style="{ color: themeColor }">
           Drag and drop to upload content!
         </h3>
         <div class="subtitle">
@@ -29,8 +26,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, getCurrentInstance } from 'vue'
-import { VueDropzone } from '@dragndrop/vue-dropzone'
+import { defineComponent, getCurrentInstance } from "vue"
+import { VueDropzone } from "@dragndrop/vue-dropzone"
 
 export default defineComponent({
   components: {
@@ -40,12 +37,16 @@ export default defineComponent({
     const { ctx } = getCurrentInstance() as any
     const { $message } = ctx.root
     const dropzoneSuccess = (file: File, response: any) => {
-      $message({ message: 'Upload success', type: 'success' })
+      $message({ message: "Upload success", type: "success" })
       console.log(file, response)
     }
 
-    const dropzoneRemovedFile = (file: File, error: Error, xhr: XMLHttpRequest) => {
-      $message({ message: 'Delete success', type: 'success' })
+    const dropzoneRemovedFile = (
+      file: File,
+      error: Error,
+      xhr: XMLHttpRequest
+    ) => {
+      $message({ message: "Delete success", type: "success" })
       console.log(file, error, xhr)
     }
 

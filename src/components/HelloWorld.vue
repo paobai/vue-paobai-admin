@@ -34,10 +34,10 @@
   </p>
 </template>
 
-<script lang="ts" >
-import { ref, defineComponent } from 'vue'
+<script lang="ts">
+import { ref, defineComponent } from "vue"
 export default defineComponent({
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
     msg: {
       type: String,
@@ -46,7 +46,7 @@ export default defineComponent({
   },
   setup: () => {
     const count = ref(0)
-    const color = ref('red')
+    const color = ref("red")
     return { count, color }
   }
 })
@@ -56,7 +56,7 @@ export default defineComponent({
 a {
   color: #42b983;
 }
-p{
+p {
   color: v-bind(color);
 }
 

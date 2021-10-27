@@ -5,23 +5,23 @@
  * @LastEditors: ZY
  * @LastEditTime: 2021-01-20 11:12:08
  */
-import { createI18n } from 'vue-i18n' // import from runtime only
+import { createI18n } from "vue-i18n" // import from runtime only
 
-import { getLanguage } from '@/utils/cookies'
+import { getLanguage } from "@/utils/cookies"
 
-import elementEnLocale from 'element-plus/lib/locale/lang/en'
-import elementZhLocale from 'element-plus/lib/locale/lang/zh-cn'
+import elementEnLocale from "element-plus/lib/locale/lang/en"
+import elementZhLocale from "element-plus/lib/locale/lang/zh-cn"
 
 // User defined lang
-import enLocale from './en'
-import zhLocale from './zh-cn'
+import enLocale from "./en"
+import zhLocale from "./zh-cn"
 
 const messages = {
   en: {
     ...enLocale,
     ...elementEnLocale
   },
-  'zh-cn': {
+  "zh-cn": {
     ...zhLocale,
     ...elementZhLocale
   }
@@ -41,7 +41,7 @@ export const getLocale = () => {
   }
 
   // Default language is english
-  return 'zh'
+  return "zh"
 }
 
 const i18n = createI18n({

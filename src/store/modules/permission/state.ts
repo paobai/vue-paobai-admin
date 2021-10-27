@@ -6,11 +6,11 @@
  * @LastEditTime: 2020-12-26 13:57:51
  */
 
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw } from "vue-router"
 
 export interface PermissionState {
-    routes: RouteRecordRaw[]
-    dynamicRoutes: RouteRecordRaw[]
+  routes: RouteRecordRaw[]
+  dynamicRoutes: RouteRecordRaw[]
 }
 
 export const state: PermissionState = {

@@ -6,28 +6,28 @@
  * @LastEditTime: 2021-01-07 08:40:47
  */
 
-export enum Language{
-     En='en',
-     Zh='zh-cn',
+export enum Language {
+  En = "en",
+  Zh = "zh-cn"
 }
 
-export enum Environment{
-    Development = 'development',
-    Production = 'production'
+export enum Environment {
+  Development = "development",
+  Production = "production"
 }
 
-export enum RouterSource{
-    Frontend = 'frontend',
-    Backend = 'backend'
+export enum RouterSource {
+  Frontend = "frontend",
+  Backend = "backend"
 }
 
-export enum RouterMode{
-    Hash = 'hash',
-    HISTORY = 'history'
+export enum RouterMode {
+  Hash = "hash",
+  HISTORY = "history"
 }
 
-export enum TokenStorageName{
-    LocalStorage = 'localStorage',
-    SessionStorage = 'sessionStorage',
-    Cookie = 'cookie'
+export enum TokenStorageName {
+  LocalStorage = "localStorage",
+  SessionStorage = "sessionStorage",
+  Cookie = "cookie"
 }

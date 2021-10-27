@@ -7,15 +7,15 @@
  */
 // refer to Bootstrap's responsive design
 
-import { useStore } from '@/store'
-import { AppActionTypes } from '@/store/modules/app/action-types'
-import { DeviceType } from '@/store/modules/app/state'
-import { computed, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useStore } from "@/store"
+import { AppActionTypes } from "@/store/modules/app/action-types"
+import { DeviceType } from "@/store/modules/app/state"
+import { computed, watch } from "vue"
+import { useRoute } from "vue-router"
 const store = useStore()
 const WIDTH = 992 // refer to Bootstrap's responsive design
 
-export default function() {
+export default function () {
   const device = computed(() => {
     return store.state.app.device
   })
@@ -25,11 +25,17 @@ export default function() {
   })
 
   const currentRoute = useRoute()
-  const watchRouter = watch(() => currentRoute.name, () => {
-    if (store.state.app.device === DeviceType.Mobile && store.state.app.sidebar.opened) {
-      store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
+  const watchRouter = watch(
+    () => currentRoute.name,
+    () => {
+      if (
+        store.state.app.device === DeviceType.Mobile &&
+        store.state.app.sidebar.opened
+      ) {
+        store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, false)
+      }
     }
-  })
+  )
 
   const isMobile = () => {
     const rect = document.body.getBoundingClientRect()
@@ -45,18 +51,21 @@ export default function() {
 
   const resizeHandler = () => {
     if (!document.hidden) {
-      store.dispatch(AppActionTypes.ACTION_TOGGLE_DEVICE, isMobile() ? DeviceType.Mobile : DeviceType.Desktop)
+      store.dispatch(
+        AppActionTypes.ACTION_TOGGLE_DEVICE,
+        isMobile() ? DeviceType.Mobile : DeviceType.Desktop
+      )
       if (isMobile()) {
         store.dispatch(AppActionTypes.ACTION_CLOSE_SIDEBAR, true)
       }
     }
   }
   const addEventListenerOnResize = () => {
-    window.addEventListener('resize', resizeHandler)
+    window.addEventListener("resize", resizeHandler)
   }
 
   const removeEventListenerResize = () => {
-    window.removeEventListener('resize', resizeHandler)
+    window.removeEventListener("resize", resizeHandler)
   }
 
   return {

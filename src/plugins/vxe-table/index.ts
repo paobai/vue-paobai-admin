@@ -1,7 +1,7 @@
-import "xe-utils";
-import { App } from "vue";
-import { i18n } from "../i18n/index";
-import "font-awesome/css/font-awesome.css";
+import "xe-utils"
+import { App } from "vue"
+import { i18n } from "../i18n/index"
+import "font-awesome/css/font-awesome.css"
 import {
   // 核心
   VXETable,
@@ -45,7 +45,7 @@ import {
 
   // 表格
   Table
-} from "vxe-table";
+} from "vxe-table"
 
 // 全局默认参数
 VXETable.setup({
@@ -68,14 +68,14 @@ VXETable.setup({
   translate(key, args) {
     // 例如，只翻译 "message." 开头的键值
     if (key && key.indexOf("message.") > -1) {
-      return i18n.global.t(key, args);
+      return i18n.global.t(key, args)
     }
     if (key && key.indexOf("el.") > -1) {
-      return i18n.global.t(key, args);
+      return i18n.global.t(key, args)
     }
-    return key;
+    return key
   }
-});
+})
 
 export function useTable(app: App) {
   app
@@ -115,5 +115,5 @@ export function useTable(app: App) {
     .use(List)
     .use(Pulldown)
     // 安装表格
-    .use(Table);
+    .use(Table)
 }

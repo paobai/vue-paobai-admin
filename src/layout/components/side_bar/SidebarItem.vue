@@ -11,19 +11,16 @@
     v-if="!item.meta || !item.meta.hidden"
     :class="[
       isCollapse ? 'simple-mode' : 'full-mode',
-      {'first-level': isFirstLevel}
+      { 'first-level': isFirstLevel }
     ]"
   >
     <template
       v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children"
     >
-      <SidebarItemLink
-        v-if="theOnlyOneChild.meta"
-        :to="theOnlyOneChild.path"
-      >
+      <SidebarItemLink v-if="theOnlyOneChild.meta" :to="theOnlyOneChild.path">
         <el-menu-item
           :index="theOnlyOneChild.meta.id"
-          :class="{'submenu-title-noDropdown': isFirstLevel}"
+          :class="{ 'submenu-title-noDropdown': isFirstLevel }"
         >
           <svg
             v-if="theOnlyOneChild.meta.icon"
@@ -39,11 +36,7 @@
         </el-menu-item>
       </SidebarItemLink>
     </template>
-    <el-sub-menu
-      v-else
-      :index="item.meta.id"
-      popper-append-to-body
-    >
+    <el-sub-menu v-else :index="item.meta.id" popper-append-to-body>
       <template #title>
         <svg
           v-if="item.meta && item.meta.icon"
@@ -53,9 +46,7 @@
         >
           <use :xlink:href="item.meta.icon" />
         </svg>
-        <span v-if="item.meta && item.meta.title">{{
-          item.meta.title
-        }}</span>
+        <span v-if="item.meta && item.meta.title">{{ item.meta.title }}</span>
       </template>
       <template v-if="item.children">
         <sidebar-item
@@ -73,13 +64,13 @@
 </template>
 
 <script lang="ts">
-import path from 'path'
-import { computed, defineComponent, PropType } from 'vue'
-import { RouteRecordRaw } from 'vue-router'
-import { isExternal } from '@/utils/validate'
-import SidebarItemLink from './SidebarItemLink.vue'
-import { useI18n } from 'vue-i18n'
-import {type} from "os";
+import path from "path"
+import { computed, defineComponent, PropType } from "vue"
+import { RouteRecordRaw } from "vue-router"
+import { isExternal } from "@/utils/validate"
+import SidebarItemLink from "./SidebarItemLink.vue"
+import { useI18n } from "vue-i18n"
+import { type } from "os"
 export default defineComponent({
   props: {
     item: {
@@ -113,7 +104,7 @@ export default defineComponent({
 
     const showingChildNumber = computed(() => {
       if (props.item.children) {
-        const showingChildren = props.item.children.filter((item) => {
+        const showingChildren = props.item.children.filter(item => {
           if (item.meta && item.meta.hidden) {
             return false
           } else {
@@ -179,8 +170,8 @@ export default defineComponent({
       background-color: $subMenuHover !important;
     }
   }
-  .el-menu-item{
-    &>span{
+  .el-menu-item {
+    & > span {
       display: inline-block;
       padding-left: 5px;
     }
@@ -194,8 +185,7 @@ export default defineComponent({
       }
 
       & > span {
-             padding-left: 5px;
-
+        padding-left: 5px;
       }
     }
   }
