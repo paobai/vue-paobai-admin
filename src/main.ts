@@ -2,7 +2,7 @@ import "@/styles/index.scss"
 import { createApp, Directive } from "vue"
 import App from "./App.vue"
 import router from "./router"
-import { store } from "./store"
+import { setupStore } from "@/store";
 // import { loadAllPlugins } from './plugins'
 import { i18n } from "@/plugins/i18n"
 import { useElementPlus } from "@/plugins/element-plus"
@@ -17,5 +17,6 @@ const app = createApp(App)
 Object.keys(directives).forEach(key => {
   app.directive(key, (directives as { [key: string]: Directive })[key])
 })
-app.use(router).use(useArco).use(useElementPlus).use(i18n).use(store)
+setupStore(app)
+app.use(router).use(useArco).use(useElementPlus).use(i18n)
 app.mount("#app")

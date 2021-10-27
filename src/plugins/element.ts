@@ -40,10 +40,9 @@ import ElementPlus from "element-plus"
 import "element-plus/theme-chalk/index.css"
 // import 'element-plus/dist/index.css'
 import i18n from "@/locales"
-import { useStore } from "@/store"
 import { App, Component } from "vue"
 export default function loadComponent(app: App) {
-  app.use(ElementPlus, { size: useStore().state.app.size, i18n: i18n.global.t })
+  app.use(ElementPlus, { i18n: i18n.global.t })
   // app.use(ElButton)
   // app.use(ElSelect)
   // app.use(ElBreadcrumb)

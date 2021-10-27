@@ -7,10 +7,10 @@
 // })
 
 import { resolve } from "path";
-import { UserConfigExport, ConfigEnv } from "vite";
+import { UserConfigExport, ConfigEnv, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { loadEnv } from "./build/utils";
+import { warpperEnv } from "./build/utils";
 import { createProxy } from "./build/proxy";
 import { viteMockServe } from "vite-plugin-mock";
 import styleImport from "vite-plugin-style-import";
@@ -19,7 +19,6 @@ const pathResolve = (dir: string): any => {
   return resolve(__dirname, ".", dir);
 };
 
-const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_OPEN, VITE_HOST } = loadEnv();
 const alias: Record<string, string> = {
   "@": pathResolve("src"),
   //解决开发环境下的警告 You are running the esm-bundler build of vue-i18n. It is recommended to configure your bundler to explicitly replace feature flag globals with boolean literals to get proper tree-shaking in the final bundle.
@@ -28,7 +27,10 @@ const alias: Record<string, string> = {
 
 const root: string = process.cwd();
 
-export default ({ command }: ConfigEnv): UserConfigExport => {
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+    const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = warpperEnv(
+        loadEnv(mode, root)
+    );
   let prodMock = true;
   return {
     /**
@@ -45,9 +47,14 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "./src/styles/_mixins.scss";@import "./src/styles/_variables.scss";'
+          additionalData: '@import "./src/styles/_mixins.scss";@import "./src/styles/_variables.scss";@import "./src/styles/arco-varables.scss";'
         },
         less: {
+          additionalData:  `@import "./src/styles/arco-varables.less";`,
+          modifyVars: {
+            // 'arcoblue-6': '#06979C'
+          },
+          javascriptEnabled: true
         }
       },
     },
@@ -59,7 +66,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
        * 端口号
        * @default 3000
        */
-      host: VITE_HOST,
+      host: '0.0.0.0',
       port: VITE_PORT,
       // 本地跨域代理
       proxy: createProxy(VITE_PROXY),

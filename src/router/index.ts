@@ -14,16 +14,14 @@ import {
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
-import Layout from "@/layout/Index.vue"
+import Layout from "@/layout/index.vue"
 import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
-import { useStore } from "@/store"
-import { LoginType } from "@/store/modules/paobai/state"
+import { useUserStoreHook } from "@/store/modules/user"
 import Cookies from "js-cookie"
-import { PermissionActionType } from "@/store/modules/permission/action-types"
 
 const modulesRoutes = import.meta.glob("/src/views/*/*.vue")
 
-const store = useStore()
+const store = useUserStoreHook()
 
 const commonFiles = import.meta.globEager("./commonModules/*.ts")
 let commonModules: Array<RouteRecordRaw> = []
@@ -31,11 +29,6 @@ Object.keys(commonFiles).forEach(key => {
   if (key === "./index.ts") return
   commonModules = commonModules.concat(commonFiles[key].default)
 })
-// const otherFiles = import.meta.globEager('./permissionModules/*.ts')
-// Object.keys(otherFiles).forEach((key) => {
-//   if (key === './index.ts') return
-//   commonModules = commonModules.concat(otherFiles[key].default)
-// })
 
 // 主入口路由(需嵌套上左右整体布局)
 const mainRoutes: RouteRecordRaw = {
@@ -58,17 +51,6 @@ const mainRoutes: RouteRecordRaw = {
 }
 
 export const constantRoutes: Array<RouteRecordRaw> = [
-  // {
-  //   path: '/redirect',
-  //   component: Layout,
-  //   meta: { hidden: true },
-  //   children: [
-  //     {
-  //       path: '/redirect/:path(.*)',
-  //       component: () => import(/* webpackChunkName: "redirect" */ '@/views/index.vue')
-  //     }
-  //   ]
-  // },
   mainRoutes,
   ...commonModules
 ]
@@ -101,7 +83,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     // TODO 获取路由
-    const token = Cookies.get("token")
+    const token = Cookies.get("access_token")
     if (!token) {
       router.push({ name: "login" })
       next()
@@ -113,29 +95,10 @@ router.beforeEach((to, from, next) => {
           const newRoute: Array<GetRouteStructure> = res.data as any
           newRoute.forEach(item => {
             buildRouter(item, modulesRoutes, router)
-            // Dynamically add accessible routes
           })
-          // store.state.permission.dynamicRoutes.forEach((route) => {
-          //   router.addRoute(route)
-          // })
-          store.dispatch(PermissionActionType.ACTION_SET_ROUTES, newRoute)
+          store.updatePermissions(newRoute)
         }
         next()
-        // console.log(res)
-        // if (res && res.code === 0) {
-        //   let menus = res.data
-        //   let fixRes = fixMenu(menus)
-        //   router.options.isAddDynamicMenuRoutes = true
-        //   // let btPerms = fixRes.btPerms.map(item => item.menuKey)
-        //   // store.commit('user/updateBtPerms', btPerms)
-        //   sessionStorage.setItem('menuList', JSON.stringify(menus || '[]'))
-        //   // sessionStorage.setItem('permissions', JSON.stringify(res.data.permissions || '[]'))
-        //   next({ ...to, replace: true })
-        // } else {
-        //   sessionStorage.setItem('menuList', '[]')
-        //   // sessionStorage.setItem('permissions', '[]')
-        //   next()
-        // }
       })
       .catch(e => {
         console.log(

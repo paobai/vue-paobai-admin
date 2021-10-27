@@ -1,6 +1,4 @@
 import router, { resetRouter } from "@/router"
-import { useStore } from "@/store"
-const store = useStore()
 import Vue from "vue"
 import Cookies from "js-cookie"
 import { MyRouterOptions } from "@/router/routerHelp"

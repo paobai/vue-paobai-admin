@@ -1,6 +1,7 @@
-import "@arco-design/web-vue/dist/arco.css"
 import ArcoVue from "@arco-design/web-vue"
+import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import { App, Component } from "vue"
+import './theme.less'
 
 // import {
 //     Button
@@ -19,4 +20,7 @@ export function useArco(app: App) {
   //     app.use(plugin);
   // });
   app.use(ArcoVue, { componentPrefix })
+  Object.keys(ArcoVueIcon).forEach(key => {
+    app.component(componentPrefix + key, (<any>ArcoVueIcon)[key] as Component);
+  })
 }
