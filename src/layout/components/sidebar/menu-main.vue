@@ -5,67 +5,74 @@
       :selected-keys="selectKey"
       @menu-item-click="clickMenu"
     >
-      <a-menu-item key="8_0"
-        ><a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" /> Menu
-        8</a-menu-item
-      >
-      <a-sub-menu key="0">
-        <template #title
-          ><a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
-          Navigation 1</template
-        >
-        <template #expand-icon-down
-          ><a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }"
-        /></template>
-        <a-menu-item key="0_0">Menu 1</a-menu-item>
-        <a-menu-item key="0_1">Menu 2</a-menu-item>
-        <a-menu-item key="0_2">Menu 3</a-menu-item>
-        <a-menu-item key="0_3">Menu 4</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="1">
-        <template #title
-          ><a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
-          Navigation 2</template
-        >
-        <template #expand-icon-down
-          ><a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }"
-        /></template>
-        <a-menu-item key="1_0">Menu 1</a-menu-item>
-        <a-menu-item key="1_1">Menu 2</a-menu-item>
-        <a-menu-item key="1_2">Menu 3</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="2">
-        <template #title
-          ><a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
-          Navigation 3</template
-        >
-        <template #expand-icon-down
-          ><a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }"
-        /></template>
-        <a-menu-item key="2_0">Menu 1</a-menu-item>
-        <a-menu-item key="2_1">Menu 2</a-menu-item>
-        <a-sub-menu key="2_2" title="Navigation 4">
-          <a-menu-item key="2_2_0">Menu 1</a-menu-item>
-          <a-menu-item key="2_2_1">Menu 2</a-menu-item>
-        </a-sub-menu>
-      </a-sub-menu>
+      <template v-for="route in routeList">
+        <template v-if="route.children && route.children.length > 0">
+          <a-sub-menu key="0">
+            <template #title>
+              <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
+              Navigation 1
+            </template>
+            <template #expand-icon-down>
+              <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
+            </template>
+            <menu-sub
+              v-for="routSub in route.children"
+              :route="routSub"
+              :key="routSub.key"
+            ></menu-sub>
+          </a-sub-menu>
+        </template>
+        <template> </template>
+      </template>
     </a-menu>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue"
+import menuSub from "./menu-sub.vue"
 export default defineComponent({
+  components: {
+    menuSub
+  },
   setup(props) {
     let selectKey = ref(["2_2_0"])
-    let clickMenu = dist => {
+    let routeList = [
+      { key: "1", title: "menu1" },
+      {
+        key: "2",
+        title: "menu2",
+        children: [
+          { key: "2_1", title: "menu2_1" },
+          { key: "2_2", title: "menu2_2" }
+        ]
+      },
+      {
+        key: "3",
+        title: "menu3",
+        children: [
+          { key: "3_1", title: "menu3_1" },
+          {
+            key: "3_2",
+            title: "menu3",
+            children: [
+              { key: "3_2_1", title: "menu3_1_1" },
+              { key: "3_2_2", title: "menu3_1_2" }
+            ]
+          },
+          { key: "3_3", title: "menu3_3" }
+        ]
+      }
+    ]
+    let clickMenu = (dist: string) => {
       console.log(dist)
       selectKey.value = [dist]
       console.log(selectKey)
     }
     return {
       clickMenu,
-      selectKey
+      selectKey,
+      routeList
     }
   }
 })
