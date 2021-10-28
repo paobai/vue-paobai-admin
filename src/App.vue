@@ -10,7 +10,7 @@ export default defineComponent({})
 
 <style>
 @import url("assets/css/iconfont.css");
-.iconfont{
+.iconfont {
   font-size: unset;
 }
 </style>

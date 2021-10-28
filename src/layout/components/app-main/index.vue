@@ -2,10 +2,7 @@
   <div class="app-main">
     <router-view>
       <template #default="{ Component, route }">
-        <transition
-            mode="out-in"
-            appear
-        >
+        <transition mode="out-in" appear>
           <component :is="Component" :key="route.fullPath" />
         </transition>
       </template>
@@ -14,6 +11,6 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import { defineComponent } from "vue"
 export default defineComponent({})
 </script>

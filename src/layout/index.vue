@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script >
+<script>
 import {
   computed,
   defineComponent,
@@ -18,9 +18,9 @@ import {
   reactive,
   toRefs
 } from "vue"
-import navbar from './components/navbar/index.vue'
-import sidebar from './components/sidebar/index.vue'
-import appMain from './components/app-main/index.vue'
+import navbar from "./components/navbar/index.vue"
+import sidebar from "./components/sidebar/index.vue"
+import appMain from "./components/app-main/index.vue"
 export default defineComponent({
   name: "Layout",
   components: {
@@ -29,11 +29,9 @@ export default defineComponent({
     appMain
   },
   setup() {
-    return {
-    }
+    return {}
   }
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

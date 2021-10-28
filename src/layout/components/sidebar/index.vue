@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import {defineComponent, ref} from "vue"
-import menuMain from './menu-main.vue'
+import { defineComponent, ref } from "vue"
+import menuMain from "./menu-main.vue"
 export default defineComponent({
-  components:{
+  components: {
     menuMain
   },
-  setup(props){
-    let clickMenu = (dist) => {
+  setup(props) {
+    let clickMenu = dist => {
       console.log(dist)
     }
     return {
@@ -22,10 +22,9 @@ export default defineComponent({
 })
 </script>
 
-
 <style lang="scss" scoped>
-.app-sidebar{
-  .menu-wrapper{
+.app-sidebar {
+  .menu-wrapper {
     width: 100%;
     height: 100%;
   }
