@@ -4,7 +4,7 @@
       <div class="content-wrapper">
         <div class="title">
           <div class="english">
-            <img class="welcome" src="/src/assets/common/welcome-en.png">
+            <img class="welcome" src="/src/assets/images/login/welcome-en.png">
           </div>
           <div class="chinese">欢迎回来</div>
         </div>
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   reactive,
   ref
@@ -62,7 +62,7 @@ export default {
 .login-wrapper{
   width: 100%;
   height: 100%;
-  background: url("/src/assets/common/login-bak.png") no-repeat;
+  background: url("/src/assets/images/login/login-bak.png") no-repeat;
   background-size: cover;
   display: flex;
   .left-wrapper{

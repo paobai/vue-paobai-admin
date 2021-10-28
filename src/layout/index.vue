@@ -1,19 +1,14 @@
 <template>
   <div class="app-wrapper">
-    <router-view>
-      <template #default="{ Component, route }">
-        <transition
-            mode="out-in"
-            appear
-        >
-          <component :is="Component" :key="route.fullPath" />
-        </transition>
-      </template>
-    </router-view>
+    <navbar></navbar>
+    <div class="bottom-wrapper">
+      <sidebar></sidebar>
+      <app-main></app-main>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script >
 import {
   computed,
   defineComponent,
@@ -23,9 +18,15 @@ import {
   reactive,
   toRefs
 } from "vue"
+import navbar from './components/navbar/index.vue'
+import sidebar from './components/sidebar/index.vue'
+import appMain from './components/app-main/index.vue'
 export default defineComponent({
   name: "Layout",
   components: {
+    navbar,
+    sidebar,
+    appMain
   },
   setup() {
     return {
