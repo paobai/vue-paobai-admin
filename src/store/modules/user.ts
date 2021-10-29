@@ -1,16 +1,20 @@
 import { defineStore } from "pinia";
 import { store } from "@/store";
+import {RouterApiType} from "@/constant/settings";
 
 
 export const useUserStore = defineStore({
     id: "store-user",
     state: () => ({
-        permissions: []
+        permissions : [] as RouterApiType[]
     }),
     getters: {
+        getPermissions(): RouterApiType[] {
+            return this.permissions
+        }
     },
     actions: {
-        updatePermissions (permissions) {
+        updatePermissions (permissions: RouterApiType[]) {
             this.permissions = permissions
         }
     }

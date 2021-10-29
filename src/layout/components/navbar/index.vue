@@ -2,11 +2,11 @@
   <div class="app-navbar">
     <div class="left-wrapper">
       <img class="logo" src="/src/assets/images/common/logo-with-text.png" />
-      <a-menu mode="horizontal" :default-selected-keys="['1']">
+      <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="selectKey" @menu-item-click="clickMenu">
         <a-menu-item v-for="menu in routerList" :key="menu.key">
           <div class="my-menu-item">
             <iconfont class="icon-dangshui"></iconfont>
-            {{ menu.name }}
+            {{ menu.title }}
           </div>
         </a-menu-item>
       </a-menu>
@@ -37,22 +37,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
+import { useUserStoreHook } from '@/store/modules/user'
+import { useAppStoreHook } from '@/store/modules/app'
+import {RouterApiType} from "@/constant/settings";
+
 export default defineComponent({
   setup() {
-    let routerList = [
-      { key: "1", name: "总体概况", icon: "" },
-      { key: "2", name: "作战指挥", icon: "" },
-      { key: "3", name: "智慧治水", icon: "" },
-      { key: "4", name: "数据管理", icon: "" },
-      { key: "5", name: "系统管理", icon: "" }
-    ]
+    const userStore = useUserStoreHook()
+    const appStore = useAppStoreHook()
+    const routerList = computed((): RouterApiType[] => {
+      return userStore.getPermissions
+    })
+    let selectKey = ref([''])
     let dropDownState = ref(false)
-    const getDropDownState = function (status) {
-      console.log(dropDownState)
+    const clickMenu = function (key: string) {
+      selectKey.value = [key]
+    }
+    const getDropDownState = function (status: boolean) {
       dropDownState.value = status
     }
-    return { routerList, getDropDownState, dropDownState }
+    watchEffect(() => appStore.updateNowFirstRouteKey(unref(selectKey)[0]))
+    onMounted(() => {
+      if (unref(routerList).length >0) selectKey.value = [unref(routerList)[0].key]
+    });
+    return { routerList, getDropDownState, dropDownState, selectKey, clickMenu }
   }
 })
 </script>

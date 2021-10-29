@@ -1,73 +1,79 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
-      :default-open-keys="['0']"
+      :default-open-keys="selectKey"
       :selected-keys="selectKey"
       @menu-item-click="clickMenu"
     >
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
-          <a-sub-menu key="0">
+          <a-sub-menu :key="route.key">
             <template #title>
               <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
-              Navigation 1
+              {{route.title}}i
             </template>
             <template #expand-icon-down>
               <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
             </template>
             <menu-sub
-              v-for="routSub in route.children"
-              :route="routSub"
+              v-for="(routSub, index) in route.children"
+              :menuItem="routSub"
               :key="routSub.key"
             ></menu-sub>
+            <br>
+<!--            <a-menu-item v-for="(routSub, index) in route.children" :key="routSub.key">-->
+<!--              {{routSub.title}}-->
+<!--            </a-menu-item>-->
           </a-sub-menu>
         </template>
-        <template> </template>
+        <template v-else>
+          <a-menu-item :key="route.key">
+            <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
+            {{route.title}}
+          </a-menu-item>
+        </template>
       </template>
     </a-menu>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue"
+import { defineComponent, ref, reactive, computed, watch, unref } from "vue"
 import menuSub from "./menu-sub.vue"
+import { fixRouteList, getFirstMenuItem } from './menu-help'
+import { useAppStoreHook } from "@/store/modules/app";
+import { useUserStoreHook } from "@/store/modules/user";
+import {RouterApiType} from "@/constant/settings";
 export default defineComponent({
   components: {
     menuSub
   },
   setup(props) {
-    let selectKey = ref(["2_2_0"])
-    let routeList = [
-      { key: "1", title: "menu1" },
-      {
-        key: "2",
-        title: "menu2",
-        children: [
-          { key: "2_1", title: "menu2_1" },
-          { key: "2_2", title: "menu2_2" }
-        ]
-      },
-      {
-        key: "3",
-        title: "menu3",
-        children: [
-          { key: "3_1", title: "menu3_1" },
-          {
-            key: "3_2",
-            title: "menu3",
-            children: [
-              { key: "3_2_1", title: "menu3_1_1" },
-              { key: "3_2_2", title: "menu3_1_2" }
-            ]
-          },
-          { key: "3_3", title: "menu3_3" }
-        ]
+    const appStore = useAppStoreHook()
+    const userStore = useUserStoreHook()
+    let selectKey = ref([])
+    let routeList = ref([] as RouterApiType[])
+    let routeFixMap: { [key: string]: any } = {}
+    watch([() => appStore.getNowFirstRouteKey,() => appStore.getNavbarShow], ([nowKey, navBarShow]) => {
+      let dist: RouterApiType[] = []
+      if (navBarShow) {
+        let parentDist = userStore.getPermissions.filter(item => item.key === unref(nowKey))[0]
+        if (parentDist) dist = parentDist.children || []
+      } else {
+        dist = userStore.getPermissions
       }
-    ]
-    let clickMenu = (dist: string) => {
-      console.log(dist)
-      selectKey.value = [dist]
-      console.log(selectKey)
+      routeList.value = dist || []
+      routeFixMap = {}
+      let routeFixArray = fixRouteList(unref(routeList))
+      routeFixArray.forEach(item => {
+        routeFixMap[item.key] = item
+      })
+      let findFirstMenu = getFirstMenuItem(unref(routeList))
+      if (findFirstMenu) selectKey.value = routeFixMap[findFirstMenu.key].parentKey.concat(findFirstMenu.key)
+    })
+    let clickMenu = (key: string) => {
+      let dist = routeFixMap[key].parentKey
+      selectKey.value = dist.concat(key)
     }
     return {
       clickMenu,

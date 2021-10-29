@@ -18,6 +18,7 @@ import Layout from "@/layout/index.vue"
 import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
 import { useUserStoreHook } from "@/store/modules/user"
 import Cookies from "js-cookie"
+import {RouterApiType} from "@/constant/settings";
 
 const modulesRoutes = import.meta.glob("/src/views/*/*.vue")
 
@@ -92,10 +93,10 @@ router.beforeEach((to, from, next) => {
     getCurrentUserTreeApi()
       .then(res => {
         if (res.code === 1) {
-          const newRoute: Array<GetRouteStructure> = res.data as any
-          newRoute.forEach(item => {
-            buildRouter(item, modulesRoutes, router)
-          })
+          const newRoute: Array<RouterApiType> = res.data as any
+          // newRoute.forEach(item => {
+          //   buildRouter(item, modulesRoutes, router)
+          // })
           store.updatePermissions(newRoute)
         }
         next()

@@ -31,3 +31,18 @@ export enum TokenStorageName {
   SessionStorage = "sessionStorage",
   Cookie = "cookie"
 }
+
+export enum RouteType {
+  Menu,
+  Page,
+  Button
+}
+
+export interface RouterApiType {
+  key: string
+  path: string
+  type: RouteType
+  icon?: string
+  children?: RouterApiType[]
+  title: string
+}

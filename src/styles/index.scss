@@ -64,6 +64,7 @@ div:focus {
     height: $app-navbar-height;
     background: #06979c;
     transition: height 0.28s;
+    overflow: hidden;
   }
   > .bottom-wrapper {
     height: 0;

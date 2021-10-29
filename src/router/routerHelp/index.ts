@@ -143,8 +143,9 @@ export interface GetRouteStructure {
 }
 
 import Layout from "@/layout/Index.vue"
+import {RouterApiType} from "@/constant/settings";
 export function buildRouter(
-  item: GetRouteStructure,
+  item: RouterApiType,
   modulesRoutes: any,
   route: Router
 ) {
@@ -162,7 +163,7 @@ export function buildRouter(
     children: [
       {
         path: item.path,
-        name: item.name,
+        name: item.title,
         component: modulesRoutes[componentPath],
         meta: {}
       }

@@ -7,7 +7,6 @@
  */
 import { createI18n } from "vue-i18n" // import from runtime only
 
-import { getLanguage } from "@/utils/cookies"
 
 import elementEnLocale from "element-plus/lib/locale/lang/en"
 import elementZhLocale from "element-plus/lib/locale/lang/zh-cn"
@@ -28,10 +27,6 @@ const messages = {
 }
 
 export const getLocale = () => {
-  const cookieLanguage = getLanguage()
-  if (cookieLanguage) {
-    return cookieLanguage
-  }
   const language = navigator.language.toLowerCase()
   const locales = Object.keys(messages)
   for (const locale of locales) {
