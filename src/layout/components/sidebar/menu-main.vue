@@ -20,10 +20,6 @@
               :menuItem="routSub"
               :key="routSub.key"
             ></menu-sub>
-            <br>
-<!--            <a-menu-item v-for="(routSub, index) in route.children" :key="routSub.key">-->
-<!--              {{routSub.title}}-->
-<!--            </a-menu-item>-->
           </a-sub-menu>
         </template>
         <template v-else>
@@ -70,7 +66,7 @@ export default defineComponent({
       })
       let findFirstMenu = getFirstMenuItem(unref(routeList))
       if (findFirstMenu) selectKey.value = routeFixMap[findFirstMenu.key].parentKey.concat(findFirstMenu.key)
-    })
+    }, {immediate: true})
     let clickMenu = (key: string) => {
       let dist = routeFixMap[key].parentKey
       selectKey.value = dist.concat(key)
