@@ -5,6 +5,7 @@
       <sidebar></sidebar>
       <app-main></app-main>
     </div>
+    <right-setting></right-setting>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import {
 import navbar from "./components/navbar/index.vue"
 import sidebar from "./components/sidebar/index.vue"
 import appMain from "./components/app-main/index.vue"
+import rightSetting from './components/right-setting/index.vue'
 import { useAppStoreHook } from "@/store/modules/app";
 import { watchEffect, ref } from 'vue'
 export default defineComponent({
@@ -28,7 +30,8 @@ export default defineComponent({
   components: {
     navbar,
     sidebar,
-    appMain
+    appMain,
+    rightSetting
   },
   setup() {
     const appStore = useAppStoreHook()

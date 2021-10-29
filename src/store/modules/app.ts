@@ -7,7 +7,8 @@ export const useAppStore = defineStore({
     id: "store-app",
     state: () => ({
         nowFirstRouteKey : '',
-        navBarShow: false
+        navBarShow: true,
+        showRightSetting: false
     }),
     getters: {
         getNowFirstRouteKey (): string {
@@ -15,6 +16,9 @@ export const useAppStore = defineStore({
         },
         getNavbarShow (): boolean {
             return this.navBarShow
+        },
+        getShowRightSetting () : boolean{
+            return this.showRightSetting
         }
     },
     actions: {
@@ -23,6 +27,9 @@ export const useAppStore = defineStore({
         },
         updateNavBarShow (navBarShow: boolean) {
             this.navBarShow = navBarShow
+        },
+        updateShowRightSetting (showRightSetting: boolean) {
+            this.showRightSetting = showRightSetting
         }
     }
 });
