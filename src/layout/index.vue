@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper" :class="{'not-show-app-navbar': !showNavFlag}">
+  <div class="app-wrapper" :class="{'not-show-app-navbar': !showNavFlag, 'not-show-sidebar': !showSideBar }">
     <navbar></navbar>
     <div class="bottom-wrapper">
       <sidebar></sidebar>
@@ -25,6 +25,7 @@ import appMain from "./components/app-main/index.vue"
 import rightSetting from './components/right-setting/index.vue'
 import { useAppStoreHook } from "@/store/modules/app";
 import { watchEffect, ref } from 'vue'
+import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   name: "Layout",
   components: {
@@ -34,12 +35,8 @@ export default defineComponent({
     rightSetting
   },
   setup() {
-    const appStore = useAppStoreHook()
-    let showNavFlag = ref(true)
-    watchEffect(() => {
-      showNavFlag.value = appStore.getNavbarShow
-    })
-    return {showNavFlag}
+    let { navbarShow: showNavFlag, showSideBar } = useAppHook()
+    return {showNavFlag, showSideBar}
   }
 })
 </script>

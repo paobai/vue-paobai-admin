@@ -90,14 +90,11 @@ export function fnCurrentRouteType(
 }
 
 /**
- * 根据来源menu修改成需要的样子
- * @param menu
+ * 根据来源api结构改成要的样子
+ * @param sourceApiData
  */
-export function fixMenu(menu: any[]): any {
-  // let btPerms = []
-  // let newMenu = fixMenuMainDo(menu, btPerms)
-  // let routers = fnAddDynamicMenuRoutes(newMenu)
-  return { menu: [], btPerms: [], routers: [] }
+export function fixResToSys(sourceApiData: any): { permissions: string[], routers: RouterApiType[]} {
+  return { permissions: sourceApiData.permissions, routers: sourceApiData.routers}
 }
 function fixMenuMainDo(menu: any, btPerms: any) {
   const newMenu: any[] = []
@@ -143,31 +140,76 @@ export interface GetRouteStructure {
 }
 
 import Layout from "@/layout/Index.vue"
-import {RouterApiType} from "@/constant/settings";
-export function buildRouter(
-  item: RouterApiType,
+import {RouterApiType, RouteType} from "@/constant/settings";
+import {fixRouteList} from "@/utils/menu-help";
+export function addRouterFromData(
+  routes: RouterApiType[],
   modulesRoutes: any,
-  route: Router
+  router: Router
 ) {
-  if (item.children && item.children.length > 0) {
-    item.children.forEach(child => {
-      buildRouter(child, modulesRoutes, route)
-    })
-    return
-  }
-  const componentPath = `/src/views${item.path}.vue`
-  const distComponent = {
+  if (!routes || routes.length === 0) return
+  let inList:RouteRecordRaw[] = []
+  routes.forEach(item => buildRoute(item, modulesRoutes, inList))
+  let dist = {
     path: "/",
     component: Layout,
-    name: "normal-layout",
+    redirect: "/main",
     children: [
       {
-        path: item.path,
-        name: item.title,
-        component: modulesRoutes[componentPath],
-        meta: {}
-      }
+        path: "/main",
+        component: () =>
+            import(/* webpackChunkName: "dashboard" */ "@/views/main.vue"),
+        name: "main",
+        meta: {
+          title: "main",
+          icon: "#icondashboard",
+          affix: true,
+          key: "1"
+        }
+      },
+      ...inList,
     ]
   }
-  route.addRoute(distComponent)
+  router.addRoute(dist)
+  router.addRoute({
+    path: "/:pathMatch(.*)",
+    redirect: "/error/404"
+  })
+}
+
+function buildRoute (
+    item: RouterApiType,
+    modulesRoutes: any,
+    inList: RouteRecordRaw[] = []
+) {
+  if (item.type === RouteType.Menu) {
+    if (item.children && item.children.length > 0) {
+      item.children.forEach(child => {
+        buildRoute(child, modulesRoutes, inList)
+      })
+    }
+    return
+  }
+  if (!item.path) return
+  const componentPath = `/src/views${item.path}.vue`
+  let findModule = modulesRoutes[componentPath]
+  if (!findModule) {
+    debugger
+    return
+  }
+  inList.push({
+    path: item.path,
+    name: buildRouteName(item),
+    component: findModule,
+    meta: {
+      icon: item.icon,
+      title: item.title,
+      key: item.key,
+      type: item.type
+    }
+  })
+}
+
+export function buildRouteName (route :RouterApiType) {
+  return route.title + '-' + route.key
 }

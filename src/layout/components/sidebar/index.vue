@@ -12,11 +12,7 @@ export default defineComponent({
     menuMain
   },
   setup(props) {
-    let clickMenu = dist => {
-      console.log(dist)
-    }
     return {
-      clickMenu
     }
   }
 })

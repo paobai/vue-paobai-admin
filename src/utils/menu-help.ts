@@ -2,7 +2,8 @@ import {RouterApiType, RouteType} from "@/constant/settings";
 
 export function fixRouteList (routeList: RouterApiType[], parentKey: string[] = [], sourceArray:any[] = []) {
     routeList.forEach(item => {
-        sourceArray.push({...item, parentKey: parentKey})
+        item.parentKey = parentKey
+        sourceArray.push(item)
         if (item.children) {
             fixRouteList(item.children, parentKey.concat(item.key), sourceArray)
         }
@@ -19,4 +20,7 @@ export function getFirstMenuItem(routeList?: RouterApiType[]): undefined|RouterA
         dist = getFirstMenuItem(dist.children)
         if (dist) return dist
     }
+}
+export function buildMenuName (route: RouterApiType) {
+    return route.title + '-' + route.key
 }

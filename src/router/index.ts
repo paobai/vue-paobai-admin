@@ -7,8 +7,8 @@
  */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
 import {
-  buildRouter,
-  fixMenu,
+  addRouterFromData,
+  fixResToSys,
   fnCurrentRouteType,
   GetRouteStructure,
   MyRouter,
@@ -20,9 +20,9 @@ import { useUserStoreHook } from "@/store/modules/user"
 import Cookies from "js-cookie"
 import {RouterApiType} from "@/constant/settings";
 
-const modulesRoutes = import.meta.glob("/src/views/*/*.vue")
+const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
-const store = useUserStoreHook()
+const userStore = useUserStoreHook()
 
 const commonFiles = import.meta.globEager("./commonModules/*.ts")
 let commonModules: Array<RouteRecordRaw> = []
@@ -45,7 +45,7 @@ const mainRoutes: RouteRecordRaw = {
       meta: {
         title: "main",
         icon: "#icondashboard",
-        affix: true
+        key: "main-1"
       }
     }
   ]
@@ -62,14 +62,14 @@ const routerOptions: MyRouterOptions = {
   isAddDynamicMenuRoutes: false
 }
 const router: MyRouter = createRouter(routerOptions)
-router.addRoute({
-  path: "/:pathMatch(.*)",
-  redirect: "/error/404"
-})
+const sourceRouter: MyRouter = createRouter(routerOptions)
+// router.addRoute({
+//   path: "/:pathMatch(.*)",
+//   redirect: "/error/404"
+// })
 
 export function resetRouter() {
-  const newRouter = router
-  ;(router as any).matcher = (newRouter as any).matcher // reset router
+  (router as any).matcher = (sourceRouter as any).matcher // reset router
 }
 
 router.beforeEach((to, from, next) => {
@@ -77,6 +77,7 @@ router.beforeEach((to, from, next) => {
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
   // debugger
+  console.log('route.get', router.getRoutes(), to)
   if (
     router.options.isAddDynamicMenuRoutes ||
     fnCurrentRouteType(to as any, commonModules) === "global"
@@ -93,13 +94,13 @@ router.beforeEach((to, from, next) => {
     getCurrentUserTreeApi()
       .then(res => {
         if (res.code === 1) {
-          const newRoute: Array<RouterApiType> = res.data as any
-          // newRoute.forEach(item => {
-          //   buildRouter(item, modulesRoutes, router)
-          // })
-          store.updateRouteList(newRoute)
+          let {routers:newRoutes , permissions} = fixResToSys(res.data)
+          userStore.updatePermissions(permissions)
+          addRouterFromData(newRoutes, modulesRoutes, router)
+          userStore.updateRouteList(newRoutes)
+          router.options.isAddDynamicMenuRoutes = true
         }
-        next()
+        next({ ...to, replace: true })
       })
       .catch(e => {
         console.log(

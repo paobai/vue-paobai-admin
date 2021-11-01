@@ -2,7 +2,7 @@
   <div class="app-navbar">
     <div class="left-wrapper">
       <img class="logo" src="/src/assets/images/common/logo-with-text.png" />
-      <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="nowFirstRouteKey" @menu-item-click="clickMenu">
+      <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
         <a-menu-item v-for="menu in routerList" :key="menu.key">
           <div class="my-menu-item">
             <iconfont class="icon-dangshui"></iconfont>
@@ -40,14 +40,26 @@
 import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
 import { getUserHook } from '@/hooks/user'
 import { useAppHook } from '@/hooks/app'
+import {RouteType} from "@/constant/settings";
+import router from "@/router";
+import {fixRouteList, getFirstMenuItem, buildMenuName} from "@/utils/menu-help";
 
 export default defineComponent({
   setup() {
-    let { routerList } = getUserHook()
-    let { nowFirstRouteKey } = useAppHook()
+    let { routerList, routerMap } = getUserHook()
+    let { nowFirstRouteKey, updateNowFirstRouteKey, changeSideChose, menuChoseKey } = useAppHook()
     let dropDownState = ref(false)
     const clickMenu = function (key: string) {
-      nowFirstRouteKey.value = key
+      updateNowFirstRouteKey(key)
+      let dist = routerMap.value[key]
+      if (dist.type === RouteType.Page) {
+        router.push({path: dist.path})
+      } else {
+        let find = getFirstMenuItem(dist.children)
+        if (!find) return
+        menuChoseKey.value = find.parentKey!.concat(find.key)
+        router.push({path: find.path})
+      }
     }
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status

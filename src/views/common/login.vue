@@ -52,7 +52,7 @@ export default {
       // alert(`成功${userName} ${passWord}`)
       Cookies.set('access_token', '123123')
       // this.$cookie.set('refresh_token', res.data.refresh_token)
-      router.replace({ name: 'main' })
+      router.replace({ path: '/main' })
     }
     return { login, loginForm }
   }

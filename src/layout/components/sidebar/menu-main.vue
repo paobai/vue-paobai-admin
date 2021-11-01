@@ -1,9 +1,10 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
-      :default-open-keys="menuChoseKey"
       :selected-keys="menuChoseKey"
+      :openKeys="openKeys"
       @menu-item-click="clickMenu"
+      @sub-menu-click="onClickSubMenu"
     >
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
@@ -34,19 +35,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, computed, watch, unref } from "vue"
+import { defineComponent, ref, reactive, computed, watch, unref, onMounted, watchEffect } from "vue"
 import menuSub from "./menu-sub.vue"
 import { useAppHook } from '@/hooks/app'
+import { getUserHook } from '@/hooks/user'
+import router from "@/router";
+import {RouterApiType} from "@/constant/settings";
 export default defineComponent({
   components: {
     menuSub
   },
   setup(props) {
-    let {menuChoseKey, routeSidebarList: routeList, menuChose: clickMenu } = useAppHook()
+    let {menuChoseKey, routeSidebarList: routeList, changeSideChose, getMenuByKey, nowFirstRouteKey } = useAppHook()
+    let { routerMap } = getUserHook()
+    let clickMenu = function (key: string) {
+      let dist = getMenuByKey(key)
+      if (!dist) return
+      changeSideChose(key)
+      router.push({name: dist.title + '-' + dist.key})
+    }
+    let openKeys = ref(menuChoseKey.value)
+    let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
+      openKeys.value = getOpenKeys
+    }
+    watch(nowFirstRouteKey, (t) => {
+      openKeys.value = menuChoseKey.value
+    })
     return {
       clickMenu,
       menuChoseKey,
-      routeList
+      routeList,
+      openKeys,
+      onClickSubMenu
     }
   }
 })

@@ -21,7 +21,7 @@ export const useAppStore = defineStore({
         getRightSettingShow () : boolean{
             return this.rightSettingShow
         },
-        getMenuChoseKey () {
+        getMenuChoseKey (): string[] {
             return this.menuChoseKey
         }
     },

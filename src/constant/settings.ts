@@ -45,4 +45,5 @@ export interface RouterApiType {
   icon?: string
   children?: RouterApiType[]
   title: string
+  parentKey?: string[]
 }

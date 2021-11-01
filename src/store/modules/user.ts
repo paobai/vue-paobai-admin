@@ -6,16 +6,23 @@ import {RouterApiType} from "@/constant/settings";
 export const useUserStore = defineStore({
     id: "store-user",
     state: () => ({
-        routeList : [] as RouterApiType[]
+        routeList : [] as RouterApiType[],
+        permissions: [] as string[]
     }),
     getters: {
         getRouteList(): RouterApiType[] {
             return this.routeList
+        },
+        gerPermissions (): string[] {
+            return this.permissions
         }
     },
     actions: {
         updateRouteList (routeList: RouterApiType[]) {
             this.routeList = routeList
+        },
+        updatePermissions (permissions: string[]) {
+            this.permissions = permissions
         }
     }
 });
