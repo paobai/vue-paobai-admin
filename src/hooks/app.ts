@@ -6,6 +6,9 @@ import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
 import router from '@/router/index'
 
 export function useAppHook(){
+
+    let { routeList, routerMap } = getUserHook()
+
     const appStore = useAppStoreHook()
 
     const navbarShow = computed(() => {
@@ -29,20 +32,15 @@ export function useAppHook(){
     }
 
     const nowFirstRoute = computed(() => {
-        let { routerList } = getUserHook()
-        return routerList.value.find(route => route.key === nowFirstRouteKey.value)
+        return routeList.value.find(route => route.key === nowFirstRouteKey.value)
     })
 
-    let nowFirstRouteKey =  function (){
-        let { routerList } = getUserHook()
-        let res = computed({
-            get: () => appStore.getNowFirstRouteKey,
-            set: val => {
-                updateNowFirstRouteKey(val)
-            }
-        })
-        return res
-    }()
+    let nowFirstRouteKey =  computed({
+        get: () => appStore.getNowFirstRouteKey,
+        set: val => {
+            updateNowFirstRouteKey(val)
+        }
+    })
 
     const updateMenuChoseKey = function (menuChoseKey: string[]) {
         appStore.updateMenuChoseKey(menuChoseKey)
@@ -56,9 +54,9 @@ export function useAppHook(){
     })
 
     // 左边的routeList
-    let {routeList: routeSidebarList, changeSideChose, getMenuByKey } = function () {
-        let { routerList: sourceRouterList } = getUserHook()
-        let routeList = ref([] as RouterApiType[])
+    let {routeSidebarList, changeSideChose, getMenuByKey } = function () {
+        let sourceRouteList = routeList
+        let routeSidebarList = ref([] as RouterApiType[])
         let sideRouteMap: { [key: string]: any } = {}
         // 该方法有延迟。只能在sidebar点击中使用。
         let changeSideChose = (key: string) => {
@@ -72,28 +70,30 @@ export function useAppHook(){
         watch([() => appStore.getNowFirstRouteKey,() => appStore.getNavbarShow], ([nowKey, navBarShow]) => {
             let dist: RouterApiType[] = []
             if (navBarShow) {
-                let parentDist = sourceRouterList.value.filter(item => item.key === unref(nowKey))[0]
+                let parentDist = sourceRouteList.value.filter(item => item.key === unref(nowKey))[0]
                 if (parentDist) dist = parentDist.children || []
             } else {
-                dist = sourceRouterList.value
+                dist = sourceRouteList.value
             }
-            routeList.value = dist || []
+            routeSidebarList.value = dist || []
             sideRouteMap = {}
-            let routeFixArray = fixRouteList(unref(routeList))
+            let routeFixArray = fixRouteList(unref(routeSidebarList))
             routeFixArray.forEach(item => {
                 sideRouteMap[item.key] = item
             })
         }, {immediate: true})
-        return {routeList, changeSideChose, getMenuByKey}
+        return {routeSidebarList, changeSideChose, getMenuByKey}
     }()
-    onBeforeMount(() => {
-        let { routerList: sourceRouterList, routerMap } = getUserHook()
-        let key = router.currentRoute.value.meta.key as string
-        let dist = routerMap.value[key]
-        if (!dist) return
-        menuChoseKey.value = dist.parentKey!.concat(key)
-        updateNowFirstRouteKey(dist.parentKey![0] || dist.key)
-    })
+
+    const initRouterMenu = function () {
+        onBeforeMount(() => {
+            let key = router.currentRoute.value.meta.key as string
+            let dist = routerMap.value[key]
+            if (!dist) return
+            menuChoseKey.value = dist.parentKey!.concat(key)
+            updateNowFirstRouteKey(dist.parentKey![0] || dist.key)
+        })
+    }
     return {
         navbarShow,
         updateNavBar,
@@ -106,6 +106,7 @@ export function useAppHook(){
         routeSidebarList,
         changeSideChose,
         getMenuByKey,
-        updateNowFirstRouteKey
+        updateNowFirstRouteKey,
+        initRouterMenu
     }
 }

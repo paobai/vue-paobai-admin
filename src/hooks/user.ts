@@ -4,13 +4,13 @@ import {RouterApiType} from "@/constant/settings";
 import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
 export function getUserHook() {
     let userStore = useUserStoreHook()
-    const routerList = computed((): RouterApiType[] => {
+    let routeList = computed((): RouterApiType[] => {
         return userStore.getRouteList
     })
 
     const routerMap = computed(() => {
         let routeFixMap:{[key: string]: RouterApiType} = {}
-        let routeFixArray = fixRouteList(unref(routerList.value))
+        let routeFixArray = fixRouteList(unref(routeList.value))
         routeFixArray.forEach(item => {
             routeFixMap[item.key] = item
         })
@@ -18,7 +18,7 @@ export function getUserHook() {
     })
 
     return{
-        routerList,
+        routeList,
         routerMap
     }
 }

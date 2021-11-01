@@ -54,6 +54,7 @@ export default defineComponent({
       changeSideChose(key)
       router.push({name: dist.title + '-' + dist.key})
     }
+    // TODO: 看看能不能fix这个任务
     let openKeys = ref(menuChoseKey.value)
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
       openKeys.value = getOpenKeys

@@ -3,7 +3,7 @@
     <div class="left-wrapper">
       <img class="logo" src="/src/assets/images/common/logo-with-text.png" />
       <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
-        <a-menu-item v-for="menu in routerList" :key="menu.key">
+        <a-menu-item v-for="menu in routeList" :key="menu.key">
           <div class="my-menu-item">
             <iconfont class="icon-dangshui"></iconfont>
             {{ menu.title }}
@@ -46,8 +46,8 @@ import {fixRouteList, getFirstMenuItem, buildMenuName} from "@/utils/menu-help";
 
 export default defineComponent({
   setup() {
-    let { routerList, routerMap } = getUserHook()
-    let { nowFirstRouteKey, updateNowFirstRouteKey, changeSideChose, menuChoseKey } = useAppHook()
+    let { routeList, routerMap } = getUserHook()
+    let { nowFirstRouteKey, updateNowFirstRouteKey, menuChoseKey } = useAppHook()
     let dropDownState = ref(false)
     const clickMenu = function (key: string) {
       updateNowFirstRouteKey(key)
@@ -64,7 +64,7 @@ export default defineComponent({
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status
     }
-    return { routerList, getDropDownState, dropDownState, nowFirstRouteKey, clickMenu }
+    return { routeList, getDropDownState, dropDownState, nowFirstRouteKey, clickMenu }
   }
 })
 </script>
