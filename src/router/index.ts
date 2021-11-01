@@ -97,7 +97,7 @@ router.beforeEach((to, from, next) => {
           // newRoute.forEach(item => {
           //   buildRouter(item, modulesRoutes, router)
           // })
-          store.updatePermissions(newRoute)
+          store.updateRouteList(newRoute)
         }
         next()
       })

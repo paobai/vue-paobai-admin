@@ -1,20 +1,20 @@
 <template>
   <div class="right-setting-button">
-    <a-button type="primary" shape="circle" @click="showRightSetting">
+    <a-button type="primary" shape="circle" @click="updateRightSetting(true)">
       <a-icon-settings :style="{color:'#ffffff', fontSize: '30pX'}"  />
     </a-button>
   </div>
-  <a-drawer :visible="visible"  unmountOnClose  @cancel="cancelRightSetting" :closable="false" cancel-text="关闭" :width="300">
+  <a-drawer :visible="showRightSetting"  unmountOnClose  @cancel="updateRightSetting(false)" :closable="false" cancel-text="关闭" :width="300">
     <template #title>
       全局设置
     </template>
     <template #footer>
-      <a-button @click="cancelRightSetting" type="primary" >关闭</a-button>
+      <a-button @click="updateRightSetting(false)" type="primary" >关闭</a-button>
     </template>
     <div class="right-setting-wrapper">
       <div class="item-setting-line">
         显示顶部：
-        <a-switch :default-checked="defaultShow" @change="changeNavBar">
+        <a-switch :default-checked="navbarShow" @change="updateNavBar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
@@ -32,26 +32,12 @@
 
 <script lang="ts">
 import { defineComponent,computed, watchEffect,ref } from 'vue'
-import { useAppStoreHook} from "@/store/modules/app";
+import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   setup() {
-    let appStore = useAppStoreHook()
-    let visible = computed(() => {
-      return appStore.getShowRightSetting
-    })
-    let showRightSetting = function () {
-      appStore.updateShowRightSetting(true)
-    }
-    let cancelRightSetting = function () {
-      appStore.updateShowRightSetting(false)
-    }
-    // TODO下面这部分需要去抽出来
-    let defaultShow = appStore.getNavbarShow
-    let changeNavBar = function (res: boolean) {
-      console.log('res', res)
-      appStore.updateNavBarShow(res)
-    }
-    return { visible, showRightSetting, cancelRightSetting, changeNavBar, defaultShow }
+    let appStore = useAppHook()
+    const { navbarShow, updateNavBar, updateRightSetting, showRightSetting } = useAppHook()
+    return { showRightSetting, updateRightSetting, updateNavBar, navbarShow }
   }
 })
 </script>

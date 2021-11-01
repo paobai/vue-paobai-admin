@@ -1,8 +1,8 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
-      :default-open-keys="selectKey"
-      :selected-keys="selectKey"
+      :default-open-keys="menuChoseKey"
+      :selected-keys="menuChoseKey"
       @menu-item-click="clickMenu"
     >
       <template v-for="route in routeList">
@@ -40,40 +40,16 @@ import { fixRouteList, getFirstMenuItem } from './menu-help'
 import { useAppStoreHook } from "@/store/modules/app";
 import { useUserStoreHook } from "@/store/modules/user";
 import {RouterApiType} from "@/constant/settings";
+import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   components: {
     menuSub
   },
   setup(props) {
-    const appStore = useAppStoreHook()
-    const userStore = useUserStoreHook()
-    let selectKey = ref([])
-    let routeList = ref([] as RouterApiType[])
-    let routeFixMap: { [key: string]: any } = {}
-    watch([() => appStore.getNowFirstRouteKey,() => appStore.getNavbarShow], ([nowKey, navBarShow]) => {
-      let dist: RouterApiType[] = []
-      if (navBarShow) {
-        let parentDist = userStore.getPermissions.filter(item => item.key === unref(nowKey))[0]
-        if (parentDist) dist = parentDist.children || []
-      } else {
-        dist = userStore.getPermissions
-      }
-      routeList.value = dist || []
-      routeFixMap = {}
-      let routeFixArray = fixRouteList(unref(routeList))
-      routeFixArray.forEach(item => {
-        routeFixMap[item.key] = item
-      })
-      let findFirstMenu = getFirstMenuItem(unref(routeList))
-      if (findFirstMenu) selectKey.value = routeFixMap[findFirstMenu.key].parentKey.concat(findFirstMenu.key)
-    }, {immediate: true})
-    let clickMenu = (key: string) => {
-      let dist = routeFixMap[key].parentKey
-      selectKey.value = dist.concat(key)
-    }
+    let {menuChoseKey, routeSidebarList: routeList, menuChose: clickMenu } = useAppHook()
     return {
       clickMenu,
-      selectKey,
+      menuChoseKey,
       routeList
     }
   }

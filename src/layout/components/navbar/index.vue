@@ -2,7 +2,7 @@
   <div class="app-navbar">
     <div class="left-wrapper">
       <img class="logo" src="/src/assets/images/common/logo-with-text.png" />
-      <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="selectKey" @menu-item-click="clickMenu">
+      <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="nowFirstRouteKey" @menu-item-click="clickMenu">
         <a-menu-item v-for="menu in routerList" :key="menu.key">
           <div class="my-menu-item">
             <iconfont class="icon-dangshui"></iconfont>
@@ -40,28 +40,22 @@
 import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
 import { useUserStoreHook } from '@/store/modules/user'
 import { useAppStoreHook } from '@/store/modules/app'
-import {RouterApiType} from "@/constant/settings";
+import { RouterApiType } from "@/constant/settings";
+import { getUserHook } from '@/hooks/user'
+import { useAppHook } from '@/hooks/app'
 
 export default defineComponent({
   setup() {
-    const userStore = useUserStoreHook()
-    const appStore = useAppStoreHook()
-    const routerList = computed((): RouterApiType[] => {
-      return userStore.getPermissions
-    })
-    let selectKey = ref([''])
+    let { routerList } = getUserHook()
+    let { nowFirstRouteKey } = useAppHook()
     let dropDownState = ref(false)
     const clickMenu = function (key: string) {
-      selectKey.value = [key]
+      nowFirstRouteKey.value = key
     }
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status
     }
-    watchEffect(() => appStore.updateNowFirstRouteKey(unref(selectKey)[0]))
-    onMounted(() => {
-      if (unref(routerList).length >0) selectKey.value = [unref(routerList)[0].key]
-    });
-    return { routerList, getDropDownState, dropDownState, selectKey, clickMenu }
+    return { routerList, getDropDownState, dropDownState, nowFirstRouteKey, clickMenu }
   }
 })
 </script>
