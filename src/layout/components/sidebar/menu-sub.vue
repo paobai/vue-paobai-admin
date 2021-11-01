@@ -12,9 +12,6 @@
       {{menuItem.key}}
     </a-menu-item>
   </template>
-<!--  <a-menu-item :key="menuItem.key" >-->
-<!--    {{menuItem.title}}-->
-<!--  </a-menu-item>-->
 </template>
 <script>
 import { defineComponent } from "vue"

@@ -35,7 +35,6 @@ import { defineComponent,computed, watchEffect,ref } from 'vue'
 import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   setup() {
-    let appStore = useAppHook()
     const { navbarShow, updateNavBar, updateRightSetting, showRightSetting } = useAppHook()
     return { showRightSetting, updateRightSetting, updateNavBar, navbarShow }
   }

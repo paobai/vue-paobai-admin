@@ -36,10 +36,6 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, computed, watch, unref } from "vue"
 import menuSub from "./menu-sub.vue"
-import { fixRouteList, getFirstMenuItem } from './menu-help'
-import { useAppStoreHook } from "@/store/modules/app";
-import { useUserStoreHook } from "@/store/modules/user";
-import {RouterApiType} from "@/constant/settings";
 import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   components: {

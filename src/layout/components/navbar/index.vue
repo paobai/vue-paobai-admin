@@ -38,9 +38,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
-import { useUserStoreHook } from '@/store/modules/user'
-import { useAppStoreHook } from '@/store/modules/app'
-import { RouterApiType } from "@/constant/settings";
 import { getUserHook } from '@/hooks/user'
 import { useAppHook } from '@/hooks/app'
 
