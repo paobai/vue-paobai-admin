@@ -13,10 +13,6 @@ export function initApp(app: App) {
         app.directive(key, (directives as { [key: string]: Directive })[key])
     })
 }
-interface String {
-    format(args: string): string;
-}
-// eslint-disable-next-line no-extend-native
 String.prototype.format = function (args: string | string[]) {
     if (arguments.length > 0) {
         let result = this
@@ -42,19 +38,18 @@ String.prototype.format = function (args: string | string[]) {
     }
 }
 
-// eslint-disable-next-line no-extend-native
 String.prototype.trim = function () {
     return this.trimLeft().trimRight()
 }
-// eslint-disable-next-line no-extend-native
+
 String.prototype.trimLeft = function () {
     return this.replace(/^[\s\n\t]+/g, '')
 }
-// eslint-disable-next-line no-extend-native
+
 String.prototype.trimRight = function () {
     return this.replace(/[\s\n\t]+$/g, '')
 }
-// eslint-disable-next-line no-extend-native
+
 Date.prototype.format = function (fmt: string) {
     var o = {
         'M+': this.getMonth() + 1, // 月份
