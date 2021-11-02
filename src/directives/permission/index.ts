@@ -5,19 +5,20 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-28 13:46:23
  */
-import { useStore } from "@/store/vuex"
+import { useUserStoreHook } from "@/store/modules/user"
 import { Directive } from "vue"
 
 export const permission: Directive = {
   mounted(el, binding) {
     const { value } = binding
-    const roles = useStore().state.user.roles
+    const permissions = useUserStoreHook().getPermissions
     if (value && value instanceof Array && value.length > 0) {
-      const permissionRoles = value
-      const hasPermission = roles.some((role: any) => {
-        return permissionRoles.includes(role)
+      let res = true
+      value.every(item => {
+        res = permissions.indexOf(item) !== -1
+        return res
       })
-      if (!hasPermission) {
+      if (!res) {
         el.style.display = "none"
       }
     } else {

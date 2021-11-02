@@ -12,5 +12,6 @@ export default defineComponent({})
 @import url("assets/css/iconfont.css");
 .iconfont {
   font-size: unset;
+  fill: currentColor;
 }
 </style>

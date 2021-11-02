@@ -121,4 +121,10 @@ declare global {
             [elem: string]: any;
         }
     }
+    interface Date {
+        format (fmt?: string) : string
+    }
+    interface String {
+        format (args: string | string[]) : String
+    }
 }

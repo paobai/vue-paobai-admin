@@ -13,7 +13,7 @@ export const useUserStore = defineStore({
         getRouteList(): RouterApiType[] {
             return this.routeList
         },
-        gerPermissions (): string[] {
+        getPermissions (): string[] {
             return this.permissions
         }
     },
