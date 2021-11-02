@@ -10,6 +10,7 @@ import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
 import { loadEnv } from "@/../build/utils";
+import sysConfig from "@/config";
 
 const env = loadEnv();
 const apiBaseUrl = env.VITE_API_BASE_URL
@@ -87,7 +88,7 @@ http.adornData = (
  */
 http.interceptors.request.use(
   config => {
-    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get("access_token") // 请求头带上token
+    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.tokenName) // 请求头带上token
     // config.headers['Access-Control-Allow-Origin'] = '*'
     // config.headers['Access-Control-Allow-Methods'] = '*'
     config.headers["X-STEINS-TENANT-ID"] = "1"
@@ -109,8 +110,7 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers["X-STEINS-TOKEN"] =
-        "Bearer " + Cookies.get("access_token")
+      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.tokenPre + Cookies.get(sysConfig.tokenName)
       resolve(http(httpConfig))
     })
   })
@@ -129,7 +129,7 @@ function addSubscriber(callback: () => void) {
 }
 
 function referToken() {
-  const refreshToken = Cookies.get("refresh_token")
+  const refreshToken = Cookies.get(res.data.refresh_token)
   login({
     grant_type: grantTypeRefreshToken,
     client_id: clientId,
@@ -137,8 +137,8 @@ function referToken() {
     refresh_token: refreshToken
   })
     .then(res => {
-      Cookies.set("access_token", res.data.access_token)
-      Cookies.set("refresh_token", res.data.refresh_token)
+      Cookies.set(sysConfig.tokenName, res.data.access_token)
+      Cookies.set(sysConfig.refreshTokenName, res.data.refresh_token)
       onAccessTokenFetched()
     })
     .catch(() => {
@@ -182,7 +182,7 @@ http.interceptors.response.use(
       }
 
       console.log('clearLoginInfo')
-      let refreshToken = Cookies.get('refresh_token')
+      let refreshToken = Cookies.get(sysConfig.refreshTokenName)
       if (!refreshToken) {
         // 没有refreshToken情况直接返回不需要提示。
         errorLogin()

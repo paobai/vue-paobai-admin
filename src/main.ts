@@ -10,9 +10,11 @@ import { useArco } from "@/plugins/arco"
 import iconfont from "@/components/iconfont.vue"
 import * as directives from "@/directives"
 import "@/assets/iconfont/iconfont.css"
+import { initApp } from './init'
+
 
 const app = createApp(App)
-// loadAllPlugins(app)
+initApp(app)
 
 // 自定义指令
 Object.keys(directives).forEach(key => {

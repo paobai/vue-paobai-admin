@@ -19,6 +19,8 @@ import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
 import { useUserStoreHook } from "@/store/modules/user"
 import Cookies from "js-cookie"
 import {RouterApiType} from "@/constant/settings";
+import config from '@/config'
+import { storageSession } from "@/utils/storage";
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -63,10 +65,6 @@ const routerOptions: MyRouterOptions = {
 }
 const router: MyRouter = createRouter(routerOptions)
 const sourceRouter: MyRouter = createRouter(routerOptions)
-// router.addRoute({
-//   path: "/:pathMatch(.*)",
-//   redirect: "/error/404"
-// })
 
 export function resetRouter() {
   (router as any).matcher = (sourceRouter as any).matcher // reset router
@@ -84,7 +82,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     // TODO 获取路由
-    const token = Cookies.get("access_token")
+    const token = Cookies.get(config.tokenName)
     if (!token) {
       router.push({ name: "login" })
       next()
@@ -98,6 +96,7 @@ router.beforeEach((to, from, next) => {
           addRouterFromData(newRoutes, modulesRoutes, router)
           userStore.updateRouteList(newRoutes)
           router.options.isAddDynamicMenuRoutes = true
+          storageSession.setItem(config.permissionName, permissions)
         }
         next({ ...to, replace: true })
       })

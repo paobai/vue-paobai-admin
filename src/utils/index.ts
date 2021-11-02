@@ -3,13 +3,14 @@ import Vue from "vue"
 import Cookies from "js-cookie"
 import {MyRouter, MyRouterOptions} from "@/router/routerHelp"
 import { storageSession } from '@/utils/storage'
+import sysConfig from "@/config";
 
 export function clearLoginInfo() {
-  Cookies.remove("access_token")
-  Cookies.remove("refresh_token")
+  Cookies.remove(sysConfig.tokenName)
+  Cookies.remove(sysConfig.refreshTokenName)
   // store.commit('resetStore')
   // @ts-ignore
-  storageSession.setItem("permissions", []);
+  storageSession.setItem(sysConfig.permissionName, []);
   resetRouter()
 }
 

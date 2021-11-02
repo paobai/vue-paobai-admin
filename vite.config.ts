@@ -95,16 +95,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           },
         ],
       }),
-      // viteMockServe({
-      //   mockPath: "mock",
-      //   localEnabled: command === "serve",
-      //   prodEnabled: command !== "serve" && prodMock,
-      //   injectCode: `
-      //     import { setupProdMockServer } from './mockProdServer';
-      //     setupProdMockServer();
-      //   `,
-      //   logger: true,
-      // }),
+      viteMockServe({
+        mockPath: "mock",
+          localEnabled: command === "serve",
+          prodEnabled: command !== "serve" && prodMock,
+        injectCode: `
+          import { setupProdMockServer } from './mockProdServer';
+          setupProdMockServer();
+        `,
+        logger: true,
+      }),
     ],
     optimizeDeps: {
       include: [

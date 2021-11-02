@@ -30,9 +30,11 @@
     "vue-router": "^4.0.11",
     "vxe-table": "^4.0.21",
     "lodash-es": "^4.17.21",
-    "typescript-cookie": "^1.0.0"
+    "typescript-cookie": "^1.0.0",
+    "mockjs": "^1.1.0"
   },
   "devDependencies": {
+    "@types/mockjs": "^1.0.3",
     "@types/clipboard": "^2.0.1",
     "@types/file-saver": "^2.0.3",
     "@types/js-cookie": "^2.2.6",

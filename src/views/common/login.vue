@@ -8,7 +8,7 @@
           </div>
           <div class="chinese">欢迎回来</div>
         </div>
-        <div class="name">慈溪市河情监控指挥信息系统</div>
+        <div class="name">{{title}}</div>
       </div>
     </div>
     <div class="right-wrapper">
@@ -35,10 +35,12 @@
 <script lang="ts">
 import {
   reactive,
-  ref
+  ref,
+  getCurrentInstance
 } from 'vue'
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie"
+import config from '@/config'
 export default {
   setup() {
     let loginForm = reactive({
@@ -53,7 +55,7 @@ export default {
       // this.$cookie.set('refresh_token', res.data.refresh_token)
       router.replace({ path: '/main' })
     }
-    return { login, loginForm }
+    return { login, loginForm , title: config.htmlTitle}
   }
 }
 </script>
