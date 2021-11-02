@@ -70,14 +70,13 @@ const sourceRouter: MyRouter = createRouter(routerOptions)
 
 export function resetRouter() {
   (router as any).matcher = (sourceRouter as any).matcher // reset router
+  router.options.isAddDynamicMenuRoutes = false
 }
 
 router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
-  // debugger
-  console.log('route.get', router.getRoutes(), to)
   if (
     router.options.isAddDynamicMenuRoutes ||
     fnCurrentRouteType(to as any, commonModules) === "global"

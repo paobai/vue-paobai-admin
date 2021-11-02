@@ -85,7 +85,7 @@ export function useAppHook(){
         return {routeSidebarList, changeSideChose, getMenuByKey}
     }()
 
-    const initRouterMenu = function () {
+    const initRouterMenuChose = function () {
         onBeforeMount(() => {
             let key = router.currentRoute.value.meta.key as string
             let dist = routerMap.value[key]
@@ -107,6 +107,6 @@ export function useAppHook(){
         changeSideChose,
         getMenuByKey,
         updateNowFirstRouteKey,
-        initRouterMenu
+        initRouterMenuChose
     }
 }

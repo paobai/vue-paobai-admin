@@ -8,6 +8,11 @@ export declare interface MyRouter extends Router {
   readonly options: MyRouterOptions
 }
 
+import Layout from "@/layout/Index.vue"
+import {RouterApiType, RouteType} from "@/constant/settings";
+import {fixRouteList} from "@/utils/menu-help";
+import {storageSession} from "@/utils/storage";
+
 /**
  * 添加动态(菜单)路由
  * @param {*} menuList 菜单列表
@@ -125,10 +130,7 @@ export function addRouterToMainRouter(
   mainRoutes.menuName = "main-dynamic"
   mainRoutes.children = mainRoutes.children.concat(routes)
   router.addRoutes([mainRoutes, { path: "*", redirect: { name: "404" } }])
-  sessionStorage.setItem(
-    "dynamicMenuRoutes",
-    JSON.stringify(mainRoutes.children || "[]")
-  )
+  storageSession.setItem("dynamicMenuRoutes", mainRoutes.children || []);
 }
 
 export interface GetRouteStructure {
@@ -139,9 +141,6 @@ export interface GetRouteStructure {
   children?: GetRouteStructure[]
 }
 
-import Layout from "@/layout/Index.vue"
-import {RouterApiType, RouteType} from "@/constant/settings";
-import {fixRouteList} from "@/utils/menu-help";
 export function addRouterFromData(
   routes: RouterApiType[],
   modulesRoutes: any,

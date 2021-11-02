@@ -9,6 +9,10 @@ import { login } from "@/api/auth-api"
 import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
+import { loadEnv } from "@/../build/utils";
+
+const env = loadEnv();
+const apiBaseUrl = env.VITE_API_BASE_URL
 
 enum ContentType {
   JSON = "json",
@@ -41,11 +45,7 @@ const http: HttpMore = axios.create({
 http.adornUrl = (actionName: string) => {
   // 非生产环境 && 开启代理, 接口前缀统一使用[/proxyApi/]前缀做代理拦截!
   // @ts-ignore
-  return (
-    (process.env.NODE_ENV !== "production" && process.env.OPEN_PROXY
-      ? "/proxyApi/"
-      : window.SITE_CONFIG.baseUrl) + actionName
-  )
+  return apiBaseUrl + actionName
 }
 
 /**
@@ -155,9 +155,7 @@ function referToken() {
 function errorLogin() {
   clearLoginInfo()
   ElMessage.error("登录失效")
-  // router.push({ name: 'login' })
-  // @ts-ignore
-  window.location.href = window.SITE_CONFIG["loginPage"]
+  router.push({ name: 'login' })
 }
 /**
  * 响应拦截
@@ -183,21 +181,19 @@ http.interceptors.response.use(
         return Promise.reject(error.response.data)
       }
 
-      console.log("clearLoginInfo")
-      // 不需要刷新token直接跳到登录页
-      errorLogin()
-      // let refreshToken = Cookies.get('refresh_token')
-      // if (!refreshToken) {
-      //   // 没有refreshToken情况直接返回不需要提示。
-      //   errorLogin()
-      //   return
-      // } else {
-      //   return new Promise((resolve) => {
-      //     checkStatus(response.config).then(res => {
-      //       resolve(res)
-      //     })
-      //   })
-      // }
+      console.log('clearLoginInfo')
+      let refreshToken = Cookies.get('refresh_token')
+      if (!refreshToken) {
+        // 没有refreshToken情况直接返回不需要提示。
+        errorLogin()
+        return
+      } else {
+        return new Promise((resolve) => {
+          checkStatus(response.config).then(res => {
+            resolve(res)
+          })
+        })
+      }
     }
     if (error.response.data.code === 10250) {
       ElMessage.error("登录失效,请先登录")
@@ -209,8 +205,8 @@ http.interceptors.response.use(
 
 export const postRequest = (
   url: string,
-  data: any,
-  params: any,
+  data?: any,
+  params?: any,
   type = "json"
 ) => {
   url = http.adornUrl(url) as string
@@ -234,7 +230,7 @@ export const postRequest = (
   }
 }
 
-export const getRequest = (url: string, params: any = null): any => {
+export const getRequest = (url: string, params?: any): any => {
   url = http.adornUrl(url) as string
   return http({
     method: "get",
@@ -243,7 +239,7 @@ export const getRequest = (url: string, params: any = null): any => {
   })
 }
 
-export const putRequest = (url: any, data: any, params: string) => {
+export const putRequest = (url: any, data?: any, params?: any) => {
   url = http.adornUrl(url)
   return http({
     method: "put",
@@ -253,7 +249,7 @@ export const putRequest = (url: any, data: any, params: string) => {
   })
 }
 
-export const deleteRequest = (url: any, params: string, data: any) => {
+export const deleteRequest = (url: any, params?: any, data?: any) => {
   url = http.adornUrl(url)
   return http({
     method: "delete",
@@ -266,7 +262,7 @@ export const deleteRequest = (url: any, params: string, data: any) => {
 // 下载文件方法
 export function downloadFile(
   url: any,
-  params: any,
+  params?: any,
   method = "get",
   fileName = undefined
 ) {

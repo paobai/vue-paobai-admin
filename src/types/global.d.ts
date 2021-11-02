@@ -80,6 +80,7 @@ declare global {
         VITE_LEGACY: boolean;
         VITE_USE_IMAGEMIN: boolean;
         VITE_GENERATE_UI: string;
+        VITE_API_BASE_URL: string;
     }
 
     declare interface ServerConfigs {

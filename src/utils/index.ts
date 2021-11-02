@@ -1,17 +1,15 @@
 import router, { resetRouter } from "@/router"
 import Vue from "vue"
 import Cookies from "js-cookie"
-import { MyRouterOptions } from "@/router/routerHelp"
+import {MyRouter, MyRouterOptions} from "@/router/routerHelp"
+import { storageSession } from '@/utils/storage'
 
 export function clearLoginInfo() {
   Cookies.remove("access_token")
   Cookies.remove("refresh_token")
   // store.commit('resetStore')
   // @ts-ignore
-  sessionStorage.setItem(
-    "permissions",
-    "[]"
-  )(router.options as MyRouterOptions).isAddDynamicMenuRoutes = false
+  storageSession.setItem("permissions", []);
   resetRouter()
 }
 

@@ -37,7 +37,6 @@ import {
   reactive,
   ref
 } from 'vue'
-import { cookies } from '@/utils/cookie.ts'
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie"
 export default {

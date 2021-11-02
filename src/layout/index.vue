@@ -35,8 +35,8 @@ export default defineComponent({
     rightSetting
   },
   setup() {
-    let { navbarShow: showNavFlag, showSideBar, initRouterMenu } = useAppHook()
-    initRouterMenu()
+    let { navbarShow: showNavFlag, showSideBar, initRouterMenuChose } = useAppHook()
+    initRouterMenuChose()
     return {showNavFlag, showSideBar}
   }
 })
