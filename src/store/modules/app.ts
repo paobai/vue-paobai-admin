@@ -7,7 +7,7 @@ export const useAppStore = defineStore({
     id: "store-app",
     state: () => ({
         nowFirstRouteKey : '',
-        menuChoseKey: [''],
+        menuChoseKey: '',
         navBarShow: true,
         rightSettingShow: false
     }),
@@ -21,7 +21,7 @@ export const useAppStore = defineStore({
         getRightSettingShow () : boolean{
             return this.rightSettingShow
         },
-        getMenuChoseKey (): string[] {
+        getMenuChoseKey (): string {
             return this.menuChoseKey
         }
     },
@@ -35,7 +35,7 @@ export const useAppStore = defineStore({
         updateRightSettingShow (rightSettingShow: boolean) {
             this.rightSettingShow = rightSettingShow
         },
-        updateMenuChoseKey (menuChoseKey: string[]) {
+        updateMenuChoseKey (menuChoseKey: string) {
             return this.menuChoseKey = menuChoseKey
         }
     }

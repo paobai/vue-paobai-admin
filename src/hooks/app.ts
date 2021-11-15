@@ -42,7 +42,7 @@ export function useAppHook(){
         }
     })
 
-    const updateMenuChoseKey = function (menuChoseKey: string[]) {
+    const updateMenuChoseKey = function (menuChoseKey: string) {
         appStore.updateMenuChoseKey(menuChoseKey)
     }
 
@@ -62,7 +62,7 @@ export function useAppHook(){
         let changeSideChose = (key: string) => {
             let dist = sideRouteMap[key]
             if (!dist) return
-            menuChoseKey.value = dist.parentKey.concat(key)
+            menuChoseKey.value = key
         }
         let getMenuByKey = (key: string) => {
             return sideRouteMap[key]
@@ -90,7 +90,7 @@ export function useAppHook(){
             let key = router.currentRoute.value.meta.key as string
             let dist = routerMap.value[key]
             if (!dist) return
-            menuChoseKey.value = dist.parentKey!.concat(key)
+            menuChoseKey.value = key
             updateNowFirstRouteKey(dist.parentKey![0] || dist.key)
         })
     }

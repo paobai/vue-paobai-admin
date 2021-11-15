@@ -1,8 +1,8 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
-      :selected-keys="menuChoseKey"
-      :openKeys="openKeys"
+      :selected-keys="[menuChoseKey]"
+      :open-keys="openKeys"
       @menu-item-click="clickMenu"
       @sub-menu-click="onClickSubMenu"
     >
@@ -48,20 +48,22 @@ export default defineComponent({
   setup(props) {
     let {menuChoseKey, routeSidebarList: routeList, changeSideChose, getMenuByKey, nowFirstRouteKey } = useAppHook()
     let { routerMap } = getUserHook()
+    let openKeys = ref([''])
     let clickMenu = function (key: string) {
       let dist = getMenuByKey(key)
       if (!dist) return
       changeSideChose(key)
       router.push({name: dist.title + '-' + dist.key})
     }
-    // TODO: 看看能不能fix这个任务
-    let openKeys = ref(menuChoseKey.value)
+    watchEffect(() => {
+      let key = menuChoseKey.value
+      let dist = getMenuByKey(key)
+      if (!dist) return
+      openKeys.value = dist.parentKey.concat(key)
+    })
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
       openKeys.value = getOpenKeys
     }
-    watch(nowFirstRouteKey, (t) => {
-      openKeys.value = menuChoseKey.value
-    })
     return {
       clickMenu,
       menuChoseKey,

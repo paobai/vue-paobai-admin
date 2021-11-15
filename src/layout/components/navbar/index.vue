@@ -57,7 +57,7 @@ export default defineComponent({
       } else {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
-        menuChoseKey.value = find.parentKey!.concat(find.key)
+        menuChoseKey.value = find.key
         router.push({path: find.path})
       }
     }
