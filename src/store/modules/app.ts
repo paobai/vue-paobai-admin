@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
 import { store } from "@/store";
-
-
+import config from "@/config";
+import { storageSession, storageLocal } from '@/utils/storage'
 
 export const useAppStore = defineStore({
     id: "store-app",
     state: () => ({
         nowFirstRouteKey : '',
         menuChoseKey: '',
-        navBarShow: true,
+        navBarShow: storageLocal.getItem(config.NavBarShowKey) === null ? true : storageLocal.getItem(config.NavBarShowKey),
         rightSettingShow: false
     }),
     getters: {

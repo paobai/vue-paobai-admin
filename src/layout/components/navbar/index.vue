@@ -27,7 +27,7 @@
             <a-icon-up v-else /> </template
         ></a-button>
         <template #content>
-          <a-doption>Option 1</a-doption>
+          <a-doption @click="logOutHand">登出</a-doption>
           <a-doption>Option 2</a-doption>
           <a-doption>Option 3</a-doption>
         </template>
@@ -43,10 +43,11 @@ import { useAppHook } from '@/hooks/app'
 import {RouteType} from "@/constant/settings";
 import router from "@/router";
 import {fixRouteList, getFirstMenuItem, buildMenuName} from "@/utils/menu-help";
+import ArcoModal from '@arco-design/web-vue/es/modal';
 
 export default defineComponent({
   setup() {
-    let { routeList, routerMap } = getUserHook()
+    let { routeList, routerMap, logOutEvent } = getUserHook()
     let { nowFirstRouteKey, updateNowFirstRouteKey, menuChoseKey } = useAppHook()
     let dropDownState = ref(false)
     const clickMenu = function (key: string) {
@@ -64,12 +65,31 @@ export default defineComponent({
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status
     }
-    return { routeList, getDropDownState, dropDownState, nowFirstRouteKey, clickMenu }
+    const logOutHand = function () {
+      ArcoModal.warning({
+        title: '确认登出',
+        content: '是否确认登出？',
+        cancelText: '取消',
+        closable: true,
+        hideCancel: false,
+        onOk: () => {
+          logOutEvent()
+        }
+      });
+    }
+    return {
+      routeList,
+      getDropDownState,
+      dropDownState,
+      nowFirstRouteKey,
+      clickMenu,
+      logOutHand
+    }
   }
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .app-navbar {
   display: flex;
   justify-content: space-between;
@@ -93,7 +113,7 @@ export default defineComponent({
         }
         .arco-menu-item {
           padding: 0;
-          height: $app-navbar-height;
+          height: @app-navbar-height;
           border-radius: 0;
           .my-menu-item {
             text-align: center;

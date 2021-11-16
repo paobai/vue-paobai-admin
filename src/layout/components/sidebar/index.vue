@@ -18,7 +18,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .app-sidebar {
   .menu-wrapper {
     width: 100%;

@@ -15,17 +15,23 @@
       <div class="login-form-wrapper">
         <div class="login-title">用户登录</div>
         <div class="login-content-wrapper">
-          <a-input v-model="loginForm.userName" placeholder="用户名/手机号码" >
-            <template #prefix>
-              <a-icon-user  :style="{fontSize:'20px',color:'#BABABA'}"/>
-            </template>
-          </a-input>
-          <a-input v-model="loginForm.passWord" placeholder="密码" type="password" >
-            <template #prefix>
-              <a-icon-lock  :style="{fontSize:'20px',color:'#BABABA'}"/>
-            </template>
-          </a-input>
-          <a-button class="sub-bt" type="primary" @click="login">登&nbsp;&nbsp;录</a-button>
+          <a-form :model="loginForm" :label-col-props="{span: 0}" :wrapper-col-props="{span: 24}" @keyup.enter.native="login()">
+            <a-form-item field="userName">
+              <a-input v-model="loginForm.userName" placeholder="用户名/手机号码">
+                <template #prefix>
+                  <a-icon-user  :style="{fontSize:'20px',color:'#BABABA'}"/>
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-form-item field="passWord">
+              <a-input v-model="loginForm.passWord" placeholder="密码" type="password">
+                <template #prefix>
+                  <a-icon-lock  :style="{fontSize:'20px',color:'#BABABA'}"/>
+                </template>
+              </a-input>
+            </a-form-item>
+            <a-button class="sub-bt" type="primary" @click="login">登&nbsp;&nbsp;录</a-button>
+          </a-form>
         </div>
       </div>
     </div>
@@ -59,7 +65,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .login-wrapper{
   width: 100%;
   height: 100%;

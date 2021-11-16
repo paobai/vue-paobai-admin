@@ -65,7 +65,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .wscn-http404-container {
   transform: translate(-50%, -50%);
   position: absolute;

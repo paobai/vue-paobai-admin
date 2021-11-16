@@ -17,6 +17,7 @@ import {
 import Layout from "@/layout/index.vue"
 import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
 import { useUserStoreHook } from "@/store/modules/user"
+import { getUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
 import {RouterApiType} from "@/constant/settings";
 import config from '@/config'
@@ -24,7 +25,7 @@ import { storageSession } from "@/utils/storage";
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
-const userStore = useUserStoreHook()
+const userStore = getUserHook()
 
 const commonFiles = import.meta.globEager("./commonModules/*.ts")
 let commonModules: Array<RouteRecordRaw> = []
@@ -92,11 +93,8 @@ router.beforeEach((to, from, next) => {
       .then(res => {
         if (res.code === 1) {
           let {routers:newRoutes , permissions} = fixResToSys(res.data)
-          userStore.updatePermissions(permissions)
+          userStore.loginEvent(newRoutes, permissions)
           addRouterFromData(newRoutes, modulesRoutes, router)
-          userStore.updateRouteList(newRoutes)
-          router.options.isAddDynamicMenuRoutes = true
-          storageSession.setItem(config.permissionName, permissions)
         }
         next({ ...to, replace: true })
       })

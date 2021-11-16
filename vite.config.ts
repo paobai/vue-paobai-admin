@@ -47,9 +47,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "./src/styles/_mixins.scss";@import "./src/styles/_variables.scss";'
         },
         less: {
+          additionalData: '@import "./src/styles/_variables.module.less";',
           modifyVars: {
           },
           javascriptEnabled: true

@@ -4,6 +4,8 @@ import {defineComponent, computed, watchEffect, ref, unref, onMounted, watch, on
 import {RouterApiType, RouteType} from "@/constant/settings";
 import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
 import router from '@/router/index'
+import { storageSession, storageLocal } from '@/utils/storage'
+import config from "@/config";
 
 export function useAppHook(){
 
@@ -20,6 +22,7 @@ export function useAppHook(){
 
     const updateNavBar = function (res: boolean) {
         appStore.updateNavBarShow(res)
+        storageLocal.setItem(config.NavBarShowKey, res)
     }
     const updateRightSetting = function (res: boolean) {
         appStore.updateRightSettingShow(res)

@@ -75,7 +75,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .errPage-container {
   width: 800px;
   max-width: 100%;

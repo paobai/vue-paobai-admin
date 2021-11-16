@@ -40,7 +40,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .right-setting-button{
   position: fixed;
   right: 0;
@@ -48,7 +48,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   display: flex;
-  background: $primary-color;
+  background: @primary-color;
   justify-content: center;
   align-items: center;
   border-radius: 8px 0 0 8px;

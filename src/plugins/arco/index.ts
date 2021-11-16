@@ -1,7 +1,7 @@
 import ArcoVue from "@arco-design/web-vue"
 import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import { App, Component } from "vue"
-import './theme.less'
+import '@/styles/arco-thme.less'
 
 // import {
 //     Button
