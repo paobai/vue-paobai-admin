@@ -13,17 +13,11 @@ export default [
                 data: {
                     routers: [
                         {
-                            title: 'main',
-                            path: '/main',
-                            key: '1',
-                            type: RouteType.Page
-                        },
-                        {
                             title: '作战指挥',
                             path: '',
                             key: 'zzzh',
                             type: RouteType.Menu,
-                            icon: '',
+                            icon: 'icon-dangshui',
                             children: [
                                 {
                                     key: "2",
@@ -58,14 +52,14 @@ export default [
                             title: '智慧治水',
                             path: '',
                             key: 'zhzs',
-                            icon: '',
+                            icon: 'icon-dangshui',
                             type: RouteType.Menu
                         },
                         {
                             title: '数据管理',
                             path: '',
                             key: 'sjgl',
-                            icon: '',
+                            icon: 'icon-dangshui',
                             type: RouteType.Page
                         },
                         {
@@ -73,7 +67,7 @@ export default [
                             path: '',
                             key: 'xtgl',
                             type: RouteType.Page,
-                            icon: '',
+                            icon: 'icon-dangshui',
                         }
                     ],
                     permissions: []

@@ -5,7 +5,7 @@
       <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
         <a-menu-item v-for="menu in routeList" :key="menu.key">
           <div class="my-menu-item">
-            <iconfont class="icon-dangshui"></iconfont>
+            <iconfont :class="menu.icon"></iconfont>
             {{ menu.title }}
           </div>
         </a-menu-item>

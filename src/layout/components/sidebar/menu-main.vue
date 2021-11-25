@@ -11,7 +11,7 @@
           <a-sub-menu :key="route.key">
             <template #title>
               <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
-              {{route.title}}i
+              {{route.title}}
             </template>
             <template #expand-icon-down>
               <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />

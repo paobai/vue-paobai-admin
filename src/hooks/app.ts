@@ -16,8 +16,9 @@ export function useAppHook(){
     const navbarShow = computed(() => {
         return appStore.getNavbarShow
     })
+    // 顶部菜单不显示，则显示侧边菜单。
     const showSideBar = computed(() => {
-        return !(nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)
+        return !navbarShow.value || !(nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)
     })
 
     const updateNavBar = function (res: boolean) {

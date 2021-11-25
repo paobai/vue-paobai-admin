@@ -72,18 +72,18 @@ export function fnAddDynamicMenuRoutes(
 }
 
 /**
- * 判断当前路由类型, global: 全局路由, main: 主入口路由
+ * 判断当前路由类型,是否为全局路由
  * @param {*} route 当前路由
  * @param globalRoutes
  */
-export function fnCurrentRouteType(
+export function isGlobalRoute(
   route: RouteRecordRaw,
   globalRoutes: any = []
 ): any {
   let temp: any[] = []
   for (let i = 0; i < globalRoutes.length; i++) {
     if (route.path === globalRoutes[i].path) {
-      return "global"
+      return true
     } else if (
       globalRoutes[i].children &&
       globalRoutes[i].children.length >= 1
@@ -91,7 +91,7 @@ export function fnCurrentRouteType(
       temp = temp.concat(globalRoutes[i].children)
     }
   }
-  return temp.length >= 1 ? fnCurrentRouteType(route, temp) : "main"
+  return temp.length >= 1 ? isGlobalRoute(route, temp) : false
 }
 
 /**
@@ -141,6 +141,12 @@ export interface GetRouteStructure {
   children?: GetRouteStructure[]
 }
 
+/**
+ * 道路后增加routes
+ * @param routes 需要加载的route
+ * @param modulesRoutes 本地有哪些路由页面
+ * @param router router
+ */
 export function addRouterFromData(
   routes: RouterApiType[],
   modulesRoutes: any,
@@ -149,25 +155,11 @@ export function addRouterFromData(
   if (!routes || routes.length === 0) return
   let inList:RouteRecordRaw[] = []
   routes.forEach(item => buildRoute(item, modulesRoutes, inList))
-  let dist = {
+  let dist :RouteRecordRaw = {
     path: "/",
     component: Layout,
     redirect: "/main",
-    children: [
-      {
-        path: "/main",
-        component: () =>
-            import(/* webpackChunkName: "dashboard" */ "@/views/main.vue"),
-        name: "main",
-        meta: {
-          title: "main",
-          icon: "#icondashboard",
-          affix: true,
-          key: "1"
-        }
-      },
-      ...inList,
-    ]
+    children: inList
   }
   router.addRoute(dist)
   router.addRoute({
@@ -176,7 +168,7 @@ export function addRouterFromData(
   })
 }
 
-function buildRoute (
+export function buildRoute (
     item: RouterApiType,
     modulesRoutes: any,
     inList: RouteRecordRaw[] = []
@@ -192,10 +184,6 @@ function buildRoute (
   if (!item.path) return
   const componentPath = `/src/views${item.path}.vue`
   let findModule = modulesRoutes[componentPath]
-  if (!findModule) {
-    debugger
-    return
-  }
   inList.push({
     path: item.path,
     name: buildRouteName(item),

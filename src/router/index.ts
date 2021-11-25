@@ -1,27 +1,16 @@
-/*
- * @Description:
- * @Author: ZY
- * @Date: 2020-12-07 10:30:20
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-27 20:10:59
- */
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
 import {
   addRouterFromData,
   fixResToSys,
-  fnCurrentRouteType,
-  GetRouteStructure,
+  isGlobalRoute,
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
-import Layout from "@/layout/index.vue"
 import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
-import { useUserStoreHook } from "@/store/modules/user"
 import { getUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
-import {RouterApiType} from "@/constant/settings";
 import config from '@/config'
-import { storageSession } from "@/utils/storage";
+import mainRoutesSource from './commonLoginRouteApi/common'
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -34,28 +23,7 @@ Object.keys(commonFiles).forEach(key => {
   commonModules = commonModules.concat(commonFiles[key].default)
 })
 
-// 主入口路由(需嵌套上左右整体布局)
-const mainRoutes: RouteRecordRaw = {
-  path: "/",
-  component: Layout,
-  redirect: "/main",
-  children: [
-    {
-      path: "/main",
-      component: () =>
-        import(/* webpackChunkName: "dashboard" */ "@/views/main.vue"),
-      name: "main",
-      meta: {
-        title: "main",
-        icon: "#icondashboard",
-        key: "main-1"
-      }
-    }
-  ]
-}
-
 export const constantRoutes: Array<RouteRecordRaw> = [
-  mainRoutes,
   ...commonModules
 ]
 
@@ -78,7 +46,7 @@ router.beforeEach((to, from, next) => {
   // 2. 获取菜单列表, 添加并保存本地存储
   if (
     router.options.isAddDynamicMenuRoutes ||
-    fnCurrentRouteType(to as any, commonModules) === "global"
+    isGlobalRoute(to as any, commonModules)
   ) {
     next()
   } else {
@@ -86,15 +54,16 @@ router.beforeEach((to, from, next) => {
     const token = Cookies.get(config.tokenName)
     if (!token) {
       router.push({ name: "login" })
-      next()
       return
     }
     getCurrentUserTreeApi()
       .then(res => {
         if (res.code === 1) {
           let {routers:newRoutes , permissions} = fixResToSys(res.data)
-          userStore.loginEvent(newRoutes, permissions)
-          addRouterFromData(newRoutes, modulesRoutes, router)
+          // 加入了登录之后的默认route
+          let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+          userStore.loginEvent(addCommonRoutes, permissions)
+          addRouterFromData(addCommonRoutes, modulesRoutes, router)
         }
         next({ ...to, replace: true })
       })
