@@ -2,7 +2,7 @@
   <div class="app-main">
     <router-view>
       <template #default="{ Component, route }">
-        <transition mode="out-in" appear>
+        <transition mode="out-in" appear name="fade">
           <component :is="Component" :key="route.fullPath" />
         </transition>
       </template>
