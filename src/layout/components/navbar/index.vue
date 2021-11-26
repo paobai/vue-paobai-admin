@@ -104,7 +104,7 @@ export default defineComponent({
       margin-right: 30px;
     }
     :deep(.arco-menu) {
-      background-color: #06979c;
+      background-color: @primary-color;
       .arco-menu-inner {
         overflow-y: hidden;
         padding: 0;
@@ -120,7 +120,6 @@ export default defineComponent({
             height: 100%;
             line-height: 18px;
             width: 190px;
-            background: #06979c;
             color: #ffffff;
             font-size: 18px;
             padding: 20px 0;
@@ -128,14 +127,9 @@ export default defineComponent({
             .iconfont {
               margin-right: 10px;
             }
-            &:hover {
-              background: #14c2c2;
-            }
           }
           &.arco-menu-selected {
-            .my-menu-item {
-              background: #14c2c2;
-            }
+            background: @primary-hover;
           }
         }
       }

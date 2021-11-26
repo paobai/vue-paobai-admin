@@ -1,6 +1,10 @@
 @import "./_transition.less";
 @import "./_mixins.less";
+@import "./_variables.module.less";
 
+@app-navbar-height: 60px;
+@app-sidebar-width: 215px;
+@app-sidebar-bg-color: #232324;
 
 body {
   height: 100%;
@@ -58,7 +62,7 @@ div:focus {
   }
   > .app-navbar {
     height: @app-navbar-height;
-    background: #06979c;
+    background: @primary-color;
     transition: height 0.28s;
     overflow: hidden;
   }
@@ -71,7 +75,7 @@ div:focus {
     > .app-sidebar {
       width: @app-sidebar-width;
       height: 100%;
-      background: #313749;
+      background: @app-sidebar-bg-color;
       transition: width 0.28s;
     }
     > .app-main {

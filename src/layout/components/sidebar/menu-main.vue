@@ -1,6 +1,7 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
+      theme="dark"
       :selected-keys="[menuChoseKey]"
       :open-keys="openKeys"
       @menu-item-click="clickMenu"
@@ -80,44 +81,34 @@ export default defineComponent({
   color: #ffffff;
   :deep(.arco-menu) {
     width: 100%;
-    background: transparent;
     .arco-menu-inner {
       padding: 0;
     }
     .arco-menu-inline {
       .arco-menu-inline-header {
-        background: transparent;
         margin-bottom: 0;
       }
     }
     .arco-menu-item {
       padding-right: 0;
-      background: transparent;
       color: #ffffff;
       margin-bottom: 0;
       line-height: 48px;
-      border-right: 4px solid transparent;
-      transition: background, border-right-color 0.2s;
-      &.arco-menu-selected,
-      &:hover {
-        background: #222735;
-      }
-      &.arco-menu-selected {
-        border-right: 4px solid #06979c;
+      border-left: 4px solid transparent;
+      transition: background-color  0.5s,border-left-color 0.5s;
+      &.arco-menu-selected, &:hover {
+        border-left: 4px solid #ffffff;
       }
     }
     .arco-menu-inline {
       .arco-menu-inline-header {
         color: #ffffff;
-        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
         line-height: 48px;
-        transition: background, border-right-color 0.2s;
+        transition: background-color  0.5s, border-left-color 0.5s;
         &.arco-menu-selected:hover,
-        &.arco-menu-selected {
-          background: #222735;
-        }
-        &.arco-menu-selected {
-          border-right: 4px solid #06979c;
+        &.arco-menu-selected, &:hover {
+          border-left: 4px solid #ffffff;
         }
       }
     }
