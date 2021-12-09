@@ -1,5 +1,6 @@
 import { MockMethod } from "vite-plugin-mock";
 import {RouteType} from "../src/constant/settings";
+import { ApiCodeEnum } from "../src/constant/api";
 
 let urlPre = "/upms"
 
@@ -9,7 +10,7 @@ export default [
         method: "get",
         response: () => {
             return {
-                code: 1,
+                code: ApiCodeEnum.SUCCESS,
                 data: {
                     routers: [
                         {
@@ -71,6 +72,25 @@ export default [
                         }
                     ],
                     permissions: []
+                }
+            }
+        }
+    },
+    {
+        url:  urlPre + "/users/login",
+        method: "post",
+        response: (request: any) => {
+            let data = request.body
+            if (data.userName !== 'paobai' || data.passWord !== 'paobai') {
+                return {
+                    code: ApiCodeEnum.FAILED,
+                    msg: '错误账号或者密码'
+                }
+            }
+            return {
+                code: ApiCodeEnum.SUCCESS,
+                data: {
+                    access_token: '123123'
                 }
             }
         }

@@ -7,10 +7,12 @@ import { cloneDeep, merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
 import { login } from "@/api/auth-api"
 import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
+import { ApiCodeEnum } from '@/constant/api';
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
 import { loadEnv } from "@/../build/utils";
 import sysConfig from "@/config";
+import { Message } from '@arco-design/web-vue'
 
 const env = loadEnv();
 const apiBaseUrl = env.VITE_API_BASE_URL
@@ -129,7 +131,7 @@ function addSubscriber(callback: () => void) {
 }
 
 function referToken() {
-  const refreshToken = Cookies.get(res.data.refresh_token)
+  const refreshToken = Cookies.get("refresh_token")
   login({
     grant_type: grantTypeRefreshToken,
     client_id: clientId,
@@ -162,6 +164,13 @@ function errorLogin() {
  */
 http.interceptors.response.use(
   response => {
+    if (!response.data) {
+      return Promise.reject('系统错误')
+    }
+    if (response.data.code !== ApiCodeEnum.SUCCESS) {
+      Message.error(response.data.msg || '系统错误')
+      return Promise.reject(response.data)
+    }
     response.data.__headers = response.headers
     return response.data
   },

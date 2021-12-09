@@ -6,7 +6,7 @@ import {
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
-import { getCurrentUserTree as getCurrentUserTreeApi } from "@/api/upms-api"
+import { AuthApi } from "@/api/upms-api"
 import { getUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
 import config from '@/config'
@@ -56,24 +56,23 @@ router.beforeEach((to, from, next) => {
       router.push({ name: "login" })
       return
     }
-    getCurrentUserTreeApi()
-      .then(res => {
-        if (res.code === 1) {
-          let {routers:newRoutes , permissions} = fixResToSys(res.data)
-          // 加入了登录之后的默认route
-          let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
-          userStore.loginEvent(addCommonRoutes, permissions)
-          addRouterFromData(addCommonRoutes, modulesRoutes, router)
-        }
-        next({ ...to, replace: true })
-      })
-      .catch(e => {
-        console.log(
-          `%c${e} 请求菜单列表和权限失败，跳转至登录页！！`,
-          "color:blue"
-        )
-        router.push({ name: "login" })
-      })
+    AuthApi.getCurrentUserTree().then(res => {
+      if (res.code === 1) {
+        let {routers:newRoutes , permissions} = fixResToSys(res.data)
+        // 加入了登录之后的默认route
+        let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+        userStore.loginEvent(addCommonRoutes, permissions)
+        addRouterFromData(addCommonRoutes, modulesRoutes, router)
+      }
+      next({ ...to, replace: true })
+    })
+    .catch(e => {
+      console.log(
+        `%c${e} 请求菜单列表和权限失败，跳转至登录页！！`,
+        "color:blue"
+      )
+      router.push({ name: "login" })
+    })
   }
 })
 

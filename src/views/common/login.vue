@@ -47,6 +47,7 @@ import {
 import { useRoute, useRouter } from "vue-router";
 import Cookies from "js-cookie"
 import config from '@/config'
+import { AuthApi } from '@/api/upms-api'
 export default {
   setup() {
     let loginForm = reactive({
@@ -55,11 +56,13 @@ export default {
     });
     const router = useRouter()
     const login = async () => {
-      let { userName, passWord} = loginForm;
+      let { userName, passWord } = loginForm;
       // alert(`成功${userName} ${passWord}`)
-      Cookies.set('access_token', '123123')
-      // this.$cookie.set('refresh_token', res.data.refresh_token)
-      router.replace({ path: '/main' })
+      AuthApi.login(loginForm).then(res => {
+        Cookies.set('access_token', res.data.access_token)
+        // this.$cookie.set('refresh_token', res.data.refresh_token)
+        router.replace({ path: '/main' })
+      })
     }
     return { login, loginForm , title: config.htmlTitle}
   }
