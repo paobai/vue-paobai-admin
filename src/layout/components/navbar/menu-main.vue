@@ -12,18 +12,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
+import {defineComponent, ref, computed, reactive, onMounted, unref, watchEffect, watch} from "vue"
 import {getUserHook} from "@/hooks//user";
 import {useAppHook} from "@/hooks/app";
 import {RouteType} from "@/constant/settings";
 import router from "@/router";
 import {getFirstMenuItem} from "@/utils/menu-help";
+import {useRoute} from "vue-router";
 export default defineComponent({
   setup () {
     let { routeList, routerMap, logOutEvent } = getUserHook()
     let { nowFirstRouteKey, updateNowFirstRouteKey, menuChoseKey } = useAppHook()
+    const route = useRoute()
+    watch(() => route.path,() => {
+      let currentRouteKey = route.meta.key
+      let dist = routerMap.value[currentRouteKey]
+      if ( !dist.parentKey[0] ) {
+        updateNowFirstRouteKey(currentRouteKey)
+      } else {
+        updateNowFirstRouteKey(dist.parentKey[0])
+      }
+    }, { immediate: true })
     const clickMenu = function (key: string) {
-      updateNowFirstRouteKey(key)
       let dist = routerMap.value[key]
       if (dist.type === RouteType.Page) {
         router.push({path: dist.path})
@@ -46,6 +56,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .menu-main{
   height: 100%;
+  flex: auto;
   :deep(.arco-menu) {
     height: 100%;
     background-color: @primary-color;
@@ -78,9 +89,10 @@ export default defineComponent({
         }
       }
     }
-    &.arco-menu-horizontal .arco-menu-item:not(:first-child),
-    &.arco-menu-horizontal .arco-menu-pop:not(:first-child) {
-      margin-left: 0;
+    &.arco-menu-horizontal .arco-menu-item:not(:first-child)
+    ,&.arco-menu-horizontal .arco-menu-pop:not(:first-child)
+    {
+      margin-left: 0px;
     }
   }
 }

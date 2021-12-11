@@ -71,6 +71,7 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   .left-wrapper {
+    flex: auto;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;

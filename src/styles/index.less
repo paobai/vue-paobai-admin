@@ -4,6 +4,7 @@
 
 @app-navbar-height: 60px;
 @app-sidebar-width: 215px;
+@app-tag-height: 30px;
 @app-sidebar-bg-color: #232324;
 
 body {
@@ -56,7 +57,7 @@ div:focus {
     }
   }
   &.not-show-sidebar {
-    .bottom-wrapper .app-sidebar {
+    > .bottom-wrapper .bottom-left-wrapper .app-sidebar {
       width: 0;
     }
   }
@@ -72,16 +73,27 @@ div:focus {
     width: 100%;
     position: relative;
     display: flex;
-    > .app-sidebar {
-      width: @app-sidebar-width;
-      height: 100%;
-      background: @app-sidebar-bg-color;
-      transition: width 0.28s;
+    .bottom-left-wrapper{
+      .app-sidebar {
+        width: @app-sidebar-width;
+        height: 100%;
+        background: @app-sidebar-bg-color;
+        transition: width 0.28s;
+      }
     }
-    > .app-main {
+    .bottom-right-wrapper {
       width: 0;
       flex: 1;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      .app-main{
+        height: 0;
+        flex: 1;
+      }
+      .app-tag {
+        height: @app-tag-height;
+      }
     }
   }
 }

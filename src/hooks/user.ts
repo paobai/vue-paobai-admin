@@ -27,6 +27,9 @@ export function getUserHook() {
         routeFixArray.forEach(item => {
             routeFixMap[item.key] = item
         })
+        // console.log('routeList.value', routeList.value)
+        // TODO 寻找为什么这句话会影响routerMap的结果
+        console.log('routeFixMap', Object.values(routeFixMap).map(item => item.parentKey))
         return routeFixMap
     })
     const logOutEvent = function () {
