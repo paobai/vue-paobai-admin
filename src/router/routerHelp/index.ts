@@ -9,7 +9,7 @@ export declare interface MyRouter extends Router {
 }
 
 import Layout from "@/layout/Index.vue"
-import {RouterApiType, RouteType} from "@/constant/settings";
+import {RouterApiType, RouterCustomType, RouteType} from "@/constant/settings";
 import {fixRouteList} from "@/utils/menu-help";
 import {storageSession} from "@/utils/storage";
 
@@ -82,7 +82,7 @@ export function isGlobalRoute(
 ): any {
   let temp: any[] = []
   for (let i = 0; i < globalRoutes.length; i++) {
-    if (route.path === globalRoutes[i].path) {
+    if (route.name && route.name === globalRoutes[i].name) {
       return true
     } else if (
       globalRoutes[i].children &&
@@ -153,7 +153,7 @@ export function addRouterFromData(
   router: Router
 ) {
   if (!routes || routes.length === 0) return
-  let inList:RouteRecordRaw[] = []
+  let inList:RouterCustomType[] = []
   routes.forEach(item => buildRoute(item, modulesRoutes, inList))
   let dist :RouteRecordRaw = {
     path: "/",
@@ -171,7 +171,7 @@ export function addRouterFromData(
 export function buildRoute (
     item: RouterApiType,
     modulesRoutes: any,
-    inList: RouteRecordRaw[] = []
+    inList: RouterCustomType[] = []
 ) {
   if (item.type === RouteType.Menu) {
     if (item.children && item.children.length > 0) {
@@ -192,7 +192,8 @@ export function buildRoute (
       icon: item.icon,
       title: item.title,
       key: item.key,
-      type: item.type
+      type: item.type,
+      notShow: item.notShow
     }
   })
 }

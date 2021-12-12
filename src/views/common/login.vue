@@ -61,7 +61,7 @@ export default {
       AuthApi.login(loginForm).then(res => {
         Cookies.set('access_token', res.data.access_token)
         // this.$cookie.set('refresh_token', res.data.refresh_token)
-        router.replace({ path: '/main' })
+        router.replace({ path: config.homePagePath })
       })
     }
     return { login, loginForm , title: config.htmlTitle}

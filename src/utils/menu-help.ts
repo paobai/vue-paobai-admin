@@ -24,3 +24,18 @@ export function getFirstMenuItem(routeList?: RouterApiType[]): undefined|RouterA
 export function buildMenuName (route: RouterApiType) {
     return route.title + '-' + route.key
 }
+
+export function getCanShowRoute (routes: RouterApiType[]) {
+    let res:RouterApiType[] = []
+    routes.filter(route => {
+        if (route.notShow) return false
+        let children = getCanShowRoute(route.children || [])
+        res.push({
+            ...route,
+            children: children
+        })
+        return true
+    })
+    return res
+}
+

@@ -48,7 +48,7 @@
           Please check that the URL you entered is correct, or click the button
           below to return to the homepage.
         </div>
-        <a href="" class="text-404__return-home">Back to home</a>
+        <div @click="goHome" class="text-404__return-home">Back to home</div>
       </div>
     </div>
   </div>
@@ -56,10 +56,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
+import config from "@/config";
+import {useRouter} from "vue-router";
 export default defineComponent({
   setup() {
+    let router = useRouter()
+    const goHome = function () {
+      router.replace({path: config.homePagePath})
+    }
     return {
-      message: "404 Page Not Found"
+      message: "404 Page Not Found",
+      goHome
     }
   }
 })

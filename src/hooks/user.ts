@@ -1,5 +1,6 @@
 import { useUserStoreHook} from "@/store/modules/user";
-import {defineComponent, computed, watchEffect, ref, unref} from 'vue'
+import {defineComponent, computed, watchEffect, ref, unref, watch} from 'vue'
+import type { Ref } from 'vue'
 import {RouterApiType} from "@/constant/settings";
 import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
 import Cookies from "js-cookie"
@@ -7,6 +8,7 @@ import { storageSession, storageLocal } from '@/utils/storage'
 import router, { resetRouter } from "@/router"
 import {addRouterFromData} from "@/router/routerHelp";
 import config from "@/config";
+import _ from 'lodash'
 export function getUserHook() {
     let userStore = useUserStoreHook()
     let routeList = computed((): RouterApiType[] => {
@@ -23,13 +25,10 @@ export function getUserHook() {
 
     const routerMap = computed(() => {
         let routeFixMap:{[key: string]: RouterApiType} = {}
-        let routeFixArray = fixRouteList(unref(routeList.value))
+        let routeFixArray = fixRouteList(_.cloneDeep(unref(routeList.value)))
         routeFixArray.forEach(item => {
             routeFixMap[item.key] = item
         })
-        // console.log('routeList.value', routeList.value)
-        // TODO 寻找为什么这句话会影响routerMap的结果
-        console.log('routeFixMap', Object.values(routeFixMap).map(item => item.parentKey))
         return routeFixMap
     })
     const logOutEvent = function () {

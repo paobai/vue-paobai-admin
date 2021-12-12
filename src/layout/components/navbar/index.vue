@@ -13,14 +13,14 @@
         />
       </a-avatar>
       <div class="username">admin</div>
-      <a-dropdown @popup-visible-change="getDropDownState">
+      <a-dropdown @popup-visible-change="getDropDownState" @select="tagSelect">
         <a-button type="primary" class="arco-btn-only-icon">
           <template #icon>
             <a-icon-down v-if="!dropDownState" />
             <a-icon-up v-else /> </template
         ></a-button>
         <template #content>
-          <a-doption @click="logOutHand">登出</a-doption>
+          <a-doption value="logout">登出</a-doption>
           <a-doption>Option 2</a-doption>
           <a-doption>Option 3</a-doption>
         </template>
@@ -57,10 +57,15 @@ export default defineComponent({
         }
       });
     }
+    const tagSelect = function (tagValue: string) {
+      if (tagValue === 'logout') {
+        logOutHand()
+      }
+    }
     return {
       getDropDownState,
       dropDownState,
-      logOutHand
+      tagSelect
     }
   }
 })

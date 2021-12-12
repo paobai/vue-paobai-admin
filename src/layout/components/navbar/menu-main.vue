@@ -1,7 +1,7 @@
 <template>
   <div class="menu-main">
     <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
-      <a-menu-item v-for="menu in routeList" :key="menu.key">
+      <a-menu-item v-for="menu in showRouteList" :key="menu.key">
         <div class="my-menu-item">
           <iconfont :class="menu.icon"></iconfont>
           {{ menu.title }}
@@ -17,17 +17,22 @@ import {getUserHook} from "@/hooks//user";
 import {useAppHook} from "@/hooks/app";
 import {RouteType} from "@/constant/settings";
 import router from "@/router";
-import {getFirstMenuItem} from "@/utils/menu-help";
+import {getFirstMenuItem, getCanShowRoute} from "@/utils/menu-help";
 import {useRoute} from "vue-router";
 export default defineComponent({
   setup () {
     let { routeList, routerMap, logOutEvent } = getUserHook()
     let { nowFirstRouteKey, updateNowFirstRouteKey, menuChoseKey } = useAppHook()
     const route = useRoute()
+    const showRouteList = computed(() => {
+      return getCanShowRoute(unref(routeList))
+    })
     watch(() => route.path,() => {
-      let currentRouteKey = route.meta.key
+      let currentRouteKey: string = route.meta.key as string
+      if (!currentRouteKey) return
       let dist = routerMap.value[currentRouteKey]
-      if ( !dist.parentKey[0] ) {
+      if (dist.notShow) return;
+      if ( !dist.parentKey || !dist.parentKey[0] ) {
         updateNowFirstRouteKey(currentRouteKey)
       } else {
         updateNowFirstRouteKey(dist.parentKey[0])
@@ -45,7 +50,7 @@ export default defineComponent({
       }
     }
     return {
-      routeList,
+      showRouteList,
       nowFirstRouteKey,
       clickMenu
     }

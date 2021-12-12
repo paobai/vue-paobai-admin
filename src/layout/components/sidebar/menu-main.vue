@@ -7,7 +7,7 @@
       @menu-item-click="clickMenu"
       @sub-menu-click="onClickSubMenu"
     >
-      <template v-for="route in routeList">
+      <template v-for="route in showRouteList">
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key">
             <template #title>
@@ -42,6 +42,8 @@ import { useAppHook } from '@/hooks/app'
 import { getUserHook } from '@/hooks/user'
 import router from "@/router";
 import {RouterApiType} from "@/constant/settings";
+import {useRoute} from "vue-router";
+import {getCanShowRoute} from "@/utils/menu-help";
 export default defineComponent({
   components: {
     menuSub
@@ -50,12 +52,17 @@ export default defineComponent({
     let {menuChoseKey, routeSidebarList: routeList, changeSideChose, getMenuByKey, nowFirstRouteKey } = useAppHook()
     let { routerMap } = getUserHook()
     let openKeys = ref([''])
+    const route = useRoute()
     let clickMenu = function (key: string) {
       let dist = getMenuByKey(key)
-      if (!dist) return
-      changeSideChose(key)
       router.push({name: dist.title + '-' + dist.key})
     }
+    const showRouteList = computed(() => {
+      return getCanShowRoute(unref(routeList))
+    })
+    watchEffect(() => {
+      menuChoseKey.value = route.meta.key as string
+    })
     watchEffect(() => {
       let key = menuChoseKey.value
       let dist = getMenuByKey(key)
@@ -68,7 +75,7 @@ export default defineComponent({
     return {
       clickMenu,
       menuChoseKey,
-      routeList,
+      showRouteList,
       openKeys,
       onClickSubMenu
     }

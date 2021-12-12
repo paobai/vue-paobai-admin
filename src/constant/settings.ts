@@ -1,10 +1,4 @@
-/*
- * @Description:
- * @Author: ZY
- * @Date: 2020-12-08 10:28:32
- * @LastEditors: ZY
- * @LastEditTime: 2021-01-07 08:40:47
- */
+import {RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw} from "vue-router";
 
 export enum Language {
   En = "en",
@@ -32,12 +26,18 @@ export enum TokenStorageName {
   Cookie = "cookie"
 }
 
+/**
+ * route的类型
+ */
 export enum RouteType {
   Menu,
   Page,
   Button
 }
 
+/**
+ * api返回的route结构
+ */
 export interface RouterApiType {
   key: string
   path: string
@@ -46,4 +46,37 @@ export interface RouterApiType {
   children?: RouterApiType[]
   title: string
   parentKey?: string[]
+  notShow?: boolean
+}
+
+
+export declare interface RouteMetaCustom extends RouteMeta {
+  icon?: string,
+  title: string,
+  key: string,
+  type: RouteType,
+  notShow?: boolean
+}
+/**
+ * 自定义的route储存结构
+ */
+export type RouterCustomType = RouteRecordRaw & {
+  meta: RouteMetaCustom
+}
+
+/**
+ * useRoute 返回的route对象类型
+ */
+export declare interface RouteLocationNormalizedLoadedCustom extends RouteLocationNormalizedLoaded{
+  meta: RouteMetaCustom
+}
+
+/**
+ * tag的类型结构
+ */
+export type tagType = {
+  title: string,
+  key: string,
+  name: string,
+  path: string
 }

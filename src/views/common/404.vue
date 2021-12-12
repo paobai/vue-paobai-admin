@@ -3,11 +3,13 @@
   <button @click="goHome">回到登录页</button>
 </template>
 <script lang="ts">
-import router from "@/router"
+import config from "@/config";
+import {useRouter} from "vue-router";
 export default {
   setup() {
+    const router = useRouter()
     let goHome = function () {
-      router.push({ name: "login" })
+      router.push({ path: config.homePagePath })
     }
     return { goHome }
   }

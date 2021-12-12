@@ -40,13 +40,18 @@ export function resetRouter() {
   router.options.isAddDynamicMenuRoutes = false
 }
 
+export function clearRouter () {
+  (router as any).matcher = [] // reset router
+  router.options.isAddDynamicMenuRoutes = false
+}
+
 router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
   if (
     router.options.isAddDynamicMenuRoutes ||
-    isGlobalRoute(to as any, commonModules)
+    isGlobalRoute(to as any, constantRoutes)
   ) {
     next()
   } else {
@@ -62,6 +67,7 @@ router.beforeEach((to, from, next) => {
         // 加入了登录之后的默认route
         let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
         userStore.loginEvent(addCommonRoutes, permissions)
+        // clearRouter()
         addRouterFromData(addCommonRoutes, modulesRoutes, router)
       }
       next({ ...to, replace: true })
