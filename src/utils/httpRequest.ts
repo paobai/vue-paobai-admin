@@ -1,5 +1,4 @@
 import Vue from "vue"
-import { ElMessage } from "element-plus"
 import axios, { AxiosInstance, AxiosRequestConfig, Method } from "axios"
 import router from "@/router"
 import qs from "qs"
@@ -156,7 +155,7 @@ function referToken() {
 
 function errorLogin() {
   clearLoginInfo()
-  ElMessage.error("登录失效")
+  Message.error("登录失效")
   router.push({ name: 'login' })
 }
 /**
@@ -186,7 +185,7 @@ http.interceptors.response.use(
       // Bad client错误流程
       if (response.data.msg === "Bad client credentials") {
         errorLogin()
-        ElMessage.error("认证失败,client错误,请联系管理员。")
+        Message.error("认证失败,client错误,请联系管理员。")
         return Promise.reject(error.response.data)
       }
 
@@ -205,9 +204,9 @@ http.interceptors.response.use(
       }
     }
     if (error.response.data.code === 10250) {
-      ElMessage.error("登录失效,请先登录")
+      Message.error("登录失效,请先登录")
     } else if (error.response.data.code === 10251) {
-    } else ElMessage.error(error.response.data.msg)
+    } else Message.error(error.response.data.msg)
     return Promise.reject(error.response.data)
   }
 )
