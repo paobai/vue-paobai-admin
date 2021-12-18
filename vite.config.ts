@@ -39,7 +39,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
      * @default '/'
      */
     base:
-        process.env.NODE_ENV === "production" ? "/manages/" : VITE_PUBLIC_PATH,
+        process.env.NODE_ENV === "production" ? "./" : VITE_PUBLIC_PATH,
     root,
     resolve: {
       alias,
