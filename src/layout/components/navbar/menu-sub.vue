@@ -1,6 +1,6 @@
 <template>
   <template v-if="menuItem.children && menuItem.children.length > 0">
-    <a-sub-menu :key="menuItem.key" :title="menuItem.key">
+    <a-sub-menu :key="menuItem.key" :title="menuItem.title">
       <template #expand-icon-down>
         <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
       </template>
@@ -9,7 +9,7 @@
   </template>
   <template v-else>
     <a-menu-item :key="menuItem.key" >
-      {{menuItem.key}}
+      {{menuItem.title}}
     </a-menu-item>
   </template>
 </template>

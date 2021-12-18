@@ -14,14 +14,14 @@
     <div class="right-setting-wrapper">
       <div class="item-setting-line">
         显示顶部：
-        <a-switch :default-checked="navbarShow" @change="updateNavbar">
+        <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="updateNavbar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
       <div class="item-setting-line" >
         显示左部(未实现)：
-        <a-switch :default-checked="sidebarShow" @change="updateSidebar">
+        <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="updateSidebar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>

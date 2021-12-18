@@ -5,15 +5,13 @@
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key">
             <template #title>
-<!--              <iconfont :class="route.icon"></iconfont>-->
-<!--              {{route.title}}-->
-              <div class="my-menu-item">
-                <iconfont :class="route.icon"></iconfont>
-                {{ route.title }}
+              <div class="my-menu-item" @click="clickMenu(route.key)" :class="{'active': nowFirstRouteKey === route.key}">
+                <iconfont class="left-iconfont" :class="route.icon"></iconfont>
+                <div class="title-content">{{ route.title }}</div>
+                <a-icon-down class="right-suffix"/>
               </div>
             </template>
             <template #expand-icon-down>
-              <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
             </template>
             <menu-sub
                 v-for="(routSub, index) in route.children"
@@ -25,8 +23,8 @@
         <template v-else>
         <a-menu-item :key="route.key">
           <div class="my-menu-item">
-            <iconfont :class="route.icon"></iconfont>
-            {{ route.title }}
+            <iconfont class="left-iconfont" :class="route.icon"></iconfont>
+            <div class="title-content">{{ route.title }}</div>
           </div>
         </a-menu-item>
       </template>
@@ -101,16 +99,31 @@ export default defineComponent({
         height: 100%;
         border-radius: 0;
         .my-menu-item {
-          text-align: center;
+          text-align: left;
           height: 100%;
-          line-height: 18px;
-          width: 190px;
+          min-width: 190px;
+          max-width: 275px;
           color: #ffffff;
           font-size: 18px;
-          padding: 20px 0;
+          padding: 20px 20px 20px 30px;
           transition: background 0.5s;
-          .iconfont {
+          display: flex;
+          align-content: center;
+          align-items: center;
+          .left-iconfont {
             margin-right: 10px;
+          }
+          .right-suffix{
+            margin-left: 10px;
+            margin-right: 0;
+            color: rgba(255, 255, 255, 0.7);
+          }
+          .title-content{
+            flex: auto;
+            text-align: center;
+          }
+          &.active{
+            background: @primary-hover;
           }
         }
         &.arco-menu-selected {

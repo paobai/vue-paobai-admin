@@ -1,11 +1,13 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
+      showCollapseButton
       theme="dark"
       :selected-keys="[menuChoseKey]"
       :open-keys="openKeys"
       @menu-item-click="clickMenu"
       @sub-menu-click="onClickSubMenu"
+      @collapse="collapseEvent"
     >
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
@@ -68,12 +70,16 @@ export default defineComponent({
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
       openKeys.value = getOpenKeys
     }
+    const collapseEvent = function (res) {
+      console.log('collapseEvent', res)
+    }
     return {
       clickMenu,
       menuChoseKey,
       routeList,
       openKeys,
-      onClickSubMenu
+      onClickSubMenu,
+      collapseEvent
     }
   }
 })
@@ -83,6 +89,7 @@ export default defineComponent({
 .menu-wrapper {
   color: #ffffff;
   :deep(.arco-menu) {
+    padding-top: 34px;
     width: 100%;
     .arco-menu-inner {
       padding: 0;
@@ -92,7 +99,7 @@ export default defineComponent({
         margin-bottom: 0;
       }
     }
-    .arco-menu-item {
+    .arco-menu-item, .arco-menu-pop {
       padding-right: 0;
       color: #ffffff;
       margin-bottom: 0;
@@ -114,6 +121,9 @@ export default defineComponent({
           border-left: 4px solid #ffffff;
         }
       }
+    }
+    .arco-menu-collapse-button{
+      top: 12px;
     }
   }
 }
