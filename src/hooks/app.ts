@@ -1,6 +1,6 @@
 import { useAppStoreHook} from "@/store/modules/app";
 import { getUserHook } from './user'
-import {computed, ref, unref, watch, onBeforeMount} from 'vue'
+import {computed, ref, unref, watch, onBeforeMount, watchEffect} from 'vue'
 import {RouterApiType, RouteType} from "@/constant/settings";
 import {fixRouteList} from "@/utils/menu-help";
 import router from '@/router/index'
@@ -18,9 +18,20 @@ export function useAppHook(){
     const sidebarShow = computed(() => {
         return appStore.getSidebarShow
     })
-    // 顶部菜单不显示，则显示侧边菜单。
+
+    const collapse = computed({
+        get: () => appStore.getSidebarMenuCollapsed,
+        set: val => {
+            updateCollapse(val)
+        }
+    })
+
     const fixSidebarShow = computed(() => {
-        return sidebarShow.value && !(nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)
+        // nav显示 同时选择的第一个为page ，则侧边栏为空，所以应该隐藏
+        if (navbarShow.value && (nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)) {
+            return false
+        }
+        return sidebarShow.value
     })
 
     const updateNavbar = function (res: boolean) {
@@ -30,6 +41,11 @@ export function useAppHook(){
     const updateSidebar = function (res: boolean) {
         appStore.updateSidebarShow(res)
     }
+
+    const updateCollapse = function (res: boolean) {
+        appStore.updateSidebarMenuCollapsed(res)
+    }
+
     const updateRightSetting = function (res: boolean) {
         appStore.updateRightSettingShow(res)
     }
@@ -51,28 +67,13 @@ export function useAppHook(){
         }
     })
 
-    const updateMenuChoseKey = function (menuChoseKey: string) {
-        appStore.updateMenuChoseKey(menuChoseKey)
-    }
 
-    let menuChoseKey = computed({
-        get: () => appStore.getMenuChoseKey,
-        set: val => {
-            updateMenuChoseKey(val)
-        }
-    })
 
     // 左边的routeList
-    let {routeSidebarList, changeSideChose, getMenuByKey } = function () {
+    let {routeSidebarList, getMenuByKey } = function () {
         let sourceRouteList = showRouteList
         let routeSidebarList = ref([] as RouterApiType[])
         let sideRouteMap: { [key: string]: any } = {}
-        // 该方法有延迟。只能在sidebar点击中使用。
-        let changeSideChose = (key: string) => {
-            let dist = sideRouteMap[key]
-            if (!dist) return
-            menuChoseKey.value = key
-        }
         let getMenuByKey = (key: string) => {
             return sideRouteMap[key]
         }
@@ -92,7 +93,7 @@ export function useAppHook(){
                 sideRouteMap[item.key] = item
             })
         }, {immediate: true})
-        return {routeSidebarList, changeSideChose, getMenuByKey}
+        return {routeSidebarList, getMenuByKey}
     }()
 
     const routeNavbarList = computed(() => {
@@ -110,31 +111,21 @@ export function useAppHook(){
         return dist
     })
 
-    const initRouterMenuChose = function () {
-        onBeforeMount(() => {
-            let key = router.currentRoute.value.meta.key as string
-            let dist = routerMap.value[key]
-            if (!dist) return
-            menuChoseKey.value = key
-            updateNowFirstRouteKey(dist.parentKey![0] || dist.key)
-        })
-    }
     return {
         navbarShow,
         updateNavbar,
         updateSidebar,
+        collapse,
+        updateCollapse,
         updateRightSetting,
         showRightSetting,
         nowFirstRouteKey,
         nowFirstRoute,
         fixSidebarShow,
         sidebarShow,
-        menuChoseKey,
         routeSidebarList,
         routeNavbarList,
-        changeSideChose,
         getMenuByKey,
         updateNowFirstRouteKey,
-        initRouterMenuChose
     }
 }

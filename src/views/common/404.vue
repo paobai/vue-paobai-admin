@@ -9,7 +9,7 @@ export default {
   setup() {
     const router = useRouter()
     let goHome = function () {
-      router.push({ path: config.homePagePath })
+      router.push({ path: config.app.homePagePath })
     }
     return { goHome }
   }

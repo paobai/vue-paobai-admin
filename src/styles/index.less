@@ -4,6 +4,7 @@
 
 @app-navbar-height: 60px;
 @app-sidebar-width: 215px;
+@app-sidebar-collapse-width: 85px;
 @app-tag-height: 30px;
 @app-sidebar-bg-color: #232324;
 
@@ -59,6 +60,12 @@ div:focus {
   &.not-show-sidebar {
     > .bottom-wrapper .bottom-left-wrapper .app-sidebar {
       width: 0;
+      &.menu-collapse{
+        width: 0;
+        .arco-menu:before, .arco-menu-collapse-button{
+          display: none;
+        }
+      }
     }
   }
   > .app-navbar {
@@ -79,6 +86,9 @@ div:focus {
         height: 100%;
         background: @app-sidebar-bg-color;
         transition: width 0.28s;
+        &.menu-collapse{
+          width: @app-sidebar-collapse-width;
+        }
       }
     }
     .bottom-right-wrapper {

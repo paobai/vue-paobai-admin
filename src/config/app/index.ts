@@ -1,4 +1,4 @@
-export interface DefaultConfig {
+export interface AppConfig {
     tokenPre: string
     tokenName: string
     refreshTokenName: string
@@ -7,9 +7,10 @@ export interface DefaultConfig {
     homePagePath: string
     navbarShowKey: string
     sidebarShowKey: string
+    sidebarMenuCollapsedKey: string
 }
 
-const defaultConfig: DefaultConfig = {
+const appConfig: AppConfig = {
     tokenPre: 'Bearer ',
     tokenName: 'access_token',
     refreshTokenName: 'refresh_token',
@@ -17,7 +18,8 @@ const defaultConfig: DefaultConfig = {
     loginPageName: 'login',
     homePagePath: '/main',
     navbarShowKey: 'layout-nav-bar-show',
-    sidebarShowKey: 'layout-side-bar-show'
+    sidebarShowKey: 'layout-side-bar-show',
+    sidebarMenuCollapsedKey: 'layout-sidebar-menu-collapsed-'
 }
 
-export default defaultConfig
+export default appConfig

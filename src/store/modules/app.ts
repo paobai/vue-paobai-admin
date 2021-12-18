@@ -7,9 +7,9 @@ export const useAppStore = defineStore({
     id: "store-app",
     state: () => ({
         nowFirstRouteKey : '',
-        menuChoseKey: '',
-        navbarShow: storageLocal.getItem(config.navbarShowKey) === null ? true : storageLocal.getItem(config.navbarShowKey),
-        sidebarShow: storageLocal.getItem(config.sidebarShowKey) === null ? true : storageLocal.getItem(config.sidebarShowKey),
+        navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
+        sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
+        sidebarMenuCollapsed :storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
         rightSettingShow: false
     }),
     getters: {
@@ -22,11 +22,11 @@ export const useAppStore = defineStore({
         getSidebarShow (): boolean {
             return this.sidebarShow
         },
+        getSidebarMenuCollapsed (): boolean {
+            return this.sidebarMenuCollapsed
+        },
         getRightSettingShow () : boolean{
             return this.rightSettingShow
-        },
-        getMenuChoseKey (): string {
-            return this.menuChoseKey
         }
     },
     actions: {
@@ -35,17 +35,18 @@ export const useAppStore = defineStore({
         },
         updateNavbarShow (navbarShow: boolean) {
             this.navbarShow = navbarShow
-            storageLocal.setItem(config.navbarShowKey, navbarShow)
+            storageLocal.setItem(config.app.navbarShowKey, navbarShow)
         },
         updateSidebarShow (sidebarShow: boolean) {
             this.sidebarShow = sidebarShow
-            storageLocal.setItem(config.sidebarShowKey, sidebarShow)
+            storageLocal.setItem(config.app.sidebarShowKey, sidebarShow)
+        },
+        updateSidebarMenuCollapsed (sidebarMenuCollapsed: boolean) {
+            this.sidebarMenuCollapsed = sidebarMenuCollapsed
+            storageLocal.setItem(config.app.sidebarMenuCollapsedKey, sidebarMenuCollapsed)
         },
         updateRightSettingShow (rightSettingShow: boolean) {
             this.rightSettingShow = rightSettingShow
-        },
-        updateMenuChoseKey (menuChoseKey: string) {
-            return this.menuChoseKey = menuChoseKey
         }
     }
 });

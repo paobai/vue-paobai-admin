@@ -61,10 +61,10 @@ export default {
       AuthApi.login(loginForm).then(res => {
         Cookies.set('access_token', res.data.access_token)
         // this.$cookie.set('refresh_token', res.data.refresh_token)
-        router.replace({ path: config.homePagePath })
+        router.replace({ path: config.app.homePagePath })
       })
     }
-    return { login, loginForm , title: config.htmlTitle}
+    return { login, loginForm , title: config.custom.htmlTitle}
   }
 }
 </script>

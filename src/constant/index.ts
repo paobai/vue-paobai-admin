@@ -1,4 +1,3 @@
-import dictConfigMap from "./dictConfigMap"
 export const grantTypePassword = "password"
 export const grantTypeRefreshToken = "refresh_token"
 export const clientId = "test"

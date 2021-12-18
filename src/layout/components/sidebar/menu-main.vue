@@ -7,7 +7,7 @@
       :open-keys="openKeys"
       @menu-item-click="clickMenu"
       @sub-menu-click="onClickSubMenu"
-      @collapse="collapseEvent"
+      v-model:collapsed="collapse"
     >
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
@@ -45,19 +45,26 @@ import { getUserHook } from '@/hooks/user'
 import router from "@/router";
 import {RouterApiType} from "@/constant/settings";
 import {useRoute} from "vue-router";
+import {getFirstMenuItem} from "@/utils/menu-help";
 export default defineComponent({
   components: {
     menuSub
   },
   setup(props) {
-    let {menuChoseKey, routeSidebarList: routeList, changeSideChose, getMenuByKey, nowFirstRouteKey } = useAppHook()
-    let { routerMap } = getUserHook()
+    let {
+      routeSidebarList: routeList,
+      getMenuByKey,
+      nowFirstRouteKey,
+      collapse,
+      updateCollapse
+    } = useAppHook()
     let openKeys = ref([''])
     const route = useRoute()
     let clickMenu = function (key: string) {
       let dist = getMenuByKey(key)
       router.push({name: dist.title + '-' + dist.key})
     }
+    let menuChoseKey = ref('')
     watchEffect(() => {
       menuChoseKey.value = route.meta.key as string
     })
@@ -68,10 +75,13 @@ export default defineComponent({
       openKeys.value = dist.parentKey.concat(key)
     })
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
+      if (unref(collapse)) {
+        let dist = getMenuByKey(key)
+        let find = getFirstMenuItem(dist.children)
+        if (!find) return
+        clickMenu(find.key)
+      }
       openKeys.value = getOpenKeys
-    }
-    const collapseEvent = function (res) {
-      console.log('collapseEvent', res)
     }
     return {
       clickMenu,
@@ -79,7 +89,8 @@ export default defineComponent({
       routeList,
       openKeys,
       onClickSubMenu,
-      collapseEvent
+      collapse,
+      updateCollapse
     }
   }
 })
@@ -88,10 +99,26 @@ export default defineComponent({
 <style lang="less" scoped>
 .menu-wrapper {
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
   :deep(.arco-menu) {
-    height: 100%;
+    height: 0;
+    flex: 1;
     width: 100%;
+    &.arco-menu-collapsed{
+      font-size: 60px;
+      .arco-menu-item, .arco-menu-pop{
+        line-height: 80px;
+      }
+      .arco-icon{
+        vertical-align: -10px;
+      }
+      &.arco-menu-vertical .arco-menu-pop-header, .arco-menu-item{
+        padding-left: 9px;
+      }
+    }
     .arco-menu-inner {
+      overflow: hidden;
       padding: 0;
     }
     .arco-menu-inline {
@@ -125,8 +152,10 @@ export default defineComponent({
     .arco-menu-collapse-button{
       right: -10px;
       bottom: 12px;
+      font-size: 20px;
     }
     &:before{
+      overflow: hidden;
       content: "";
       position: absolute;
       right: 0;

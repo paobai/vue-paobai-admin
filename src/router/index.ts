@@ -11,6 +11,7 @@ import { getUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
 import config from '@/config'
 import mainRoutesSource from './commonLoginRouteApi/common'
+import {fixRouteList} from "@/utils/menu-help";
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -56,7 +57,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     // TODO 获取路由
-    const token = Cookies.get(config.tokenName)
+    const token = Cookies.get(config.app.tokenName)
     if (!token) {
       router.push({ name: "login" })
       return

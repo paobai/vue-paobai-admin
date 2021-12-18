@@ -42,8 +42,7 @@ export default defineComponent({
     appTag
   },
   setup() {
-    let { navbarShow, fixSidebarShow, initRouterMenuChose } = useAppHook()
-    initRouterMenuChose()
+    let { navbarShow, fixSidebarShow } = useAppHook()
     return {navbarShow, fixSidebarShow}
   }
 })

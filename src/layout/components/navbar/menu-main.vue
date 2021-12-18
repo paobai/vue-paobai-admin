@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup () {
     let { routerMap, logOutEvent } = getUserHook()
-    let { nowFirstRouteKey, updateNowFirstRouteKey, menuChoseKey, routeNavbarList:  routeList} = useAppHook()
+    let { nowFirstRouteKey, updateNowFirstRouteKey, routeNavbarList:  routeList} = useAppHook()
     const route = useRoute()
     watch(() => route.path,() => {
       let currentRouteKey: string = route.meta.key as string
@@ -67,7 +67,6 @@ export default defineComponent({
       } else {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
-        menuChoseKey.value = find.key
         router.push({path: find.path})
       }
     }

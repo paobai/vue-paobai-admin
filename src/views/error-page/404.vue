@@ -62,7 +62,7 @@ export default defineComponent({
   setup() {
     let router = useRouter()
     const goHome = function () {
-      router.replace({path: config.homePagePath})
+      router.replace({path: config.app.homePagePath})
     }
     return {
       message: "404 Page Not Found",

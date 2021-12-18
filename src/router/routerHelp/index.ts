@@ -10,7 +10,6 @@ export declare interface MyRouter extends Router {
 
 import Layout from "@/layout/Index.vue"
 import {RouterApiType, RouterCustomType, RouteType} from "@/constant/settings";
-import {fixRouteList} from "@/utils/menu-help";
 import {storageSession} from "@/utils/storage";
 
 /**

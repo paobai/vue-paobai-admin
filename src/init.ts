@@ -5,7 +5,7 @@ import iconfont from "@/components/iconfont.vue"
 import { setupStore } from "@/store"
 export function initApp(app: App) {
     let dist = document.getElementsByTagName('title')[0]
-    dist.innerHTML = config.htmlTitle
+    dist.innerHTML = config.custom.htmlTitle
     app.component("iconfont", iconfont as unknown as Component)
     setupStore(app)
     // 自定义指令

@@ -62,7 +62,7 @@ export default defineComponent({
     const deleteTag = function (item: tagType, index: number) {
       appTagList.value.splice(index, 1)
       if (appTagList.value.length === 0) {
-        router.replace({ path: config.homePagePath })
+        router.replace({ path: config.app.homePagePath })
         return
       }
       if (activeRouteKey.value === item.key) {
@@ -78,8 +78,8 @@ export default defineComponent({
       if (value === 'closeChose') {
         deleteTag(item, index)
       } else if (value === 'closeAll'){
-        appTagList.value = item.path === config.homePagePath ? [item]: []
-        router.replace({ path: config.homePagePath })
+        appTagList.value = item.path === config.app.homePagePath ? [item]: []
+        router.replace({ path: config.app.homePagePath })
       } else if(value === 'reloadChose') {
         router.replace({
           name: "跳转页-redirect-page",

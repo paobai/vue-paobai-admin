@@ -36,18 +36,18 @@ export function getUserHook() {
     const logOutEvent = function () {
         Cookies.remove('access_token')
         Cookies.remove('refresh_token')
-        storageSession.setItem(config.permissionName, [])
+        storageSession.setItem(config.app.permissionName, [])
         resetRouter()
         updateRouteList([])
         updatePermissions([])
-        router.replace({name: config.loginPageName})
+        router.replace({name: config.app.loginPageName})
     }
 
     const loginEvent = function (routeList: RouterApiType[], permissions: string[]){
         userStore.updatePermissions(permissions)
         userStore.updateRouteList(routeList)
         router.options.isAddDynamicMenuRoutes = true
-        storageSession.setItem(config.permissionName, permissions)
+        storageSession.setItem(config.app.permissionName, permissions)
     }
 
     return{
