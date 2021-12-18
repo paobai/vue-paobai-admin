@@ -89,7 +89,7 @@ export default defineComponent({
 .menu-wrapper {
   color: #ffffff;
   :deep(.arco-menu) {
-    padding-top: 34px;
+    height: 100%;
     width: 100%;
     .arco-menu-inner {
       padding: 0;
@@ -123,7 +123,23 @@ export default defineComponent({
       }
     }
     .arco-menu-collapse-button{
-      top: 12px;
+      right: -10px;
+      bottom: 12px;
+    }
+    &:before{
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 48px;
+      height: 48px;
+      background-color: inherit;
+      border-radius: 50%;
+      box-shadow: 4px 0 2px #0000004d,0 0 1px #0000004d;
+      transform: translate(50%);
+    }
+    &:not(.arco-menu-collapsed):before{
+      box-shadow: -4px 0 2px #0000004d,0 0 1px #0000004d;
     }
   }
 }
