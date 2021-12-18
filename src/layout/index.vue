@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper" :class="{'not-show-app-navbar': !showNavFlag, 'not-show-sidebar': !showSideBar }">
+  <div class="app-wrapper" :class="{'not-show-app-navbar': !navbarShow, 'not-show-sidebar': !fixSidebarShow }">
     <navbar></navbar>
     <div class="bottom-wrapper">
       <div class="bottom-left-wrapper">
@@ -42,9 +42,9 @@ export default defineComponent({
     appTag
   },
   setup() {
-    let { navbarShow: showNavFlag, showSideBar, initRouterMenuChose } = useAppHook()
+    let { navbarShow, fixSidebarShow, initRouterMenuChose } = useAppHook()
     initRouterMenuChose()
-    return {showNavFlag, showSideBar}
+    return {navbarShow, fixSidebarShow}
   }
 })
 </script>

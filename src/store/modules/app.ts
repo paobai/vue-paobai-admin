@@ -8,7 +8,8 @@ export const useAppStore = defineStore({
     state: () => ({
         nowFirstRouteKey : '',
         menuChoseKey: '',
-        navBarShow: storageLocal.getItem(config.NavBarShowKey) === null ? true : storageLocal.getItem(config.NavBarShowKey),
+        navbarShow: storageLocal.getItem(config.navbarShowKey) === null ? true : storageLocal.getItem(config.navbarShowKey),
+        sidebarShow: storageLocal.getItem(config.sidebarShowKey) === null ? true : storageLocal.getItem(config.sidebarShowKey),
         rightSettingShow: false
     }),
     getters: {
@@ -16,7 +17,10 @@ export const useAppStore = defineStore({
             return this.nowFirstRouteKey
         },
         getNavbarShow (): boolean {
-            return this.navBarShow
+            return this.navbarShow
+        },
+        getSidebarShow (): boolean {
+            return this.sidebarShow
         },
         getRightSettingShow () : boolean{
             return this.rightSettingShow
@@ -29,8 +33,13 @@ export const useAppStore = defineStore({
         updateNowFirstRouteKey(nowFirstRouteKey: string) {
             this.nowFirstRouteKey = nowFirstRouteKey
         },
-        updateNavBarShow (navBarShow: boolean) {
-            this.navBarShow = navBarShow
+        updateNavbarShow (navbarShow: boolean) {
+            this.navbarShow = navbarShow
+            storageLocal.setItem(config.navbarShowKey, navbarShow)
+        },
+        updateSidebarShow (sidebarShow: boolean) {
+            this.sidebarShow = sidebarShow
+            storageLocal.setItem(config.sidebarShowKey, sidebarShow)
         },
         updateRightSettingShow (rightSettingShow: boolean) {
             this.rightSettingShow = rightSettingShow

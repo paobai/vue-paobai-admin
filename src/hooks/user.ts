@@ -2,17 +2,19 @@ import { useUserStoreHook} from "@/store/modules/user";
 import {defineComponent, computed, watchEffect, ref, unref, watch} from 'vue'
 import type { Ref } from 'vue'
 import {RouterApiType} from "@/constant/settings";
-import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
+import {fixRouteList, getCanShowRoute, getFirstMenuItem} from "@/utils/menu-help";
 import Cookies from "js-cookie"
-import { storageSession, storageLocal } from '@/utils/storage'
+import { storageSession } from '@/utils/storage'
 import router, { resetRouter } from "@/router"
-import {addRouterFromData} from "@/router/routerHelp";
 import config from "@/config";
 import _ from 'lodash'
 export function getUserHook() {
     let userStore = useUserStoreHook()
     let routeList = computed((): RouterApiType[] => {
         return userStore.getRouteList
+    })
+    const showRouteList = computed(() => {
+        return getCanShowRoute(unref(routeList))
     })
 
     const updateRouteList =  function (routeList: RouterApiType[]) {
@@ -34,9 +36,7 @@ export function getUserHook() {
     const logOutEvent = function () {
         Cookies.remove('access_token')
         Cookies.remove('refresh_token')
-        // TODO: 重置store 状态
-        // store.commit('resetStore')
-        storageSession.setItem('permissions', [])
+        storageSession.setItem(config.permissionName, [])
         resetRouter()
         updateRouteList([])
         updatePermissions([])
@@ -52,6 +52,7 @@ export function getUserHook() {
 
     return{
         routeList,
+        showRouteList,
         routerMap,
         logOutEvent,
         loginEvent,

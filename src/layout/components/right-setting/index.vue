@@ -14,14 +14,14 @@
     <div class="right-setting-wrapper">
       <div class="item-setting-line">
         显示顶部：
-        <a-switch :default-checked="navbarShow" @change="updateNavBar">
+        <a-switch :default-checked="navbarShow" @change="updateNavbar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
-      <div class="item-setting-line">
+      <div class="item-setting-line" >
         显示左部(未实现)：
-        <a-switch @change="">
+        <a-switch :default-checked="sidebarShow" @change="updateSidebar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
@@ -35,8 +35,8 @@ import { defineComponent,computed, watchEffect,ref } from 'vue'
 import { useAppHook } from '@/hooks/app'
 export default defineComponent({
   setup() {
-    const { navbarShow, updateNavBar, updateRightSetting, showRightSetting } = useAppHook()
-    return { showRightSetting, updateRightSetting, updateNavBar, navbarShow }
+    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting } = useAppHook()
+    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar }
   }
 })
 </script>

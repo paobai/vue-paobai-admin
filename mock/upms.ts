@@ -21,6 +21,12 @@ export default [
                             icon: 'icon-dangshui',
                             children: [
                                 {
+                                    key: "1",
+                                    title: "menu1",
+                                    type: RouteType.Page,
+                                    path: '/test-router/path1'
+                                },
+                                {
                                     key: "2",
                                     title: "menu2",
                                     type: RouteType.Menu,
@@ -81,12 +87,12 @@ export default [
         method: "post",
         response: (request: any) => {
             let data = request.body
-            if (data.userName !== 'paobai' || data.passWord !== 'paobai') {
-                return {
-                    code: ApiCodeEnum.FAILED,
-                    msg: '错误账号或者密码'
-                }
-            }
+            // if (data.userName !== 'paobai' || data.passWord !== 'paobai') {
+            //     return {
+            //         code: ApiCodeEnum.FAILED,
+            //         msg: '错误账号或者密码'
+            //     }
+            // }
             return {
                 code: ApiCodeEnum.SUCCESS,
                 data: {

@@ -6,7 +6,6 @@
     123123
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
-    <button @click="changeSide">切换</button>
   </div>
 </template>
 
@@ -28,9 +27,6 @@ export default defineComponent({
   },
   setup() {
     let appStore = useAppStoreHook()
-    let changeSide = function (){
-      appStore.updateNavBarShow(!appStore.navBarShow)
-    }
     let goHome = function () {
       router.push({ name: "home" })
     }
@@ -52,7 +48,7 @@ export default defineComponent({
     }
     let { setOption } = useECharts(chartRef as Ref<HTMLDivElement>)
     setOption(options)
-    return { goHome, changeSide, chartRef }
+    return { goHome, chartRef }
   }
 })
 </script>

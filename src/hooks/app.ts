@@ -1,29 +1,34 @@
 import { useAppStoreHook} from "@/store/modules/app";
 import { getUserHook } from './user'
-import {defineComponent, computed, watchEffect, ref, unref, onMounted, watch, onBeforeMount} from 'vue'
+import {computed, ref, unref, watch, onBeforeMount} from 'vue'
 import {RouterApiType, RouteType} from "@/constant/settings";
-import {fixRouteList, getFirstMenuItem} from "@/utils/menu-help";
+import {fixRouteList} from "@/utils/menu-help";
 import router from '@/router/index'
-import { storageSession, storageLocal } from '@/utils/storage'
-import config from "@/config";
 
 export function useAppHook(){
 
-    let { routeList, routerMap } = getUserHook()
+    let { showRouteList, routerMap } = getUserHook()
 
     const appStore = useAppStoreHook()
 
     const navbarShow = computed(() => {
         return appStore.getNavbarShow
     })
+
+    const sidebarShow = computed(() => {
+        return appStore.getSidebarShow
+    })
     // 顶部菜单不显示，则显示侧边菜单。
-    const showSideBar = computed(() => {
-        return !navbarShow.value || !(nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)
+    const fixSidebarShow = computed(() => {
+        return sidebarShow.value && !(nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page)
     })
 
-    const updateNavBar = function (res: boolean) {
-        appStore.updateNavBarShow(res)
-        storageLocal.setItem(config.NavBarShowKey, res)
+    const updateNavbar = function (res: boolean) {
+        appStore.updateNavbarShow(res)
+    }
+
+    const updateSidebar = function (res: boolean) {
+        appStore.updateSidebarShow(res)
     }
     const updateRightSetting = function (res: boolean) {
         appStore.updateRightSettingShow(res)
@@ -36,7 +41,7 @@ export function useAppHook(){
     }
 
     const nowFirstRoute = computed(() => {
-        return routeList.value.find(route => route.key === nowFirstRouteKey.value)
+        return showRouteList.value.find(route => route.key === nowFirstRouteKey.value)
     })
 
     let nowFirstRouteKey =  computed({
@@ -59,7 +64,7 @@ export function useAppHook(){
 
     // 左边的routeList
     let {routeSidebarList, changeSideChose, getMenuByKey } = function () {
-        let sourceRouteList = routeList
+        let sourceRouteList = showRouteList
         let routeSidebarList = ref([] as RouterApiType[])
         let sideRouteMap: { [key: string]: any } = {}
         // 该方法有延迟。只能在sidebar点击中使用。
@@ -71,9 +76,10 @@ export function useAppHook(){
         let getMenuByKey = (key: string) => {
             return sideRouteMap[key]
         }
-        watch([() => appStore.getNowFirstRouteKey,() => appStore.getNavbarShow], ([nowKey, navBarShow]) => {
+        watch([() => unref(nowFirstRouteKey
+        ),() => unref(navbarShow)], ([nowKey, navbarShow]) => {
             let dist: RouterApiType[] = []
-            if (navBarShow) {
+            if (navbarShow) {
                 let parentDist = sourceRouteList.value.filter(item => item.key === unref(nowKey))[0]
                 if (parentDist) dist = parentDist.children || []
             } else {
@@ -89,6 +95,21 @@ export function useAppHook(){
         return {routeSidebarList, changeSideChose, getMenuByKey}
     }()
 
+    const routeNavbarList = computed(() => {
+        let dist: RouterApiType[] = []
+        if (sidebarShow.value) {
+            unref(showRouteList).forEach(item => {
+                dist.push({
+                    ...item,
+                    children: []
+                })
+            })
+        } else {
+            dist = unref(showRouteList)
+        }
+        return dist
+    })
+
     const initRouterMenuChose = function () {
         onBeforeMount(() => {
             let key = router.currentRoute.value.meta.key as string
@@ -100,14 +121,17 @@ export function useAppHook(){
     }
     return {
         navbarShow,
-        updateNavBar,
+        updateNavbar,
+        updateSidebar,
         updateRightSetting,
         showRightSetting,
         nowFirstRouteKey,
         nowFirstRoute,
-        showSideBar,
+        fixSidebarShow,
+        sidebarShow,
         menuChoseKey,
         routeSidebarList,
+        routeNavbarList,
         changeSideChose,
         getMenuByKey,
         updateNowFirstRouteKey,

@@ -5,7 +5,8 @@ export interface DefaultConfig {
     permissionName: string
     loginPageName: string
     homePagePath: string
-    NavBarShowKey: string
+    navbarShowKey: string
+    sidebarShowKey: string
 }
 
 const defaultConfig: DefaultConfig = {
@@ -15,7 +16,8 @@ const defaultConfig: DefaultConfig = {
     permissionName: 'permissions',
     loginPageName: 'login',
     homePagePath: '/main',
-    NavBarShowKey: 'layout-nav-bar-show'
+    navbarShowKey: 'layout-nav-bar-show',
+    sidebarShowKey: 'layout-side-bar-show'
 }
 
 export default defaultConfig
