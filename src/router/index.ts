@@ -11,7 +11,7 @@ import { getUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
 import config from '@/config'
 import mainRoutesSource from './commonLoginRouteApi/common'
-import {fixRouteList} from "@/utils/menu-help";
+import {fixRoute} from "@/utils/menu-help";
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -67,6 +67,7 @@ router.beforeEach((to, from, next) => {
         let {routers:newRoutes , permissions} = fixResToSys(res.data)
         // 加入了登录之后的默认route
         let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+        addCommonRoutes = fixRoute(addCommonRoutes)
         userStore.loginEvent(addCommonRoutes, permissions)
         // clearRouter()
         addRouterFromData(addCommonRoutes, modulesRoutes, router)

@@ -192,7 +192,8 @@ export function buildRoute (
       title: item.title,
       key: item.key,
       type: item.type,
-      notShow: item.notShow
+      notShow: item.notShow,
+      parentKey: item.parentKey
     }
   })
 }

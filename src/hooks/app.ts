@@ -2,7 +2,7 @@ import { useAppStoreHook} from "@/store/modules/app";
 import { getUserHook } from './user'
 import {computed, ref, unref, watch, onBeforeMount, watchEffect} from 'vue'
 import {RouterApiType, RouteType} from "@/constant/settings";
-import {fixRouteList} from "@/utils/menu-help";
+import {getRouteMap} from "@/utils/menu-help";
 import router from '@/router/index'
 
 export function useAppHook(){
@@ -87,11 +87,7 @@ export function useAppHook(){
                 dist = sourceRouteList.value
             }
             routeSidebarList.value = dist || []
-            sideRouteMap = {}
-            let routeFixArray = fixRouteList(unref(routeSidebarList))
-            routeFixArray.forEach(item => {
-                sideRouteMap[item.key] = item
-            })
+            sideRouteMap = getRouteMap(unref(routeSidebarList))
         }, {immediate: true})
         return {routeSidebarList, getMenuByKey}
     }()

@@ -1,14 +1,48 @@
 import {RouterApiType, RouteType} from "@/constant/settings";
 
-export function fixRouteList (routeList: RouterApiType[], parentKey: string[] = [], sourceArray:any[] = []) {
+/**
+ * 处理route 增加信息
+ * @param routeList
+ * @param parentKey
+ */
+export function fixRoute (routeList: RouterApiType[], parentKey: string[] = []): RouterApiType[] {
     routeList.forEach(item => {
         item.parentKey = parentKey
+        if (item.children) {
+            fixRoute(item.children, parentKey.concat(item.key))
+        }
+    })
+    return routeList
+}
+
+/**
+ *
+ * @param routeList
+ * @param sourceArray
+ */
+export function getRouteList (routeList: RouterApiType[], sourceArray:any[] = []) {
+    routeList.forEach(item => {
         sourceArray.push(item)
         if (item.children) {
-            fixRouteList(item.children, parentKey.concat(item.key), sourceArray)
+            getRouteList(item.children, sourceArray)
         }
     })
     return sourceArray
+}
+
+/**
+ * 根据key 得到route map
+ * @param routeList
+ * @param sourceMap
+ */
+export function getRouteMap (routeList: RouterApiType[], sourceMap: {[key: string]: RouterApiType } = {}): {[key: string]: RouterApiType } {
+    routeList.forEach(item => {
+        sourceMap[item.key] = item
+        if (item.children) {
+            getRouteMap(item.children, sourceMap)
+        }
+    })
+    return sourceMap
 }
 
 export function getFirstMenuItem(routeList?: RouterApiType[]): undefined|RouterApiType {

@@ -1,13 +1,13 @@
-import { useUserStoreHook} from "@/store/modules/user";
-import {defineComponent, computed, watchEffect, ref, unref, watch} from 'vue'
-import type { Ref } from 'vue'
+import {useUserStoreHook} from "@/store/modules/user";
+import {computed, unref} from 'vue'
 import {RouterApiType} from "@/constant/settings";
-import {fixRouteList, getCanShowRoute, getFirstMenuItem} from "@/utils/menu-help";
+import {getCanShowRoute, getRouteMap} from "@/utils/menu-help";
 import Cookies from "js-cookie"
-import { storageSession } from '@/utils/storage'
-import router, { resetRouter } from "@/router"
+import {storageSession} from '@/utils/storage'
+import router, {resetRouter} from "@/router"
 import config from "@/config";
 import _ from 'lodash'
+
 export function getUserHook() {
     let userStore = useUserStoreHook()
     let routeList = computed((): RouterApiType[] => {
@@ -26,12 +26,7 @@ export function getUserHook() {
     }
 
     const routerMap = computed(() => {
-        let routeFixMap:{[key: string]: RouterApiType} = {}
-        let routeFixArray = fixRouteList(_.cloneDeep(unref(routeList.value)))
-        routeFixArray.forEach(item => {
-            routeFixMap[item.key] = item
-        })
-        return routeFixMap
+        return getRouteMap(unref(routeList.value))
     })
     const logOutEvent = function () {
         Cookies.remove('access_token')
