@@ -1,6 +1,6 @@
 import { MockMethod } from "vite-plugin-mock";
 import {RouteType} from "../src/constant/settings";
-import { ApiCodeEnum } from "../src/constant/api";
+import { ApiCodeEnum } from "@/model/sys/apiModel";
 
 let urlPre = "/upms"
 
@@ -96,7 +96,14 @@ export default [
             return {
                 code: ApiCodeEnum.SUCCESS,
                 data: {
-                    access_token: '123123'
+                    access_token: '123123',
+                    userInfo: {
+                        userId: 1,
+                        username: 'paobai',
+                        realName: '泡白',
+                        avatar: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+                        roles: ['admin']
+                    }
                 }
             }
         }

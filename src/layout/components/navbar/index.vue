@@ -9,10 +9,10 @@
         <img
           class="avatar"
           alt="avatar"
-          src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
+          :src="userInfo.avatar"
         />
       </a-avatar>
-      <div class="username">admin</div>
+      <div class="username">{{userInfo.username}}</div>
       <a-dropdown @popup-visible-change="getDropDownState" @select="tagSelect">
         <a-button type="primary" class="arco-btn-only-icon">
           <template #icon>
@@ -34,13 +34,12 @@ import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect
 import { getUserHook } from '@/hooks/user'
 import ArcoModal from '@arco-design/web-vue/es/modal';
 import menuMain from './menu-main.vue'
-
 export default defineComponent({
   components: {
     menuMain
   },
   setup() {
-    let { logOutEvent } = getUserHook()
+    let { logOutEvent, userInfo } = getUserHook()
     let dropDownState = ref(false)
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status
@@ -65,7 +64,8 @@ export default defineComponent({
     return {
       getDropDownState,
       dropDownState,
-      tagSelect
+      tagSelect,
+      userInfo
     }
   }
 })

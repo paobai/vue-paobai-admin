@@ -1,12 +1,12 @@
 import Vue from "vue"
-import axios, { AxiosInstance, AxiosRequestConfig, Method } from "axios"
+import axios, {AxiosInstance, AxiosPromise, AxiosRequestConfig, Method} from "axios"
 import router from "@/router"
 import qs from "qs"
 import { cloneDeep, merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
-import { login } from "@/api/auth-api"
+import { AuthApi } from "@/api/upms-api"
 import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
-import { ApiCodeEnum } from '@/constant/api';
+import {ApiCodeEnum, ApiResponseBase} from '@/model/sys/apiModel';
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
 import { loadEnv } from "@/../build/utils";
@@ -89,7 +89,7 @@ http.adornData = (
  */
 http.interceptors.request.use(
   config => {
-    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.tokenName) // 请求头带上token
+    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
     // config.headers['Access-Control-Allow-Origin'] = '*'
     // config.headers['Access-Control-Allow-Methods'] = '*'
     config.headers["X-STEINS-TENANT-ID"] = "1"
@@ -111,7 +111,7 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.tokenPre + Cookies.get(sysConfig.tokenName)
+      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
       resolve(http(httpConfig))
     })
   })
@@ -131,15 +131,15 @@ function addSubscriber(callback: () => void) {
 
 function referToken() {
   const refreshToken = Cookies.get("refresh_token")
-  login({
+  AuthApi.login({
     grant_type: grantTypeRefreshToken,
     client_id: clientId,
     client_secret: clientSecret,
     refresh_token: refreshToken
   })
     .then(res => {
-      Cookies.set(sysConfig.tokenName, res.data.access_token)
-      Cookies.set(sysConfig.refreshTokenName, res.data.refresh_token)
+      Cookies.set(sysConfig.app.tokenName, res.data.access_token)
+      Cookies.set(sysConfig.app.refreshTokenName, res.data.refresh_token)
       onAccessTokenFetched()
     })
     .catch(() => {
@@ -190,7 +190,7 @@ http.interceptors.response.use(
       }
 
       console.log('clearLoginInfo')
-      let refreshToken = Cookies.get(sysConfig.refreshTokenName)
+      let refreshToken = Cookies.get(sysConfig.app.refreshTokenName)
       if (!refreshToken) {
         // 没有refreshToken情况直接返回不需要提示。
         errorLogin()
@@ -211,12 +211,12 @@ http.interceptors.response.use(
   }
 )
 
-export const postRequest = (
+export const postRequest = <T>  (
   url: string,
   data?: any,
   params?: any,
   type = "json"
-) => {
+): Promise<ApiResponseBase<T>> => {
   url = http.adornUrl(url) as string
   if (type === "json") {
     return http({
@@ -224,7 +224,7 @@ export const postRequest = (
       url: `${url}`,
       data: JSON.stringify(data),
       params: params
-    })
+    }) as unknown as Promise<ApiResponseBase<T>>
   } else {
     return http({
       method: "post",
@@ -234,7 +234,7 @@ export const postRequest = (
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
-    })
+    }) as unknown as Promise<ApiResponseBase<T>>
   }
 }
 

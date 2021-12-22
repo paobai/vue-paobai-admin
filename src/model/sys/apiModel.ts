@@ -3,8 +3,8 @@ export enum ApiCodeEnum {
     FAILED = 0
 }
 
-export interface ApiResponseBase {
+export interface ApiResponseBase<T> {
     code: ApiCodeEnum;
-    data: any;
+    data: T;
     msg?: string;
 }

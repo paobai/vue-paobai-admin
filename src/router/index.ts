@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
         // 加入了登录之后的默认route
         let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
         addCommonRoutes = fixRoute(addCommonRoutes)
-        userStore.loginEvent(addCommonRoutes, permissions)
+        userStore.updateAuth(addCommonRoutes, permissions)
         // clearRouter()
         addRouterFromData(addCommonRoutes, modulesRoutes, router)
       }

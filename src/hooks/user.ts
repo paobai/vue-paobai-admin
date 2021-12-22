@@ -7,6 +7,7 @@ import {storageSession} from '@/utils/storage'
 import router, {resetRouter} from "@/router"
 import config from "@/config";
 import _ from 'lodash'
+import {UserInfo} from "@/model/sys/userModel";
 
 export function getUserHook() {
     let userStore = useUserStoreHook()
@@ -38,19 +39,29 @@ export function getUserHook() {
         router.replace({name: config.app.loginPageName})
     }
 
-    const loginEvent = function (routeList: RouterApiType[], permissions: string[]){
+    const updateAuth = function (routeList: RouterApiType[], permissions: string[]){
         userStore.updatePermissions(permissions)
         userStore.updateRouteList(routeList)
         router.options.isAddDynamicMenuRoutes = true
         storageSession.setItem(config.app.permissionName, permissions)
     }
 
+    const updateUserInfo = function (userInfo: UserInfo) {
+        userStore.updateUserInfo(userInfo)
+    }
+
+    const userInfo = computed(() => {
+        return userStore.getUserInfo
+    })
+
     return{
         routeList,
         showRouteList,
         routerMap,
         logOutEvent,
-        loginEvent,
+        updateAuth,
+        updateUserInfo,
+        userInfo,
         updateRouteList,
         updatePermissions
     }

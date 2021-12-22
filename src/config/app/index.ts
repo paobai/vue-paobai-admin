@@ -8,6 +8,7 @@ export interface AppConfig {
     navbarShowKey: string
     sidebarShowKey: string
     sidebarMenuCollapsedKey: string
+    userInfoKey: string
 }
 
 const appConfig: AppConfig = {
@@ -19,7 +20,8 @@ const appConfig: AppConfig = {
     homePagePath: '/main',
     navbarShowKey: 'layout-nav-bar-show',
     sidebarShowKey: 'layout-side-bar-show',
-    sidebarMenuCollapsedKey: 'layout-sidebar-menu-collapsed-'
+    sidebarMenuCollapsedKey: 'layout-sidebar-menu-collapsed-',
+    userInfoKey: 'userInfo'
 }
 
 export default appConfig

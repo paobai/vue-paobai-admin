@@ -4,14 +4,14 @@ import {
   putRequest,
   deleteRequest
 } from "@/utils/httpRequest"
-import Layout from "@/layout/index.vue"
-import {RouteType} from "@/constant/settings";
+import {AuthLoginReq, AuthLoginRes} from "./model";
 let groupPre = "/upms"
 // 用户管理
+
 export class AuthApi {
   // 用户登录
-  static async login (data) {
-    return postRequest(groupPre + '/users/login', data)
+  static async login (data: AuthLoginReq) {
+    return postRequest<AuthLoginRes>(groupPre + '/users/login', data)
   }
   // 获取用户可以访问菜单树
   static async getCurrentUserTree() {
