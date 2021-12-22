@@ -48,17 +48,17 @@ import { useRouter } from "vue-router";
 import Cookies from "js-cookie"
 import config from '@/config'
 import { AuthApi } from '@/api/upms-api'
+import { AuthLoginReq } from '@/api/upms-api/model'
 import { getUserHook } from '@/hooks/user'
 export default {
   setup() {
     const userStore = getUserHook()
-    let loginForm = reactive({
+    let loginForm: AuthLoginReq = reactive({
       userName: "",
       passWord: ""
     });
     const router = useRouter()
     const login = async () => {
-      // alert(`成功${userName} ${passWord}`)
       AuthApi.login(loginForm).then(res => {
         Cookies.set('access_token', res.data.access_token)
         userStore.updateUserInfo(res.data.userInfo)
