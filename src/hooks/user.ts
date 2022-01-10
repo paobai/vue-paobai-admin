@@ -9,7 +9,7 @@ import config from "@/config";
 import _ from 'lodash'
 import {UserInfo} from "@/model/sys/userModel";
 
-export function getUserHook() {
+export function useUserHook() {
     let userStore = useUserStoreHook()
     let routeList = computed((): RouterApiType[] => {
         return userStore.getRouteList

@@ -7,7 +7,7 @@ import {
   MyRouterOptions
 } from "@/router/routerHelp"
 import { AuthApi } from "@/api/upms-api"
-import { getUserHook } from '@/hooks/user'
+import { useUserHook } from '@/hooks/user'
 import Cookies from "js-cookie"
 import config from '@/config'
 import mainRoutesSource from './commonLoginRouteApi/common'
@@ -15,7 +15,7 @@ import {fixRoute} from "@/utils/menu-help";
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
-const userStore = getUserHook()
+const userStore = useUserHook()
 
 const commonFiles = import.meta.globEager("./commonModules/*.ts")
 let commonModules: Array<RouteRecordRaw> = []

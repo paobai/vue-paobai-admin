@@ -6,7 +6,7 @@ export interface CustomConfig {
 }
 
 const customConfig: CustomConfig = {
-    htmlTitle: '慈溪市河清监控智慧信息系统',
+    htmlTitle: 'PAOBAI-ADMIN',
     navbarShow: true,
     sidebarShow: true,
     sidebarMenuCollapsed: false

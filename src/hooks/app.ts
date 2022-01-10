@@ -1,15 +1,17 @@
 import { useAppStoreHook} from "@/store/modules/app";
-import { getUserHook } from './user'
+import { useUserHook } from './user'
 import {computed, ref, unref, watch, onBeforeMount, watchEffect} from 'vue'
 import {RouterApiType, RouteType} from "@/constant/settings";
 import {getRouteMap} from "@/utils/menu-help";
-import router from '@/router/index'
+import {useRoute} from "vue-router";
 
 export function useAppHook(){
 
-    let { showRouteList, routerMap } = getUserHook()
+    let { showRouteList, routerMap } = useUserHook()
 
     const appStore = useAppStoreHook()
+
+    const route = useRoute()
 
     const navbarShow = computed(() => {
         return appStore.getNavbarShow
@@ -52,22 +54,28 @@ export function useAppHook(){
     const showRightSetting = computed(() => {
         return appStore.getRightSettingShow
     })
-    const updateNowFirstRouteKey = function (nowFirstRouteKey: string) {
-        appStore.updateNowFirstRouteKey(nowFirstRouteKey)
-    }
+
+    let nowMenuKey = computed(() => {
+        return route.meta.key as string
+    })
+
+    const nowMenu = computed(() => {
+        return unref(routerMap)[unref(nowMenuKey.value)]
+    })
 
     const nowFirstRoute = computed(() => {
-        return showRouteList.value.find(route => route.key === nowFirstRouteKey.value)
+        return unref(routerMap)[unref(nowFirstRouteKey.value)]
     })
 
-    let nowFirstRouteKey =  computed({
-        get: () => appStore.getNowFirstRouteKey,
-        set: val => {
-            updateNowFirstRouteKey(val)
+    let nowFirstRouteKey = computed(() => {
+        let nowMenuUnRef = unref(nowMenu)
+        if (!nowMenuUnRef || nowMenuUnRef.notShow) return;
+        if ( !nowMenuUnRef.parentKey || !nowMenuUnRef.parentKey[0] ) {
+            return nowMenuUnRef.key
+        } else {
+            return nowMenuUnRef.parentKey[0]
         }
     })
-
-
 
     // 左边的routeList
     let {routeSidebarList, getMenuByKey } = function () {
@@ -122,6 +130,7 @@ export function useAppHook(){
         routeSidebarList,
         routeNavbarList,
         getMenuByKey,
-        updateNowFirstRouteKey,
+        nowMenuKey,
+        nowMenu
     }
 }

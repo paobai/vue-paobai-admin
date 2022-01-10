@@ -49,10 +49,10 @@ import Cookies from "js-cookie"
 import config from '@/config'
 import { AuthApi } from '@/api/upms-api'
 import { AuthLoginReq } from '@/api/upms-api/model'
-import { getUserHook } from '@/hooks/user'
+import { useUserHook } from '@/hooks/user'
 export default {
   setup() {
-    const userStore = getUserHook()
+    const userStore = useUserHook()
     let loginForm: AuthLoginReq = reactive({
       userName: "",
       passWord: ""

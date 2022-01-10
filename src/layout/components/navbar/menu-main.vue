@@ -34,7 +34,7 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref, computed, reactive, onMounted, unref, watchEffect, watch} from "vue"
-import {getUserHook} from "@/hooks//user";
+import {useUserHook} from "@/hooks//user";
 import {useAppHook} from "@/hooks/app";
 import {RouteType} from "@/constant/settings";
 import router from "@/router";
@@ -46,20 +46,8 @@ export default defineComponent({
     menuSub
   },
   setup () {
-    let { routerMap, logOutEvent } = getUserHook()
-    let { nowFirstRouteKey, updateNowFirstRouteKey, routeNavbarList:  routeList} = useAppHook()
-    const route = useRoute()
-    watch(() => route.path,() => {
-      let currentRouteKey: string = route.meta.key as string
-      if (!currentRouteKey) return
-      let dist = routerMap.value[currentRouteKey]
-      if (dist.notShow) return;
-      if ( !dist.parentKey || !dist.parentKey[0] ) {
-        updateNowFirstRouteKey(currentRouteKey)
-      } else {
-        updateNowFirstRouteKey(dist.parentKey[0])
-      }
-    }, { immediate: true })
+    let { routerMap } = useUserHook()
+    let { nowFirstRouteKey, routeNavbarList:  routeList} = useAppHook()
     const clickMenu = function (key: string) {
       let dist = routerMap.value[key]
       if (dist.type === RouteType.Page) {

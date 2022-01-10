@@ -9,7 +9,7 @@
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "dependencies": {
-    "@arco-design/web-vue": "2.11.0",
+    "@arco-design/web-vue": "2.14.2",
     "@arco-themes/react-paobai": "0.0.1",
     "axios": "^0.21.1",
     "clipboard": "^2.0.6",

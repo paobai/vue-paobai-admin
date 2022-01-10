@@ -1,5 +1,9 @@
 <template>
   <div class="app-tag">
+    <div class="app-left-tag">
+      <a-icon-home style="font-size: 14px"/>
+      <span class="menu-tag" v-for="item in leftTag" :key="item.title">{{item.title}}</span>
+    </div>
     <div class="app-tag-main">
       <a-dropdown trigger="contextMenu" :style="{display:'block'}"  v-for="(item, index) in appTagList" :key="item.key" @select="(value)=> tagSelect(value, item, index)">
         <div class="tag-item-card" :class="{'active': activeRouteKey === item.key}">
@@ -46,14 +50,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch} from "vue"
+import {computed, defineComponent, ref, unref, watch} from "vue"
 import type { Ref } from 'vue'
 import {useRouter, useRoute} from "vue-router";
 import {RouteLocationNormalizedLoadedCustom, tagType} from '@/constant/settings'
 import config from '@/config'
-
+import {useUserHook} from "@/hooks/user";
+import { useAppHook } from "@/hooks/app";
 export default defineComponent({
   setup (props) {
+    let { routerMap } = useUserHook()
+    let { nowMenu } = useAppHook()
+    let leftTag = computed(() => {
+      let keyList = unref(nowMenu).parentKey.concat(unref(nowMenu).key)
+      let menuList = []
+      keyList.forEach(key => {
+        menuList.push(unref(routerMap)[key])
+      })
+      return menuList
+    })
     const router = useRouter()
     const fullScreenStatus = ref(0)
     const route: RouteLocationNormalizedLoadedCustom = useRoute() as RouteLocationNormalizedLoadedCustom
@@ -121,7 +136,8 @@ export default defineComponent({
       activeRouteKey,
       tagSelect,
       fullScreenStatus,
-      optionsClick
+      optionsClick,
+      leftTag
     }
   }
 })
@@ -131,6 +147,14 @@ export default defineComponent({
 .app-tag{
   box-shadow: 0 1px 4px #999999;
   display: flex;
+  .app-left-tag{
+    padding: 0 16px;
+    line-height: 30px;
+    .menu-tag{
+      padding: 0 8px;
+      border-right: 1px solid #333333;
+    }
+  }
   .app-tag-main{
     padding: 3px;
     flex: auto;

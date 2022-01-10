@@ -3,7 +3,8 @@
     <a-menu
       showCollapseButton
       theme="dark"
-      :selected-keys="[menuChoseKey]"
+      :selected-keys="[nowMenuKey]"
+      :auto-open-selected="true"
       :open-keys="openKeys"
       @menu-item-click="clickMenu"
       @sub-menu-click="onClickSubMenu"
@@ -41,11 +42,12 @@
 import { defineComponent, ref, reactive, computed, watch, unref, onMounted, watchEffect } from "vue"
 import menuSub from "./menu-sub.vue"
 import { useAppHook } from '@/hooks/app'
-import { getUserHook } from '@/hooks/user'
+import { useUserHook } from '@/hooks/user'
 import router from "@/router";
 import {RouterApiType} from "@/constant/settings";
 import {useRoute} from "vue-router";
 import {getFirstMenuItem} from "@/utils/menu-help";
+import {buildRouteName} from "@/router/routerHelp";
 export default defineComponent({
   components: {
     menuSub
@@ -54,43 +56,37 @@ export default defineComponent({
     let {
       routeSidebarList: routeList,
       getMenuByKey,
-      nowFirstRouteKey,
       collapse,
-      updateCollapse
+      updateCollapse,
+      nowMenu,
+      nowMenuKey
     } = useAppHook()
-    let openKeys = ref([''])
-    const route = useRoute()
     let clickMenu = function (key: string) {
       let dist = getMenuByKey(key)
-      router.push({name: dist.title + '-' + dist.key})
+      router.push({name: buildRouteName(dist)})
     }
-    let menuChoseKey = ref('')
+    let openKeys = ref([''])
     watchEffect(() => {
-      menuChoseKey.value = route.meta.key as string
-    })
-    watchEffect(() => {
-      let key = menuChoseKey.value
-      let dist = getMenuByKey(key)
-      if (!dist) return
-      openKeys.value = dist.parentKey.concat(key)
+      openKeys.value = unref(nowMenu).parentKey.concat(nowMenu.key)
     })
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
+      openKeys.value = getOpenKeys
+      // 折叠菜单模式点击直接选择第一个菜单
       if (unref(collapse)) {
         let dist = getMenuByKey(key)
         let find = getFirstMenuItem(dist.children)
         if (!find) return
         clickMenu(find.key)
       }
-      openKeys.value = getOpenKeys
     }
     return {
       clickMenu,
-      menuChoseKey,
+      nowMenuKey,
       routeList,
-      openKeys,
       onClickSubMenu,
       collapse,
-      updateCollapse
+      updateCollapse,
+      openKeys
     }
   }
 })

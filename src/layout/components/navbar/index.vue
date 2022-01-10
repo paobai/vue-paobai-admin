@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive, onMounted, unref, watchEffect } from "vue"
-import { getUserHook } from '@/hooks/user'
+import { useUserHook } from '@/hooks/user'
 import ArcoModal from '@arco-design/web-vue/es/modal';
 import menuMain from './menu-main.vue'
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
     menuMain
   },
   setup() {
-    let { logOutEvent, userInfo } = getUserHook()
+    let { logOutEvent, userInfo } = useUserHook()
     let dropDownState = ref(false)
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status

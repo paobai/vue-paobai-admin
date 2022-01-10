@@ -6,16 +6,12 @@ import { storageSession, storageLocal } from '@/utils/storage'
 export const useAppStore = defineStore({
     id: "store-app",
     state: () => ({
-        nowFirstRouteKey : '',
         navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
         sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
         sidebarMenuCollapsed :storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
         rightSettingShow: false
     }),
     getters: {
-        getNowFirstRouteKey (): string {
-            return this.nowFirstRouteKey
-        },
         getNavbarShow (): boolean {
             return this.navbarShow
         },
@@ -30,9 +26,6 @@ export const useAppStore = defineStore({
         }
     },
     actions: {
-        updateNowFirstRouteKey(nowFirstRouteKey: string) {
-            this.nowFirstRouteKey = nowFirstRouteKey
-        },
         updateNavbarShow (navbarShow: boolean) {
             this.navbarShow = navbarShow
             storageLocal.setItem(config.app.navbarShowKey, navbarShow)
