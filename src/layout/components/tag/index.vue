@@ -62,7 +62,10 @@ export default defineComponent({
     let { routerMap } = useUserHook()
     let { nowMenu } = useAppHook()
     let leftTag = computed(() => {
-      let keyList = unref(nowMenu).parentKey.concat(unref(nowMenu).key)
+      if (!unref(nowMenu)) {
+        return
+      }
+      let keyList = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
       let menuList = []
       keyList.forEach(key => {
         menuList.push(unref(routerMap)[key])

@@ -67,7 +67,11 @@ export default defineComponent({
     }
     let openKeys = ref([''])
     watchEffect(() => {
-      openKeys.value = unref(nowMenu).parentKey.concat(nowMenu.key)
+      if (!unref(nowMenu)) {
+        openKeys.value = []
+        return
+      }
+      openKeys.value = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
     })
     let onClickSubMenu = function (key: string, getOpenKeys: string[], keyPath: string[]) {
       openKeys.value = getOpenKeys
