@@ -13,7 +13,12 @@
     </div>
     <div class="right-wrapper">
       <div class="login-form-wrapper">
-        <div class="login-title">用户登录</div>
+        <div class="login-title">
+          <div class="logo-wrapper">
+            <img class="logo" src="/src/assets/images/common/logo-with-text-bottom.png" />
+          </div>
+          <div>用户登录</div>
+        </div>
         <div class="login-content-wrapper">
           <a-form :model="loginForm" :label-col-props="{span: 0}" :wrapper-col-props="{span: 24}" @keyup.enter.native="login()">
             <a-form-item field="userName">
@@ -127,11 +132,11 @@ export default {
     width: 0;
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     .login-form-wrapper{
       width: 540px;
-      height: 493px;
       background: #FFFFFF;
       border-radius: 8px;
       padding: 60px;
@@ -140,9 +145,18 @@ export default {
         font-weight: bold;
         color: #191919;
         line-height: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo-wrapper{
+          display: inline-block;
+          .logo{
+            width: 40px;
+          }
+        }
       }
       .login-content-wrapper{
-        margin-top: 70px;
+        margin-top: 40px;
         .arco-input-wrapper{
           border-width: 0 0 1px 0;
           height: 44px;

@@ -1,7 +1,9 @@
 <template>
   <div class="app-navbar">
     <div class="left-wrapper">
-      <img class="logo" src="/src/assets/images/common/logo-with-text.png" />
+      <div class="logo-wrapper">
+        <img class="logo" src="/src/assets/images/common/logo-with-text-small.png" />
+      </div>
       <menu-main></menu-main>
     </div>
     <div class="right-wrapper">
@@ -80,11 +82,12 @@ export default defineComponent({
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    .logo {
-      margin-left: 15px;
-      width: 429px;
-      height: 36px;
-      margin-right: 30px;
+    .logo-wrapper{
+      width: 215px;
+      text-align: center;
+      .logo {
+        width: 130px;
+      }
     }
   }
   .right-wrapper {
