@@ -38,9 +38,22 @@ export const toggleClass = (ele: HTMLElement, className: string) => {
  */
 export const changeArcoPrimaryColor = (color: string, propertyPre='--arcoblue-') => {
   const tintColor = (color: string, tint: number) => {
-    let red = parseInt(color.slice(0, 2), 16)
-    let green = parseInt(color.slice(2, 4), 16)
-    let blue = parseInt(color.slice(4, 6), 16)
+    if (!color) return ''
+    let red = 0
+    let blue = 0
+    let green = 0
+    if (color.indexOf('#') !== -1) {
+      color = color.replace('#', '')
+      red = parseInt(color.slice(0, 2), 16)
+      green = parseInt(color.slice(2, 4), 16)
+      blue = parseInt(color.slice(4, 6), 16)
+    } else {
+      let colorList = color.match(/\d+/g)!
+      red = +colorList[0]
+      green = +colorList[1]
+      blue = +colorList[2]
+    }
+
 
     if (tint === 0) { // when primary color is in its rgb space
       return [red, green, blue].join(',')
@@ -54,7 +67,7 @@ export const changeArcoPrimaryColor = (color: string, propertyPre='--arcoblue-')
   const clusters = []
   let body = document.body
   for (let i = 0; i <= 9; i++) {
-    let tgbText = tintColor(color.replace('#', ''), Number(((i - 5) / 10).toFixed(2)))
+    let tgbText = tintColor(color, Number(((i - 5) / 10).toFixed(2)))
     clusters.push(tgbText)
     body.style.setProperty(propertyPre + (i+1), tgbText)
   }

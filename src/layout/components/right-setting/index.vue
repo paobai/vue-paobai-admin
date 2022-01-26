@@ -12,20 +12,27 @@
       <a-button @click="updateRightSetting(false)" type="primary" >关闭</a-button>
     </template>
     <div class="right-setting-wrapper">
-      <div class="item-setting-line">
+      <div class="item-line-space-between">
         显示顶部：
         <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="updateNavbar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
-      <div class="item-setting-line" >
+      <div class="item-line-space-between" >
         显示左部(未实现)：
         <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="updateSidebar">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
+      <div class="color-pick">
+        <div>主题颜色：</div>
+        <div class="color-pick-wrapper">
+          <div v-for="color in sysColorList" :key="color" class="color-item" :style="{backgroundColor: color}" @click="changeArcoPrimaryColor(color)"></div>
+        </div>
+      </div>
+
     </div>
   </a-drawer>
 </template>
@@ -33,10 +40,12 @@
 <script lang="ts">
 import { defineComponent,computed, watchEffect,ref } from 'vue'
 import { useAppHook } from '@/hooks/app'
+import { changeArcoPrimaryColor } from '@/utils'
+import { sysColorList } from '@/constant'
 export default defineComponent({
   setup() {
     const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting } = useAppHook()
-    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar }
+    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar, changeArcoPrimaryColor, sysColorList }
   }
 })
 </script>
@@ -56,13 +65,28 @@ export default defineComponent({
 }
 .right-setting-wrapper{
   padding: 8px;
-  :deep(.item-setting-line) {
+  .item-line-space-between{
     line-height: 36px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .arco-switch{
+    :deep(.arco-switch) {
       min-width: 70px;
+    }
+  }
+  .color-pick{
+    .color-pick-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      .color-item{
+        cursor: pointer;
+        flex-shrink: 0;
+        border-radius: 8px;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        margin-right: 20px;
+      }
     }
   }
 }
