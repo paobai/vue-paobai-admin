@@ -9,6 +9,7 @@ export interface AppConfig {
     sidebarShowKey: string
     sidebarMenuCollapsedKey: string
     userInfoKey: string
+    sysColorKey: string
 }
 
 const appConfig: AppConfig = {
@@ -21,7 +22,8 @@ const appConfig: AppConfig = {
     navbarShowKey: 'layout-nav-bar-show',
     sidebarShowKey: 'layout-side-bar-show',
     sidebarMenuCollapsedKey: 'layout-sidebar-menu-collapsed-',
-    userInfoKey: 'userInfo'
+    userInfoKey: 'userInfo',
+    sysColorKey: 'sysColor'
 }
 
 export default appConfig

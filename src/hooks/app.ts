@@ -4,6 +4,7 @@ import {computed, ref, unref, watch, onBeforeMount, watchEffect} from 'vue'
 import {RouterApiType, RouteType} from "@/constant/settings";
 import {getRouteMap} from "@/utils/menu-help";
 import {useRoute} from "vue-router";
+import {changeArcoPrimaryColor} from "@/utils";
 
 export function useAppHook(){
 
@@ -27,6 +28,12 @@ export function useAppHook(){
             updateCollapse(val)
         }
     })
+
+    const updateSysColor = (color?: string) => {
+        color = color || appStore.getSysColor
+        appStore.updateSysColor(color)
+        changeArcoPrimaryColor(color)
+    }
 
     const fixSidebarShow = computed(() => {
         // nav显示 同时选择的第一个为page ，则侧边栏为空，所以应该隐藏
@@ -64,7 +71,7 @@ export function useAppHook(){
     })
 
     const nowFirstRoute = computed(() => {
-        return unref(routerMap)[unref(nowFirstRouteKey.value)]
+        return unref(routerMap)[unref(nowFirstRouteKey.value!)]
     })
 
     let nowFirstRouteKey = computed(() => {
@@ -131,6 +138,7 @@ export function useAppHook(){
         routeNavbarList,
         getMenuByKey,
         nowMenuKey,
-        nowMenu
+        nowMenu,
+        updateSysColor
     }
 }

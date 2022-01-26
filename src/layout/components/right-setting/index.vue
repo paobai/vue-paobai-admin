@@ -29,7 +29,7 @@
       <div class="color-pick">
         <div>主题颜色：</div>
         <div class="color-pick-wrapper">
-          <div v-for="color in sysColorList" :key="color" class="color-item" :style="{backgroundColor: color}" @click="changeArcoPrimaryColor(color)"></div>
+          <div v-for="color in sysColorList" :key="color" class="color-item" :style="{backgroundColor: color}" @click="updateSysColor(color)"></div>
         </div>
       </div>
 
@@ -38,14 +38,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent,computed, watchEffect,ref } from 'vue'
+import { defineComponent,computed, watchEffect,ref, onMounted } from 'vue'
 import { useAppHook } from '@/hooks/app'
-import { changeArcoPrimaryColor } from '@/utils'
 import { sysColorList } from '@/constant'
 export default defineComponent({
   setup() {
-    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting } = useAppHook()
-    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar, changeArcoPrimaryColor, sysColorList }
+    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, updateSysColor } = useAppHook()
+    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar, updateSysColor, sysColorList }
   }
 })
 </script>
@@ -57,7 +56,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   display: flex;
-  background: @primary-color;
+  background: rgb(var(--arcoblue-5));
   justify-content: center;
   align-items: center;
   border-radius: 8px 0 0 8px;

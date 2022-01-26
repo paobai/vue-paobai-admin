@@ -9,7 +9,8 @@ export const useAppStore = defineStore({
         navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
         sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
         sidebarMenuCollapsed :storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
-        rightSettingShow: false
+        rightSettingShow: false,
+        sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey)
     }),
     getters: {
         getNavbarShow (): boolean {
@@ -23,6 +24,9 @@ export const useAppStore = defineStore({
         },
         getRightSettingShow () : boolean{
             return this.rightSettingShow
+        },
+        getSysColor () : string {
+            return this.sysColor
         }
     },
     actions: {
@@ -40,6 +44,10 @@ export const useAppStore = defineStore({
         },
         updateRightSettingShow (rightSettingShow: boolean) {
             this.rightSettingShow = rightSettingShow
+        },
+        updateSysColor(sysColor: string) {
+            this.sysColor = sysColor
+            storageLocal.setItem(config.app.sysColorKey, sysColor)
         }
     }
 });

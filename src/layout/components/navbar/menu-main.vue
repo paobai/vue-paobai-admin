@@ -73,7 +73,7 @@ export default defineComponent({
   flex: auto;
   :deep(.arco-menu) {
     height: 100%;
-    background-color: @primary-color;
+    background-color: rgb(var(--arcoblue-6));
     .arco-menu-inner {
       overflow-y: hidden;
       padding: 0;
@@ -82,9 +82,13 @@ export default defineComponent({
         height: 100%;
       }
       .arco-menu-item, .arco-menu-pop {
+        background-color: rgb(var(--arcoblue-6));
         padding: 0;
         height: 100%;
         border-radius: 0;
+        &:hover{
+          background: rgb(var(--arcoblue-4));
+        }
         .my-menu-item {
           text-align: left;
           height: 100%;
@@ -110,11 +114,11 @@ export default defineComponent({
             text-align: center;
           }
           &.active{
-            background: @primary-hover;
+            background: rgb(var(--arcoblue-4));
           }
         }
         &.arco-menu-selected {
-          background: @primary-hover;
+          background: rgb(var(--arcoblue-4));
         }
       }
     }

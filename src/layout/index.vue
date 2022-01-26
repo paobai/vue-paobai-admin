@@ -8,6 +8,7 @@
       <div class="bottom-right-wrapper">
         <app-tag></app-tag>
         <app-main></app-main>
+        <app-footer></app-footer>
       </div>
     </div>
     <right-setting></right-setting>
@@ -32,6 +33,7 @@ import appTag from './components/tag/index.vue'
 import { useAppStoreHook } from "@/store/modules/app";
 import { watchEffect, ref } from 'vue'
 import { useAppHook } from '@/hooks/app'
+import appFooter from './components/app-footer/index.vue'
 export default defineComponent({
   name: "Layout",
   components: {
@@ -39,10 +41,14 @@ export default defineComponent({
     sidebar,
     appMain,
     rightSetting,
-    appTag
+    appTag,
+    appFooter
   },
   setup() {
-    let { navbarShow, fixSidebarShow } = useAppHook()
+    let { navbarShow, fixSidebarShow, updateSysColor } = useAppHook()
+    onMounted(() => {
+      updateSysColor()
+    })
     return {navbarShow, fixSidebarShow}
   }
 })

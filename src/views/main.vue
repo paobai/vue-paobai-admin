@@ -12,10 +12,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, unref } from "vue"
 import type { Ref } from 'vue'
-import { useRoute } from "vue-router"
 import HelloWorld from "@/components/HelloWorld.vue"
-import { useAppStoreHook } from "@/store/modules/app";
-// import { useStore } from '@/store'
 import router from "@/router"
 import { useECharts } from "@/utils/echarts";
 import type { EChartsOption } from 'echarts';
@@ -26,7 +23,6 @@ export default defineComponent({
     HelloWorld
   },
   setup() {
-    let appStore = useAppStoreHook()
     let goHome = function () {
       router.push({ name: "home" })
     }

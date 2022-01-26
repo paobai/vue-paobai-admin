@@ -148,14 +148,14 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .app-tag{
-  box-shadow: 0 1px 4px #999999;
+  box-shadow: 0 1px 4px rgb(var(--arcoblue-6));
   display: flex;
   .app-left-tag{
     padding: 0 16px;
     line-height: 30px;
     .menu-tag{
       padding: 0 8px;
-      border-right: 1px solid #333333;
+      border-right: 1px solid rgb(var(--arcoblue-6));
     }
   }
   .app-tag-main{
@@ -164,14 +164,14 @@ export default defineComponent({
     overflow: hidden;
     .tag-item-card {
       display: inline-block;
-      border: 1px solid #666666;
+      border: 1px solid rgb(var(--arcoblue-6));
       padding: 2px 4px;
       height: 24px;
       border-radius: 4px;
       &.active{
-        background: @primary-color;
+        background: rgb(var(--arcoblue-6));
         color: #ffffff;
-        border-color: @primary-color;
+        border-color: rgb(var(--arcoblue-6));
         .tag-options{
           border-color: #ffffff;
         }
@@ -188,7 +188,7 @@ export default defineComponent({
         margin-right: 6px;
       }
       .tag-options{
-        border-left: 1px solid #999999;
+        border-left: 1px solid rgb(var(--arcoblue-6));
         cursor: pointer;
         padding-left: 4px;
         display: inline-block;
@@ -203,7 +203,7 @@ export default defineComponent({
       line-height: 30px;
       display: inline-block;
       &+.options-item{
-        border-left: 1px solid #999999;
+        border-left: 1px solid rgb(var(--arcoblue-6));
       }
     }
   }
