@@ -14,9 +14,9 @@ export default [
                 data: {
                     routers: [
                         {
-                            title: '作战指挥',
+                            title: '菜单一',
                             path: '',
-                            key: 'zzzh',
+                            key: 'menu-header-1',
                             type: RouteType.Menu,
                             icon: 'icon-dangshui',
                             children: [
@@ -56,23 +56,23 @@ export default [
                             ]
                         },
                         {
-                            title: '智慧治水',
+                            title: '菜单二',
                             path: '',
-                            key: 'zhzs',
+                            key: 'menu-header-2',
                             icon: 'icon-dangshui',
                             type: RouteType.Menu
                         },
                         {
-                            title: '数据管理',
+                            title: '菜单三',
                             path: '',
-                            key: 'sjgl',
+                            key: 'menu-header-3',
                             icon: 'icon-dangshui',
                             type: RouteType.Page
                         },
                         {
-                            title: '系统管理',
+                            title: '菜单四',
                             path: '',
-                            key: 'xtgl',
+                            key: 'menu-header-4',
                             type: RouteType.Page,
                             icon: 'icon-dangshui',
                         }

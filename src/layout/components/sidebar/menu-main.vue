@@ -29,7 +29,8 @@
         <template v-else>
           <a-menu-item :key="route.key">
             <template #icon>
-              <a-icon-apps  />
+              <iconfont v-if="route.icon" :class="route.icon"></iconfont>
+              <a-icon-apps  v-else />
             </template>
             {{route.title}}
           </a-menu-item>
@@ -134,7 +135,7 @@ export default defineComponent({
         background-color: rgb(var(--arcoblue-4));
         border-left: 4px solid rgb(var(--arcoblue-9));
       }
-      .arco-icon{
+      .arco-icon, .iconfont{
         color: var(--color-white);
       }
     }
