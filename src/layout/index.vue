@@ -45,10 +45,7 @@ export default defineComponent({
     appFooter
   },
   setup() {
-    let { navbarShow, fixSidebarShow, updateSysColor, footerShow } = useAppHook()
-    onMounted(() => {
-      updateSysColor()
-    })
+    let { navbarShow, fixSidebarShow, footerShow } = useAppHook()
     return {navbarShow, fixSidebarShow, footerShow}
   }
 })

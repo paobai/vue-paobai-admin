@@ -11,7 +11,9 @@ export const useAppStore = defineStore({
         sidebarMenuCollapsed: storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
         rightSettingShow: false,
         footerShow: storageLocal.getItem(config.app.footerShowKey) === null ? config.custom.footerShow : storageLocal.getItem(config.app.footerShowKey),
-        sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey)
+        sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey),
+        weakness: storageLocal.getItem(config.app.weaknessKey) === null ? config.custom.weakness : storageLocal.getItem(config.app.weaknessKey),
+        gray: storageLocal.getItem(config.app.grayKey) === null ? config.custom.gray : storageLocal.getItem(config.app.grayKey)
     }),
     getters: {
         getNavbarShow (): boolean {
@@ -23,14 +25,20 @@ export const useAppStore = defineStore({
         getSidebarMenuCollapsed (): boolean {
             return this.sidebarMenuCollapsed
         },
-        getRightSettingShow () : boolean{
+        getRightSettingShow (): boolean{
             return this.rightSettingShow
         },
-        getSysColor () : string {
+        getSysColor (): string {
             return this.sysColor
         },
-        getFooterShow () : boolean{
+        getFooterShow (): boolean{
             return this.footerShow
+        },
+        getWeakness (): boolean {
+            return this.weakness
+        },
+        getGray (): boolean {
+            return this.gray
         }
     },
     actions: {
@@ -56,6 +64,14 @@ export const useAppStore = defineStore({
         updateSysColor(sysColor: string) {
             this.sysColor = sysColor
             storageLocal.setItem(config.app.sysColorKey, sysColor)
+        },
+        updateWeakness(weakness: boolean) {
+            this.weakness = weakness
+            storageLocal.setItem(config.app.weaknessKey, weakness)
+        },
+        updateGray(gray: boolean) {
+            this.gray = gray
+            storageLocal.setItem(config.app.grayKey, gray)
         }
     }
 });

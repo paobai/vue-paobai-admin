@@ -1,3 +1,4 @@
+import cssVariables from '@/styles/_variables.module.less'
 export interface AppConfig {
     tokenPre: string
     tokenName: string
@@ -10,7 +11,9 @@ export interface AppConfig {
     sidebarMenuCollapsedKey: string
     footerShowKey: string,
     userInfoKey: string
-    sysColorKey: string
+    sysColorKey: string,
+    weaknessKey: string,
+    grayKey: string,
 }
 
 const appConfig: AppConfig = {
@@ -24,8 +27,10 @@ const appConfig: AppConfig = {
     sidebarShowKey: 'layout-side-bar-show',
     sidebarMenuCollapsedKey: 'layout-sidebar-menu-collapsed-',
     footerShowKey: 'layout-footer-',
-    userInfoKey: 'userInfo',
-    sysColorKey: 'sysColor'
+    userInfoKey: 'user-info',
+    sysColorKey: 'sys-color',
+    weaknessKey: cssVariables.htmlWeakNessClassName,
+    grayKey: cssVariables.htmlGrayClassName
 }
 
 export default appConfig

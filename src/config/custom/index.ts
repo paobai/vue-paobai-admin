@@ -4,7 +4,9 @@ export interface CustomConfig {
     sidebarShow: boolean,
     sidebarMenuCollapsed: boolean,
     footerShow: boolean,
-    sysColor: string
+    sysColor: string,
+    weakness: boolean,
+    gray: boolean
 }
 
 const customConfig: CustomConfig = {
@@ -13,7 +15,9 @@ const customConfig: CustomConfig = {
     sidebarShow: true,
     sidebarMenuCollapsed: false,
     footerShow: true,
-    sysColor: '#165DFF'
+    sysColor: '#165DFF',
+    weakness: false,
+    gray: false
 }
 
 export default customConfig

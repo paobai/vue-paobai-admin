@@ -55,9 +55,11 @@ import config from '@/config'
 import { AuthApi } from '@/api/upms-api'
 import { AuthLoginReq } from '@/api/upms-api/model'
 import { useUserHook } from '@/hooks/user'
+import {useAppHook} from "@/hooks/app";
 export default {
   setup() {
     const userStore = useUserHook()
+    let { sysColor } = useAppHook()
     let loginForm: AuthLoginReq = reactive({
       userName: "",
       passWord: ""
@@ -71,7 +73,7 @@ export default {
         router.replace({ path: config.app.homePagePath })
       })
     }
-    return { login, loginForm , title: config.custom.htmlTitle}
+    return { login, loginForm , title: config.custom.htmlTitle, sysColor}
   }
 }
 </script>
@@ -79,15 +81,13 @@ export default {
 .login-wrapper{
   width: 100%;
   height: 100%;
-  background: url("/src/assets/images/login/login-bak.png") no-repeat;
-  background-size: cover;
   display: flex;
   .left-wrapper{
     overflow: hidden;
     max-width: 700px;
     width: 0;
     flex: 1;
-    background: #06979C;
+    background: rgb(var(--arcoblue-6));
     opacity: 0.95;
     display: flex;
     justify-content: center;
@@ -128,8 +128,9 @@ export default {
     }
   }
   .right-wrapper{
+    background: url("/src/assets/images/login/login-bak.png") no-repeat;
+    background-size: cover;
     padding: 20px;
-    width: 0;
     flex: 1;
     display: flex;
     flex-direction: column;

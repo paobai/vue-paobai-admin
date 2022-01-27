@@ -5,6 +5,7 @@ import {RouterApiType, RouteType} from "@/constant/settings";
 import {getRouteMap} from "@/utils/menu-help";
 import {useRoute} from "vue-router";
 import {changeArcoPrimaryColor} from "@/utils";
+import config from "@/config";
 
 export function useAppHook(){
 
@@ -65,6 +66,30 @@ export function useAppHook(){
         color = color || unref(sysColor)
         appStore.updateSysColor(color)
         changeArcoPrimaryColor(color)
+    }
+
+    const weakness = computed({
+        get: () => appStore.getWeakness,
+        set: (weakness: boolean) => {
+            updateWeakness(weakness)
+        }
+    })
+
+    const updateWeakness = (weakness: boolean) => {
+        appStore.updateWeakness(weakness)
+        document.getElementsByTagName('html')[0].classList.toggle(config.app.weaknessKey, weakness)
+    }
+
+    const gray = computed({
+        get: () => appStore.gray,
+        set: (gray: boolean) => {
+            updateGray(gray)
+        }
+    })
+
+    const updateGray = (gray: boolean) => {
+        appStore.updateGray(gray)
+        document.getElementsByTagName('html')[0].classList.toggle(config.app.grayKey, gray)
     }
 
     const fixSidebarShow = computed(() => {
@@ -166,6 +191,8 @@ export function useAppHook(){
         updateSysColor,
         sysColor,
         footerShow,
-        updateFooterShow
+        updateFooterShow,
+        weakness,
+        gray
     }
 }
