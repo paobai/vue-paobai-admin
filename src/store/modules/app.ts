@@ -8,8 +8,9 @@ export const useAppStore = defineStore({
     state: () => ({
         navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
         sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
-        sidebarMenuCollapsed :storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
+        sidebarMenuCollapsed: storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
         rightSettingShow: false,
+        footerShow: storageLocal.getItem(config.app.footerShowKey) === null ? config.custom.footerShow : storageLocal.getItem(config.app.footerShowKey),
         sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey)
     }),
     getters: {
@@ -27,6 +28,9 @@ export const useAppStore = defineStore({
         },
         getSysColor () : string {
             return this.sysColor
+        },
+        getFooterShow () : boolean{
+            return this.footerShow
         }
     },
     actions: {
@@ -44,6 +48,10 @@ export const useAppStore = defineStore({
         },
         updateRightSettingShow (rightSettingShow: boolean) {
             this.rightSettingShow = rightSettingShow
+        },
+        updateFooterShow(footerShow: boolean) {
+            this.footerShow = footerShow
+            storageLocal.setItem(config.app.footerShowKey, footerShow)
         },
         updateSysColor(sysColor: string) {
             this.sysColor = sysColor

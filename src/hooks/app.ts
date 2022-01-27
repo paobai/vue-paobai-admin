@@ -14,13 +14,27 @@ export function useAppHook(){
 
     const route = useRoute()
 
-    const navbarShow = computed(() => {
-        return appStore.getNavbarShow
+    const navbarShow = computed({
+        get: () => appStore.navbarShow,
+        set: val => {
+            updateNavbar(val)
+        }
     })
 
-    const sidebarShow = computed(() => {
-        return appStore.getSidebarShow
+    const updateNavbar = function (res: boolean) {
+        appStore.updateNavbarShow(res)
+    }
+
+    const sidebarShow = computed({
+        get: () => appStore.sidebarShow,
+        set: val => {
+            updateSidebar(val)
+        }
     })
+
+    const updateCollapse = function (res: boolean) {
+        appStore.updateSidebarMenuCollapsed(res)
+    }
 
     const collapse = computed({
         get: () => appStore.getSidebarMenuCollapsed,
@@ -29,8 +43,26 @@ export function useAppHook(){
         }
     })
 
+    const footerShow = computed({
+        get: () => appStore.footerShow,
+        set: val => {
+            updateFooterShow(val)
+        }
+    })
+
+    const updateFooterShow = (footerShow: boolean) => {
+        appStore.updateFooterShow(footerShow)
+    }
+
+    const sysColor = computed({
+        get: () => appStore.getSysColor,
+        set: (color: string) => {
+            updateSysColor(color)
+        }
+    })
+
     const updateSysColor = (color?: string) => {
-        color = color || appStore.getSysColor
+        color = color || unref(sysColor)
         appStore.updateSysColor(color)
         changeArcoPrimaryColor(color)
     }
@@ -43,16 +75,8 @@ export function useAppHook(){
         return sidebarShow.value
     })
 
-    const updateNavbar = function (res: boolean) {
-        appStore.updateNavbarShow(res)
-    }
-
     const updateSidebar = function (res: boolean) {
         appStore.updateSidebarShow(res)
-    }
-
-    const updateCollapse = function (res: boolean) {
-        appStore.updateSidebarMenuCollapsed(res)
     }
 
     const updateRightSetting = function (res: boolean) {
@@ -139,6 +163,9 @@ export function useAppHook(){
         getMenuByKey,
         nowMenuKey,
         nowMenu,
-        updateSysColor
+        updateSysColor,
+        sysColor,
+        footerShow,
+        updateFooterShow
     }
 }

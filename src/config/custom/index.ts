@@ -3,6 +3,7 @@ export interface CustomConfig {
     navbarShow: boolean,
     sidebarShow: boolean,
     sidebarMenuCollapsed: boolean,
+    footerShow: boolean,
     sysColor: string
 }
 
@@ -11,6 +12,7 @@ const customConfig: CustomConfig = {
     navbarShow: true,
     sidebarShow: true,
     sidebarMenuCollapsed: false,
+    footerShow: true,
     sysColor: '#165DFF'
 }
 

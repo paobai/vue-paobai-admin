@@ -83,9 +83,12 @@ export default defineComponent({
     align-items: center;
     flex-wrap: nowrap;
     .logo-wrapper{
-      width: 215px;
+      width: @app-sidebar-width;
+      height: 100%;
+      line-height: @app-navbar-height;
       text-align: center;
       .logo {
+        vertical-align: middle;
         width: 130px;
       }
     }

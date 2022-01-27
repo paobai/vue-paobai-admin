@@ -14,14 +14,21 @@
     <div class="right-setting-wrapper">
       <div class="item-line-space-between">
         显示顶部：
-        <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="updateNavbar">
+        <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="(v) => navbarShow = v">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
       <div class="item-line-space-between" >
-        显示左部(未实现)：
-        <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="updateSidebar">
+        显示左部：
+        <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="(v) => sidebarShow = v">
+          <template #checked>显示</template>
+          <template #unchecked>不显示</template>
+        </a-switch>
+      </div>
+      <div class="item-line-space-between" >
+        显示内容底部(页脚)：
+        <a-switch :default-checked="footerShow" @change="(v) => footerShow = v">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
@@ -43,8 +50,8 @@ import { useAppHook } from '@/hooks/app'
 import { sysColorList } from '@/constant'
 export default defineComponent({
   setup() {
-    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, updateSysColor } = useAppHook()
-    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar, updateSysColor, sysColorList }
+    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, updateSysColor, updateFooterShow, footerShow } = useAppHook()
+    return { showRightSetting, updateRightSetting, updateNavbar, navbarShow, sidebarShow, updateSidebar, updateSysColor, sysColorList, updateFooterShow, footerShow }
   }
 })
 </script>

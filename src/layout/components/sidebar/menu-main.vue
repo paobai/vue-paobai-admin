@@ -2,7 +2,6 @@
   <div class="menu-wrapper">
     <a-menu
       showCollapseButton
-      theme="dark"
       :selected-keys="[nowMenuKey]"
       :auto-open-selected="true"
       :open-keys="openKeys"
@@ -14,11 +13,11 @@
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key">
             <template #title>
-              <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
+              <a-icon-apps />
               {{route.title}}
             </template>
             <template #expand-icon-down>
-              <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
+              <a-icon-down  />
             </template>
             <menu-sub
               v-for="(routSub, index) in route.children"
@@ -29,7 +28,9 @@
         </template>
         <template v-else>
           <a-menu-item :key="route.key">
-            <a-icon-apps :style="{ color: 'rgba(255, 255, 255, 0.4)' }" />
+            <template #icon>
+              <a-icon-apps  />
+            </template>
             {{route.title}}
           </a-menu-item>
         </template>
@@ -57,7 +58,6 @@ export default defineComponent({
       routeSidebarList: routeList,
       getMenuByKey,
       collapse,
-      updateCollapse,
       nowMenu,
       nowMenuKey
     } = useAppHook()
@@ -89,7 +89,6 @@ export default defineComponent({
       routeList,
       onClickSubMenu,
       collapse,
-      updateCollapse,
       openKeys
     }
   }
@@ -98,12 +97,9 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .menu-wrapper {
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
   :deep(.arco-menu) {
-    height: 0;
-    flex: 1;
+    background-color: rgb(var(--arcoblue-6));
+    height: 100%;
     width: 100%;
     &.arco-menu-collapsed{
       font-size: 60px;
@@ -127,26 +123,36 @@ export default defineComponent({
       }
     }
     .arco-menu-item, .arco-menu-pop {
+      background-color: rgb(var(--arcoblue-6));
       padding-right: 0;
-      color: #ffffff;
+      color: var(--color-white);
       margin-bottom: 0;
       line-height: 48px;
       border-left: 4px solid transparent;
       transition: background-color  0.5s,border-left-color 0.5s;
       &.arco-menu-selected, &:hover {
-        border-left: 4px solid #ffffff;
+        background-color: rgb(var(--arcoblue-4));
+        border-left: 4px solid rgb(var(--arcoblue-9));
+      }
+      .arco-icon{
+        color: var(--color-white);
       }
     }
     .arco-menu-inline {
       .arco-menu-inline-header {
-        color: #ffffff;
+        background-color: rgb(var(--arcoblue-6));
+        color: var(--color-white);
         border-left: 4px solid transparent;
         line-height: 48px;
         transition: background-color  0.5s, border-left-color 0.5s;
         &.arco-menu-selected:hover,
         &.arco-menu-selected, &:hover {
-          border-left: 4px solid #ffffff;
+          background-color: rgb(var(--arcoblue-4));
+          border-left: 4px solid rgb(var(--arcoblue-9));
         }
+      }
+      .arco-icon{
+        color: var(--color-white);
       }
     }
     .arco-menu-collapse-button{

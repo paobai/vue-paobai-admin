@@ -8,7 +8,7 @@
       <div class="bottom-right-wrapper">
         <app-tag></app-tag>
         <app-main></app-main>
-        <app-footer></app-footer>
+        <app-footer v-if="footerShow"></app-footer>
       </div>
     </div>
     <right-setting></right-setting>
@@ -45,11 +45,11 @@ export default defineComponent({
     appFooter
   },
   setup() {
-    let { navbarShow, fixSidebarShow, updateSysColor } = useAppHook()
+    let { navbarShow, fixSidebarShow, updateSysColor, footerShow } = useAppHook()
     onMounted(() => {
       updateSysColor()
     })
-    return {navbarShow, fixSidebarShow}
+    return {navbarShow, fixSidebarShow, footerShow}
   }
 })
 </script>

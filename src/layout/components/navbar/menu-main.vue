@@ -94,7 +94,7 @@ export default defineComponent({
           height: 100%;
           min-width: 190px;
           max-width: 275px;
-          color: #ffffff;
+          color: var(--color-white);
           font-size: 18px;
           padding: 20px 20px 20px 30px;
           transition: background 0.5s;
@@ -107,7 +107,7 @@ export default defineComponent({
           .right-suffix{
             margin-left: 10px;
             margin-right: 0;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--color-white);
           }
           .title-content{
             flex: auto;

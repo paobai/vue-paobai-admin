@@ -2,12 +2,6 @@
 @import "./_mixins.less";
 @import "./_variables.module.less";
 
-@app-navbar-height: 60px;
-@app-sidebar-width: 215px;
-@app-sidebar-collapse-width: 85px;
-@app-tag-height: 30px;
-@app-sidebar-bg-color: #232324;
-
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -57,6 +51,11 @@ div:focus {
     .app-navbar {
       height: 0;
     }
+    .app-sidebar{
+      .logo-wrapper{
+        display: unset;
+      }
+    }
   }
   &.not-show-sidebar {
     > .bottom-wrapper .bottom-left-wrapper .app-sidebar {
@@ -85,7 +84,7 @@ div:focus {
       .app-sidebar {
         width: @app-sidebar-width;
         height: 100%;
-        background: @app-sidebar-bg-color;
+        background-color: rgb(var(--arcoblue-6));
         transition: width 0.28s;
         &.menu-collapse{
           width: @app-sidebar-collapse-width;
