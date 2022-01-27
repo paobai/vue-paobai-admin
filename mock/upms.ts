@@ -18,7 +18,7 @@ export default [
                             path: '',
                             key: 'menu-header-1',
                             type: RouteType.Menu,
-                            icon: 'icon-dangshui',
+                            icon: 'iconfont-Customermanagement-fill',
                             children: [
                                 {
                                     key: "1",
@@ -59,14 +59,14 @@ export default [
                             title: '菜单二',
                             path: '',
                             key: 'menu-header-2',
-                            icon: 'icon-dangshui',
+                            icon: 'iconfont-map1',
                             type: RouteType.Menu
                         },
                         {
                             title: '菜单三',
                             path: '',
                             key: 'menu-header-3',
-                            icon: 'icon-dangshui',
+                            icon: 'iconfont-cecurity-protection-fill',
                             type: RouteType.Page
                         },
                         {
@@ -74,7 +74,7 @@ export default [
                             path: '',
                             key: 'menu-header-4',
                             type: RouteType.Page,
-                            icon: 'icon-dangshui',
+                            icon: 'iconfont-set1',
                         }
                     ],
                     permissions: []

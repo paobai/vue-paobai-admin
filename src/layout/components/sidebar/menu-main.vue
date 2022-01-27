@@ -12,8 +12,11 @@
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key">
+            <template #icon>
+              <iconfont v-if="route.icon" :class="route.icon"></iconfont>
+              <a-icon-apps  v-else />
+            </template>
             <template #title>
-              <a-icon-apps />
               {{route.title}}
             </template>
             <template #expand-icon-down>
@@ -103,11 +106,11 @@ export default defineComponent({
     height: 100%;
     width: 100%;
     &.arco-menu-collapsed{
-      font-size: 60px;
       .arco-menu-item, .arco-menu-pop{
         line-height: 80px;
       }
-      .arco-icon{
+      .arco-icon, .iconfont{
+        font-size: 60px !important;
         vertical-align: -10px;
       }
       &.arco-menu-vertical .arco-menu-pop-header, .arco-menu-item{
@@ -123,11 +126,9 @@ export default defineComponent({
         margin-bottom: 0;
       }
     }
-    .arco-menu-item, .arco-menu-pop {
+    .menu-item-common{
       background-color: rgb(var(--arcoblue-6));
-      padding-right: 0;
       color: var(--color-white);
-      margin-bottom: 0;
       line-height: 48px;
       border-left: 4px solid transparent;
       transition: background-color  0.5s,border-left-color 0.5s;
@@ -136,24 +137,18 @@ export default defineComponent({
         border-left: 4px solid rgb(var(--arcoblue-9));
       }
       .arco-icon, .iconfont{
+        font-size: 18px;
         color: var(--color-white);
       }
     }
+    .arco-menu-item, .arco-menu-pop {
+      padding-right: 0;
+      margin-bottom: 0;
+      .menu-item-common()
+    }
     .arco-menu-inline {
       .arco-menu-inline-header {
-        background-color: rgb(var(--arcoblue-6));
-        color: var(--color-white);
-        border-left: 4px solid transparent;
-        line-height: 48px;
-        transition: background-color  0.5s, border-left-color 0.5s;
-        &.arco-menu-selected:hover,
-        &.arco-menu-selected, &:hover {
-          background-color: rgb(var(--arcoblue-4));
-          border-left: 4px solid rgb(var(--arcoblue-9));
-        }
-      }
-      .arco-icon{
-        color: var(--color-white);
+        .menu-item-common()
       }
     }
     .arco-menu-collapse-button{

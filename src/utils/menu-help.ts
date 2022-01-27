@@ -4,12 +4,16 @@ import {RouterApiType, RouteType} from "@/constant/settings";
  * 处理route 增加信息
  * @param routeList
  * @param parentKey
+ * @param parent
  */
-export function fixRoute (routeList: RouterApiType[], parentKey: string[] = []): RouterApiType[] {
+export function fixRoute (routeList: RouterApiType[], parentKey: string[] = [], parent?: RouterApiType): RouterApiType[] {
     routeList.forEach(item => {
         item.parentKey = parentKey
+        if (!item.icon && parent) {
+            item.icon = parent.icon
+        }
         if (item.children) {
-            fixRoute(item.children, parentKey.concat(item.key))
+            fixRoute(item.children, parentKey.concat(item.key), item)
         }
     })
     return routeList

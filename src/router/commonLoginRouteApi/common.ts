@@ -7,14 +7,13 @@ const mainRoutesSource: RouterApiType[] = [
         path: '/main',
         key: 'home-page',
         type: RouteType.Page,
-        icon: 'icon-dangshui'
+        icon: 'iconfont-home-fill'
     },
     {
         path: "/redirect",
         title: "跳转页",
         key: 'redirect-page',
         type: RouteType.Page,
-        icon: 'icon-dangshui',
         notShow: true
     }
 ]
