@@ -83,6 +83,9 @@ export default {
   height: 100%;
   display: flex;
   .left-wrapper{
+    @media screen and ( max-width: 1048px ) {
+      display: none;
+    }
     overflow: hidden;
     max-width: 700px;
     width: 0;

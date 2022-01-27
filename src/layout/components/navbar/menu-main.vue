@@ -3,15 +3,15 @@
     <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
-          <a-sub-menu :key="route.key">
+          <a-sub-menu :key="route.key" :class="{'arco-menu-selected':route.key === nowFirstRouteKey}">
+            <template #icon>
+              <iconfont class="left-iconfont" :class="route.icon"></iconfont>
+            </template>
             <template #title>
-              <div class="my-menu-item" @click="clickMenu(route.key)" :class="{'active': nowFirstRouteKey === route.key}">
-                <iconfont class="left-iconfont" :class="route.icon"></iconfont>
-                <div class="title-content">{{ route.title }}</div>
-                <a-icon-down class="right-suffix"/>
-              </div>
+              <div style="display: inline-block" @click="clickMenu(route.key)">{{ route.title }}</div>
             </template>
             <template #expand-icon-down>
+              <a-icon-down class="right-suffix"/>
             </template>
             <menu-sub
                 v-for="(routSub, index) in route.children"
@@ -22,10 +22,10 @@
         </template>
         <template v-else>
         <a-menu-item :key="route.key">
-          <div class="my-menu-item">
+          <template #icon>
             <iconfont class="left-iconfont" :class="route.icon"></iconfont>
-            <div class="title-content">{{ route.title }}</div>
-          </div>
+          </template>
+          <span>{{ route.title }}</span>
         </a-menu-item>
       </template>
       </template>
@@ -82,43 +82,23 @@ export default defineComponent({
         height: 100%;
       }
       .arco-menu-item, .arco-menu-pop {
+        padding: 0 40px;
         background-color: rgb(var(--arcoblue-6));
-        padding: 0;
         height: 100%;
+        line-height: @app-navbar-height;
         border-radius: 0;
-        &:hover{
+        color: var(--color-white);
+        font-size: 18px;
+        &:hover, &.arco-menu-selected{
           background: rgb(var(--arcoblue-4));
         }
-        .my-menu-item {
-          text-align: left;
-          height: 100%;
-          min-width: 190px;
-          max-width: 275px;
+        .arco-menu-title{
+          padding-right: 20px;
+          display: inline-block;
+        }
+        .arco-icon, .iconfont{
+          font-size: 20px;
           color: var(--color-white);
-          font-size: 18px;
-          padding: 20px 20px 20px 30px;
-          transition: background 0.5s;
-          display: flex;
-          align-content: center;
-          align-items: center;
-          .left-iconfont {
-            margin-right: 10px;
-          }
-          .right-suffix{
-            margin-left: 10px;
-            margin-right: 0;
-            color: var(--color-white);
-          }
-          .title-content{
-            flex: auto;
-            text-align: center;
-          }
-          &.active{
-            background: rgb(var(--arcoblue-4));
-          }
-        }
-        &.arco-menu-selected {
-          background: rgb(var(--arcoblue-4));
         }
       }
     }
