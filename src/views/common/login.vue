@@ -53,16 +53,18 @@ import { useRouter } from "vue-router";
 import Cookies from "js-cookie"
 import config from '@/config'
 import { AuthApi } from '@/api/upms-api'
-import { AuthLoginReq } from '@/api/upms-api/model'
+import { AuthLoginByPasswordReq } from '@/api/upms-api/model'
+import { grantType } from '@/constant'
 import { useUserHook } from '@/hooks/user'
 import {useAppHook} from "@/hooks/app";
 export default {
   setup() {
     const userStore = useUserHook()
     let { sysColor } = useAppHook()
-    let loginForm: AuthLoginReq = reactive({
+    let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "",
-      passWord: ""
+      passWord: "",
+      grant_type: grantType.PASSWORD
     });
     const router = useRouter()
     const login = async () => {

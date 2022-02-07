@@ -5,7 +5,7 @@ import qs from "qs"
 import { cloneDeep, merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
 import { AuthApi } from "@/api/upms-api"
-import { clientId, clientSecret, grantTypeRefreshToken } from "@/constant"
+import { clientId, clientSecret, grantType } from "@/constant"
 import {ApiCodeEnum, ApiResponseBase} from '@/model/sys/apiModel';
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
@@ -130,12 +130,12 @@ function addSubscriber(callback: () => void) {
 }
 
 function referToken() {
-  const refreshToken = Cookies.get("refresh_token")
-  AuthApi.login({
-    grant_type: grantTypeRefreshToken,
+  const refreshToken = Cookies.get("refresh_token")!
+  AuthApi.refreshToken({
+    grant_type: grantType.REFRESH_TOKEN,
+    refresh_token: refreshToken,
     client_id: clientId,
-    client_secret: clientSecret,
-    refresh_token: refreshToken
+    client_secret: clientSecret
   })
     .then(res => {
       Cookies.set(sysConfig.app.tokenName, res.data.access_token)

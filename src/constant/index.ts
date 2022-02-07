@@ -1,5 +1,7 @@
-export const grantTypePassword = "password"
-export const grantTypeRefreshToken = "refresh_token"
+export enum grantType {
+    PASSWORD = "password",
+    REFRESH_TOKEN = "refresh_token"
+}
 export const clientId = "test"
 export const clientSecret = "test"
 export const previewServerUrl = "http://36.133.83.121:8012/onlinePreview?url="
