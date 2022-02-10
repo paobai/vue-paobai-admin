@@ -1,4 +1,3 @@
-import Vue from "vue"
 import axios, {AxiosInstance, AxiosPromise, AxiosRequestConfig, Method} from "axios"
 import router from "@/router"
 import qs from "qs"
@@ -6,7 +5,7 @@ import { cloneDeep, merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
 import { AuthApi } from "@/api/upms-api"
 import { clientId, clientSecret, grantType } from "@/constant"
-import {ApiCodeEnum, ApiResponseBase} from '@/model/sys/apiModel';
+import {ApiCodeEnum, ApiResponseBase, ApiPromise, ContentType, CustomAxiosInstance} from './help';
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
 import { loadEnv } from "@/../build/utils";
@@ -16,29 +15,13 @@ import { Message } from '@arco-design/web-vue'
 const env = loadEnv();
 const apiBaseUrl = env.VITE_API_BASE_URL
 
-enum ContentType {
-  JSON = "json",
-  FORM = "form"
-}
-
-interface HttpMore extends AxiosInstance {
-  adornUrl(actionName: string): String
-  adornParams(params: any, openDefaultParams: boolean): String
-  adornData(
-    data: any,
-    openDefaultParams: boolean,
-    contentType: ContentType
-  ): String
-}
-
-// @ts-ignore
-const http: HttpMore = axios.create({
+const http: CustomAxiosInstance = axios.create({
   timeout: 1000 * 30,
   withCredentials: false,
   headers: {
     "Content-Type": "application/json; charset=utf-8"
   }
-})
+}) as CustomAxiosInstance
 
 /**
  * 请求地址处理
@@ -216,7 +199,7 @@ export const postRequest = <T>  (
   data?: any,
   params?: any,
   type = "json"
-): Promise<ApiResponseBase<T>> => {
+): ApiPromise<T> => {
   url = http.adornUrl(url) as string
   if (type === "json") {
     return http({
@@ -224,7 +207,7 @@ export const postRequest = <T>  (
       url: `${url}`,
       data: JSON.stringify(data),
       params: params
-    }) as unknown as Promise<ApiResponseBase<T>>
+    })
   } else {
     return http({
       method: "post",
@@ -234,11 +217,11 @@ export const postRequest = <T>  (
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
-    }) as unknown as Promise<ApiResponseBase<T>>
+    })
   }
 }
 
-export const getRequest = (url: string, params?: any): any => {
+export const getRequest = <T> (url: string, params?: any): ApiPromise<T> => {
   url = http.adornUrl(url) as string
   return http({
     method: "get",
@@ -247,7 +230,7 @@ export const getRequest = (url: string, params?: any): any => {
   })
 }
 
-export const putRequest = (url: any, data?: any, params?: any) => {
+export const putRequest = <T> (url: any, data?: any, params?: any): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "put",
@@ -257,7 +240,7 @@ export const putRequest = (url: any, data?: any, params?: any) => {
   })
 }
 
-export const deleteRequest = (url: any, params?: any, data?: any) => {
+export const deleteRequest = <T> (url: any, params?: any, data?: any): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "delete",
@@ -273,7 +256,7 @@ export function downloadFile(
   params?: any,
   method = "get",
   fileName = undefined
-) {
+): ApiPromise {
   url = http.adornUrl(url)
   return new Promise((resolve, reject) => {
     http({
@@ -302,7 +285,7 @@ export function uploadFile(
   data: any,
   method = "post",
   fileName = undefined
-) {
+): ApiPromise {
   url = http.adornUrl(url) as string
   return http({
     method: method as Method,

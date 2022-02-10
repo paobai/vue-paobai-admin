@@ -1,6 +1,6 @@
 import { MockMethod } from "vite-plugin-mock";
 import {RouteType} from "@/constant/settings";
-import { ApiCodeEnum } from "@/model/sys/apiModel";
+import { ApiCodeEnum } from "@/utils/httpRequest/help";
 
 let urlPre = "/upms"
 
