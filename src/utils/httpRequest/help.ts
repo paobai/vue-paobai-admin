@@ -9,6 +9,7 @@ export interface ApiResponseBase<T> {
     code: ApiCodeEnum;
     data: T;
     msg?: string;
+    __headers: any
 }
 
 export interface ApiPromise<T = any> extends Promise<ApiResponseBase<T>> {
