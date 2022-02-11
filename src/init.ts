@@ -3,6 +3,7 @@ import config from '@/config'
 import * as directives from "./directives"
 import iconfont from "@/components/iconfont.vue"
 import { setupStore } from "@/store"
+import echarts from '@/utils/echarts'
 export function initApp(app: App) {
     let dist = document.getElementsByTagName('title')[0]
     dist.innerHTML = config.custom.htmlTitle
@@ -12,6 +13,7 @@ export function initApp(app: App) {
     Object.keys(directives).forEach(key => {
         app.directive(key, (directives as { [key: string]: Directive })[key])
     })
+    app.use(echarts)
 }
 String.prototype.format = function (args: string | string[]) {
     if (arguments.length > 0) {

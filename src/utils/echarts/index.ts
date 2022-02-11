@@ -1,30 +1,42 @@
-import { onMounted, unref, ref } from "vue";
-import { Ref } from "vue";
-import type { EChartsOption } from 'echarts';
-import echarts from './core/index'
-export let echartsCore = echarts;
+import * as echarts from "echarts/core"
+import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts"
+import { CanvasRenderer } from "echarts/renderers"
+import Chart from './chart/index.vue'
 
-export function useECharts(
-    elRef: Ref<HTMLDivElement | null>,
-    options?: EChartsOption,
-    theme: 'light' | 'dark' | 'default' = 'default',
-) {
-    // TODO: add resize event
-    let chartInstance: Ref<echarts.ECharts | null> = ref(null);
-    const setOption = (options: EChartsOption, clear: Boolean = true) => {
-        clear && chartInstance.value?.clear();
-        if (!chartInstance.value) {
-            setTimeout(() => setOption(options, clear), 100)
-        } else {
-            chartInstance.value?.setOption(options)
-        }
-    }
-    onMounted(() => {
-        chartInstance.value = echarts.init(unref(elRef) as HTMLDivElement, theme)
-        if (options) setOption(options)
-    })
-    return {
-        setOption,
-        chartInstance
-    }
-}
+import {
+  GridComponent,
+  TitleComponent,
+  LegendComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  DataZoomComponent,
+  VisualMapComponent,
+  GraphicComponent,
+} from "echarts/components"
+
+const { use, registerTheme } = echarts
+
+use([
+  PieChart,
+  BarChart,
+  LineChart,
+  CanvasRenderer,
+  GridComponent,
+  TitleComponent,
+  LegendComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  DataZoomComponent,
+  VisualMapComponent,
+  GraphicComponent
+])
+
+// 自定义主题
+import theme from "./theme.json"
+registerTheme("ovilia-green", theme)
+
+export default {
+  install(Vue: App) {
+    Vue.component('Chart', Chart);
+  },
+};

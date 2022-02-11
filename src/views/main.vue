@@ -1,8 +1,6 @@
 <template>
   <div class="app-container">
-    <div ref="chartRef" style="width: 500px;height: 500px">
-
-    </div>
+    <chart width="500px" height="500px" :options="options"></chart>
     123123
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
@@ -14,8 +12,6 @@ import { defineComponent, computed, ref, onMounted, unref } from "vue"
 import type { Ref } from 'vue'
 import HelloWorld from "@/components/HelloWorld.vue"
 import router from "@/router"
-import { useECharts } from "@/utils/echarts";
-import type { EChartsOption } from 'echarts';
 
 export default defineComponent({
   name: "App",
@@ -26,8 +22,7 @@ export default defineComponent({
     let goHome = function () {
       router.push({ name: "home" })
     }
-    const chartRef = ref<HTMLDivElement | null>( null);
-    let options: EChartsOption = {
+    let options = {
       xAxis: {
         type: 'category',
         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -42,9 +37,7 @@ export default defineComponent({
         }
       ]
     }
-    let { setOption } = useECharts(chartRef as Ref<HTMLDivElement>)
-    setOption(options)
-    return { goHome, chartRef }
+    return { goHome, options }
   }
 })
 </script>
