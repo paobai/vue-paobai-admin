@@ -1,8 +1,15 @@
 <template>
   <div class="app-tag">
     <div class="app-left-tag">
-      <a-icon-home style="font-size: 14px"/>
-      <span class="menu-tag" v-for="item in leftTag" :key="item.title">{{item.title}}</span>
+      <a-breadcrumb>
+        <a-breadcrumb-item>
+          <a-icon-home style="font-size: 14px"/>
+        </a-breadcrumb-item>
+        <a-breadcrumb-item v-for="item in leftTag" :key="item.title">{{item.title}}</a-breadcrumb-item>
+        <template #separator>
+          <a-icon-right />
+        </template>
+      </a-breadcrumb>
     </div>
     <div class="app-tag-main">
       <a-dropdown trigger="contextMenu" :style="{display:'block'}"  v-for="(item, index) in appTagList" :key="item.key" @select="(value)=> tagSelect(value, item, index)">
@@ -132,6 +139,9 @@ export default defineComponent({
         path: route.path as string
       })
     }, { immediate: true })
+    function breadcrumbClick(item) {
+      console.log(item)
+    }
     return {
       appTagList,
       deleteTag,
@@ -140,7 +150,8 @@ export default defineComponent({
       tagSelect,
       fullScreenStatus,
       optionsClick,
-      leftTag
+      leftTag,
+      breadcrumbClick
     }
   }
 })
