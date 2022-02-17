@@ -56,13 +56,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import config from "@/config";
-import {useRouter} from "vue-router";
+import config from "@/config"
+import { useRouter } from "vue-router"
 export default defineComponent({
   setup() {
     let router = useRouter()
     const goHome = function () {
-      router.replace({path: config.app.homePagePath})
+      router.replace({ path: config.app.homePagePath })
     }
     return {
       message: "404 Page Not Found",

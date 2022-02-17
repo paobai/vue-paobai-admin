@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from "vue"
-import {useAppHook} from "@/hooks/app";
+import { defineComponent, onMounted } from "vue"
+import { useAppHook } from "@/hooks/app"
 
 export default defineComponent({
   setup() {

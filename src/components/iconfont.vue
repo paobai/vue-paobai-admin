@@ -2,18 +2,17 @@
   <span
     class="iconfont"
     v-bind="$attrs"
-    v-on:input="$emit('input', $event.target.value)">
-    <slot>
-    </slot>
+    v-on:input="$emit('input', $event.target.value)"
+  >
+    <slot> </slot>
   </span>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import { defineComponent } from "vue"
 export default defineComponent({
   setup: () => {
-    return { }
+    return {}
   }
 })
 </script>
-<style scoped>
-</style>
+<style scoped></style>

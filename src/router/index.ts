@@ -7,11 +7,11 @@ import {
   MyRouterOptions
 } from "@/router/routerHelp"
 import { AuthApi } from "@/api/upms-api"
-import { useUserHook } from '@/hooks/user'
+import { useUserHook } from "@/hooks/user"
 import Cookies from "js-cookie"
-import config from '@/config'
-import mainRoutesSource from './commonLoginRouteApi/common'
-import {fixRoute} from "@/utils/menu-help";
+import config from "@/config"
+import mainRoutesSource from "./commonLoginRouteApi/common"
+import { fixRoute } from "@/utils/menu-help"
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -24,9 +24,7 @@ Object.keys(commonFiles).forEach(key => {
   commonModules = commonModules.concat(commonFiles[key].default)
 })
 
-export const constantRoutes: Array<RouteRecordRaw> = [
-  ...commonModules
-]
+export const constantRoutes: Array<RouteRecordRaw> = [...commonModules]
 
 const routerOptions: MyRouterOptions = {
   history: createWebHashHistory(),
@@ -37,12 +35,12 @@ const router: MyRouter = createRouter(routerOptions)
 const sourceRouter: MyRouter = createRouter(routerOptions)
 
 export function resetRouter() {
-  (router as any).matcher = (sourceRouter as any).matcher // reset router
+  ;(router as any).matcher = (sourceRouter as any).matcher // reset router
   router.options.isAddDynamicMenuRoutes = false
 }
 
-export function clearRouter () {
-  (router as any).matcher = [] // reset router
+export function clearRouter() {
+  ;(router as any).matcher = [] // reset router
   router.options.isAddDynamicMenuRoutes = false
 }
 
@@ -62,25 +60,26 @@ router.beforeEach((to, from, next) => {
       router.push({ name: "login" })
       return
     }
-    AuthApi.getCurrentUserTree().then(res => {
-      if (res.code === 1) {
-        let {routers:newRoutes , permissions} = fixResToSys(res.data)
-        // 加入了登录之后的默认route
-        let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
-        addCommonRoutes = fixRoute(addCommonRoutes)
-        userStore.updateAuth(addCommonRoutes, permissions)
-        // clearRouter()
-        addRouterFromData(addCommonRoutes, modulesRoutes, router)
-      }
-      next({ ...to, replace: true })
-    })
-    .catch(e => {
-      console.log(
-        `%c${e} 请求菜单列表和权限失败，跳转至登录页！！`,
-        "color:blue"
-      )
-      router.push({ name: "login" })
-    })
+    AuthApi.getCurrentUserTree()
+      .then(res => {
+        if (res.code === 1) {
+          const { routers: newRoutes, permissions } = fixResToSys(res.data)
+          // 加入了登录之后的默认route
+          let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+          addCommonRoutes = fixRoute(addCommonRoutes)
+          userStore.updateAuth(addCommonRoutes, permissions)
+          // clearRouter()
+          addRouterFromData(addCommonRoutes, modulesRoutes, router)
+        }
+        next({ ...to, replace: true })
+      })
+      .catch(e => {
+        console.log(
+          `%c${e} 请求菜单列表和权限失败，跳转至登录页！！`,
+          "color:blue"
+        )
+        router.push({ name: "login" })
+      })
   }
 })
 

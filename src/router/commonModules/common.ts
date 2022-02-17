@@ -6,7 +6,6 @@
  * @LastEditTime: 2021-01-21 18:04:55
  */
 import { RouteRecordRaw } from "vue-router"
-import Layout from "@/layout/index.vue";
 
 const UserManagerRouter: Array<RouteRecordRaw> = [
   {
@@ -21,8 +20,8 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: "/error/401",
     component: import(
-        /* webpackChunkName: "error-page-401" */ "@/views/error-page/401.vue"
-        ),
+      /* webpackChunkName: "error-page-401" */ "@/views/error-page/401.vue"
+    ),
     // redirect: "noredirect",
     name: "Page401",
     meta: {
@@ -33,8 +32,8 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: "/error/404",
     component: import(
-        /* webpackChunkName: "error-page-404" */ "@/views/error-page/404.vue"
-        ),
+      /* webpackChunkName: "error-page-404" */ "@/views/error-page/404.vue"
+    ),
     // redirect: "noredirect",
     name: "Page404",
     meta: {

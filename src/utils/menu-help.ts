@@ -1,4 +1,4 @@
-import {RouterApiType, RouteType} from "@/constant/settings";
+import { RouterApiType, RouteType } from "@/constant/settings"
 
 /**
  * 处理route 增加信息
@@ -6,17 +6,21 @@ import {RouterApiType, RouteType} from "@/constant/settings";
  * @param parentKey
  * @param parent
  */
-export function fixRoute (routeList: RouterApiType[], parentKey: string[] = [], parent?: RouterApiType): RouterApiType[] {
-    routeList.forEach(item => {
-        item.parentKey = parentKey
-        if (!item.icon && parent) {
-            item.icon = parent.icon
-        }
-        if (item.children) {
-            fixRoute(item.children, parentKey.concat(item.key), item)
-        }
-    })
-    return routeList
+export function fixRoute(
+  routeList: RouterApiType[],
+  parentKey: string[] = [],
+  parent?: RouterApiType
+): RouterApiType[] {
+  routeList.forEach(item => {
+    item.parentKey = parentKey
+    if (!item.icon && parent) {
+      item.icon = parent.icon
+    }
+    if (item.children) {
+      fixRoute(item.children, parentKey.concat(item.key), item)
+    }
+  })
+  return routeList
 }
 
 /**
@@ -24,14 +28,17 @@ export function fixRoute (routeList: RouterApiType[], parentKey: string[] = [], 
  * @param routeList
  * @param sourceArray
  */
-export function getRouteList (routeList: RouterApiType[], sourceArray:any[] = []) {
-    routeList.forEach(item => {
-        sourceArray.push(item)
-        if (item.children) {
-            getRouteList(item.children, sourceArray)
-        }
-    })
-    return sourceArray
+export function getRouteList(
+  routeList: RouterApiType[],
+  sourceArray: any[] = []
+) {
+  routeList.forEach(item => {
+    sourceArray.push(item)
+    if (item.children) {
+      getRouteList(item.children, sourceArray)
+    }
+  })
+  return sourceArray
 }
 
 /**
@@ -39,41 +46,45 @@ export function getRouteList (routeList: RouterApiType[], sourceArray:any[] = []
  * @param routeList
  * @param sourceMap
  */
-export function getRouteMap (routeList: RouterApiType[], sourceMap: {[key: string]: RouterApiType } = {}): {[key: string]: RouterApiType } {
-    routeList.forEach(item => {
-        sourceMap[item.key] = item
-        if (item.children) {
-            getRouteMap(item.children, sourceMap)
-        }
-    })
-    return sourceMap
-}
-
-export function getFirstMenuItem(routeList?: RouterApiType[]): undefined|RouterApiType {
-    let dist
-    if (!routeList || routeList.length === 0) return dist
-    for (let i = 0; i< routeList.length; i++) {
-        dist = routeList[i]
-        if (dist.type === RouteType.Page) return dist
-        dist = getFirstMenuItem(dist.children)
-        if (dist) return dist
+export function getRouteMap(
+  routeList: RouterApiType[],
+  sourceMap: { [key: string]: RouterApiType } = {}
+): { [key: string]: RouterApiType } {
+  routeList.forEach(item => {
+    sourceMap[item.key] = item
+    if (item.children) {
+      getRouteMap(item.children, sourceMap)
     }
-}
-export function buildMenuName (route: RouterApiType) {
-    return route.title + '-' + route.key
+  })
+  return sourceMap
 }
 
-export function getCanShowRoute (routes: RouterApiType[]) {
-    let res:RouterApiType[] = []
-    routes.filter(route => {
-        if (route.notShow) return false
-        let children = getCanShowRoute(route.children || [])
-        res.push({
-            ...route,
-            children: children
-        })
-        return true
+export function getFirstMenuItem(
+  routeList?: RouterApiType[]
+): undefined | RouterApiType {
+  let dist
+  if (!routeList || routeList.length === 0) return dist
+  for (let i = 0; i < routeList.length; i++) {
+    dist = routeList[i]
+    if (dist.type === RouteType.Page) return dist
+    dist = getFirstMenuItem(dist.children)
+    if (dist) return dist
+  }
+}
+export function buildMenuName(route: RouterApiType) {
+  return route.title + "-" + route.key
+}
+
+export function getCanShowRoute(routes: RouterApiType[]) {
+  const res: RouterApiType[] = []
+  routes.filter(route => {
+    if (route.notShow) return false
+    const children = getCanShowRoute(route.children || [])
+    res.push({
+      ...route,
+      children: children
     })
-    return res
+    return true
+  })
+  return res
 }
-

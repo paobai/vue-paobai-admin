@@ -8,33 +8,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, nextTick } from 'vue';
-import VCharts from 'vue-echarts';
-// import { useStore } from '@/store';
+import { defineComponent, ref, nextTick } from "vue"
+import VCharts from "vue-echarts"
 
 export default defineComponent({
   components: {
-    VCharts,
+    VCharts
   },
   props: {
     options: {
       type: Object,
       default() {
-        return {};
-      },
+        return {}
+      }
     },
     autoresize: {
       type: Boolean,
-      default: true,
+      default: true
     },
     width: {
       type: String,
-      default: '100%',
+      default: "100%"
     },
     height: {
       type: String,
-      default: '100%',
-    },
+      default: "100%"
+    }
   },
   setup() {
     // const store = useStore();
@@ -42,17 +41,17 @@ export default defineComponent({
     //   if (store.state.app.theme === 'dark') return 'dark';
     //   return '';
     // });
-    const renderChart = ref(false);
+    const renderChart = ref(false)
     // wait container expand
     nextTick(() => {
-      renderChart.value = true;
-    });
+      renderChart.value = true
+    })
     return {
       // theme,
-      renderChart,
-    };
-  },
-});
+      renderChart
+    }
+  }
+})
 </script>
 
 <style scoped lang="less"></style>

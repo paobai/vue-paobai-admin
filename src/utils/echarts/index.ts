@@ -1,7 +1,8 @@
 import * as echarts from "echarts/core"
-import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts"
+import { BarChart, LineChart, PieChart } from "echarts/charts"
 import { CanvasRenderer } from "echarts/renderers"
-import Chart from './chart/index.vue'
+import Chart from "./chart/index.vue"
+import { App } from "vue"
 
 import {
   GridComponent,
@@ -11,7 +12,7 @@ import {
   TooltipComponent,
   DataZoomComponent,
   VisualMapComponent,
-  GraphicComponent,
+  GraphicComponent
 } from "echarts/components"
 
 const { use, registerTheme } = echarts
@@ -37,6 +38,6 @@ registerTheme("ovilia-green", theme)
 
 export default {
   install(Vue: App) {
-    Vue.component('Chart', Chart);
-  },
-};
+    Vue.component("Chart", Chart)
+  }
+}

@@ -3,19 +3,32 @@
     <div class="app-left-tag">
       <a-breadcrumb>
         <a-breadcrumb-item>
-          <a-icon-home style="font-size: 14px"/>
+          <a-icon-home style="font-size: 14px" />
         </a-breadcrumb-item>
-        <a-breadcrumb-item v-for="item in leftTag" :key="item.title">{{item.title}}</a-breadcrumb-item>
+        <a-breadcrumb-item v-for="item in leftTag" :key="item.title">{{
+          item.title
+        }}</a-breadcrumb-item>
         <template #separator>
           <a-icon-right />
         </template>
       </a-breadcrumb>
     </div>
     <div class="app-tag-main">
-      <a-dropdown trigger="contextMenu" :style="{display:'block'}"  v-for="(item, index) in appTagList" :key="item.key" @select="(value)=> tagSelect(value, item, index)">
-        <div class="tag-item-card" :class="{'active': activeRouteKey === item.key}">
-          <div class="tag-name" @click="gotoTag(item)">{{item.title}}</div>
-          <div class="tag-options" @click="deleteTag(item, index)"><a-icon-close /></div>
+      <a-dropdown
+        trigger="contextMenu"
+        :style="{ display: 'block' }"
+        v-for="(item, index) in appTagList"
+        :key="item.key"
+        @select="value => tagSelect(value, item, index)"
+      >
+        <div
+          class="tag-item-card"
+          :class="{ active: activeRouteKey === item.key }"
+        >
+          <div class="tag-name" @click="gotoTag(item)">{{ item.title }}</div>
+          <div class="tag-options" @click="deleteTag(item, index)">
+            <a-icon-close />
+          </div>
         </div>
         <template #content>
           <a-doption value="closeChose">
@@ -30,9 +43,9 @@
             </template>
             <template #default>关闭全部</template>
           </a-doption>
-          <a-doption  value="reloadChose">
+          <a-doption value="reloadChose">
             <template #icon>
-              <a-icon-refresh spin/>
+              <a-icon-refresh spin />
             </template>
             <template #default>刷新当前</template>
           </a-doption>
@@ -40,16 +53,30 @@
       </a-dropdown>
     </div>
     <div class="app-tag-options">
-      <div title="刷新当前" class="options-item" @click="optionsClick('refresh')">
-        <a-icon-refresh/>
+      <div
+        title="刷新当前"
+        class="options-item"
+        @click="optionsClick('refresh')"
+      >
+        <a-icon-refresh />
       </div>
-      <div title="关闭当前" class="options-item"  @click="optionsClick('close')">
-        <a-icon-close/>
+      <div title="关闭当前" class="options-item" @click="optionsClick('close')">
+        <a-icon-close />
       </div>
-      <div title="全屏" class="options-item" v-if="fullScreenStatus === 0" @click="optionsClick('fullScreen')">
+      <div
+        title="全屏"
+        class="options-item"
+        v-if="fullScreenStatus === 0"
+        @click="optionsClick('fullScreen')"
+      >
         <a-icon-fullscreen />
       </div>
-      <div title="退出全屏" class="options-item"  v-else @click="optionsClick('exitFullScreen')">
+      <div
+        title="退出全屏"
+        class="options-item"
+        v-else
+        @click="optionsClick('exitFullScreen')"
+      >
         <a-icon-fullscreen-exit />
       </div>
     </div>
@@ -57,15 +84,18 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref, unref, watch} from "vue"
-import type { Ref } from 'vue'
-import {useRouter, useRoute} from "vue-router";
-import {RouteLocationNormalizedLoadedCustom, tagType} from '@/constant/settings'
-import config from '@/config'
-import {useUserHook} from "@/hooks/user";
-import { useAppHook } from "@/hooks/app";
+import { computed, defineComponent, ref, unref, watch } from "vue"
+import type { Ref } from "vue"
+import { useRouter, useRoute } from "vue-router"
+import {
+  RouteLocationNormalizedLoadedCustom,
+  tagType
+} from "@/constant/settings"
+import config from "@/config"
+import { useUserHook } from "@/hooks/user"
+import { useAppHook } from "@/hooks/app"
 export default defineComponent({
-  setup (props) {
+  setup() {
     let { routerMap } = useUserHook()
     let { nowMenu } = useAppHook()
     let leftTag = computed(() => {
@@ -73,7 +103,7 @@ export default defineComponent({
         return
       }
       let keyList = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
-      let menuList = []
+      let menuList: any = []
       keyList.forEach(key => {
         menuList.push(unref(routerMap)[key])
       })
@@ -81,8 +111,9 @@ export default defineComponent({
     })
     const router = useRouter()
     const fullScreenStatus = ref(0)
-    const route: RouteLocationNormalizedLoadedCustom = useRoute() as RouteLocationNormalizedLoadedCustom
-    let activeRouteKey: Ref<String> = ref('')
+    const route: RouteLocationNormalizedLoadedCustom =
+      useRoute() as RouteLocationNormalizedLoadedCustom
+    let activeRouteKey: Ref<String> = ref("")
     let appTagList: Ref<Array<tagType>> = ref([])
     const deleteTag = function (item: tagType, index: number) {
       appTagList.value.splice(index, 1)
@@ -92,7 +123,7 @@ export default defineComponent({
       }
       if (activeRouteKey.value === item.key) {
         let nextIndex = index - 1 < 0 ? 0 : index - 1
-        let nextItem =  appTagList.value[nextIndex]
+        let nextItem = appTagList.value[nextIndex]
         router.replace({ path: nextItem.path })
       }
     }
@@ -100,48 +131,51 @@ export default defineComponent({
       router.replace({ path: item.path })
     }
     const tagSelect = function (value: string, item: tagType, index: number) {
-      if (value === 'closeChose') {
+      if (value === "closeChose") {
         deleteTag(item, index)
-      } else if (value === 'closeAll'){
-        appTagList.value = item.path === config.app.homePagePath ? [item]: []
+      } else if (value === "closeAll") {
+        appTagList.value = item.path === config.app.homePagePath ? [item] : []
         router.replace({ path: config.app.homePagePath })
-      } else if(value === 'reloadChose') {
+      } else if (value === "reloadChose") {
         router.replace({
           name: "跳转页-redirect-page",
-          params: {distPath: item.path}
-        });
+          params: { distPath: item.path }
+        })
       }
     }
     const optionsClick = function (optionsValue: string) {
-      let distIndex = appTagList.value.findIndex(item => item.key === activeRouteKey.value)
+      let distIndex = appTagList.value.findIndex(
+        item => item.key === activeRouteKey.value
+      )
       let distItem = appTagList.value[distIndex]
-      if (optionsValue === 'refresh') {
-        tagSelect('reloadChose', distItem, distIndex)
-      } else if (optionsValue === 'close') {
-        tagSelect('closeChose', distItem, distIndex)
-      } else if (optionsValue === 'fullScreen') {
+      if (optionsValue === "refresh") {
+        tagSelect("reloadChose", distItem, distIndex)
+      } else if (optionsValue === "close") {
+        tagSelect("closeChose", distItem, distIndex)
+      } else if (optionsValue === "fullScreen") {
         document.documentElement.requestFullscreen()
         fullScreenStatus.value = 1
-      } else if (optionsValue === 'exitFullScreen') {
-        document.exitFullscreen();
+      } else if (optionsValue === "exitFullScreen") {
+        document.exitFullscreen()
         fullScreenStatus.value = 0
       }
     }
-    watch(() => route.path,() => {
-      activeRouteKey.value = route.meta.key
-      let find = appTagList.value.find(item => item.key === route.meta.key)
-      if (find) return
-      if (route.meta.notShow) return;
-      appTagList.value.push({
-        title: route.meta.title  as string,
-        key: route.meta.key  as string,
-        name: route.name as string,
-        path: route.path as string
-      })
-    }, { immediate: true })
-    function breadcrumbClick(item) {
-      console.log(item)
-    }
+    watch(
+      () => route.path,
+      () => {
+        activeRouteKey.value = route.meta.key
+        let find = appTagList.value.find(item => item.key === route.meta.key)
+        if (find) return
+        if (route.meta.notShow) return
+        appTagList.value.push({
+          title: route.meta.title as string,
+          key: route.meta.key as string,
+          name: route.name as string,
+          path: route.path as string
+        })
+      },
+      { immediate: true }
+    )
     return {
       appTagList,
       deleteTag,
@@ -150,26 +184,25 @@ export default defineComponent({
       tagSelect,
       fullScreenStatus,
       optionsClick,
-      leftTag,
-      breadcrumbClick
+      leftTag
     }
   }
 })
 </script>
 
 <style lang="less" scoped>
-.app-tag{
+.app-tag {
   box-shadow: 0 1px 4px rgb(var(--arcoblue-6));
   display: flex;
-  .app-left-tag{
+  .app-left-tag {
     padding: 0 16px;
     line-height: 30px;
-    .menu-tag{
+    .menu-tag {
       padding: 0 8px;
       border-right: 1px solid rgb(var(--arcoblue-6));
     }
   }
-  .app-tag-main{
+  .app-tag-main {
     padding: 3px;
     flex: auto;
     overflow: hidden;
@@ -179,18 +212,18 @@ export default defineComponent({
       padding: 2px 4px;
       height: 24px;
       border-radius: 4px;
-      &.active{
+      &.active {
         background: rgb(var(--arcoblue-6));
         color: #ffffff;
         border-color: rgb(var(--arcoblue-6));
-        .tag-options{
+        .tag-options {
           border-color: #ffffff;
         }
       }
-      &+.tag-item-card{
+      & + .tag-item-card {
         margin-left: 16px;
       }
-      .tag-name{
+      .tag-name {
         cursor: pointer;
         display: inline-block;
         line-height: 18px;
@@ -198,7 +231,7 @@ export default defineComponent({
         padding: 0 4px;
         margin-right: 6px;
       }
-      .tag-options{
+      .tag-options {
         border-left: 1px solid rgb(var(--arcoblue-6));
         cursor: pointer;
         padding-left: 4px;
@@ -206,14 +239,14 @@ export default defineComponent({
       }
     }
   }
-  .app-tag-options{
-    .options-item{
+  .app-tag-options {
+    .options-item {
       cursor: pointer;
       padding: 0 8px;
       font-size: 16px;
       line-height: 30px;
       display: inline-block;
-      &+.options-item{
+      & + .options-item {
         border-left: 1px solid rgb(var(--arcoblue-6));
       }
     }

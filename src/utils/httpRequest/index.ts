@@ -1,18 +1,23 @@
-import axios, {AxiosInstance, AxiosPromise, AxiosRequestConfig, Method} from "axios"
+import axios, { AxiosRequestConfig, Method } from "axios"
 import router from "@/router"
 import qs from "qs"
-import { cloneDeep, merge } from "lodash"
+import { merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
 import { AuthApi } from "@/api/upms-api"
 import { clientId, clientSecret, grantType } from "@/constant"
-import {ApiCodeEnum, ApiResponseBase, ApiPromise, ContentType, CustomAxiosInstance} from './help';
+import {
+  ApiCodeEnum,
+  ApiPromise,
+  ContentType,
+  CustomAxiosInstance
+} from "./help"
 import { saveAs } from "file-saver"
 import Cookies from "js-cookie"
-import { loadEnv } from "@/../build/utils";
-import sysConfig from "@/config";
-import { Message } from '@arco-design/web-vue'
+import { loadEnv } from "@/../build/utils"
+import sysConfig from "@/config"
+import { Message } from "@arco-design/web-vue"
 
-const env = loadEnv();
+const env = loadEnv()
 const apiBaseUrl = env.VITE_API_BASE_URL
 
 const http: CustomAxiosInstance = axios.create({
@@ -72,7 +77,8 @@ http.adornData = (
  */
 http.interceptors.request.use(
   config => {
-    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
+    config.headers["X-STEINS-TOKEN"] =
+      "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
     // config.headers['Access-Control-Allow-Origin'] = '*'
     // config.headers['Access-Control-Allow-Methods'] = '*'
     config.headers["X-STEINS-TENANT-ID"] = "1"
@@ -94,7 +100,8 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
+      httpConfig.headers["X-STEINS-TOKEN"] =
+        sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
       resolve(http(httpConfig))
     })
   })
@@ -139,7 +146,7 @@ function referToken() {
 function errorLogin() {
   clearLoginInfo()
   Message.error("登录失效")
-  router.push({ name: 'login' })
+  router.push({ name: "login" })
 }
 /**
  * 响应拦截
@@ -147,10 +154,10 @@ function errorLogin() {
 http.interceptors.response.use(
   response => {
     if (!response.data) {
-      return Promise.reject('系统错误')
+      return Promise.reject("系统错误")
     }
     if (response.data.code !== ApiCodeEnum.SUCCESS) {
-      Message.error(response.data.msg || '系统错误')
+      Message.error(response.data.msg || "系统错误")
       return Promise.reject(response.data)
     }
     response.data.__headers = response.headers
@@ -172,14 +179,14 @@ http.interceptors.response.use(
         return Promise.reject(error.response.data)
       }
 
-      console.log('clearLoginInfo')
-      let refreshToken = Cookies.get(sysConfig.app.refreshTokenName)
+      console.log("clearLoginInfo")
+      const refreshToken = Cookies.get(sysConfig.app.refreshTokenName)
       if (!refreshToken) {
         // 没有refreshToken情况直接返回不需要提示。
         errorLogin()
         return
       } else {
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
           checkStatus(response.config).then(res => {
             resolve(res)
           })
@@ -188,13 +195,15 @@ http.interceptors.response.use(
     }
     if (error.response.data.code === 10250) {
       Message.error("登录失效,请先登录")
+      // eslint-disable-next-line no-empty
     } else if (error.response.data.code === 10251) {
+      // TODO
     } else Message.error(error.response.data.msg)
     return Promise.reject(error.response.data)
   }
 )
 
-export const postRequest = <T>  (
+export const postRequest = <T>(
   url: string,
   data?: any,
   params?: any,
@@ -221,7 +230,7 @@ export const postRequest = <T>  (
   }
 }
 
-export const getRequest = <T> (url: string, params?: any): ApiPromise<T> => {
+export const getRequest = <T>(url: string, params?: any): ApiPromise<T> => {
   url = http.adornUrl(url) as string
   return http({
     method: "get",
@@ -230,7 +239,11 @@ export const getRequest = <T> (url: string, params?: any): ApiPromise<T> => {
   })
 }
 
-export const putRequest = <T> (url: any, data?: any, params?: any): ApiPromise<T> => {
+export const putRequest = <T>(
+  url: any,
+  data?: any,
+  params?: any
+): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "put",
@@ -240,7 +253,11 @@ export const putRequest = <T> (url: any, data?: any, params?: any): ApiPromise<T
   })
 }
 
-export const deleteRequest = <T> (url: any, params?: any, data?: any): ApiPromise<T> => {
+export const deleteRequest = <T>(
+  url: any,
+  params?: any,
+  data?: any
+): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "delete",
@@ -255,10 +272,10 @@ export function downloadFile(
   url: any,
   params?: any,
   method = "get",
-  fileName = undefined
+  fileName: string | undefined = undefined
 ): ApiPromise {
   url = http.adornUrl(url)
-  return new Promise((resolve, reject) => {
+  return new Promise(() => {
     http({
       method: method as Method,
       url: url,
@@ -266,12 +283,13 @@ export function downloadFile(
       data: params,
       responseType: "blob"
     }).then(res => {
-      let fileName = "download"
+      fileName = fileName || "download"
       const contentDisposition =
         (res as any).__headers["content-disposition"] ||
         (res as any).__headers["Content-disposition"]
       if (contentDisposition) {
-        fileName = window.decodeURI(contentDisposition.split("''")[1])
+        fileName =
+          fileName || window.decodeURI(contentDisposition.split("''")[1])
       }
       const blob = new Blob([res as any], { type: "application/vnd.ms-excel" })
       saveAs(blob, fileName)
@@ -284,6 +302,7 @@ export function uploadFile(
   url: string,
   data: any,
   method = "post",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
   fileName = undefined
 ): ApiPromise {
   url = http.adornUrl(url) as string

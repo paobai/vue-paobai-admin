@@ -18,10 +18,10 @@ export default defineComponent({})
 </script>
 
 <style lang="less" scoped>
-.app-main{
+.app-main {
   width: 100%;
   height: 100%;
-  .app-main-container{
+  .app-main-container {
     width: 100%;
     height: 100%;
     overflow: auto;

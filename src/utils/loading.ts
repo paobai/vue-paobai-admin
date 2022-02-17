@@ -6,9 +6,7 @@
  * @LastEditTime: 2021-01-20 15:09:36
  */
 
-
 export default function () {
-
   return {
     // loading
   }

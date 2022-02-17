@@ -1,7 +1,10 @@
 <template>
-  <div class="app-sidebar" :class="{'menu-collapse': collapse}">
+  <div class="app-sidebar" :class="{ 'menu-collapse': collapse }">
     <div class="logo-wrapper">
-      <img class="logo logo-big" src="/src/assets/images/common/logo-with-text-small.png" />
+      <img
+        class="logo logo-big"
+        src="/src/assets/images/common/logo-with-text-small.png"
+      />
       <img class="logo logo-small" src="/src/assets/images/common/logo.png" />
     </div>
     <menu-main></menu-main>
@@ -9,14 +12,14 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue"
+import { defineComponent } from "vue"
 import menuMain from "./menu-main.vue"
-import {useAppHook} from "@/hooks/app";
+import { useAppHook } from "@/hooks/app"
 export default defineComponent({
   components: {
     menuMain
   },
-  setup(props) {
+  setup() {
     let { collapse } = useAppHook()
     return {
       collapse
@@ -29,17 +32,17 @@ export default defineComponent({
 .app-sidebar {
   display: flex;
   flex-direction: column;
-  &.menu-collapse{
-    .logo-wrapper{
-      .logo-big{
+  &.menu-collapse {
+    .logo-wrapper {
+      .logo-big {
         display: none;
       }
-      .logo-small{
+      .logo-small {
         display: unset;
       }
     }
   }
-  .logo-wrapper{
+  .logo-wrapper {
     display: none;
     width: 100%;
     height: @app-navbar-height;
@@ -48,10 +51,10 @@ export default defineComponent({
     .logo {
       vertical-align: middle;
     }
-    .logo-big{
+    .logo-big {
       width: 130px;
     }
-    .logo-small{
+    .logo-small {
       width: 40px;
       display: none;
     }

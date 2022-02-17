@@ -8,11 +8,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, onMounted, unref } from "vue"
-import type { Ref } from 'vue'
+import { defineComponent } from "vue"
 import HelloWorld from "@/components/HelloWorld.vue"
 import router from "@/router"
-import { Message } from '@arco-design/web-vue'
+import { Message } from "@arco-design/web-vue"
 
 export default defineComponent({
   name: "App",
@@ -20,22 +19,22 @@ export default defineComponent({
     HelloWorld
   },
   setup() {
-    Message.info('1231')
+    Message.info("1231")
     let goHome = function () {
       router.push({ name: "home" })
     }
     let options = {
       xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        type: "category",
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
       },
       yAxis: {
-        type: 'value'
+        type: "value"
       },
       series: [
         {
           data: [150, 230, 224, 218, 135, 147, 260],
-          type: 'line'
+          type: "line"
         }
       ]
     }
@@ -45,7 +44,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.app-container{
-
+.app-container {
 }
 </style>

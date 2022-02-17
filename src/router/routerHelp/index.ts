@@ -9,8 +9,8 @@ export declare interface MyRouter extends Router {
 }
 
 import Layout from "@/layout/Index.vue"
-import {RouterApiType, RouterCustomType, RouteType} from "@/constant/settings";
-import {storageSession} from "@/utils/storage";
+import { RouterApiType, RouterCustomType, RouteType } from "@/constant/settings"
+import { storageSession } from "@/utils/storage"
 
 /**
  * 添加动态(菜单)路由
@@ -52,13 +52,16 @@ export function fnAddDynamicMenuRoutes(
           // 先看直接目录有没有
           try {
             distComponent = import.meta.glob(`/src/views/${menuList[i].path}`)
-          } catch (e) {}
+            // eslint-disable-next-line no-empty
+          } catch {}
           // 没有的话就去该目录的index文件看看有没有
           if (!distComponent)
             distComponent =
               import.meta.glob(`/src/views/${menuList[i].path}/index`) || null
           route["component"] = distComponent as any
-        } catch (e) {}
+        } catch (e) {
+          console.warn("find can't find :" + `${menuList[i].path}`)
+        }
       }
       routes.push(route)
     }
@@ -97,10 +100,16 @@ export function isGlobalRoute(
  * 根据来源api结构改成要的样子
  * @param sourceApiData
  */
-export function fixResToSys(sourceApiData: any): { permissions: string[], routers: RouterApiType[]} {
-  return { permissions: sourceApiData.permissions, routers: sourceApiData.routers}
+export function fixResToSys(sourceApiData: any): {
+  permissions: string[]
+  routers: RouterApiType[]
+} {
+  return {
+    permissions: sourceApiData.permissions,
+    routers: sourceApiData.routers
+  }
 }
-function fixMenuMainDo(menu: any, btPerms: any) {
+export function fixMenuMainDo(menu: any, btPerms: any) {
   const newMenu: any[] = []
   menu.forEach((item: any) => {
     if (item.type === 2) {
@@ -129,7 +138,7 @@ export function addRouterToMainRouter(
   mainRoutes.menuName = "main-dynamic"
   mainRoutes.children = mainRoutes.children.concat(routes)
   router.addRoutes([mainRoutes, { path: "*", redirect: { name: "404" } }])
-  storageSession.setItem("dynamicMenuRoutes", mainRoutes.children || []);
+  storageSession.setItem("dynamicMenuRoutes", mainRoutes.children || [])
 }
 
 export interface GetRouteStructure {
@@ -152,9 +161,9 @@ export function addRouterFromData(
   router: Router
 ) {
   if (!routes || routes.length === 0) return
-  let inList:RouterCustomType[] = []
+  const inList: RouterCustomType[] = []
   routes.forEach(item => buildRoute(item, modulesRoutes, inList))
-  let dist :RouteRecordRaw = {
+  const dist: RouteRecordRaw = {
     path: "/",
     component: Layout,
     redirect: "/main",
@@ -167,10 +176,10 @@ export function addRouterFromData(
   })
 }
 
-export function buildRoute (
-    item: RouterApiType,
-    modulesRoutes: any,
-    inList: RouterCustomType[] = []
+export function buildRoute(
+  item: RouterApiType,
+  modulesRoutes: any,
+  inList: RouterCustomType[] = []
 ) {
   if (item.type === RouteType.Menu) {
     if (item.children && item.children.length > 0) {
@@ -182,7 +191,7 @@ export function buildRoute (
   }
   if (!item.path) return
   const componentPath = `/src/views${item.path}.vue`
-  let findModule = modulesRoutes[componentPath]
+  const findModule = modulesRoutes[componentPath]
   inList.push({
     path: item.path,
     name: buildRouteName(item),
@@ -198,6 +207,6 @@ export function buildRoute (
   })
 }
 
-export function buildRouteName (route :RouterApiType) {
-  return route.title + '-' + route.key
+export function buildRouteName(route: RouterApiType) {
+  return route.title + "-" + route.key
 }

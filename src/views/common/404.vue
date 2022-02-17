@@ -3,8 +3,8 @@
   <button @click="goHome">回到登录页</button>
 </template>
 <script lang="ts">
-import config from "@/config";
-import {useRouter} from "vue-router";
+import config from "@/config"
+import { useRouter } from "vue-router"
 export default {
   setup() {
     const router = useRouter()

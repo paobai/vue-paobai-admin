@@ -1,7 +1,5 @@
 <template>
-  <div class="app-footer">
-    PAOBAI-ADMIN@0.1
-  </div>
+  <div class="app-footer">PAOBAI-ADMIN@0.1</div>
 </template>
 
 <style lang="scss" scoped>

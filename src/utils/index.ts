@@ -1,16 +1,14 @@
-import router, { resetRouter } from "@/router"
-import Vue from "vue"
+import { resetRouter } from "@/router"
 import Cookies from "js-cookie"
-import {MyRouter, MyRouterOptions} from "@/router/routerHelp"
-import { storageSession } from '@/utils/storage'
-import sysConfig from "@/config";
+import { storageSession } from "@/utils/storage"
+import sysConfig from "@/config"
 
 export function clearLoginInfo() {
   Cookies.remove(sysConfig.app.tokenName)
   Cookies.remove(sysConfig.app.refreshTokenName)
   // store.commit('resetStore')
   // @ts-ignore
-  storageSession.setItem(sysConfig.permissionName, []);
+  storageSession.setItem(sysConfig.permissionName, [])
   resetRouter()
 }
 
@@ -36,27 +34,30 @@ export const toggleClass = (ele: HTMLElement, className: string) => {
  * @param color 颜色
  * @param propertyPre 更新类型默认主题色
  */
-export const changeArcoPrimaryColor = (color: string, propertyPre='--arcoblue-') => {
+export const changeArcoPrimaryColor = (
+  color: string,
+  propertyPre = "--arcoblue-"
+) => {
   const tintColor = (color: string, tint: number) => {
-    if (!color) return ''
+    if (!color) return ""
     let red = 0
     let blue = 0
     let green = 0
-    if (color.indexOf('#') !== -1) {
-      color = color.replace('#', '')
+    if (color.indexOf("#") !== -1) {
+      color = color.replace("#", "")
       red = parseInt(color.slice(0, 2), 16)
       green = parseInt(color.slice(2, 4), 16)
       blue = parseInt(color.slice(4, 6), 16)
     } else {
-      let colorList = color.match(/\d+/g)!
+      const colorList = color.match(/\d+/g)!
       red = +colorList[0]
       green = +colorList[1]
       blue = +colorList[2]
     }
 
-
-    if (tint === 0) { // when primary color is in its rgb space
-      return [red, green, blue].join(',')
+    if (tint === 0) {
+      // when primary color is in its rgb space
+      return [red, green, blue].join(",")
     } else {
       red += Math.round(tint * (255 - red))
       green += Math.round(tint * (255 - green))
@@ -65,10 +66,10 @@ export const changeArcoPrimaryColor = (color: string, propertyPre='--arcoblue-')
     }
   }
   const clusters = []
-  let body = document.body
+  const body = document.body
   for (let i = 0; i <= 9; i++) {
-    let tgbText = tintColor(color, Number(((i - 5) / 10).toFixed(2)))
+    const tgbText = tintColor(color, Number(((i - 5) / 10).toFixed(2)))
     clusters.push(tgbText)
-    body.style.setProperty(propertyPre + (i+1), tgbText)
+    body.style.setProperty(propertyPre + (i + 1), tgbText)
   }
 }
