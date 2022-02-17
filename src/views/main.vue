@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <chart width="500px" height="500px" :options="options"></chart>
+    <chart width="100%" height="500px" :options="options"></chart>
     123123
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
@@ -12,6 +12,7 @@ import { defineComponent, computed, ref, onMounted, unref } from "vue"
 import type { Ref } from 'vue'
 import HelloWorld from "@/components/HelloWorld.vue"
 import router from "@/router"
+import { Message } from '@arco-design/web-vue'
 
 export default defineComponent({
   name: "App",
@@ -19,6 +20,7 @@ export default defineComponent({
     HelloWorld
   },
   setup() {
+    Message.info('1231')
     let goHome = function () {
       router.push({ name: "home" })
     }

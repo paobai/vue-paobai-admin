@@ -74,25 +74,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       vueJsx(),
       styleImport({
         libs: [
-          // 按需加载element-plus
           {
-            libraryName: "element-plus",
+            libraryName: '@arco-design/web-vue',
             esModule: true,
-            ensureStyleFile: true,
             resolveStyle: (name) => {
-              return `element-plus/lib/theme-chalk/${name}.css`;
+              // css
+              return `@arco-design/web-vue/es/${name}/style/css.js`
+              // less
+              return `@arco-design/web-vue/es/${name}/style/index.js`
             },
-            resolveComponent: (name) => {
-              return `element-plus/lib/${name}`;
-            },
-          },
-          // 按需加载vxe-table
-          {
-            libraryName: "vxe-table",
-            esModule: true,
-            resolveComponent: (name) => `vxe-table/es/${name}`,
-            resolveStyle: (name) => `vxe-table/es/${name}/style.css`,
-          },
+          }
         ],
       }),
       viteMockServe({
@@ -108,10 +99,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     ],
     optimizeDeps: {
       include: [
-        "element-plus/lib/locale/lang/zh-cn",
-        "element-plus/lib/locale/lang/en",
-        "vxe-table/lib/locale/lang/zh-CN",
-        "vxe-table/lib/locale/lang/en-US",
       ],
     },
     build: {
