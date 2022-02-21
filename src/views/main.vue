@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <div style="width: 100%;overflow: hidden">
-      <chart  :options="options"></chart>
+    <div style="width: 100%;height:500px;overflow: hidden">
+      <chart :options="options"></chart>
     </div>
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
