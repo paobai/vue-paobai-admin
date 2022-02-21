@@ -1,5 +1,5 @@
 import { resetRouter } from "@/router"
-import Cookies from "./storage/cookie"
+import Cookies from "@/utils/storage/cookie"
 import { storageSession } from "@/utils/storage"
 import sysConfig from "@/config"
 
