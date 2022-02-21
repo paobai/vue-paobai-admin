@@ -3,7 +3,7 @@ import config from "@/config"
 import * as directives from "./directives"
 import iconfont from "@/components/iconfont.vue"
 import { setupStore } from "@/store"
-import echarts from "@/utils/echarts"
+import echarts from "@/plugins/echarts"
 export function initApp(app: App) {
   const dist = document.getElementsByTagName("title")[0]
   dist.innerHTML = config.custom.htmlTitle

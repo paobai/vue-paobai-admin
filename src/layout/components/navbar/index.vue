@@ -10,6 +10,44 @@
       <menu-main></menu-main>
     </div>
     <div class="right-wrapper">
+      <ul class="right-side">
+        <li>
+          <a-tooltip content="搜索">
+            <a-button class="nav-btn" type="outline" :shape="'circle'">
+              <template #icon>
+                <a-icon-search />
+              </template>
+            </a-button>
+          </a-tooltip>
+        </li>
+        <li>
+          <a-tooltip content="消息通知">
+            <div class="message-box-trigger">
+              <a-badge :count="9" dot>
+                <a-button
+                    class="nav-btn"
+                    type="outline"
+                    :shape="'circle'"
+                    @click="setPopoverVisible"
+                >
+                  <a-icon-notification />
+                </a-button>
+              </a-badge>
+            </div>
+          </a-tooltip>
+          <a-popover
+              trigger="click"
+              :arrow-style="{ display: 'none' }"
+              :content-style="{ padding: 0, minWidth: '400px' }"
+              content-class="message-popover"
+          >
+            <div ref="refBtn" class="ref-btn"></div>
+            <template #content>
+              <message-box />
+            </template>
+          </a-popover>
+        </li>
+      </ul>
       <a-avatar>
         <img class="avatar" alt="avatar" :src="userInfo.avatar" />
       </a-avatar>
@@ -35,9 +73,13 @@ import { defineComponent, ref } from "vue"
 import { useUserHook } from "@/hooks/user"
 import ArcoModal from "@arco-design/web-vue/es/modal"
 import menuMain from "./menu-main.vue"
+import messageBox  from './message-box/index.vue'
+import List from "@/layout/components/navbar/message-box/list.vue";
 export default defineComponent({
   components: {
-    menuMain
+    List,
+    menuMain,
+    messageBox
   },
   setup() {
     let { logOutEvent, userInfo } = useUserHook()
@@ -62,11 +104,22 @@ export default defineComponent({
         logOutHand()
       }
     }
+    const refBtn = ref();
+    const setPopoverVisible = () => {
+      const event = new MouseEvent('click', {
+        view: window,
+        bubbles: true,
+        cancelable: true,
+      });
+      refBtn.value.dispatchEvent(event);
+    };
     return {
       getDropDownState,
       dropDownState,
       tagSelect,
-      userInfo
+      userInfo,
+      setPopoverVisible,
+      refBtn
     }
   }
 })
@@ -96,6 +149,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding-right: 18px;
+    position: relative;
     .username {
       padding: 0 10px;
       font-size: 14px;
@@ -103,6 +157,37 @@ export default defineComponent({
       line-height: 19px;
     }
     .avatar {
+    }
+    .right-side {
+      display: flex;
+      padding-right: 20px;
+      list-style: none;
+      :deep(.locale-select) {
+        border-radius: 20px;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+      }
+
+      a {
+        color: var(--color-text-1);
+        text-decoration: none;
+      }
+      .nav-btn {
+        color: rgb(var(--gray-2));
+        border-color: rgb(var(--gray-2));
+        font-size: 16px;
+      }
+      .trigger-btn,
+      .ref-btn {
+        position: absolute;
+        bottom: 14px;
+      }
+      .trigger-btn {
+        margin-left: 14px;
+      }
     }
   }
 }

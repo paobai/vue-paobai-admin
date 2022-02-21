@@ -1,7 +1,8 @@
 import * as echarts from "echarts/core"
-
-import { PieChart, BarChart, LineChart } from "echarts/charts"
-import { SVGRenderer } from "echarts/renderers"
+import { BarChart, LineChart, PieChart } from "echarts/charts"
+import { CanvasRenderer } from "echarts/renderers"
+import Chart from "./chart/index.vue"
+import { App } from "vue"
 
 import {
   GridComponent,
@@ -10,7 +11,8 @@ import {
   ToolboxComponent,
   TooltipComponent,
   DataZoomComponent,
-  VisualMapComponent
+  VisualMapComponent,
+  GraphicComponent
 } from "echarts/components"
 
 const { use, registerTheme } = echarts
@@ -19,18 +21,23 @@ use([
   PieChart,
   BarChart,
   LineChart,
-  SVGRenderer,
+  CanvasRenderer,
   GridComponent,
   TitleComponent,
   LegendComponent,
   ToolboxComponent,
   TooltipComponent,
   DataZoomComponent,
-  VisualMapComponent
+  VisualMapComponent,
+  GraphicComponent
 ])
 
 // 自定义主题
 import theme from "./theme.json"
 registerTheme("ovilia-green", theme)
 
-export default echarts
+export default {
+  install(Vue: App) {
+    Vue.component("Chart", Chart)
+  }
+}

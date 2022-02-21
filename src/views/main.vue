@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
-    <chart width="100%" height="500px" :options="options"></chart>
-    123123
+    <div style="width: 100%;overflow: hidden">
+      <chart  :options="options"></chart>
+    </div>
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
   </div>
@@ -19,7 +20,6 @@ export default defineComponent({
     HelloWorld
   },
   setup() {
-    Message.info("1231")
     let goHome = function () {
       router.push({ name: "home" })
     }
