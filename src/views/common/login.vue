@@ -70,7 +70,7 @@
 <script lang="ts">
 import { reactive } from "vue"
 import { useRouter } from "vue-router"
-import Cookies from "js-cookie"
+import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import { AuthApi } from "@/api/upms-api"
 import { AuthLoginByPasswordReq } from "@/api/upms-api/model"

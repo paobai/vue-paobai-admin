@@ -8,7 +8,7 @@ import {
 } from "@/router/routerHelp"
 import { AuthApi } from "@/api/upms-api"
 import { useUserHook } from "@/hooks/user"
-import Cookies from "js-cookie"
+import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import mainRoutesSource from "./commonLoginRouteApi/common"
 import { fixRoute } from "@/utils/menu-help"

@@ -1,8 +1,8 @@
-import { loadEnv } from "@build/utils"
+import { loadEnv } from "@/../build/utils"
 import { LocalStorage, LowSync } from "lowdb"
 import { chain, cloneDeep } from "lodash-es"
 import { storageLocal } from "."
-import { cookies } from "./cookie"
+import Cookies from "@/utils/storage/cookie"
 type Data = {
   database: {}
   sys: {}
@@ -38,7 +38,7 @@ class DB {
     validator = () => true,
     defaultValue = ""
   }): string {
-    const uuid = cookies.get("uuid") || "ghost-uuid"
+    const uuid = Cookies.get("uuid") || "ghost-uuid"
     const currentPath = `${dbName}.${user ? `user.${uuid}` : "public"}${
       path ? `.${path}` : ""
     }`

@@ -160,6 +160,7 @@ export default defineComponent({
       right: -10px;
       bottom: 12px;
       font-size: 20px;
+      overflow: hidden;
     }
     &:before {
       overflow: hidden;

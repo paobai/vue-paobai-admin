@@ -1,5 +1,5 @@
 import { resetRouter } from "@/router"
-import Cookies from "js-cookie"
+import Cookies from "./storage/cookie"
 import { storageSession } from "@/utils/storage"
 import sysConfig from "@/config"
 

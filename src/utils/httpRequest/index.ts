@@ -12,7 +12,7 @@ import {
   CustomAxiosInstance
 } from "./help"
 import { saveAs } from "file-saver"
-import Cookies from "js-cookie"
+import Cookies from "@/utils/storage/cookie"
 import { loadEnv } from "@/../build/utils"
 import sysConfig from "@/config"
 import { Message } from "@arco-design/web-vue"
