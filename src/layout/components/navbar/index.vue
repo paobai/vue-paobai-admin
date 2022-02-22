@@ -4,7 +4,7 @@
       <div class="logo-wrapper">
         <img
           class="logo"
-          src="/src/assets/images/common/logo-with-text-small.png"
+          src="/src/assets/images/common/logo/logo-with-text-small.png"
         />
       </div>
       <menu-main></menu-main>
@@ -74,10 +74,8 @@ import { useUserHook } from "@/hooks/user"
 import ArcoModal from "@arco-design/web-vue/es/modal"
 import menuMain from "./menu-main.vue"
 import messageBox from "./message-box/index.vue"
-import List from "@/layout/components/navbar/message-box/list.vue"
 export default defineComponent({
   components: {
-    List,
     menuMain,
     messageBox
   },

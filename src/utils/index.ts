@@ -6,27 +6,16 @@ import sysConfig from "@/config"
 export function clearLoginInfo() {
   Cookies.remove(sysConfig.app.tokenName)
   Cookies.remove(sysConfig.app.refreshTokenName)
-  // store.commit('resetStore')
-  // @ts-ignore
-  storageSession.setItem(sysConfig.permissionName, [])
+  storageSession.setItem(sysConfig.app.permissionName, [])
   resetRouter()
 }
 
 // Toggle class for the selected element
-export const toggleClass = (ele: HTMLElement, className: string) => {
+export const toggleClass = (ele: HTMLElement, className: string, force?: boolean| undefined) => {
   if (!ele || !className) {
     return
   }
-  let classString = ele.className
-  const nameIndex = classString.indexOf(className)
-  if (nameIndex === -1) {
-    classString += "" + className
-  } else {
-    classString =
-      classString.substr(0, nameIndex) +
-      classString.substr(nameIndex + className.length)
-  }
-  ele.className = classString
+  ele.classList.toggle(className, force)
 }
 
 /**

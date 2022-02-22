@@ -3,15 +3,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue"
+import { defineComponent } from "vue"
 import { useAppHook } from "@/hooks/app"
 
 export default defineComponent({
   setup() {
-    let { updateSysColor } = useAppHook()
-    onMounted(() => {
-      updateSysColor()
-    })
+    let { initSys } = useAppHook()
+    initSys()
   }
 })
 </script>

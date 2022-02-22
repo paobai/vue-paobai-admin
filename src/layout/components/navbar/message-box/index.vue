@@ -15,100 +15,98 @@
         />
       </a-tab-pane>
       <template #extra>
-        <a-button type="text" @click="emptyList">
-          清空
-        </a-button>
+        <a-button type="text" @click="emptyList"> 清空 </a-button>
       </template>
     </a-tabs>
   </a-spin>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs, computed } from 'vue';
+import { defineComponent, ref, reactive, toRefs, computed } from "vue"
 import {
   queryMessageList,
   setMessageStatus,
   MessageRecord,
-  MessageListType,
-} from './api';
-import useLoading from '@/hooks/loading';
-import List from './list.vue';
+  MessageListType
+} from "./api"
+import useLoading from "@/hooks/loading"
+import List from "./list.vue"
 
 interface TabItem {
-  key: string;
-  title: string;
-  avatar?: string;
+  key: string
+  title: string
+  avatar?: string
 }
 export default defineComponent({
   components: {
-    List,
+    List
   },
   setup() {
-    const { loading, setLoading } = useLoading(true);
-    const messageType = ref('message');
+    const { loading, setLoading } = useLoading(true)
+    const messageType = ref("message")
     const messageData = reactive<{
-      renderList: MessageRecord[];
-      messageList: MessageRecord[];
+      renderList: MessageRecord[]
+      messageList: MessageRecord[]
     }>({
       renderList: [],
-      messageList: [],
-    });
-    const refData = toRefs(messageData);
+      messageList: []
+    })
+    const refData = toRefs(messageData)
     const tabList: TabItem[] = [
       {
-        key: 'message',
-        title: '消息',
+        key: "message",
+        title: "消息"
       },
       {
-        key: 'notice',
-        title: '通知',
+        key: "notice",
+        title: "通知"
       },
       {
-        key: 'todo',
-        title: '待办',
-      },
-    ];
+        key: "todo",
+        title: "待办"
+      }
+    ]
     async function fetchSourceData() {
-      setLoading(true);
+      setLoading(true)
       try {
-        const { data } = await queryMessageList();
-        messageData.messageList = data;
+        const { data } = await queryMessageList()
+        messageData.messageList = data
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
     async function readMessage(data: MessageListType) {
-      const ids = data.map((item) => item.id);
-      await setMessageStatus({ ids });
-      fetchSourceData();
+      const ids = data.map(item => item.id)
+      await setMessageStatus({ ids })
+      fetchSourceData()
     }
     const renderList = computed(() => {
       return messageData.messageList.filter(
-        (item) => messageType.value === item.type
-      );
-    });
+        item => messageType.value === item.type
+      )
+    })
     const unreadCount = computed(() => {
-      return renderList.value.filter((item) => !item.status).length;
-    });
+      return renderList.value.filter(item => !item.status).length
+    })
     const getUnreadList = (type: string) => {
       const list = messageData.messageList.filter(
-        (item) => item.type === type && !item.status
-      );
-      return list;
-    };
+        item => item.type === type && !item.status
+      )
+      return list
+    }
     const formatUnreadLength = (type: string) => {
-      const list = getUnreadList(type);
-      return list.length ? `(${list.length})` : ``;
-    };
+      const list = getUnreadList(type)
+      return list.length ? `(${list.length})` : ``
+    }
     const handleItemClick = (items: MessageListType) => {
-      if (renderList.value.length) readMessage([...items]);
-    };
+      if (renderList.value.length) readMessage([...items])
+    }
     const emptyList = () => {
-      messageData.messageList = [];
-    };
-    fetchSourceData();
+      messageData.messageList = []
+    }
+    fetchSourceData()
     return {
       loading,
       tabList,
@@ -118,10 +116,10 @@ export default defineComponent({
       formatUnreadLength,
       unreadCount,
       messageType,
-      emptyList,
-    };
-  },
-});
+      emptyList
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">

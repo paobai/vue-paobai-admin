@@ -12,7 +12,6 @@
 import { defineComponent } from "vue"
 import HelloWorld from "@/components/HelloWorld.vue"
 import router from "@/router"
-import { Message } from "@arco-design/web-vue"
 
 export default defineComponent({
   name: "App",

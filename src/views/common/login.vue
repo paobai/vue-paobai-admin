@@ -20,7 +20,7 @@
           <div class="logo-wrapper">
             <img
               class="logo"
-              src="/src/assets/images/common/logo-with-text-bottom.png"
+              src="/src/assets/images/common/logo/logo-with-text-bottom.png"
             />
           </div>
           <div>用户登录</div>

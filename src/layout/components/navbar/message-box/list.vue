@@ -5,7 +5,7 @@
       :key="item.id"
       action-layout="vertical"
       :style="{
-        opacity: item.status ? 0.5 : 1,
+        opacity: item.status ? 0.5 : 1
       }"
     >
       <template #extra>
@@ -34,7 +34,7 @@
             <div>
               <a-typography-paragraph
                 :ellipsis="{
-                  rows: 1,
+                  rows: 1
                 }"
                 >{{ item.content }}</a-typography-paragraph
               >
@@ -71,39 +71,39 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { MessageRecord, MessageListType } from './api';
+import { defineComponent, PropType } from "vue"
+import { MessageRecord, MessageListType } from "./api"
 
 export default defineComponent({
   props: {
     renderList: {
       type: Array as PropType<MessageListType>,
-      required: true,
+      required: true
     },
     unreadCount: {
       type: Number,
-      default: 0,
-    },
+      default: 0
+    }
   },
-  emits: ['itemClick'],
+  emits: ["itemClick"],
   setup(props, context) {
     const allRead = () => {
-      context.emit('itemClick', [...props.renderList]);
-    };
+      context.emit("itemClick", [...props.renderList])
+    }
 
     const onItemClick = (item: MessageRecord) => {
       if (!item.status) {
-        context.emit('itemClick', [item]);
+        context.emit("itemClick", [item])
       }
-    };
-    const showMax = 3;
+    }
+    const showMax = 3
     return {
       allRead,
       onItemClick,
-      showMax,
-    };
-  },
-});
+      showMax
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">

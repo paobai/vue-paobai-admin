@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue"
-import errGif from "@/assets/401-images/401.gif"
+import errGif from "@/assets/images/common/error/401.gif"
 import { useRoute, useRouter } from "vue-router"
 export default defineComponent({
   setup() {

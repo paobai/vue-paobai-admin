@@ -1,11 +1,12 @@
 import { useAppStoreHook } from "@/store/modules/app"
 import { useUserHook } from "./user"
-import { computed, ref, unref, watch } from "vue"
+import {computed, onMounted, ref, unref, watch} from "vue"
 import { RouterApiType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
-import { changeArcoPrimaryColor } from "@/utils"
+import { changeArcoPrimaryColor, toggleClass } from "@/utils"
 import config from "@/config"
+
 
 export function useAppHook() {
   const { showRouteList, routerMap } = useUserHook()
@@ -61,8 +62,7 @@ export function useAppHook() {
     }
   })
 
-  const updateSysColor = (color?: string) => {
-    color = color || unref(sysColor)
+  const updateSysColor = (color: string) => {
     appStore.updateSysColor(color)
     changeArcoPrimaryColor(color)
   }
@@ -76,9 +76,7 @@ export function useAppHook() {
 
   const updateWeakness = (weakness: boolean) => {
     appStore.updateWeakness(weakness)
-    document
-      .getElementsByTagName("html")[0]
-      .classList.toggle(config.app.weaknessKey, weakness)
+    toggleClass(document.getElementsByTagName("html")[0], config.app.weaknessKey, weakness)
   }
 
   const gray = computed({
@@ -90,9 +88,7 @@ export function useAppHook() {
 
   const updateGray = (gray: boolean) => {
     appStore.updateGray(gray)
-    document
-      .getElementsByTagName("html")[0]
-      .classList.toggle(config.app.grayKey, gray)
+    toggleClass(document.getElementsByTagName("html")[0], config.app.grayKey, gray)
   }
 
   const fixSidebarShow = computed(() => {
@@ -183,6 +179,14 @@ export function useAppHook() {
     return dist
   })
 
+  const initSys = () => {
+    return onMounted(() => {
+      updateSysColor(sysColor.value)
+      updateWeakness(weakness.value)
+      updateGray(gray.value)
+    })
+  }
+
   return {
     navbarShow,
     updateNavbar,
@@ -205,6 +209,7 @@ export function useAppHook() {
     footerShow,
     updateFooterShow,
     weakness,
-    gray
+    gray,
+    initSys
   }
 }
