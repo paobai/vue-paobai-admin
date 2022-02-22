@@ -76,7 +76,7 @@ export function useAppHook() {
 
   const updateWeakness = (weakness: boolean) => {
     appStore.updateWeakness(weakness)
-    toggleClass(document.getElementsByTagName("html")[0], config.app.weaknessKey, weakness)
+    toggleClass(document.body, config.app.weaknessKey, weakness)
   }
 
   const gray = computed({
@@ -88,7 +88,7 @@ export function useAppHook() {
 
   const updateGray = (gray: boolean) => {
     appStore.updateGray(gray)
-    toggleClass(document.getElementsByTagName("html")[0], config.app.grayKey, gray)
+    toggleClass(document.body, config.app.grayKey, gray)
   }
 
   const fixSidebarShow = computed(() => {

@@ -29,8 +29,8 @@ const appConfig: AppConfig = {
   footerShowKey: "layout-footer-",
   userInfoKey: "user-info",
   sysColorKey: "sys-color",
-  weaknessKey: cssVariables.htmlWeakNessClassName,
-  grayKey: cssVariables.htmlGrayClassName
+  weaknessKey: cssVariables.weakNessClassName,
+  grayKey: cssVariables.grayClassName
 }
 
 export default appConfig
