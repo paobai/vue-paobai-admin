@@ -101,7 +101,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .menu-wrapper {
   :deep(.arco-menu) {
-    background-color: rgb(var(--arcoblue-6));
+    background-color: @app-sidebar-bk-color;
     height: 100%;
     width: 100%;
     &.arco-menu-collapsed {
@@ -129,15 +129,15 @@ export default defineComponent({
       }
     }
     .menu-item-common {
-      background-color: rgb(var(--arcoblue-6));
+      background-color: @app-sidebar-bk-color;
       color: var(--color-white);
       line-height: 48px;
-      border-left: 4px solid transparent;
-      transition: background-color 0.5s, border-left-color 0.5s;
+      border-right: 4px solid transparent;
+      transition: background-color 0.5s, border-right-color 0.5s;
       &.arco-menu-selected,
       &:hover {
-        background-color: rgb(var(--arcoblue-4));
-        border-left: 4px solid rgb(var(--arcoblue-9));
+        background-color: @app-sidebar-bk-chose-color;
+        border-right: 4px solid @app-sidebar-border-color;
       }
       .arco-icon,
       .iconfont {

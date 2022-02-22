@@ -25,10 +25,10 @@
             <div class="message-box-trigger">
               <a-badge :count="9" dot>
                 <a-button
-                    class="nav-btn"
-                    type="outline"
-                    :shape="'circle'"
-                    @click="setPopoverVisible"
+                  class="nav-btn"
+                  type="outline"
+                  :shape="'circle'"
+                  @click="setPopoverVisible"
                 >
                   <a-icon-notification />
                 </a-button>
@@ -36,10 +36,10 @@
             </div>
           </a-tooltip>
           <a-popover
-              trigger="click"
-              :arrow-style="{ display: 'none' }"
-              :content-style="{ padding: 0, minWidth: '400px' }"
-              content-class="message-popover"
+            trigger="click"
+            :arrow-style="{ display: 'none' }"
+            :content-style="{ padding: 0, minWidth: '400px' }"
+            content-class="message-popover"
           >
             <div ref="refBtn" class="ref-btn"></div>
             <template #content>
@@ -51,7 +51,7 @@
       <a-avatar>
         <img class="avatar" alt="avatar" :src="userInfo.avatar" />
       </a-avatar>
-      <div class="username">{{ userInfo.username }}</div>
+      <div class="username">{{ userInfo.realName }}</div>
       <a-dropdown @popup-visible-change="getDropDownState" @select="tagSelect">
         <a-button type="primary" class="arco-btn-only-icon">
           <template #icon>
@@ -73,8 +73,8 @@ import { defineComponent, ref } from "vue"
 import { useUserHook } from "@/hooks/user"
 import ArcoModal from "@arco-design/web-vue/es/modal"
 import menuMain from "./menu-main.vue"
-import messageBox  from './message-box/index.vue'
-import List from "@/layout/components/navbar/message-box/list.vue";
+import messageBox from "./message-box/index.vue"
+import List from "@/layout/components/navbar/message-box/list.vue"
 export default defineComponent({
   components: {
     List,
@@ -104,15 +104,15 @@ export default defineComponent({
         logOutHand()
       }
     }
-    const refBtn = ref();
+    const refBtn = ref()
     const setPopoverVisible = () => {
-      const event = new MouseEvent('click', {
+      const event = new MouseEvent("click", {
         view: window,
         bubbles: true,
-        cancelable: true,
-      });
-      refBtn.value.dispatchEvent(event);
-    };
+        cancelable: true
+      })
+      refBtn.value.dispatchEvent(event)
+    }
     return {
       getDropDownState,
       dropDownState,

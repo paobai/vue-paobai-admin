@@ -82,7 +82,7 @@ export default defineComponent({
   flex: auto;
   :deep(.arco-menu) {
     height: 100%;
-    background-color: rgb(var(--arcoblue-6));
+    background-color: @app-navbar-bk-color;
     .arco-menu-inner {
       overflow-y: hidden;
       padding: 0;
@@ -93,7 +93,7 @@ export default defineComponent({
       .arco-menu-item,
       .arco-menu-pop {
         padding: 0 40px;
-        background-color: rgb(var(--arcoblue-6));
+        background-color: @app-navbar-bk-color;
         height: 100%;
         line-height: @app-navbar-height;
         border-radius: 0;
@@ -101,7 +101,7 @@ export default defineComponent({
         font-size: 18px;
         &:hover,
         &.arco-menu-selected {
-          background: rgb(var(--arcoblue-4));
+          background: @app-navbar-bk-chose-color;
         }
         .arco-menu-title {
           padding-right: 20px;

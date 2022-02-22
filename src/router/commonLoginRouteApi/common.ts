@@ -9,7 +9,7 @@ const mainRoutesSource: RouterApiType[] = [
     icon: "iconfont-home-fill"
   },
   {
-    path: "/redirect",
+    path: "/common/redirect",
     title: "跳转页",
     key: "redirect-page",
     type: RouteType.Page,

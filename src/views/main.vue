@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div style="width: 100%;height:500px;overflow: hidden">
+    <div style="width: 100%; height: 500px; overflow: hidden">
       <chart :options="options"></chart>
     </div>
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
@@ -43,7 +43,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .app-container {
 }
 </style>
