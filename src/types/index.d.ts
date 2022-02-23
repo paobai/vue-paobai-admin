@@ -27,7 +27,7 @@ declare type ComponentRef<T extends HTMLElement = HTMLDivElement> =
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 
 declare type ForDataType<T> = {
-  [P in T]?: ForDataType<T[P]>;
+  [P in keyof T]?: ForDataType<T[P]>;
 };
 
 declare type AnyFunction<T> = (...args: any[]) => T;

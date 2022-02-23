@@ -11,7 +11,11 @@ export function clearLoginInfo() {
 }
 
 // Toggle class for the selected element
-export const toggleClass = (ele: HTMLElement, className: string, force?: boolean| undefined) => {
+export const toggleClass = (
+  ele: HTMLElement,
+  className: string,
+  force?: boolean | undefined
+) => {
   if (!ele || !className) {
     return
   }

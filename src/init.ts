@@ -6,7 +6,7 @@ import { setupStore } from "@/store"
 import echarts from "@/plugins/echarts"
 import "@/styles/index.less"
 import { useArco } from "@/plugins/arco"
-import '@/utils/prototype-plus'
+import "@/utils/prototype-plus"
 export function initApp(app: App) {
   const dist = document.getElementsByTagName("title")[0]
   dist.innerHTML = config.custom.htmlTitle
@@ -19,5 +19,3 @@ export function initApp(app: App) {
   })
   app.use(echarts)
 }
-
-

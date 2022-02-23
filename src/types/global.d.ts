@@ -1,9 +1,6 @@
 import type {
-    ComponentRenderProxy,
-    VNode,
-    ComponentPublicInstance,
-    FunctionalComponent,
-    PropType as VuePropType
+    PropType as VuePropType,
+    App
 } from "vue";
 
 declare global {
@@ -38,7 +35,6 @@ declare global {
     };
 
     type Nullable<T> = T | null;
-    type NonNullable<T> = T extends null | undefined ? never : T;
     type Recordable<T = any> = Record<string, T>;
     type ReadonlyRecordable<T = any> = {
         readonly [key: string]: T;
@@ -63,7 +59,7 @@ declare global {
         __: unknown;
     }
 
-    declare interface ViteEnv {
+    interface ViteEnv {
         VITE_PORT: number;
         VITE_TITLE: string;
         VITE_VERSION: string;
@@ -83,7 +79,7 @@ declare global {
         VITE_API_BASE_URL: string;
     }
 
-    declare interface ServerConfigs {
+    interface ServerConfigs {
         Version?: string;
         Title?: string;
         FixedHeader?: boolean;
@@ -106,21 +102,6 @@ declare global {
 
     function parseFloat(string: string | number): number;
 
-    namespace JSX {
-        // tslint:disable no-empty-interface
-        type Element = VNode;
-        // tslint:disable no-empty-interface
-        type ElementClass = ComponentRenderProxy;
-        interface ElementAttributesProperty {
-            $props: any;
-        }
-        interface IntrinsicElements {
-            [elem: string]: any;
-        }
-        interface IntrinsicAttributes {
-            [elem: string]: any;
-        }
-    }
     interface Date {
         format (fmt?: string) : string
     }

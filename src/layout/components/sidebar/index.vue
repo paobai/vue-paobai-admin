@@ -5,7 +5,10 @@
         class="logo logo-big"
         src="/src/assets/images/common/logo/logo-with-text-small.png"
       />
-      <img class="logo logo-small" src="/src/assets/images/common/logo/logo.png" />
+      <img
+        class="logo logo-small"
+        src="/src/assets/images/common/logo/logo.png"
+      />
     </div>
     <menu-main></menu-main>
   </div>
