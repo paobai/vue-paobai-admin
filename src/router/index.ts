@@ -3,7 +3,7 @@ import {
   addRouterFromData,
   fixResToSys,
   isGlobalRoute,
-  fixRoute,
+  fixRouteToSysType,
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
@@ -65,11 +65,12 @@ router.beforeEach((to, from, next) => {
         if (res.code === 1) {
           const { routers: newRoutes, permissions } = fixResToSys(res.data)
           // 加入了登录之后的默认route
-          let addCommonRoutes = [...mainRoutesSource, ...newRoutes]
-          addCommonRoutes = fixRoute(addCommonRoutes)
-          userStore.updateAuth(addCommonRoutes, permissions)
+          const addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+          // 改变为内部系统使用的sysRouteType
+          const finalSysRoutes = fixRouteToSysType(addCommonRoutes)
+          userStore.updateAuth(finalSysRoutes, permissions)
           // clearRouter()
-          addRouterFromData(addCommonRoutes, modulesRoutes, router)
+          addRouterFromData(finalSysRoutes, modulesRoutes, router)
         }
         next({ ...to, replace: true })
       })

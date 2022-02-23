@@ -1,6 +1,6 @@
 import { useUserStoreHook } from "@/store/modules/user"
 import { computed, unref } from "vue"
-import { RouterApiType } from "@/constant/settings"
+import { RouterSysType } from "@/constant/settings"
 import { getCanShowRoute, getRouteMap } from "@/utils/menu-help"
 import Cookies from "@/utils/storage/cookie"
 import { storageSession } from "@/utils/storage"
@@ -11,14 +11,14 @@ import { UserInfo } from "@/model/sys/userModel"
 
 export function useUserHook() {
   const userStore = useUserStoreHook()
-  const routeList = computed((): RouterApiType[] => {
+  const routeList = computed((): RouterSysType[] => {
     return userStore.getRouteList
   })
   const showRouteList = computed(() => {
     return getCanShowRoute(unref(routeList))
   })
 
-  const updateRouteList = function (routeList: RouterApiType[]) {
+  const updateRouteList = function (routeList: RouterSysType[]) {
     userStore.updateRouteList(routeList)
   }
 
@@ -30,7 +30,7 @@ export function useUserHook() {
     return getRouteMap(unref(routeList.value))
   })
 
-  const getRouteByKey = (key: string): RouterApiType | undefined => {
+  const getRouteByKey = (key: string): RouterSysType | undefined => {
     if (!key) return undefined
     return routeMap.value[key]
   }
@@ -46,7 +46,7 @@ export function useUserHook() {
   }
 
   const updateAuth = function (
-    routeList: RouterApiType[],
+    routeList: RouterSysType[],
     permissions: string[]
   ) {
     userStore.updatePermissions(permissions)

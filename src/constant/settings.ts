@@ -25,10 +25,23 @@ export enum RouteType {
 export interface RouterApiType {
   key: string
   path: string
-  routeName: string
   type: RouteType
   icon?: string
   children?: RouterApiType[]
+  title: string
+  notShow?: boolean
+}
+
+/**
+ * 系统中使用的的route结构
+ */
+export interface RouterSysType {
+  key: string
+  path: string
+  routeName: string
+  type: RouteType
+  icon?: string
+  children?: RouterSysType[]
   title: string
   parentKey?: string[]
   notShow?: boolean

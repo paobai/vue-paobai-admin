@@ -120,7 +120,7 @@ function addSubscriber(callback: () => void) {
 }
 
 function referToken() {
-  const refreshToken = Cookies.get("refresh_token")!
+  const refreshToken = Cookies.get("refresh_token")! as string
   AuthApi.refreshToken({
     grant_type: grantType.REFRESH_TOKEN,
     refresh_token: refreshToken,

@@ -8,7 +8,12 @@ export declare interface MyRouter extends Router {
 }
 
 import Layout from "@/layout/Index.vue"
-import { RouterApiType, RouterCustomType, RouteType } from "@/constant/settings"
+import {
+  RouterSysType,
+  RouterCustomType,
+  RouteType,
+  RouterApiType
+} from "@/constant/settings"
 import { buildMenuName } from "@/utils/menu-help"
 
 /**
@@ -40,7 +45,7 @@ export function isGlobalRoute(
  */
 export function fixResToSys(sourceApiData: any): {
   permissions: string[]
-  routers: RouterApiType[]
+  routers: RouterSysType[]
 } {
   return {
     permissions: sourceApiData.permissions,
@@ -53,22 +58,28 @@ export function fixResToSys(sourceApiData: any): {
  * @param parentKey
  * @param parent
  */
-export function fixRoute(
+export function fixRouteToSysType(
   routeList: RouterApiType[],
   parentKey: string[] = [],
-  parent?: RouterApiType
-): RouterApiType[] {
+  parent?: RouterSysType
+): RouterSysType[] {
+  const resList: RouterSysType[] = []
   routeList.forEach(item => {
-    item.parentKey = parentKey
-    item.routeName = buildMenuName(item)
-    if (!item.icon && parent) {
-      item.icon = parent.icon
+    const resItem: RouterSysType = {
+      ...item,
+      routeName: buildMenuName(item),
+      parentKey: parentKey
+    } as RouterSysType
+    if (!resItem.icon && parent) {
+      resItem.icon = parent.icon
     }
     if (item.children) {
-      fixRoute(item.children, parentKey.concat(item.key), item)
+      fixRouteToSysType(item.children, parentKey.concat(item.key), resItem)
     }
+    resList.push(resItem)
   })
-  return routeList
+  if (parent) parent.children = resList
+  return resList
 }
 
 /**
@@ -78,7 +89,7 @@ export function fixRoute(
  * @param router router
  */
 export function addRouterFromData(
-  routes: RouterApiType[],
+  routes: RouterSysType[],
   modulesRoutes: any,
   router: Router
 ) {
@@ -99,7 +110,7 @@ export function addRouterFromData(
 }
 
 export function buildRoute(
-  item: RouterApiType,
+  item: RouterSysType,
   modulesRoutes: any,
   inList: RouterCustomType[] = []
 ) {
@@ -129,6 +140,6 @@ export function buildRoute(
   })
 }
 
-export function buildRouteName(route: RouterApiType) {
+export function buildRouteName(route: RouterSysType) {
   return route.title + "-" + route.key
 }

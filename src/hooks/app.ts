@@ -1,7 +1,7 @@
 import { useAppStoreHook } from "@/store/modules/app"
 import { useUserHook } from "./user"
 import { computed, onMounted, ref, unref, watch } from "vue"
-import { RouterApiType, RouteType } from "@/constant/settings"
+import { RouterSysType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
@@ -138,7 +138,7 @@ export function useAppHook() {
   // 左边的routeList
   const { routeSidebarList, getSideRouteByKey } = (function () {
     const sourceRouteList = showRouteList
-    const routeSidebarList = ref([] as RouterApiType[])
+    const routeSidebarList = ref([] as RouterSysType[])
     let sideRouteMap: { [key: string]: any } = {}
     const getSideRouteByKey = (key: string) => {
       return sideRouteMap[key]
@@ -146,7 +146,7 @@ export function useAppHook() {
     watch(
       [() => unref(nowFirstRouteKey), () => unref(navbarShow)],
       ([nowKey, navbarShow]) => {
-        let dist: RouterApiType[] = []
+        let dist: RouterSysType[] = []
         // navbar显示 sidebar route情况
         if (navbarShow) {
           const parentDist = sourceRouteList.value.filter(
@@ -166,7 +166,7 @@ export function useAppHook() {
   })()
 
   const routeNavbarList = computed(() => {
-    let dist: RouterApiType[] = []
+    let dist: RouterSysType[] = []
     if (sidebarShow.value) {
       unref(showRouteList).forEach(item => {
         dist.push({

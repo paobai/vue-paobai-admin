@@ -1,4 +1,4 @@
-import { RouterApiType, RouteType } from "@/constant/settings"
+import { RouterApiType, RouterSysType, RouteType } from "@/constant/settings"
 
 /**
  *
@@ -6,7 +6,7 @@ import { RouterApiType, RouteType } from "@/constant/settings"
  * @param sourceArray
  */
 export function getRouteList(
-  routeList: RouterApiType[],
+  routeList: RouterSysType[],
   sourceArray: any[] = []
 ) {
   routeList.forEach(item => {
@@ -24,9 +24,9 @@ export function getRouteList(
  * @param sourceMap
  */
 export function getRouteMap(
-  routeList: RouterApiType[],
-  sourceMap: { [key: string]: RouterApiType } = {}
-): { [key: string]: RouterApiType } {
+  routeList: RouterSysType[],
+  sourceMap: { [key: string]: RouterSysType } = {}
+): { [key: string]: RouterSysType } {
   routeList.forEach(item => {
     sourceMap[item.key] = item
     if (item.children) {
@@ -37,8 +37,8 @@ export function getRouteMap(
 }
 
 export function getFirstMenuItem(
-  routeList?: RouterApiType[]
-): undefined | RouterApiType {
+  routeList?: RouterSysType[]
+): undefined | RouterSysType {
   let dist
   if (!routeList || routeList.length === 0) return dist
   for (let i = 0; i < routeList.length; i++) {
@@ -48,12 +48,12 @@ export function getFirstMenuItem(
     if (dist) return dist
   }
 }
-export function buildMenuName(route: RouterApiType) {
+export function buildMenuName(route: RouterSysType | RouterApiType) {
   return route.title + "-" + route.key
 }
 
-export function getCanShowRoute(routes: RouterApiType[]) {
-  const res: RouterApiType[] = []
+export function getCanShowRoute(routes: RouterSysType[]) {
+  const res: RouterSysType[] = []
   routes.filter(route => {
     if (route.notShow) return false
     const children = getCanShowRoute(route.children || [])

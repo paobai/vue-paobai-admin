@@ -1,13 +1,13 @@
 import { defineStore } from "pinia"
 import { store } from "@/store"
-import { RouterApiType } from "@/constant/settings"
+import { RouterSysType } from "@/constant/settings"
 import { UserInfo } from "@/model/sys/userModel"
 import { storageLocal } from "@/utils/storage"
 import config from "@/config"
 
 interface userStore {
   userInfo: UserInfo
-  routeList: RouterApiType[]
+  routeList: RouterSysType[]
   permissions: string[]
 }
 
@@ -15,11 +15,11 @@ export const useUserStore = defineStore({
   id: "store-user",
   state: (): userStore => ({
     userInfo: (storageLocal.getItem(config.app.userInfoKey) || {}) as UserInfo,
-    routeList: [] as RouterApiType[],
+    routeList: [] as RouterSysType[],
     permissions: [] as string[]
   }),
   getters: {
-    getRouteList(): RouterApiType[] {
+    getRouteList(): RouterSysType[] {
       return this.routeList
     },
     getPermissions(): string[] {
@@ -30,7 +30,7 @@ export const useUserStore = defineStore({
     }
   },
   actions: {
-    updateRouteList(routeList: RouterApiType[]) {
+    updateRouteList(routeList: RouterSysType[]) {
       this.routeList = routeList
     },
     updatePermissions(permissions: string[]) {
