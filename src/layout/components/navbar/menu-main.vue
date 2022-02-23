@@ -55,12 +55,13 @@ export default defineComponent({
     menuSub
   },
   setup() {
-    let { routerMap } = useUserHook()
+    let { getRouteByKey } = useUserHook()
     let { nowFirstRouteKey, routeNavbarList: routeList } = useAppHook()
     const clickMenu = function (key: string) {
-      let dist = routerMap.value[key]
+      let dist = getRouteByKey(key)
+      if (!dist) return
       if (dist.type === RouteType.Page) {
-        router.push({ path: dist.path })
+        router.push({ name: dist.routeName })
       } else {
         let find = getFirstMenuItem(dist.children)
         if (!find) return

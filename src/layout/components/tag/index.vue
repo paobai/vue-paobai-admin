@@ -96,16 +96,18 @@ import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
 export default defineComponent({
   setup() {
-    let { routerMap } = useUserHook()
+    let { getRouteByKey } = useUserHook()
     let { nowMenu } = useAppHook()
     let leftTag = computed(() => {
       if (!unref(nowMenu)) {
         return
       }
-      let keyList = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
+      let keyList = (unref(nowMenu)!.parentKey || []).concat(
+        unref(nowMenu)!.key
+      )
       let menuList: any = []
       keyList.forEach(key => {
-        menuList.push(unref(routerMap)[key])
+        menuList.push(getRouteByKey(key))
       })
       return menuList
     })

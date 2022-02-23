@@ -3,6 +3,7 @@ import {
   addRouterFromData,
   fixResToSys,
   isGlobalRoute,
+  fixRoute,
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
@@ -11,7 +12,6 @@ import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import mainRoutesSource from "./commonLoginRouteApi/common"
-import { fixRoute } from "@/utils/menu-help"
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 

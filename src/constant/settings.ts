@@ -25,6 +25,7 @@ export enum RouteType {
 export interface RouterApiType {
   key: string
   path: string
+  routeName: string
   type: RouteType
   icon?: string
   children?: RouterApiType[]

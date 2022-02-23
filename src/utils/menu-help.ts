@@ -1,29 +1,6 @@
 import { RouterApiType, RouteType } from "@/constant/settings"
 
 /**
- * 处理route 增加信息
- * @param routeList
- * @param parentKey
- * @param parent
- */
-export function fixRoute(
-  routeList: RouterApiType[],
-  parentKey: string[] = [],
-  parent?: RouterApiType
-): RouterApiType[] {
-  routeList.forEach(item => {
-    item.parentKey = parentKey
-    if (!item.icon && parent) {
-      item.icon = parent.icon
-    }
-    if (item.children) {
-      fixRoute(item.children, parentKey.concat(item.key), item)
-    }
-  })
-  return routeList
-}
-
-/**
  *
  * @param routeList
  * @param sourceArray
@@ -42,7 +19,7 @@ export function getRouteList(
 }
 
 /**
- * 根据key 得到route map
+ * 返回一个map 可以根据key 得到route
  * @param routeList
  * @param sourceMap
  */

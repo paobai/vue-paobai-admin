@@ -26,9 +26,15 @@ export function useUserHook() {
     userStore.updatePermissions(permissions)
   }
 
-  const routerMap = computed(() => {
+  const routeMap = computed(() => {
     return getRouteMap(unref(routeList.value))
   })
+
+  const getRouteByKey = (key: string): RouterApiType | undefined => {
+    if (!key) return undefined
+    return routeMap.value[key]
+  }
+
   const logOutEvent = function () {
     Cookies.remove("access_token")
     Cookies.remove("refresh_token")
@@ -60,7 +66,8 @@ export function useUserHook() {
   return {
     routeList,
     showRouteList,
-    routerMap,
+    routeMap,
+    getRouteByKey,
     logOutEvent,
     updateAuth,
     updateUserInfo,

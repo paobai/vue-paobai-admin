@@ -57,13 +57,13 @@ export default defineComponent({
   setup() {
     let {
       routeSidebarList: routeList,
-      getMenuByKey,
+      getSideRouteByKey,
       collapse,
       nowMenu,
       nowMenuKey
     } = useAppHook()
     let clickMenu = function (key: string) {
-      let dist = getMenuByKey(key)
+      let dist = getSideRouteByKey(key)
       router.push({ name: buildRouteName(dist) })
     }
     let openKeys = ref([""])
@@ -80,7 +80,7 @@ export default defineComponent({
       openKeys.value = getOpenKeys
       // 折叠菜单模式点击直接选择第一个菜单
       if (unref(collapse)) {
-        let dist = getMenuByKey(key)
+        let dist = getSideRouteByKey(key)
         let find = getFirstMenuItem(dist.children)
         if (!find) return
         clickMenu(find.key)

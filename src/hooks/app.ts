@@ -1,15 +1,14 @@
 import { useAppStoreHook } from "@/store/modules/app"
 import { useUserHook } from "./user"
-import {computed, onMounted, ref, unref, watch} from "vue"
+import { computed, onMounted, ref, unref, watch } from "vue"
 import { RouterApiType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
 import config from "@/config"
 
-
 export function useAppHook() {
-  const { showRouteList, routerMap } = useUserHook()
+  const { showRouteList, getRouteByKey } = useUserHook()
 
   const appStore = useAppStoreHook()
 
@@ -119,11 +118,11 @@ export function useAppHook() {
   })
 
   const nowMenu = computed(() => {
-    return unref(routerMap)[unref(nowMenuKey.value)]
+    return getRouteByKey(nowMenuKey.value)
   })
 
   const nowFirstRoute = computed(() => {
-    return unref(routerMap)[unref(nowFirstRouteKey.value!)]
+    return getRouteByKey(nowFirstRouteKey.value!)
   })
 
   const nowFirstRouteKey = computed(() => {
@@ -137,23 +136,25 @@ export function useAppHook() {
   })
 
   // 左边的routeList
-  const { routeSidebarList, getMenuByKey } = (function () {
+  const { routeSidebarList, getSideRouteByKey } = (function () {
     const sourceRouteList = showRouteList
     const routeSidebarList = ref([] as RouterApiType[])
     let sideRouteMap: { [key: string]: any } = {}
-    const getMenuByKey = (key: string) => {
+    const getSideRouteByKey = (key: string) => {
       return sideRouteMap[key]
     }
     watch(
       [() => unref(nowFirstRouteKey), () => unref(navbarShow)],
       ([nowKey, navbarShow]) => {
         let dist: RouterApiType[] = []
+        // navbar显示 sidebar route情况
         if (navbarShow) {
           const parentDist = sourceRouteList.value.filter(
             item => item.key === unref(nowKey)
           )[0]
           if (parentDist) dist = parentDist.children || []
         } else {
+          // 顶部不显示 sidebar route情况
           dist = sourceRouteList.value
         }
         routeSidebarList.value = dist || []
@@ -161,7 +162,7 @@ export function useAppHook() {
       },
       { immediate: true }
     )
-    return { routeSidebarList, getMenuByKey }
+    return { routeSidebarList, getSideRouteByKey }
   })()
 
   const routeNavbarList = computed(() => {
@@ -201,7 +202,7 @@ export function useAppHook() {
     sidebarShow,
     routeSidebarList,
     routeNavbarList,
-    getMenuByKey,
+    getSideRouteByKey,
     nowMenuKey,
     nowMenu,
     updateSysColor,
