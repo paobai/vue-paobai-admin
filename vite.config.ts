@@ -38,7 +38,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
      * /manages/ 可根据项目部署域名的后缀自行填写（全局搜/manages/替换）
      * @default '/'
      */
-    base: process.env.NODE_ENV === "production" ? "./" : VITE_PUBLIC_PATH,
+    base: VITE_PUBLIC_PATH,
     root,
     resolve: {
       alias
