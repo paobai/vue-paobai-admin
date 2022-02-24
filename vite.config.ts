@@ -46,7 +46,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     css: {
       preprocessorOptions: {
         less: {
+          // 这个相当于在每个less 里面增加这些变量。但是如果less文件里面已经有这个变量，则使用文件里面的。
           additionalData: '@import "./src/styles/_variables.module.less";',
+          // 这个相当于在每个less文件里面增加这些变量，但是如果less文件里面已经有这个变量，优先使用modifyVars里面的。
           modifyVars: {},
           javascriptEnabled: true
         }

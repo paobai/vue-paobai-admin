@@ -182,7 +182,7 @@ export function useAppHook() {
 
   const initSys = () => {
     return onMounted(() => {
-      updateSysColor(sysColor.value)
+      changeArcoPrimaryColor(sysColor.value)
       updateWeakness(weakness.value)
       updateGray(gray.value)
     })

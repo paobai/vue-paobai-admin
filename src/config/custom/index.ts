@@ -15,7 +15,7 @@ const customConfig: CustomConfig = {
   sidebarShow: true,
   sidebarMenuCollapsed: false,
   footerShow: true,
-  sysColor: "#165DFF",
+  sysColor: "",
   weakness: false,
   gray: false
 }

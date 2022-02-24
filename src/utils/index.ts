@@ -31,6 +31,7 @@ export const changeArcoPrimaryColor = (
   color: string,
   propertyPre = "--arcoblue-"
 ) => {
+  if (!color) return
   const tintColor = (color: string, tint: number) => {
     if (!color) return ""
     let red = 0
