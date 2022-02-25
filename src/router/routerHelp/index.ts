@@ -122,11 +122,17 @@ export function buildRoute(
     }
     return
   }
-  if (!item.path) return
-  const componentPath = `/src/views${item.path}.vue`
-  const findModule = modulesRoutes[componentPath]
+  if (item.type === RouteType.Button) return
+  let findModule = modulesRoutes["/src/views/common/wait-dev.vue"]
+  let modulePath = item.path
+  if (modulePath) {
+    const componentPath = `/src/views${modulePath}.vue`
+    findModule = modulesRoutes[componentPath] || findModule
+  } else {
+    modulePath = "temp-Path-" + item.key
+  }
   inList.push({
-    path: item.path,
+    path: modulePath,
     name: item.routeName,
     component: findModule,
     meta: {

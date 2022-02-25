@@ -65,7 +65,7 @@ export default defineComponent({
       } else {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
-        router.push({ path: find.path })
+        router.push({ name: find.routeName })
       }
     }
     return {

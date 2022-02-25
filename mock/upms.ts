@@ -89,14 +89,28 @@ export default [
               title: "菜单二",
               path: "",
               key: "menu-header-2",
-              icon: "iconfont-map1",
-              type: RouteType.Menu
+              icon: "icon-grid",
+              type: RouteType.Menu,
+              children: [
+                {
+                  key: "cd2-3_1",
+                  title: "菜单2的页面1",
+                  type: RouteType.Page,
+                  path: ""
+                },
+                {
+                  key: "cd2-3_2",
+                  title: "菜单2的页面2",
+                  type: RouteType.Page,
+                  path: ""
+                }
+              ]
             },
             {
               title: "菜单三",
               path: "",
               key: "menu-header-3",
-              icon: "iconfont-cecurity-protection-fill",
+              icon: "icon-grid",
               type: RouteType.Page
             },
             {

@@ -24,7 +24,7 @@ export enum RouteType {
  */
 export interface RouterApiType {
   key: string
-  path: string
+  path?: string
   type: RouteType
   icon?: string
   children?: RouterApiType[]
@@ -37,7 +37,7 @@ export interface RouterApiType {
  */
 export interface RouterSysType {
   key: string
-  path: string
+  path?: string
   routeName: string
   type: RouteType
   icon?: string
