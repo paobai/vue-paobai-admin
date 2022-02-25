@@ -184,7 +184,7 @@ http.interceptors.response.use(
       if (!refreshToken) {
         // 没有refreshToken情况直接返回不需要提示。
         errorLogin()
-        return
+        return Promise.reject(error.response.data)
       } else {
         return new Promise(resolve => {
           checkStatus(response.config).then(res => {

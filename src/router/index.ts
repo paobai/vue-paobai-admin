@@ -62,16 +62,14 @@ router.beforeEach((to, from, next) => {
     }
     AuthApi.getCurrentUserTree()
       .then(res => {
-        if (res.code === 1) {
-          const { routers: newRoutes, permissions } = fixResToSys(res.data)
-          // 加入了登录之后的默认route
-          const addCommonRoutes = [...mainRoutesSource, ...newRoutes]
-          // 改变为内部系统使用的sysRouteType
-          const finalSysRoutes = fixRouteToSysType(addCommonRoutes)
-          userStore.updateAuth(finalSysRoutes, permissions)
-          // clearRouter()
-          addRouterFromData(finalSysRoutes, modulesRoutes, router)
-        }
+        const { routers: newRoutes, permissions } = fixResToSys(res.data)
+        // 加入了登录之后的默认route
+        const addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+        // 改变为内部系统使用的sysRouteType
+        const finalSysRoutes = fixRouteToSysType(addCommonRoutes)
+        userStore.updateAuth(finalSysRoutes, permissions)
+        // clearRouter()
+        addRouterFromData(finalSysRoutes, modulesRoutes, router)
         next({ ...to, replace: true })
       })
       .catch(e => {
