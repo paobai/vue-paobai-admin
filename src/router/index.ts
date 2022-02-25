@@ -11,7 +11,7 @@ import { AuthApi } from "@/api/upms-api"
 import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
-import mainRoutesSource from "./commonLoginRouteApi/common"
+import mainRoutesSource from "./commonLoginRoute/common"
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -63,10 +63,12 @@ router.beforeEach((to, from, next) => {
     AuthApi.getCurrentUserTree()
       .then(res => {
         const { routers: newRoutes, permissions } = fixResToSys(res.data)
-        // 加入了登录之后的默认route
-        const addCommonRoutes = [...mainRoutesSource, ...newRoutes]
+        // mainRoutesSource为加入了登录之后的默认route
         // 改变为内部系统使用的sysRouteType
-        const finalSysRoutes = fixRouteToSysType(addCommonRoutes)
+        const finalSysRoutes = [
+          ...mainRoutesSource,
+          ...fixRouteToSysType(newRoutes)
+        ]
         userStore.updateAuth(finalSysRoutes, permissions)
         // clearRouter()
         addRouterFromData(finalSysRoutes, modulesRoutes, router)

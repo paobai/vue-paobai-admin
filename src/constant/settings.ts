@@ -45,6 +45,7 @@ export interface RouterSysType {
   title: string
   parentKey?: string[]
   notShow?: boolean
+  [k: string]: any
 }
 
 export declare interface RouteMetaCustom extends RouteMeta {

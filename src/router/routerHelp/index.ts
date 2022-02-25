@@ -15,6 +15,7 @@ import {
   RouterApiType
 } from "@/constant/settings"
 import { buildMenuName } from "@/utils/menu-help"
+import config from "@/config"
 
 /**
  * 判断当前路由类型,是否为全局路由
@@ -74,7 +75,7 @@ export function fixRouteToSysType(
       resItem.icon = parent.icon
     }
     if (item.children) {
-      fixRouteToSysType(item.children, parentKey.concat(item.key), resItem)
+      fixRouteToSysType(item.children, parentKey.concat(resItem.key), resItem)
     }
     resList.push(resItem)
   })
@@ -99,7 +100,7 @@ export function addRouterFromData(
   const dist: RouteRecordRaw = {
     path: "/",
     component: Layout,
-    redirect: "/main",
+    redirect: config.app.homePagePath,
     children: inList
   }
   router.addRoute(dist)
@@ -126,6 +127,7 @@ export function buildRoute(
   let findModule = modulesRoutes["/src/views/common/wait-dev.vue"]
   let modulePath = item.path
   if (modulePath) {
+    if (modulePath[0] !== "/") modulePath = "/" + modulePath
     const componentPath = `/src/views${modulePath}.vue`
     findModule = modulesRoutes[componentPath] || findModule
   } else {
