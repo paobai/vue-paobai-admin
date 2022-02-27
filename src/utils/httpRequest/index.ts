@@ -173,7 +173,7 @@ http.interceptors.response.use(
       response.data.code === 10250
     ) {
       // Bad client错误流程
-      if (response.data.msg === "Bad client credentials") {
+      if (response.data && response.data.msg === "Bad client credentials") {
         errorLogin()
         Message.error("认证失败,client错误,请联系管理员。")
         return Promise.reject(error.response.data)
@@ -193,7 +193,7 @@ http.interceptors.response.use(
         })
       }
     }
-    if (error.response.data.code === 10250) {
+    if (response.data && response.data.code === 10250) {
       Message.error("登录失效,请先登录")
       // eslint-disable-next-line no-empty
     } else if (error.response.data.code === 10251) {

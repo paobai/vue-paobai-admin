@@ -1,3 +1,5 @@
+import { getRequest, postRequest } from "@/utils/httpRequest";
+
 const haveReadIds: number[] = []
 export const getMessageList = () => {
   return [
@@ -68,18 +70,11 @@ export const getMessageList = () => {
 }
 
 export function queryMessageList() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve({ data: getMessageList() })
-    }, 1000)
-  })
+  return postRequest<MessageListType>('/api/message/list');
 }
 
-export function setMessageStatus(data: { ids: number[] }) {
-  return new Promise(resolve => {
-    haveReadIds.push(...data.ids)
-    resolve({ data: getMessageList() })
-  })
+export function setMessageStatus(data: MessageStatus) {
+  return postRequest<MessageListType>('/api/message/read', data);
 }
 
 export interface MessageRecord {
@@ -92,6 +87,10 @@ export interface MessageRecord {
   time: string
   status: 0 | 1
   messageType?: number
+}
+
+interface MessageStatus {
+  ids: number[];
 }
 
 export type MessageListType = MessageRecord[]

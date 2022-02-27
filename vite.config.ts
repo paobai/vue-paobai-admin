@@ -65,7 +65,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       host: "0.0.0.0",
       port: VITE_PORT,
       // 本地跨域代理
-      proxy: createProxy(VITE_PROXY)
+      // proxy: createProxy(VITE_PROXY)
     },
     plugins: [
       vue(),
@@ -89,7 +89,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         localEnabled: command === "serve",
         prodEnabled: command !== "serve" && prodMock,
         injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
+          import { setupProdMockServer } from '../mock/mockProdServer';
           setupProdMockServer();
         `,
         logger: true

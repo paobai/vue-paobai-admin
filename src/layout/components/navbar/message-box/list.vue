@@ -19,7 +19,7 @@
           <template v-if="item.avatar" #avatar>
             <a-avatar shape="circle">
               <img v-if="item.avatar" :src="item.avatar" />
-              <icon-desktop v-else />
+              <a-icon-desktop v-else />
             </a-avatar>
           </template>
           <template #title>
