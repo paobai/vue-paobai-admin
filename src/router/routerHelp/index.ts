@@ -128,7 +128,7 @@ export function buildRoute(
   let modulePath = item.path
   if (modulePath) {
     if (modulePath[0] !== "/") modulePath = "/" + modulePath
-    const componentPath = `/src/views${modulePath}.vue`
+    const componentPath = `/src/views/modules${modulePath}.vue`
     findModule = modulesRoutes[componentPath] || findModule
   } else {
     modulePath = "temp-Path-" + item.key
