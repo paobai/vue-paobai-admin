@@ -93,7 +93,7 @@ export default defineComponent({
       }
       .arco-menu-item,
       .arco-menu-pop {
-        padding: 0 40px;
+        padding: 0 30px;
         background-color: @app-navbar-bk-color;
         height: 100%;
         line-height: @app-navbar-height;

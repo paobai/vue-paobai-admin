@@ -128,11 +128,13 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   .left-wrapper {
+    width: 0;
     flex: auto;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
     .logo-wrapper {
+      white-space: pre;
       width: @app-sidebar-width;
       height: 100%;
       line-height: @app-navbar-height;
