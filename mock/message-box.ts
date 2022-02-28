@@ -72,6 +72,7 @@ export default [
   {
     url: new RegExp("/api/message/list"),
     method: "post",
+    timeout: 1000,
     response: () => {
       return successResponseWrap(getMessageList())
     }
