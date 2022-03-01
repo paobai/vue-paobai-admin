@@ -109,3 +109,9 @@ declare global {
         format (args: string | string[]) : String
     }
 }
+
+export interface MockPostData {
+    body: {[k: string]: any};
+    type: string;
+    url: string;
+}

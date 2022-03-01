@@ -140,7 +140,7 @@ export default defineComponent({
         router.replace({ path: config.app.homePagePath })
       } else if (value === "reloadChose") {
         router.replace({
-          name: "跳转页-redirect-page",
+          name: config.app.redirectPageName,
           params: { distPath: item.path }
         })
       }

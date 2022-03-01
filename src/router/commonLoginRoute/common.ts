@@ -10,15 +10,15 @@ const mainRoutesSource: RouterSysType[] = [
     type: RouteType.Page,
     icon: "iconfont-home-fill",
     routeName: ""
-  },
-  {
-    path: "/common/redirect",
-    title: "跳转页",
-    key: "redirect-page",
-    type: RouteType.Page,
-    notShow: true,
-    routeName: ""
   }
+  // {
+  //   path: "/common/redirect",
+  //   title: "跳转页",
+  //   key: "redirect-page",
+  //   type: RouteType.Page,
+  //   notShow: true,
+  //   routeName: ""
+  // }
 ]
 mainRoutesSource.forEach(item => {
   item.routeName = buildRouteName(item)

@@ -161,8 +161,10 @@ export default defineComponent({
       bottom: 12px;
       font-size: 20px;
       overflow: hidden;
+      z-index: 1000;
     }
     &:before {
+      z-index: 1000;
       overflow: hidden;
       content: "";
       position: absolute;

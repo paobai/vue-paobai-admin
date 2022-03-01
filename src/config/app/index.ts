@@ -5,6 +5,7 @@ export interface AppConfig {
   refreshTokenName: string
   permissionName: string
   loginPageName: string
+  redirectPageName: string
   homePagePath: string
   navbarShowKey: string
   sidebarShowKey: string
@@ -22,6 +23,7 @@ const appConfig: AppConfig = {
   refreshTokenName: "refresh_token",
   permissionName: "permissions",
   loginPageName: "login",
+  redirectPageName: "redirect",
   homePagePath: "/main",
   navbarShowKey: "layout-nav-bar-show",
   sidebarShowKey: "layout-side-bar-show",

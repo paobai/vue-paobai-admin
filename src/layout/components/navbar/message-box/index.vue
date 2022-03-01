@@ -28,7 +28,7 @@ import {
   setMessageStatus,
   MessageRecord,
   MessageListType
-} from "./api"
+} from "@/api/message-box"
 import useLoading from "@/hooks/loading"
 import List from "./list.vue"
 

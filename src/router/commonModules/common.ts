@@ -18,6 +18,15 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
     }
   },
   {
+    path: "/redirect",
+    name: "redirect",
+    component: () => import("@/views/common/redirect.vue"),
+    meta: {
+      title: "跳转页",
+      icon: "#icondashboard"
+    }
+  },
+  {
     path: "/error/401",
     component: import(
       /* webpackChunkName: "error-page-401" */ "@/views/common/error-page/401.vue"

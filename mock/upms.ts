@@ -80,6 +80,25 @@ export default [
                     path: "/test-router/menu3/menu3-3"
                   }
                 ]
+              },
+              {
+                key: "visualization",
+                title: "分析数据可视化",
+                type: RouteType.Menu,
+                children: [
+                  {
+                    key: "data-analysis",
+                    title: "数据分析",
+                    type: RouteType.Page,
+                    path: '/visualization/data-analysis/index'
+                  },
+                  {
+                    key: "multi-dimension-data-analysis",
+                    title: "多维数据分析",
+                    type: RouteType.Page,
+                    path: '/visualization/multi-dimension-data-analysis/index'
+                  }
+                ]
               }
             ]
           },

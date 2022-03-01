@@ -1,6 +1,4 @@
-import Mock from "mockjs"
-import setupMock, { successResponseWrap } from "@/utils/mock"
-import { RouteType } from "../src/constant/settings"
+import { successResponseWrap } from "@/utils/mock"
 
 const haveReadIds: number[] = []
 const getMessageList = () => {

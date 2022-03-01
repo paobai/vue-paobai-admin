@@ -1,5 +1,5 @@
 import * as echarts from "echarts/core"
-import { BarChart, LineChart, PieChart } from "echarts/charts"
+import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts"
 import { CanvasRenderer } from "echarts/renderers"
 import Chart from "./chart/index.vue"
 import { App } from "vue"
@@ -12,7 +12,8 @@ import {
   TooltipComponent,
   DataZoomComponent,
   VisualMapComponent,
-  GraphicComponent
+  GraphicComponent,
+  RadarComponent
 } from "echarts/components"
 
 const { use, registerTheme } = echarts
@@ -29,7 +30,9 @@ use([
   TooltipComponent,
   DataZoomComponent,
   VisualMapComponent,
-  GraphicComponent
+  GraphicComponent,
+  RadarComponent,
+  RadarChart
 ])
 
 // 自定义主题
