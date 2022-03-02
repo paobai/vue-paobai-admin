@@ -1,6 +1,6 @@
 import { loadEnv } from "@/../build/utils"
 import { LocalStorage, LowSync } from "lowdb"
-import { chain, cloneDeep } from "lodash-es"
+import { chain, cloneDeep } from "lodash"
 import { storageLocal } from "."
 import Cookies from "@/utils/storage/cookie"
 type Data = {

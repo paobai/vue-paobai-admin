@@ -119,3 +119,8 @@ export interface MockPostData {
 export interface AnyObject {
     [key: string]: unknown;
 }
+
+export interface GeneralChart {
+    xAxis: string[];
+    data: Array<{ name: string; value: number[] }>;
+}
