@@ -4,40 +4,23 @@
       <a-icon-settings :style="{ color: '#ffffff', fontSize: '30pX' }" />
     </a-button>
   </div>
-  <a-drawer
-    :visible="showRightSetting"
-    unmountOnClose
-    @cancel="updateRightSetting(false)"
-    :closable="false"
-    cancel-text="关闭"
-    :width="300"
-  >
+  <a-drawer :visible="showRightSetting" unmountOnClose @cancel="updateRightSetting(false)" :closable="false" cancel-text="关闭" :width="300">
     <template #title> 全局设置 </template>
     <template #footer>
-      <a-button @click="updateRightSetting(false)" type="primary"
-        >关闭</a-button
-      >
+      <a-button @click="updateRightSetting(false)" type="primary">关闭</a-button>
     </template>
     <div class="right-setting-wrapper">
       <h3>页面布局:</h3>
       <div class="item-line-space-between">
         显示顶部：
-        <a-switch
-          :disabled="!sidebarShow"
-          :default-checked="navbarShow"
-          @change="v => (navbarShow = v)"
-        >
+        <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="v => (navbarShow = v)">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
       <div class="item-line-space-between">
         显示左部：
-        <a-switch
-          :disabled="!navbarShow"
-          :default-checked="sidebarShow"
-          @change="v => (sidebarShow = v)"
-        >
+        <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="v => (sidebarShow = v)">
           <template #checked>显示</template>
           <template #unchecked>不显示</template>
         </a-switch>
@@ -67,13 +50,7 @@
       <div class="color-pick">
         <div>主题颜色：</div>
         <div class="color-pick-wrapper">
-          <div
-            v-for="color in sysColorList"
-            :key="color"
-            class="color-item"
-            :style="{ backgroundColor: color }"
-            @click="sysColor = color"
-          >
+          <div v-for="color in sysColorList" :key="color" class="color-item" :style="{ backgroundColor: color }" @click="sysColor = color">
             <template v-if="color === sysColor">√</template>
           </div>
         </div>
@@ -88,19 +65,7 @@ import { useAppHook } from "@/hooks/app"
 import { sysColorList } from "@/constant"
 export default defineComponent({
   setup() {
-    const {
-      navbarShow,
-      updateNavbar,
-      sidebarShow,
-      updateSidebar,
-      updateRightSetting,
-      showRightSetting,
-      sysColor,
-      updateFooterShow,
-      footerShow,
-      weakness,
-      gray
-    } = useAppHook()
+    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, sysColor, updateFooterShow, footerShow, weakness, gray } = useAppHook()
     return {
       showRightSetting,
       updateRightSetting,
@@ -126,7 +91,7 @@ export default defineComponent({
   width: 50px;
   height: 50px;
   display: flex;
-  background: rgb(var(--arcoblue-5));
+  background: rgb(var(--primary-5));
   justify-content: center;
   align-items: center;
   border-radius: 8px 0 0 8px;

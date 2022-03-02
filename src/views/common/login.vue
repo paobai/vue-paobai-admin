@@ -4,10 +4,7 @@
       <div class="content-wrapper">
         <div class="title">
           <div class="english">
-            <img
-              class="welcome"
-              src="/src/assets/images/login/welcome-en.png"
-            />
+            <img class="welcome" src="/src/assets/images/login/welcome-en.png" />
           </div>
           <div class="chinese">欢迎回来</div>
         </div>
@@ -18,48 +15,27 @@
       <div class="login-form-wrapper">
         <div class="login-title">
           <div class="logo-wrapper">
-            <img
-              class="logo"
-              src="/src/assets/images/common/logo/logo-with-text-bottom.png"
-            />
+            <img class="logo" src="/src/assets/images/common/logo/logo-with-text-bottom.png" />
           </div>
           <div>用户登录</div>
         </div>
         <div class="login-content-wrapper">
-          <a-form
-            :model="loginForm"
-            :label-col-props="{ span: 0 }"
-            :wrapper-col-props="{ span: 24 }"
-            @keyup.enter="login()"
-          >
+          <a-form :model="loginForm" :label-col-props="{ span: 0 }" :wrapper-col-props="{ span: 24 }" @keyup.enter="login()">
             <a-form-item field="userName">
-              <a-input
-                v-model="loginForm.userName"
-                placeholder="用户名/手机号码"
-              >
+              <a-input v-model="loginForm.userName" placeholder="用户名/手机号码">
                 <template #prefix>
-                  <a-icon-user
-                    :style="{ fontSize: '20px', color: '#BABABA' }"
-                  />
+                  <a-icon-user :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
               </a-input>
             </a-form-item>
             <a-form-item field="passWord">
-              <a-input
-                v-model="loginForm.passWord"
-                placeholder="密码"
-                type="password"
-              >
+              <a-input v-model="loginForm.passWord" placeholder="密码" type="password">
                 <template #prefix>
-                  <a-icon-lock
-                    :style="{ fontSize: '20px', color: '#BABABA' }"
-                  />
+                  <a-icon-lock :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
               </a-input>
             </a-form-item>
-            <a-button class="sub-bt" type="primary" @click="login"
-              >登&nbsp;&nbsp;录</a-button
-            >
+            <a-button class="sub-bt" type="primary" @click="login">登&nbsp;&nbsp;录</a-button>
           </a-form>
         </div>
       </div>
@@ -112,7 +88,7 @@ export default {
     max-width: 700px;
     width: 0;
     flex: 1;
-    background: rgb(var(--arcoblue-6));
+    background: @primary-color;
     opacity: 0.95;
     display: flex;
     justify-content: center;
