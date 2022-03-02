@@ -11,11 +11,7 @@ export function clearLoginInfo() {
 }
 
 // Toggle class for the selected element
-export const toggleClass = (
-  ele: HTMLElement,
-  className: string,
-  force?: boolean | undefined
-) => {
+export const toggleClass = (ele: HTMLElement, className: string, force?: boolean | undefined) => {
   if (!ele || !className) {
     return
   }
@@ -27,10 +23,7 @@ export const toggleClass = (
  * @param color 颜色
  * @param propertyPre 更新类型默认主题色
  */
-export const changeArcoPrimaryColor = (
-  color: string,
-  propertyPre = "--arcoblue-"
-) => {
+export const changeArcoPrimaryColor = (color: string, propertyPre = "--primary-") => {
   if (!color) return
   const tintColor = (color: string, tint: number) => {
     if (!color) return ""
