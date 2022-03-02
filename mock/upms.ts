@@ -99,6 +99,25 @@ export default [
                     path: '/visualization/multi-dimension-data-analysis/index'
                   }
                 ]
+              },
+              {
+                key: "dashboard",
+                title: "仪表盘",
+                type: RouteType.Menu,
+                children: [
+                  {
+                    key: "workplace",
+                    title: "工作台",
+                    type: RouteType.Page,
+                    path: '/dashboard/workplace/index'
+                  },
+                  {
+                    key: "monitor",
+                    title: "实时监控",
+                    type: RouteType.Page,
+                    path: '/dashboard/monitor/index'
+                  },
+                ]
               }
             ]
           },

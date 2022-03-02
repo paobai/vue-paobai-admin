@@ -115,3 +115,7 @@ export interface MockPostData {
     type: string;
     url: string;
 }
+
+export interface AnyObject {
+    [key: string]: unknown;
+}
