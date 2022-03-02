@@ -45,10 +45,7 @@ export function useUserHook() {
     router.replace({ name: config.app.loginPageName })
   }
 
-  const updateAuth = function (
-    routeList: RouterSysType[],
-    permissions: string[]
-  ) {
+  const updateAuth = function (routeList: RouterSysType[], permissions: string[]) {
     userStore.updatePermissions(permissions)
     userStore.updateRouteList(routeList)
     router.options.isAddDynamicMenuRoutes = true

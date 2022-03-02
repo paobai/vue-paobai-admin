@@ -8,18 +8,14 @@
       height: '100%',
       paddingTop: '16px',
       display: 'flex',
-      flexFlow: 'column',
+      flexFlow: 'column'
     }"
   >
     <a-space :size="8">
       <a-select style="width: 86px" default-value="all">
-        <a-option value="all">
-          全部
-        </a-option>
+        <a-option value="all"> 全部 </a-option>
       </a-select>
-      <a-input-search
-        placeholder="搜索类目"
-      />
+      <a-input-search placeholder="搜索类目" />
       <a-button type="text">
         <a-icon-download />
       </a-button>
@@ -43,35 +39,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { queryChatList, ChatRecord } from '@/api/message';
-import useLoading from '@/hooks/loading';
-import ChatList from './chat-list.vue';
+import { defineComponent, ref } from "vue"
+import { queryChatList, ChatRecord } from "@/api/message"
+import useLoading from "@/hooks/loading"
+import ChatList from "./chat-list.vue"
 
 export default defineComponent({
   components: {
-    ChatList,
+    ChatList
   },
   setup() {
-    const { loading, setLoading } = useLoading(true);
-    const chatList = ref<ChatRecord[]>([]);
+    const { loading, setLoading } = useLoading(true)
+    const chatList = ref<ChatRecord[]>([])
     const fetchData = async () => {
       try {
-        const { data } = await queryChatList();
-        chatList.value = data;
+        const { data } = await queryChatList()
+        chatList.value = data
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-    fetchData();
+    }
+    fetchData()
     return {
       loading,
-      chatList,
-    };
-  },
-});
+      chatList
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">

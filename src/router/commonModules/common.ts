@@ -28,9 +28,7 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   },
   {
     path: "/error/401",
-    component: import(
-      /* webpackChunkName: "error-page-401" */ "@/views/common/error-page/401.vue"
-    ),
+    component: import(/* webpackChunkName: "error-page-401" */ "@/views/common/error-page/401.vue"),
     // redirect: "noredirect",
     name: "Page401",
     meta: {
@@ -40,9 +38,7 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   },
   {
     path: "/error/404",
-    component: import(
-      /* webpackChunkName: "error-page-404" */ "@/views/common/error-page/404.vue"
-    ),
+    component: import(/* webpackChunkName: "error-page-404" */ "@/views/common/error-page/404.vue"),
     // redirect: "noredirect",
     name: "Page404",
     meta: {

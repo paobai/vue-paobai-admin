@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "@/utils/httpRequest";
+import { postRequest } from "@/utils/httpRequest"
 
 const haveReadIds: number[] = []
 export const getMessageList = () => {
@@ -8,8 +8,7 @@ export const getMessageList = () => {
       type: "message",
       title: "郑曦月",
       subTitle: "的私信",
-      avatar:
-        "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp",
+      avatar: "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp",
       content: "审批请求已发送，请查收",
       time: "今天 12:30:01"
     },
@@ -18,8 +17,7 @@ export const getMessageList = () => {
       type: "message",
       title: "宁波",
       subTitle: "的回复",
-      avatar:
-        "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
+      avatar: "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
       content: "此处 bug 已经修复",
       time: "今天 12:30:01"
     },
@@ -28,8 +26,7 @@ export const getMessageList = () => {
       type: "message",
       title: "宁波",
       subTitle: "的回复",
-      avatar:
-        "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
+      avatar: "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
       content: "此处 bug 已经修复",
       time: "今天 12:20:01"
     },
@@ -70,11 +67,11 @@ export const getMessageList = () => {
 }
 
 export function queryMessageList() {
-  return postRequest<MessageListType>('/api/message/list');
+  return postRequest<MessageListType>("/api/message/list")
 }
 
 export function setMessageStatus(data: MessageStatus) {
-  return postRequest<MessageListType>('/api/message/read', data);
+  return postRequest<MessageListType>("/api/message/read", data)
 }
 
 export interface MessageRecord {
@@ -90,7 +87,7 @@ export interface MessageRecord {
 }
 
 interface MessageStatus {
-  ids: number[];
+  ids: number[]
 }
 
 export type MessageListType = MessageRecord[]

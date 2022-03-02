@@ -14,8 +14,6 @@ export class AuthApi {
   }
   // 获取用户可以访问菜单树
   static async getCurrentUserTree() {
-    return getRequest<{ routers: RouterApiType[]; permissions: string[] }>(
-      groupPre + "/users/current/menus"
-    )
+    return getRequest<{ routers: RouterApiType[]; permissions: string[] }>(groupPre + "/users/current/menus")
   }
 }

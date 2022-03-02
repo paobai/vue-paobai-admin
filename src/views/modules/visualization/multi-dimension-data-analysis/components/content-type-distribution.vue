@@ -1,112 +1,108 @@
 <template>
-  <a-card
-    class="general-card"
-    title="内容题材分布"
-    :header-style="{ paddingBottom: 0 }"
-  >
+  <a-card class="general-card" title="内容题材分布" :header-style="{ paddingBottom: 0 }">
     <Chart style="height: 222px" :option="chartOption" />
   </a-card>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import useChartOption from '@/hooks/chart-option';
+import { defineComponent } from "vue"
+import useChartOption from "@/hooks/chart-option"
 
 export default defineComponent({
   setup() {
-    const { chartOption } = useChartOption((isDark) => {
+    const { chartOption } = useChartOption(isDark => {
       return {
         grid: {
           left: 0,
           right: 0,
           top: 0,
-          bottom: 20,
+          bottom: 20
         },
         legend: {
           show: true,
-          top: 'center',
-          right: '0',
-          orient: 'vertical',
-          icon: 'circle',
+          top: "center",
+          right: "0",
+          orient: "vertical",
+          icon: "circle",
           itemWidth: 10,
           itemHeight: 10,
           itemGap: 20,
           textStyle: {
-            color: isDark ? '#ffffff' : '#4E5969',
-          },
+            color: isDark ? "#ffffff" : "#4E5969"
+          }
         },
         radar: {
-          center: ['40%', '50%'],
+          center: ["40%", "50%"],
           radius: 80,
           indicator: [
-            { name: '国际', max: 6500 },
-            { name: '财经', max: 22000 },
-            { name: '科技', max: 30000 },
-            { name: '其他', max: 38000 },
-            { name: '体育', max: 52000 },
-            { name: '娱乐', max: 25000 },
+            { name: "国际", max: 6500 },
+            { name: "财经", max: 22000 },
+            { name: "科技", max: 30000 },
+            { name: "其他", max: 38000 },
+            { name: "体育", max: 52000 },
+            { name: "娱乐", max: 25000 }
           ],
           axisName: {
-            color: isDark ? '#ffffff' : '#1D2129',
+            color: isDark ? "#ffffff" : "#1D2129"
           },
           axisLine: {
             lineStyle: {
-              color: isDark ? '#484849' : '#E5E6EB',
-            },
+              color: isDark ? "#484849" : "#E5E6EB"
+            }
           },
           splitLine: {
             lineStyle: {
-              color: isDark ? '#484849' : '#E5E6EB',
-            },
+              color: isDark ? "#484849" : "#E5E6EB"
+            }
           },
           splitArea: {
             areaStyle: {
-              color: [],
-            },
-          },
+              color: []
+            }
+          }
         },
         series: [
           {
-            type: 'radar',
+            type: "radar",
             areaStyle: {
-              opacity: 0.2,
+              opacity: 0.2
             },
             data: [
               {
                 value: [4850, 19000, 19000, 29500, 35200, 20000],
-                name: '纯文本',
-                symbol: 'none',
+                name: "纯文本",
+                symbol: "none",
                 itemStyle: {
-                  color: isDark ? '#6CAAF5' : '#249EFF',
-                },
+                  color: isDark ? "#6CAAF5" : "#249EFF"
+                }
               },
               {
                 value: [2250, 17000, 21000, 23500, 42950, 22000],
-                name: '图文类',
-                symbol: 'none',
+                name: "图文类",
+                symbol: "none",
                 itemStyle: {
-                  color: isDark ? '#A079DC' : '#313CA9',
-                },
+                  color: isDark ? "#A079DC" : "#313CA9"
+                }
               },
               {
                 value: [5850, 11000, 26000, 27500, 46950, 18000],
-                name: '视频类',
-                symbol: 'none',
+                name: "视频类",
+                symbol: "none",
                 itemStyle: {
-                  color: isDark ? '#3D72F6' : '#21CCFF',
-                },
-              },
-            ],
-          },
-        ],
-      };
-    });
+                  color: isDark ? "#3D72F6" : "#21CCFF"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    })
 
     return {
-      chartOption,
-    };
-  },
-});
+      chartOption
+    }
+  }
+})
 </script>
 
 <style scoped lang="less"></style>

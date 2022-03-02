@@ -6,35 +6,14 @@ import { storageLocal } from "@/utils/storage"
 export const useAppStore = defineStore({
   id: "store-app",
   state: () => ({
-    navbarShow:
-      storageLocal.getItem(config.app.navbarShowKey) === null
-        ? config.custom.navbarShow
-        : storageLocal.getItem(config.app.navbarShowKey),
-    sidebarShow:
-      storageLocal.getItem(config.app.sidebarShowKey) === null
-        ? config.custom.sidebarShow
-        : storageLocal.getItem(config.app.sidebarShowKey),
-    sidebarMenuCollapsed:
-      storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null
-        ? config.custom.sidebarMenuCollapsed
-        : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
+    navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
+    sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
+    sidebarMenuCollapsed: storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
     rightSettingShow: false,
-    footerShow:
-      storageLocal.getItem(config.app.footerShowKey) === null
-        ? config.custom.footerShow
-        : storageLocal.getItem(config.app.footerShowKey),
-    sysColor:
-      storageLocal.getItem(config.app.sysColorKey) === null
-        ? config.custom.sysColor
-        : storageLocal.getItem(config.app.sysColorKey),
-    weakness:
-      storageLocal.getItem(config.app.weaknessKey) === null
-        ? config.custom.weakness
-        : storageLocal.getItem(config.app.weaknessKey),
-    gray:
-      storageLocal.getItem(config.app.grayKey) === null
-        ? config.custom.gray
-        : storageLocal.getItem(config.app.grayKey)
+    footerShow: storageLocal.getItem(config.app.footerShowKey) === null ? config.custom.footerShow : storageLocal.getItem(config.app.footerShowKey),
+    sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey),
+    weakness: storageLocal.getItem(config.app.weaknessKey) === null ? config.custom.weakness : storageLocal.getItem(config.app.weaknessKey),
+    gray: storageLocal.getItem(config.app.grayKey) === null ? config.custom.gray : storageLocal.getItem(config.app.grayKey)
   }),
   getters: {
     getNavbarShow(): boolean {
@@ -73,10 +52,7 @@ export const useAppStore = defineStore({
     },
     updateSidebarMenuCollapsed(sidebarMenuCollapsed: boolean) {
       this.sidebarMenuCollapsed = sidebarMenuCollapsed
-      storageLocal.setItem(
-        config.app.sidebarMenuCollapsedKey,
-        sidebarMenuCollapsed
-      )
+      storageLocal.setItem(config.app.sidebarMenuCollapsedKey, sidebarMenuCollapsed)
     },
     updateRightSettingShow(rightSettingShow: boolean) {
       this.rightSettingShow = rightSettingShow

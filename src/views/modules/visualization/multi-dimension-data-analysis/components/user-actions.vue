@@ -1,85 +1,82 @@
 <template>
-  <a-card
-    class="general-card"
-    title="今日转评赞统计"
-  >
+  <a-card class="general-card" title="今日转评赞统计">
     <Chart height="122px" :option="chartOption" />
   </a-card>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import useChartOption from '@/hooks/chart-option';
+import { defineComponent } from "vue"
+import useChartOption from "@/hooks/chart-option"
 
 export default defineComponent({
   setup() {
-    const { chartOption } = useChartOption((isDark) => {
+    const { chartOption } = useChartOption(isDark => {
       return {
         grid: {
           left: 44,
           right: 20,
           top: 0,
-          bottom: 20,
+          bottom: 20
         },
         xAxis: {
-          type: 'value',
+          type: "value",
           axisLabel: {
             show: true,
             formatter(value: number, idx: number) {
-              if (idx === 0) return String(value);
-              return `${Number(value) / 1000}k`;
-            },
+              if (idx === 0) return String(value)
+              return `${Number(value) / 1000}k`
+            }
           },
           splitLine: {
             lineStyle: {
-              color: isDark ? '#484849' : '#E5E8EF',
-            },
-          },
+              color: isDark ? "#484849" : "#E5E8EF"
+            }
+          }
         },
         yAxis: {
-          type: 'category',
-          data: ['点赞量', '评论量', '分享量'],
+          type: "category",
+          data: ["点赞量", "评论量", "分享量"],
           axisLabel: {
             show: true,
-            color: '#4E5969',
+            color: "#4E5969"
           },
           axisTick: {
             show: true,
             length: 2,
             lineStyle: {
-              color: '#A9AEB8',
+              color: "#A9AEB8"
             },
-            alignWithLabel: true,
+            alignWithLabel: true
           },
           axisLine: {
             lineStyle: {
-              color: isDark ? '#484849' : '#A9AEB8',
-            },
-          },
+              color: isDark ? "#484849" : "#A9AEB8"
+            }
+          }
         },
         tooltip: {
           show: true,
-          trigger: 'axis',
+          trigger: "axis"
         },
         series: [
           {
             data: [1033, 1244, 1520],
-            type: 'bar',
+            type: "bar",
             barWidth: 7,
             itemStyle: {
-              color: '#4086FF',
-              borderRadius: 4,
-            },
-          },
-        ],
-      };
-    });
+              color: "#4086FF",
+              borderRadius: 4
+            }
+          }
+        ]
+      }
+    })
 
     return {
-      chartOption,
-    };
-  },
-});
+      chartOption
+    }
+  }
+})
 </script>
 
 <style scoped lang="less"></style>

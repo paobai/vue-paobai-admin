@@ -14,16 +14,12 @@ class DB {
   private db: LowSync<Data>
   private static env = loadEnv()
   constructor() {
-    this.db = new LowSync<Data>(
-      new LocalStorage<Data>(`${DB.env.VITE_TITLE}-${DB.env.VITE_VERSION}`)
-    )
+    this.db = new LowSync<Data>(new LocalStorage<Data>(`${DB.env.VITE_TITLE}-${DB.env.VITE_VERSION}`))
     this.initialization()
     this.db.chain = chain(this.db.data)
   }
   private initialization() {
-    this.db.data = storageLocal.getItem(
-      `${DB.env.VITE_TITLE}-${DB.env.VITE_VERSION}`
-    ) || { database: {}, sys: {} }
+    this.db.data = storageLocal.getItem(`${DB.env.VITE_TITLE}-${DB.env.VITE_VERSION}`) || { database: {}, sys: {} }
     this.db.write()
   }
   /**
@@ -31,17 +27,9 @@ class DB {
    * @param param0
    * @returns path
    */
-  pathInit({
-    dbName = "database",
-    path = "",
-    user = true,
-    validator = () => true,
-    defaultValue = ""
-  }): string {
+  pathInit({ dbName = "database", path = "", user = true, validator = () => true, defaultValue = "" }): string {
     const uuid = Cookies.get("uuid") || "ghost-uuid"
-    const currentPath = `${dbName}.${user ? `user.${uuid}` : "public"}${
-      path ? `.${path}` : ""
-    }`
+    const currentPath = `${dbName}.${user ? `user.${uuid}` : "public"}${path ? `.${path}` : ""}`
     const value = this.db.chain.get(currentPath).value()
     if (!(value !== undefined && validator(value))) {
       this.db.chain.set(currentPath, defaultValue).value()
@@ -71,15 +59,8 @@ class DB {
    * @param param0
    * @returns
    */
-  dbGet({
-    dbName = "database",
-    path = "",
-    defaultValue = "",
-    user = false
-  }): any {
-    const values = this.db.chain
-      .get(this.pathInit({ dbName, path, user, defaultValue }))
-      .value()
+  dbGet({ dbName = "database", path = "", defaultValue = "", user = false }): any {
+    const values = this.db.chain.get(this.pathInit({ dbName, path, user, defaultValue })).value()
     return cloneDeep(values)
   }
 }

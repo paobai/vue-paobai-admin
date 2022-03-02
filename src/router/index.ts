@@ -1,12 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
-import {
-  addRouterFromData,
-  fixResToSys,
-  isGlobalRoute,
-  fixRouteToSysType,
-  MyRouter,
-  MyRouterOptions
-} from "@/router/routerHelp"
+import { addRouterFromData, fixResToSys, isGlobalRoute, fixRouteToSysType, MyRouter, MyRouterOptions } from "@/router/routerHelp"
 import { AuthApi } from "@/api/upms-api"
 import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"
@@ -48,10 +41,7 @@ router.beforeEach((to, from, next) => {
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
-  if (
-    router.options.isAddDynamicMenuRoutes ||
-    isGlobalRoute(to as any, constantRoutes)
-  ) {
+  if (router.options.isAddDynamicMenuRoutes || isGlobalRoute(to as any, constantRoutes)) {
     next()
   } else {
     // TODO 获取路由
@@ -65,20 +55,14 @@ router.beforeEach((to, from, next) => {
         const { routers: newRoutes, permissions } = fixResToSys(res.data)
         // mainRoutesSource为加入了登录之后的默认route
         // 改变为内部系统使用的sysRouteType
-        const finalSysRoutes = [
-          ...mainRoutesSource,
-          ...fixRouteToSysType(newRoutes)
-        ]
+        const finalSysRoutes = [...mainRoutesSource, ...fixRouteToSysType(newRoutes)]
         userStore.updateAuth(finalSysRoutes, permissions)
         // clearRouter()
         addRouterFromData(finalSysRoutes, modulesRoutes, router)
         next({ ...to, replace: true })
       })
       .catch(e => {
-        console.log(
-          `%c${e} 请求菜单列表和权限失败，跳转至登录页！！`,
-          "color:blue"
-        )
+        console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, "color:blue")
         router.push({ name: "login" })
       })
   }

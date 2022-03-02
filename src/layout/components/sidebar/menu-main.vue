@@ -22,11 +22,7 @@
             <template #expand-icon-down>
               <a-icon-down />
             </template>
-            <menu-sub
-              v-for="routSub in route.children"
-              :menuItem="routSub"
-              :key="routSub.key"
-            ></menu-sub>
+            <menu-sub v-for="routSub in route.children" :menuItem="routSub" :key="routSub.key"></menu-sub>
           </a-sub-menu>
         </template>
         <template v-else>
@@ -55,13 +51,7 @@ export default defineComponent({
     menuSub
   },
   setup() {
-    let {
-      routeSidebarList: routeList,
-      getSideRouteByKey,
-      collapse,
-      nowMenu,
-      nowMenuKey
-    } = useAppHook()
+    let { routeSidebarList: routeList, getSideRouteByKey, collapse, nowMenu, nowMenuKey } = useAppHook()
     let clickMenu = function (key: string) {
       let dist = getSideRouteByKey(key)
       router.push({ name: buildRouteName(dist) })
@@ -72,9 +62,7 @@ export default defineComponent({
         openKeys.value = []
         return
       }
-      openKeys.value = (unref(nowMenu).parentKey || []).concat(
-        unref(nowMenu).key
-      )
+      openKeys.value = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
     })
     let onClickSubMenu = function (key: string, getOpenKeys: string[]) {
       openKeys.value = getOpenKeys

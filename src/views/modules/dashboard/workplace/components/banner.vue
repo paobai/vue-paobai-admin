@@ -1,30 +1,28 @@
 <template>
   <a-col class="banner">
     <a-col :span="8">
-      <a-typography-title :heading="5" style="margin-top: 0">
-        欢迎回来！ {{ userInfo.name }}
-      </a-typography-title>
+      <a-typography-title :heading="5" style="margin-top: 0"> 欢迎回来！ {{ userInfo.name }} </a-typography-title>
     </a-col>
     <a-divider class="panel-border" />
   </a-col>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { useUserStoreHook } from '@/store/modules/user.ts';
+import { defineComponent, computed } from "vue"
+import { useUserStoreHook } from "@/store/modules/user.ts"
 export default defineComponent({
   setup() {
-    const userStore = useUserStoreHook();
+    const userStore = useUserStoreHook()
     const userInfo = computed(() => {
       return {
-        name: userStore.getUserInfo.realName,
-      };
-    });
+        name: userStore.getUserInfo.realName
+      }
+    })
     return {
-      userInfo,
-    };
-  },
-});
+      userInfo
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">

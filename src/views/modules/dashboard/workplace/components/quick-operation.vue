@@ -1,10 +1,5 @@
 <template>
-  <a-card
-    class="general-card"
-    title="快捷操作"
-    :header-style="{ paddingBottom: '0' }"
-    :body-style="{ padding: '24px 20px 0 20px' }"
-  >
+  <a-card class="general-card" title="快捷操作" :header-style="{ paddingBottom: '0' }" :body-style="{ padding: '24px 20px 0 20px' }">
     <template #extra>
       <a-link>管理</a-link>
     </template>
@@ -23,23 +18,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue"
 
 const links = [
-  { text: '内容管理', icon: 'a-icon-file' },
-  { text: '内容分析', icon: 'a-icon-storage' },
-  { text: '高级管理', icon: 'a-icon-settings' },
-  { text: '线上推广', icon: 'a-icon-mobile' },
-  { text: '内容投放', icon: 'a-icon-fire' },
-];
+  { text: "内容管理", icon: "a-icon-file" },
+  { text: "内容分析", icon: "a-icon-storage" },
+  { text: "高级管理", icon: "a-icon-settings" },
+  { text: "线上推广", icon: "a-icon-mobile" },
+  { text: "内容投放", icon: "a-icon-fire" }
+]
 
 export default defineComponent({
   setup() {
     return {
-      links,
-    };
-  },
-});
+      links
+    }
+  }
+})
 </script>
 
 <style scoped lang="less"></style>

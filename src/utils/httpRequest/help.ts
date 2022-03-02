@@ -23,9 +23,5 @@ export interface CustomAxiosInstance extends AxiosInstance {
   (config: AxiosRequestConfig): ApiPromise
   adornUrl(actionName: string): String
   adornParams(params: any, openDefaultParams: boolean): String
-  adornData(
-    data: any,
-    openDefaultParams: boolean,
-    contentType: ContentType
-  ): String
+  adornData(data: any, openDefaultParams: boolean, contentType: ContentType): String
 }

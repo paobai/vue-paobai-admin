@@ -9,7 +9,7 @@ export default [
     url: urlPre + "/users/current/menus",
     method: "get",
     response: () => {
-      let data = {
+      const data = {
         routers: [
           {
             title: "菜单一",
@@ -90,13 +90,13 @@ export default [
                     key: "data-analysis",
                     title: "数据分析",
                     type: RouteType.Page,
-                    path: '/visualization/data-analysis/index'
+                    path: "/visualization/data-analysis/index"
                   },
                   {
                     key: "multi-dimension-data-analysis",
                     title: "多维数据分析",
                     type: RouteType.Page,
-                    path: '/visualization/multi-dimension-data-analysis/index'
+                    path: "/visualization/multi-dimension-data-analysis/index"
                   }
                 ]
               },
@@ -109,14 +109,14 @@ export default [
                     key: "workplace",
                     title: "工作台",
                     type: RouteType.Page,
-                    path: '/dashboard/workplace/index'
+                    path: "/dashboard/workplace/index"
                   },
                   {
                     key: "monitor",
                     title: "实时监控",
                     type: RouteType.Page,
-                    path: '/dashboard/monitor/index'
-                  },
+                    path: "/dashboard/monitor/index"
+                  }
                 ]
               }
             ]
@@ -174,14 +174,13 @@ export default [
       //         msg: '错误账号或者密码'
       //     }
       // }
-      let data = {
+      const data = {
         access_token: "123123",
         userInfo: {
           userId: 1,
           username: "paobai",
           realName: "泡白",
-          avatar:
-              "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
+          avatar: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
           roles: ["admin"]
         }
       }

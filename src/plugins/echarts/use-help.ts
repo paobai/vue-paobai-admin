@@ -4,11 +4,7 @@ import type { EChartsOption } from "echarts"
 import echarts from "./index"
 export const echartsCore = echarts
 
-export function useECharts(
-  elRef: Ref<HTMLDivElement | null>,
-  options?: EChartsOption,
-  theme: "light" | "dark" | "default" = "default"
-) {
+export function useECharts(elRef: Ref<HTMLDivElement | null>, options?: EChartsOption, theme: "light" | "dark" | "default" = "default") {
   // TODO: add resize event
   const chartInstance: Ref<echarts.ECharts | null> = ref(null)
   const setOption = (options: EChartsOption, clear: Boolean = true) => {

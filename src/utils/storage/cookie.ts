@@ -16,11 +16,7 @@ class Cookies {
       expires: 1
     }
     merge(currentCookieSetting, cookieSetting)
-    tsCookies.set(
-      `${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`,
-      value,
-      currentCookieSetting
-    )
+    tsCookies.set(`${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`, value, currentCookieSetting)
   }
   /**
    * 拿到 cookie 值
@@ -28,9 +24,7 @@ class Cookies {
    * @returns
    */
   get(name = "default") {
-    return tsCookies.get(
-      `${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`
-    )
+    return tsCookies.get(`${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`)
   }
   /**
    * 拿到 cookie 全部的值
@@ -44,9 +38,7 @@ class Cookies {
    * @param name
    */
   remove(name = "default") {
-    tsCookies.remove(
-      `${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`
-    )
+    tsCookies.remove(`${Cookies.env.VITE_TITLE}-${Cookies.env.VITE_VERSION}-${name}`)
   }
 }
 

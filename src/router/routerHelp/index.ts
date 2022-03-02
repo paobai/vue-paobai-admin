@@ -8,12 +8,7 @@ export declare interface MyRouter extends Router {
 }
 
 import Layout from "@/layout/Index.vue"
-import {
-  RouterSysType,
-  RouterCustomType,
-  RouteType,
-  RouterApiType
-} from "@/constant/settings"
+import { RouterSysType, RouterCustomType, RouteType, RouterApiType } from "@/constant/settings"
 import { buildMenuName } from "@/utils/menu-help"
 import config from "@/config"
 
@@ -22,18 +17,12 @@ import config from "@/config"
  * @param {*} route 当前路由
  * @param globalRoutes
  */
-export function isGlobalRoute(
-  route: RouteRecordRaw,
-  globalRoutes: any = []
-): any {
+export function isGlobalRoute(route: RouteRecordRaw, globalRoutes: any = []): any {
   let temp: any[] = []
   for (let i = 0; i < globalRoutes.length; i++) {
     if (route.name && route.name === globalRoutes[i].name) {
       return true
-    } else if (
-      globalRoutes[i].children &&
-      globalRoutes[i].children.length >= 1
-    ) {
+    } else if (globalRoutes[i].children && globalRoutes[i].children.length >= 1) {
       temp = temp.concat(globalRoutes[i].children)
     }
   }
@@ -59,11 +48,7 @@ export function fixResToSys(sourceApiData: any): {
  * @param parentKey
  * @param parent
  */
-export function fixRouteToSysType(
-  routeList: RouterApiType[],
-  parentKey: string[] = [],
-  parent?: RouterSysType
-): RouterSysType[] {
+export function fixRouteToSysType(routeList: RouterApiType[], parentKey: string[] = [], parent?: RouterSysType): RouterSysType[] {
   const resList: RouterSysType[] = []
   routeList.forEach(item => {
     const resItem: RouterSysType = {
@@ -89,11 +74,7 @@ export function fixRouteToSysType(
  * @param modulesRoutes 本地有哪些路由页面
  * @param router router
  */
-export function addRouterFromData(
-  routes: RouterSysType[],
-  modulesRoutes: any,
-  router: Router
-) {
+export function addRouterFromData(routes: RouterSysType[], modulesRoutes: any, router: Router) {
   if (!routes || routes.length === 0) return
   const inList: RouterCustomType[] = []
   routes.forEach(item => buildRoute(item, modulesRoutes, inList))
@@ -110,11 +91,7 @@ export function addRouterFromData(
   })
 }
 
-export function buildRoute(
-  item: RouterSysType,
-  modulesRoutes: any,
-  inList: RouterCustomType[] = []
-) {
+export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: RouterCustomType[] = []) {
   if (item.type === RouteType.Menu) {
     if (item.children && item.children.length > 0) {
       item.children.forEach(child => {

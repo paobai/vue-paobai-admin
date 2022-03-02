@@ -5,12 +5,7 @@ import { merge } from "lodash"
 import { clearLoginInfo } from "@/utils"
 import { AuthApi } from "@/api/upms-api"
 import { clientId, clientSecret, grantType } from "@/constant"
-import {
-  ApiCodeEnum,
-  ApiPromise,
-  ContentType,
-  CustomAxiosInstance
-} from "./help"
+import { ApiCodeEnum, ApiPromise, ContentType, CustomAxiosInstance } from "./help"
 import { saveAs } from "file-saver"
 import Cookies from "@/utils/storage/cookie"
 import { loadEnv } from "@/../build/utils"
@@ -58,18 +53,12 @@ http.adornParams = (params = {}, openDefaultParams = true) => {
  *  json: 'application/json; charset=utf-8'
  *  form: 'application/x-www-form-urlencoded; charset=utf-8'
  */
-http.adornData = (
-  data = {},
-  openDefaultParams = true,
-  contentType = ContentType.JSON
-) => {
+http.adornData = (data = {}, openDefaultParams = true, contentType = ContentType.JSON) => {
   const defaults = {
     t: new Date().getTime()
   }
   data = openDefaultParams ? merge(defaults, data) : data
-  return contentType === ContentType.JSON
-    ? JSON.stringify(data)
-    : qs.stringify(data)
+  return contentType === ContentType.JSON ? JSON.stringify(data) : qs.stringify(data)
 }
 
 /**
@@ -77,8 +66,7 @@ http.adornData = (
  */
 http.interceptors.request.use(
   config => {
-    config.headers["X-STEINS-TOKEN"] =
-      "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
+    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
     // config.headers['Access-Control-Allow-Origin'] = '*'
     // config.headers['Access-Control-Allow-Methods'] = '*'
     config.headers["X-STEINS-TENANT-ID"] = "1"
@@ -100,8 +88,7 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers["X-STEINS-TOKEN"] =
-        sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
+      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
       resolve(http(httpConfig))
     })
   })
@@ -167,11 +154,7 @@ http.interceptors.response.use(
     const response = error.response
     console.log("error resoponse", response)
     // 401, token失效
-    if (
-      response.data &&
-      response.status === 401 &&
-      response.data.code === 10250
-    ) {
+    if (response.data && response.status === 401 && response.data.code === 10250) {
       // Bad client错误流程
       if (response.data && response.data.msg === "Bad client credentials") {
         errorLogin()
@@ -203,12 +186,7 @@ http.interceptors.response.use(
   }
 )
 
-export const postRequest = <T>(
-  url: string,
-  data?: any,
-  params?: any,
-  type = "json"
-): ApiPromise<T> => {
+export const postRequest = <T>(url: string, data?: any, params?: any, type = "json"): ApiPromise<T> => {
   url = http.adornUrl(url) as string
   if (type === "json") {
     return http({
@@ -239,11 +217,7 @@ export const getRequest = <T>(url: string, params?: any): ApiPromise<T> => {
   })
 }
 
-export const putRequest = <T>(
-  url: any,
-  data?: any,
-  params?: any
-): ApiPromise<T> => {
+export const putRequest = <T>(url: any, data?: any, params?: any): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "put",
@@ -253,11 +227,7 @@ export const putRequest = <T>(
   })
 }
 
-export const deleteRequest = <T>(
-  url: any,
-  params?: any,
-  data?: any
-): ApiPromise<T> => {
+export const deleteRequest = <T>(url: any, params?: any, data?: any): ApiPromise<T> => {
   url = http.adornUrl(url)
   return http({
     method: "delete",
@@ -268,12 +238,7 @@ export const deleteRequest = <T>(
 }
 
 // 下载文件方法
-export function downloadFile(
-  url: any,
-  params?: any,
-  method = "get",
-  fileName: string | undefined = undefined
-): ApiPromise {
+export function downloadFile(url: any, params?: any, method = "get", fileName: string | undefined = undefined): ApiPromise {
   url = http.adornUrl(url)
   return new Promise(() => {
     http({
@@ -284,12 +249,9 @@ export function downloadFile(
       responseType: "blob"
     }).then(res => {
       fileName = fileName || "download"
-      const contentDisposition =
-        (res as any).__headers["content-disposition"] ||
-        (res as any).__headers["Content-disposition"]
+      const contentDisposition = (res as any).__headers["content-disposition"] || (res as any).__headers["Content-disposition"]
       if (contentDisposition) {
-        fileName =
-          fileName || window.decodeURI(contentDisposition.split("''")[1])
+        fileName = fileName || window.decodeURI(contentDisposition.split("''")[1])
       }
       const blob = new Blob([res as any], { type: "application/vnd.ms-excel" })
       saveAs(blob, fileName)

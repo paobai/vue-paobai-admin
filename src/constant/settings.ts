@@ -1,8 +1,4 @@
-import {
-  RouteLocationNormalizedLoaded,
-  RouteMeta,
-  RouteRecordRaw
-} from "vue-router"
+import { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
 
 export enum TokenStorageName {
   LocalStorage = "localStorage",
@@ -65,8 +61,7 @@ export type RouterCustomType = RouteRecordRaw & {
 /**
  * useRoute 返回的route对象类型
  */
-export declare interface RouteLocationNormalizedLoadedCustom
-  extends RouteLocationNormalizedLoaded {
+export declare interface RouteLocationNormalizedLoadedCustom extends RouteLocationNormalizedLoaded {
   meta: RouteMetaCustom
 }
 

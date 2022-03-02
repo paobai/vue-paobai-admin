@@ -1,9 +1,5 @@
 <template>
-  <span
-    class="iconfont"
-    v-bind="$attrs"
-    v-on:input="$emit('input', $event.target.value)"
-  >
+  <span class="iconfont" v-bind="$attrs" v-on:input="$emit('input', $event.target.value)">
     <slot> </slot>
   </span>
 </template>

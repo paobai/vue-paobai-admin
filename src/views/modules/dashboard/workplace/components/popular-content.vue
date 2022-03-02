@@ -1,31 +1,15 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
-    <a-card
-      class="general-card"
-      :header-style="{ paddingBottom: '0' }"
-      :body-style="{ padding: '17px 20px 21px 20px' }"
-    >
-      <template #title>
-        线上热门内容
-      </template>
+    <a-card class="general-card" :header-style="{ paddingBottom: '0' }" :body-style="{ padding: '17px 20px 21px 20px' }">
+      <template #title> 线上热门内容 </template>
       <template #extra>
         <a-link>查看更多</a-link>
       </template>
       <a-space direction="vertical" :size="10" fill>
-        <a-radio-group
-          v-model:model-value="type"
-          type="button"
-          @change="typeChange"
-        >
-          <a-radio value="text">
-            文本
-          </a-radio>
-          <a-radio value="image">
-            图片
-          </a-radio>
-          <a-radio value="video">
-            视频
-          </a-radio>
+        <a-radio-group v-model:model-value="type" type="button" @change="typeChange">
+          <a-radio value="text"> 文本 </a-radio>
+          <a-radio value="image"> 图片 </a-radio>
+          <a-radio value="video"> 视频 </a-radio>
         </a-radio-group>
         <a-table :data="renderList" :pagination="false" :bordered="false">
           <template #columns>
@@ -34,29 +18,25 @@
               <template #cell="{ record }">
                 <a-typography-paragraph
                   :ellipsis="{
-                    rows: 1,
+                    rows: 1
                   }"
                 >
                   {{ record.title }}
                 </a-typography-paragraph>
               </template>
             </a-table-column>
-            <a-table-column title="点击量" data-index="clickNumber">
-            </a-table-column>
+            <a-table-column title="点击量" data-index="clickNumber"> </a-table-column>
             <a-table-column
               title="日涨幅"
               data-index="increases"
               :sortable="{
-                sortDirections: ['ascend', 'descend'],
+                sortDirections: ['ascend', 'descend']
               }"
             >
               <template #cell="{ record }">
                 <div class="increases-cell">
                   <span>{{ record.increases }}%</span>
-                  <a-icon-caret-up
-                    v-if="record.increases !== 0"
-                    style="color: #f53f3f; font-size: 8px"
-                  />
+                  <a-icon-caret-up v-if="record.increases !== 0" style="color: #f53f3f; font-size: 8px" />
                 </div>
               </template>
             </a-table-column>
@@ -68,38 +48,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import useLoading from '@/hooks/loading';
-import { queryPopularList, PopularRecord } from '@/api/dashboard';
+import { defineComponent, ref } from "vue"
+import useLoading from "@/hooks/loading"
+import { queryPopularList, PopularRecord } from "@/api/dashboard"
 
 export default defineComponent({
   setup() {
-    const type = ref('text');
-    const { loading, setLoading } = useLoading();
-    const renderList = ref<PopularRecord[]>();
+    const type = ref("text")
+    const { loading, setLoading } = useLoading()
+    const renderList = ref<PopularRecord[]>()
     const fetchData = async (contentType: string) => {
       try {
-        setLoading(true);
-        const { data } = await queryPopularList({ type: contentType });
-        renderList.value = data;
+        setLoading(true)
+        const { data } = await queryPopularList({ type: contentType })
+        renderList.value = data
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
     const typeChange = (contentType: string) => {
-      fetchData(contentType);
-    };
-    fetchData('text');
+      fetchData(contentType)
+    }
+    fetchData("text")
     return {
       type,
       typeChange,
       loading,
-      renderList,
-    };
-  },
-});
+      renderList
+    }
+  }
+})
 </script>
 
 <style scoped lang="less">

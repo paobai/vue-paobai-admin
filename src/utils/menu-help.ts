@@ -5,10 +5,7 @@ import { RouterApiType, RouterSysType, RouteType } from "@/constant/settings"
  * @param routeList
  * @param sourceArray
  */
-export function getRouteList(
-  routeList: RouterSysType[],
-  sourceArray: any[] = []
-) {
+export function getRouteList(routeList: RouterSysType[], sourceArray: any[] = []) {
   routeList.forEach(item => {
     sourceArray.push(item)
     if (item.children) {
@@ -23,10 +20,7 @@ export function getRouteList(
  * @param routeList
  * @param sourceMap
  */
-export function getRouteMap(
-  routeList: RouterSysType[],
-  sourceMap: { [key: string]: RouterSysType } = {}
-): { [key: string]: RouterSysType } {
+export function getRouteMap(routeList: RouterSysType[], sourceMap: { [key: string]: RouterSysType } = {}): { [key: string]: RouterSysType } {
   routeList.forEach(item => {
     sourceMap[item.key] = item
     if (item.children) {
@@ -36,9 +30,7 @@ export function getRouteMap(
   return sourceMap
 }
 
-export function getFirstMenuItem(
-  routeList?: RouterSysType[]
-): undefined | RouterSysType {
+export function getFirstMenuItem(routeList?: RouterSysType[]): undefined | RouterSysType {
   let dist
   if (!routeList || routeList.length === 0) return dist
   for (let i = 0; i < routeList.length; i++) {

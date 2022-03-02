@@ -2,10 +2,7 @@
   <div class="app-navbar">
     <div class="left-wrapper">
       <div class="logo-wrapper">
-        <img
-          class="logo"
-          src="/src/assets/images/common/logo/logo-with-text-small.png"
-        />
+        <img class="logo" src="/src/assets/images/common/logo/logo-with-text-small.png" />
       </div>
       <menu-main></menu-main>
     </div>
@@ -24,23 +21,13 @@
           <a-tooltip content="消息通知">
             <div class="message-box-trigger">
               <a-badge :count="9" dot>
-                <a-button
-                  class="nav-btn"
-                  type="outline"
-                  :shape="'circle'"
-                  @click="setPopoverVisible"
-                >
+                <a-button class="nav-btn" type="outline" :shape="'circle'" @click="setPopoverVisible">
                   <a-icon-notification />
                 </a-button>
               </a-badge>
             </div>
           </a-tooltip>
-          <a-popover
-            trigger="click"
-            :arrow-style="{ display: 'none' }"
-            :content-style="{ padding: 0, minWidth: '400px' }"
-            content-class="message-popover"
-          >
+          <a-popover trigger="click" :arrow-style="{ display: 'none' }" :content-style="{ padding: 0, minWidth: '400px' }" content-class="message-popover">
             <div ref="refBtn" class="ref-btn"></div>
             <template #content>
               <message-box />
