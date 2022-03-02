@@ -1,4 +1,4 @@
-import { useAppStoreHook } from "@/store/modules/app"
+import { useAppStoreWithOut } from "@/store/modules/app"
 import { useUserHook } from "./user"
 import { computed, onMounted, ref, unref, watch } from "vue"
 import { RouterSysType, RouteType } from "@/constant/settings"
@@ -10,12 +10,12 @@ import config from "@/config"
 export function useAppHook() {
   const { showRouteList, getRouteByKey } = useUserHook()
 
-  const appStore = useAppStoreHook()
+  const appStore = useAppStoreWithOut()
 
   const route = useRoute()
 
   const navbarShow = computed({
-    get: () => appStore.navbarShow,
+    get: () => appStore.getNavbarShow,
     set: val => {
       updateNavbar(val)
     }
@@ -26,7 +26,7 @@ export function useAppHook() {
   }
 
   const sidebarShow = computed({
-    get: () => appStore.sidebarShow,
+    get: () => appStore.getSidebarShow,
     set: val => {
       updateSidebar(val)
     }
@@ -44,7 +44,7 @@ export function useAppHook() {
   })
 
   const footerShow = computed({
-    get: () => appStore.footerShow,
+    get: () => appStore.getFooterShow,
     set: val => {
       updateFooterShow(val)
     }
@@ -79,7 +79,7 @@ export function useAppHook() {
   }
 
   const gray = computed({
-    get: () => appStore.gray,
+    get: () => appStore.getGray,
     set: (gray: boolean) => {
       updateGray(gray)
     }

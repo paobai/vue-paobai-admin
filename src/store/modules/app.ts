@@ -76,6 +76,6 @@ export const useAppStore = defineStore({
   }
 })
 
-export function useAppStoreHook() {
+export function useAppStoreWithOut() {
   return useAppStore(store)
 }

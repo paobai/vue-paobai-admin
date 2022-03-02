@@ -5,13 +5,13 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-28 13:46:23
  */
-import { useUserStoreHook } from "@/store/modules/user"
+import { useUserStoreWithOut } from "@/store/modules/user"
 import { Directive } from "vue"
 
 export const permission: Directive = {
   mounted(el, binding) {
     const { value } = binding
-    const permissions = useUserStoreHook().getPermissions
+    const permissions = useUserStoreWithOut().getPermissions
     if (value && value instanceof Array && value.length > 0) {
       let res = true
       value.every(item => {

@@ -9,10 +9,10 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue"
-import { useUserStoreHook } from "@/store/modules/user.ts"
+import { useUserStoreWithOut } from "@/store/modules/user.ts"
 export default defineComponent({
   setup() {
-    const userStore = useUserStoreHook()
+    const userStore = useUserStoreWithOut()
     const userInfo = computed(() => {
       return {
         name: userStore.getUserInfo.realName

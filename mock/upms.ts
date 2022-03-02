@@ -1,6 +1,6 @@
 import { MockMethod } from "vite-plugin-mock"
 import { RouteType } from "@/constant/settings"
-import { successResponseWrap } from "@/utils/mock"
+import { successResponseWrap, failResponseWrap } from "@/utils/mock"
 
 const urlPre = "/upms"
 
@@ -167,14 +167,11 @@ export default [
     method: "post",
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
     response: (request: any) => {
-      // const data = request.body
-      // if (data.userName !== 'paobai' || data.passWord !== 'paobai') {
-      //     return {
-      //         code: ApiCodeEnum.FAILED,
-      //         msg: '错误账号或者密码'
-      //     }
-      // }
-      const data = {
+      const data = request.body
+      if (data.userName !== "paobai" || data.passWord !== "paobai") {
+        return failResponseWrap(null, "错误账号或者密码")
+      }
+      const res = {
         access_token: "123123",
         userInfo: {
           userId: 1,
@@ -184,7 +181,7 @@ export default [
           roles: ["admin"]
         }
       }
-      return successResponseWrap(data)
+      return successResponseWrap(res)
     }
   }
 ] as MockMethod[]

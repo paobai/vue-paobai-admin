@@ -58,8 +58,8 @@ export default {
     const userStore = useUserHook()
     let { sysColor } = useAppHook()
     let loginForm: AuthLoginByPasswordReq = reactive({
-      userName: "",
-      passWord: "",
+      userName: "paobai",
+      passWord: "paobai",
       grant_type: grantType.PASSWORD
     })
     const router = useRouter()

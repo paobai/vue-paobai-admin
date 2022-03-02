@@ -43,6 +43,6 @@ export const useUserStore = defineStore({
   }
 })
 
-export function useUserStoreHook() {
+export function useUserStoreWithOut() {
   return useUserStore(store)
 }

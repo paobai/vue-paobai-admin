@@ -20,11 +20,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
-import { useUserStoreHook } from "@/store/modules/user"
+import { useUserStoreWithOut } from "@/store/modules/user"
 
 export default defineComponent({
   setup() {
-    const userStore = useUserStoreHook()
+    const userStore = useUserStoreWithOut()
     return {
       userInfo: userStore.getUserInfo
     }

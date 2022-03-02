@@ -1,4 +1,4 @@
-import { useUserStoreHook } from "@/store/modules/user"
+import { useUserStoreWithOut } from "@/store/modules/user"
 import { computed, unref } from "vue"
 import { RouterSysType } from "@/constant/settings"
 import { getCanShowRoute, getRouteMap } from "@/utils/menu-help"
@@ -10,7 +10,7 @@ import _ from "lodash"
 import { UserInfo } from "@/model/sys/userModel"
 
 export function useUserHook() {
-  const userStore = useUserStoreHook()
+  const userStore = useUserStoreWithOut()
   const routeList = computed((): RouterSysType[] => {
     return userStore.getRouteList
   })
