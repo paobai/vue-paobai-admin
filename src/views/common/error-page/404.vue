@@ -40,6 +40,7 @@ export default defineComponent({
     const goHome = function () {
       router.replace({ path: config.app.homePagePath })
     }
+    console.log("~~~~~~~~~test 404")
     return {
       message: "404 Page Not Found",
       goHome
