@@ -28,9 +28,7 @@ const alias: Record<string, string> = {
 const root: string = process.cwd()
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = warpperEnv(
-    loadEnv(mode, root)
-  )
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = warpperEnv(loadEnv(mode, root))
   const prodMock = true
   return {
     /**
@@ -63,7 +61,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
        * @default 3000
        */
       host: "0.0.0.0",
-      port: VITE_PORT,
+      port: VITE_PORT
       // 本地跨域代理
       // proxy: createProxy(VITE_PROXY)
     },
@@ -101,7 +99,14 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     build: {
       brotliSize: false,
       // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000
+      chunkSizeWarningLimit: 2000,
+      rollupOptions: {
+        output: {
+          entryFileNames: `assets/entry/[name].js`,
+          chunkFileNames: `assets/chunk/[name].js`,
+          assetFileNames: `assets/file/[name].[ext]`
+        }
+      }
     },
     define: {
       __INTLIFY_PROD_DEVTOOLS__: false
