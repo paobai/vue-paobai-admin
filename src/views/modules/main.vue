@@ -3,6 +3,9 @@
     <div style="width: 100%; height: 500px; overflow: hidden">
       <chart :options="options"></chart>
     </div>
+    学习vben的搜索 《span》第一行。左边（头像。 天气/祝福语日期） 右边 tip（比如，配置动态菜单，）
+    <br />
+    访问数，start 数， for数 card 访问量按月图 最后增加一个快捷导航
     <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
     <button @click="goHome">去home</button>
   </div>
