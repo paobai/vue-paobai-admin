@@ -106,7 +106,8 @@ export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: Rout
   if (modulePath) {
     if (modulePath[0] !== "/") modulePath = "/" + modulePath
     const componentPath = `/src/views/modules${modulePath}.vue`
-    findModule = modulesRoutes[componentPath] || findModule
+    const componentIndexPath = `/src/views/modules${modulePath}/index.vue`
+    findModule = modulesRoutes[componentPath] || modulesRoutes[componentIndexPath] || findModule
   } else {
     modulePath = "temp-Path-" + item.key
   }
