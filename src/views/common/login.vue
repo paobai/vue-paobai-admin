@@ -20,22 +20,22 @@
           <div>用户登录</div>
         </div>
         <div class="login-content-wrapper">
-          <a-form :model="loginForm" :label-col-props="{ span: 0 }" :wrapper-col-props="{ span: 24 }" @keyup.enter="login()">
-            <a-form-item field="userName">
-              <a-input v-model="loginForm.userName" placeholder="用户名/手机号码">
+          <a-form class="login-form-content" :model="loginForm" @submit-success="login">
+            <a-form-item hide-asterisk hide-label :rules="[{ required: true, message: '用户名/手机号码不可为空' }]" field="userName">
+              <a-input allow-clear v-model="loginForm.userName" placeholder="用户名/手机号码">
                 <template #prefix>
                   <a-icon-user :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
               </a-input>
             </a-form-item>
-            <a-form-item field="passWord">
-              <a-input v-model="loginForm.passWord" placeholder="密码" type="password">
+            <a-form-item hide-asterisk hide-label field="passWord" :rules="[{ required: true, message: '密码不可为空' }]">
+              <a-input-password v-model="loginForm.passWord" placeholder="密码">
                 <template #prefix>
                   <a-icon-lock :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
-              </a-input>
+              </a-input-password>
             </a-form-item>
-            <a-button class="sub-bt" type="primary" @click="login">登&nbsp;&nbsp;录</a-button>
+            <a-button class="sub-bt" type="primary" html-type="submit">登&nbsp;&nbsp;录</a-button>
           </a-form>
         </div>
       </div>
@@ -171,7 +171,7 @@ export default {
           }
         }
         .sub-bt {
-          margin-top: 47px;
+          margin-top: 20px;
           height: 54px;
           width: 100%;
           font-size: 20px;
