@@ -12,12 +12,71 @@ export default [
       const data = {
         routers: [
           {
-            title: "菜单一",
+            title: "arcoPro",
             path: "",
             key: "menu-header-1",
             type: RouteType.Menu,
             icon: "iconfont-Customermanagement-fill",
             children: [
+              {
+                key: "dashboard",
+                title: "仪表盘",
+                type: RouteType.Menu,
+                children: [
+                  {
+                    key: "workplace",
+                    title: "工作台",
+                    type: RouteType.Page,
+                    path: "/dashboard/workplace/index"
+                  },
+                  {
+                    key: "monitor",
+                    title: "实时监控",
+                    type: RouteType.Page,
+                    path: "/dashboard/monitor/index"
+                  }
+                ]
+              },
+              {
+                key: "visualization",
+                title: "分析数据可视化",
+                type: RouteType.Menu,
+                children: [
+                  {
+                    key: "data-analysis",
+                    title: "数据分析",
+                    type: RouteType.Page,
+                    path: "/visualization/data-analysis/index"
+                  },
+                  {
+                    key: "multi-dimension-data-analysis",
+                    title: "多维数据分析",
+                    type: RouteType.Page,
+                    path: "/visualization/multi-dimension-data-analysis/index"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            title: "菜单二",
+            path: "",
+            key: "menu-header-2",
+            icon: "icon-grid",
+            type: RouteType.Menu,
+            children: [
+              {
+                key: "cd2-3_1",
+                title: "菜单2的页面1",
+                type: RouteType.Page,
+                path: ""
+              },
+              {
+                key: "cd2-3_2",
+                title: "菜单2的页面2",
+                type: RouteType.Page,
+                path: ""
+              },
               {
                 key: "1",
                 title: "menu1",
@@ -80,65 +139,6 @@ export default [
                     path: "/test-router/menu3/menu3-3"
                   }
                 ]
-              },
-              {
-                key: "visualization",
-                title: "分析数据可视化",
-                type: RouteType.Menu,
-                children: [
-                  {
-                    key: "data-analysis",
-                    title: "数据分析",
-                    type: RouteType.Page,
-                    path: "/visualization/data-analysis/index"
-                  },
-                  {
-                    key: "multi-dimension-data-analysis",
-                    title: "多维数据分析",
-                    type: RouteType.Page,
-                    path: "/visualization/multi-dimension-data-analysis/index"
-                  }
-                ]
-              },
-              {
-                key: "dashboard",
-                title: "仪表盘",
-                type: RouteType.Menu,
-                children: [
-                  {
-                    key: "workplace",
-                    title: "工作台",
-                    type: RouteType.Page,
-                    path: "/dashboard/workplace/index"
-                  },
-                  {
-                    key: "monitor",
-                    title: "实时监控",
-                    type: RouteType.Page,
-                    path: "/dashboard/monitor/index"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            title: "菜单二",
-            path: "",
-            key: "menu-header-2",
-            icon: "icon-grid",
-            type: RouteType.Menu,
-            children: [
-              {
-                key: "cd2-3_1",
-                title: "菜单2的页面1",
-                type: RouteType.Page,
-                path: ""
-              },
-              {
-                key: "cd2-3_2",
-                title: "菜单2的页面2",
-                type: RouteType.Page,
-                path: ""
               }
             ]
           },

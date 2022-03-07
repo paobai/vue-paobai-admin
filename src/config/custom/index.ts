@@ -14,7 +14,7 @@ const customConfig: CustomConfig = {
   navbarShow: true,
   sidebarShow: true,
   sidebarMenuCollapsed: false,
-  footerShow: true,
+  footerShow: false,
   sysColor: "",
   weakness: false,
   gray: false
