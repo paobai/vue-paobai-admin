@@ -136,7 +136,7 @@ export default defineComponent({
         let find = appTagList.value.find(item => item.key === route.meta.key)
         if (find) return
         if (route.meta.notShow) return
-        appTagList.value.push({
+        appTagList.value.unshift({
           title: route.meta.title as string,
           key: route.meta.key as string,
           name: route.name as string,
@@ -164,6 +164,7 @@ export default defineComponent({
   box-shadow: 0 1px 4px @primary-color;
   display: flex;
   .app-left-tag {
+    flex-shrink: 0;
     padding: 0 16px;
     line-height: 30px;
     .menu-tag {
@@ -172,6 +173,7 @@ export default defineComponent({
     }
   }
   .app-tag-main {
+    white-space: pre;
     padding: 3px;
     flex: auto;
     overflow: hidden;
@@ -209,6 +211,7 @@ export default defineComponent({
     }
   }
   .app-tag-options {
+    flex-shrink: 0;
     .options-item {
       cursor: pointer;
       padding: 0 8px;
