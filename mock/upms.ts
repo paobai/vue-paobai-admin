@@ -62,7 +62,7 @@ export default [
             title: "菜单二",
             path: "",
             key: "menu-header-2",
-            icon: "icon-grid",
+            icon: "iconfont-cecurity-protection-fill",
             type: RouteType.Menu,
             children: [
               {
@@ -146,7 +146,7 @@ export default [
             title: "菜单三",
             path: "",
             key: "menu-header-3",
-            icon: "icon-grid",
+            icon: "iconfont-store-fill",
             type: RouteType.Page
           },
           {
