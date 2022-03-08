@@ -1,25 +1,46 @@
 <template>
   <a-card :loading="loading" class="welcome-card" :title="'欢迎回来！' + userInfo.realName">
     <div class="welcome-content">
-      <div class="header-wrapper">
-        <div class="left-avatar">
+      <a-row align="center" :gutter="24">
+        <a-col flex="64px" style="text-align: center">
           <a-avatar :size="64">
             <img alt="avatar" :src="userInfo.avatar" />
           </a-avatar>
-        </div>
-        <div class="center-content">
-          <a-typography>
-            <a-typography-title :heading="5">{{ new Date().format("yyyy-MM-dd HH:mm") }}</a-typography-title>
-            <a-typography-paragraph> 今日温度：5~17℃。</a-typography-paragraph>
-            <a-typography-paragraph> 东南风3-4级，晴。</a-typography-paragraph>
-            <a-typography-title :heading="5">你若安好，便是晴天。</a-typography-title>
-          </a-typography>
-        </div>
-        <div class="right-content">
+        </a-col>
+        <a-col flex="auto" style="text-align: center">
+          <div style="text-align: left; display: inline-block">
+            <a-typography>
+              <a-typography-title :heading="5">{{ new Date().format("yyyy-MM-dd HH:mm") }}</a-typography-title>
+              <a-typography-paragraph> 今日温度：5~17℃。</a-typography-paragraph>
+              <a-typography-paragraph> 东南风3-4级，晴。</a-typography-paragraph>
+              <a-typography-title :heading="5">你若安好，便是晴天。</a-typography-title>
+            </a-typography>
+          </div>
+        </a-col>
+        <a-col style="text-align: center; flex: 1 1 200px; margin-top: 20px">
           <a-statistic style="margin-right: 64px" title="待办事项" :value="6" />
           <a-statistic title="待查信息" :value="18" />
-        </div>
-      </div>
+        </a-col>
+      </a-row>
+      <!--      <div class="header-wrapper">-->
+      <!--        <div class="left-avatar">-->
+      <!--          <a-avatar :size="64">-->
+      <!--            <img alt="avatar" :src="userInfo.avatar" />-->
+      <!--          </a-avatar>-->
+      <!--        </div>-->
+      <!--        <div class="center-content">-->
+      <!--          <a-typography>-->
+      <!--            <a-typography-title :heading="5">{{ new Date().format("yyyy-MM-dd HH:mm") }}</a-typography-title>-->
+      <!--            <a-typography-paragraph> 今日温度：5~17℃。</a-typography-paragraph>-->
+      <!--            <a-typography-paragraph> 东南风3-4级，晴。</a-typography-paragraph>-->
+      <!--            <a-typography-title :heading="5">你若安好，便是晴天。</a-typography-title>-->
+      <!--          </a-typography>-->
+      <!--        </div>-->
+      <!--        <div class="right-content">-->
+      <!--          <a-statistic style="margin-right: 64px" title="待办事项" :value="6" />-->
+      <!--          <a-statistic title="待查信息" :value="18" />-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
   </a-card>
 </template>

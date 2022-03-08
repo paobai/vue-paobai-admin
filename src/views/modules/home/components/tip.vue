@@ -1,6 +1,13 @@
 <template>
   <a-card :loading="loading" class="tip-card" title="TIP/技术栈">
     <a-typography style="margin-top: -20px">
+      <a-typography-title :heading="4">前言</a-typography-title>
+      <a-typography-paragraph
+        >为何开发？目前前端框架很多了为什么还要在开发一个呢。目前我看到过几个前端admin，
+        比如vben应该是最广为人知的，但是里面的代码对新手不是很友好。包括对国内开发者有很多东西是用不到的，但是非常影响框架。
+        比如vue-il8n国际化，这个对项目耦合度太高了。我相信开发给国内用户的人来说不需要国际化，那就非常不希望代码里面出现$t这个东西存在了。
+        加之很多框架对用户权限菜单支持不是特别好。以及目前没有（可能我不知道）基于Arco Design的admin所以我打算开发一个这样的框架。</a-typography-paragraph
+      >
       <a-typography-title :heading="4"><a-link href="https://gitee.com/zheng_yc/paobai">paobai</a-link>框架简介</a-typography-title>
       <a-typography-title :heading="5">技术栈</a-typography-title>
       <a-typography-paragraph>
