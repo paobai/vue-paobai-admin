@@ -2,34 +2,20 @@
   <div class="app-container">
     <a-space direction="vertical" :size="12" fill>
       <a-row :gutter="[16, 16]" justify="start">
-        <a-col :xs="24" :md="24" :xl="12" style="height: 370px">
+        <a-col :xs="24" :md="24" :xl="14" style="height: 400px">
           <tip></tip>
         </a-col>
-        <a-col :xs="24" :md="24" :xl="12" style="height: 370px">
+        <a-col :xs="24" :md="24" :xl="10" style="height: 400px">
           <welcome></welcome>
         </a-col>
-        <a-col :xs="24" :md="12" :xl="8" style="height: 400px">
+        <a-col :xs="24" :md="12" :xl="8" style="height: 450px">
           <star-chart></star-chart>
         </a-col>
-        <a-col :xs="24" :md="12" :xl="8" style="height: 400px">
+        <a-col :xs="24" :md="12" :xl="8" style="height: 450px">
           <view-chart></view-chart>
         </a-col>
-        <a-col :xs="24" :md="24" :xl="8" style="height: 400px">
+        <a-col :xs="24" :md="24" :xl="8" style="height: 450px">
           <comp-chart></comp-chart>
-        </a-col>
-        <a-col>
-          <a-row :gutter="[16, 16]">
-            <a-col flex="auto">
-              <a-card class="first-card" title="操作方式">
-                <a-row align="center"></a-row>
-              </a-card>
-            </a-col>
-            <a-col flex="400px">
-              <a-card class="first-card" title="快捷导航">
-                <a-row align="center"></a-row>
-              </a-card>
-            </a-col>
-          </a-row>
         </a-col>
       </a-row>
     </a-space>
