@@ -1,25 +1,12 @@
 <template>
   <div class="app-container">
     <a-space direction="vertical" :size="12" fill>
-      <a-row class="top-wrapper" :gutter="[16, 16]" justify="start">
-        <a-col :span="16">
-          <a-card class="first-card" :title="'欢迎回来！' + userInfo.realName">
-            <a-row align="center">
-              <a-col flex="100px">
-                <a-avatar>
-                  <img alt="avatar" :src="userInfo.avatar" />
-                </a-avatar>
-              </a-col>
-              <a-col flex="auto">
-                <a-typography-title :heading="5" style="margin-top: 0"> {{ userInfo.realName }} </a-typography-title>
-              </a-col>
-            </a-row>
-          </a-card>
+      <a-row :gutter="[16, 16]" justify="start">
+        <a-col :span="8" style="height: 350px">
+          <welcome></welcome>
         </a-col>
-        <a-col :span="8">
-          <a-card class="first-card" title="TIP/技术栈">
-            <a-row align="center"> </a-row>
-          </a-card>
+        <a-col :span="16" style="height: 350px">
+          <tip></tip>
         </a-col>
         <a-col :xs="24" :md="12" :xl="8">
           <a-card class="first-card" title="start">
@@ -66,15 +53,19 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue"
+import { defineComponent, provide, ref, readonly } from "vue"
 import HelloWorld from "@/components/HelloWorld.vue"
 import router from "@/router"
-import { useUserStoreWithOut } from "@/store/modules/user"
+
+import welcome from "./components/welcome.vue"
+import tip from "./components/tip.vue"
 
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld
+    HelloWorld,
+    welcome,
+    tip
   },
   setup() {
     let goHome = function () {
@@ -95,11 +86,12 @@ export default defineComponent({
         }
       ]
     }
-    const userStore = useUserStoreWithOut()
-    const userInfo = computed(() => {
-      return userStore.getUserInfo
-    })
-    return { goHome, options, userInfo }
+    let loading = ref(true)
+    setTimeout(() => {
+      loading.value = false
+    }, 1000)
+    provide("loading", readonly(loading))
+    return { goHome, options }
   }
 })
 </script>
@@ -108,9 +100,17 @@ export default defineComponent({
 .app-container {
   margin: 20px;
   border-radius: 4px;
-  .top-wrapper {
-    .first-card {
-      height: 400px;
+  :deep(.arco-col) {
+    height: 400px;
+    .arco-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .arco-card-body {
+        height: 0;
+        flex: 1;
+        overflow-y: auto;
+      }
     }
   }
 }

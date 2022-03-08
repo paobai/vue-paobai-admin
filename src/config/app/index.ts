@@ -24,7 +24,7 @@ const appConfig: AppConfig = {
   permissionName: "permissions",
   loginPageName: "login",
   redirectPageName: "redirect",
-  homePagePath: "/main",
+  homePagePath: "/home",
   navbarShowKey: "layout-nav-bar-show",
   sidebarShowKey: "layout-side-bar-show",
   sidebarMenuCollapsedKey: "layout-sidebar-menu-collapsed-",
