@@ -12,11 +12,11 @@ export default [
       const data = {
         routers: [
           {
-            title: "arcoPro",
+            title: "Arco Design Pro",
             path: "",
             key: "menu-header-1",
             type: RouteType.Menu,
-            icon: "iconfont-Customermanagement-fill",
+            icon: "iconfont-store-fill",
             children: [
               {
                 key: "dashboard",
@@ -146,7 +146,7 @@ export default [
             title: "菜单三",
             path: "",
             key: "menu-header-3",
-            icon: "iconfont-store-fill",
+            icon: "iconfont-Customermanagement-fill",
             type: RouteType.Page
           },
           {
