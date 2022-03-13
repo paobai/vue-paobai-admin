@@ -1,9 +1,7 @@
 <template>
-  <a-spin class="view-chart" :loading="loading">
-    <a-card class="first-card" title="项目占比(希望)">
-      <chart v-if="!loading" :options="options"></chart>
-    </a-card>
-  </a-spin>
+  <a-card :loading="loading" class="first-card" title="项目占比(希望)">
+    <chart v-if="!loading" :options="options"></chart>
+  </a-card>
 </template>
 
 <script>
@@ -104,9 +102,4 @@ export default defineComponent({
 })
 </script>
 
-<style lang="less" scoped>
-.view-chart {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="less" scoped></style>

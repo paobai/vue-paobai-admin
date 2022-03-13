@@ -58,9 +58,11 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.tip-card {
-  .arco-link {
-    font-size: unset;
+.tip-wrapper {
+  .tip-card {
+    .arco-link {
+      font-size: unset;
+    }
   }
 }
 </style>

@@ -75,6 +75,10 @@ export default defineComponent({
   margin: 20px;
   border-radius: 4px;
   :deep(.arco-col) {
+    .arco-spin {
+      height: 100%;
+      width: 100%;
+    }
     .arco-card {
       height: 100%;
       display: flex;

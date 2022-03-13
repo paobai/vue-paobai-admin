@@ -1,9 +1,7 @@
 <template>
-  <a-spin class="comp-chart" :loading="loading">
-    <a-card class="first-card" title="浏览量(希望)">
-      <chart v-if="!loading" :options="options"></chart>
-    </a-card>
-  </a-spin>
+  <a-card :loading="loading" class="first-card" title="浏览量(希望)">
+    <chart :options="options"></chart>
+  </a-card>
 </template>
 
 <script>

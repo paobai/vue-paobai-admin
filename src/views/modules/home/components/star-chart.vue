@@ -1,9 +1,7 @@
 <template>
-  <a-spin class="start-chart" :loading="loading">
-    <a-card class="first-card" title="star数(希望)">
-      <chart v-if="!loading" :options="options"></chart>
-    </a-card>
-  </a-spin>
+  <a-card class="first-card" title="star数(希望)" :loading="loading">
+    <chart :options="options"></chart>
+  </a-card>
 </template>
 
 <script>
