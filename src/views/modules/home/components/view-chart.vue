@@ -1,6 +1,6 @@
 <template>
   <a-spin class="view-chart" :loading="loading">
-    <a-card class="first-card" title="浏览量(希望)">
+    <a-card class="first-card" title="项目占比(希望)">
       <chart v-if="!loading" :options="options"></chart>
     </a-card>
   </a-spin>
@@ -8,69 +8,94 @@
 
 <script>
 import { inject, defineComponent } from "vue"
-import { graphic } from "echarts"
 export default defineComponent({
   data() {
     let loading = inject("loading")
-    let monthList = Array.from({ length: 12 }).map((item, index) => {
-      return { value: [index + 1 + "月", Math.floor(Math.pow(1.2, index + 1) * 30 * (1 + 0.7 * Math.random()))] }
-    })
+    // let monthList = Array.from({ length: 12 }).map((item, index) => {
+    //   return { value: [index + 1 + "月", Math.floor(Math.pow(1.2, index + 1) * 30 * (1 + 0.7 * Math.random()))] }
+    // })
     let options = {
-      grid: {
-        top: 30,
-        bottom: 20,
-        left: 50,
-        right: 50,
-        containLabel: false
+      legend: {
+        left: "center",
+        data: ["Star数", "Fork数", "Watching数"],
+        bottom: 0,
+        icon: "circle",
+        itemWidth: 8,
+        textStyle: {
+          color: "#4E5969"
+        },
+        itemStyle: {
+          borderWidth: 0
+        }
       },
       tooltip: {
         show: true,
-        trigger: "axis"
+        trigger: "item"
       },
-      xAxis: {
-        type: "category",
-        axisLine: {
-          show: false
-        }
-      },
-      yAxis: {
-        name: "浏览量（次）",
-        type: "value"
+      graphic: {
+        elements: [
+          {
+            type: "text",
+            left: "center",
+            top: "40%",
+            style: {
+              text: "项目占比",
+              textAlign: "center",
+              fill: "#4E5969",
+              fontSize: 14
+            }
+          },
+          {
+            type: "text",
+            left: "center",
+            top: "50%",
+            style: {
+              text: "928,531",
+              textAlign: "center",
+              fill: "#1D2129",
+              fontSize: 16,
+              fontWeight: 500
+            }
+          }
+        ]
       },
       series: [
         {
-          data: monthList,
-          type: "bar",
+          type: "pie",
+          radius: ["50%", "70%"],
+          center: ["50%", "50%"],
+          label: {
+            formatter: "{d}%",
+            fontSize: 14,
+            color: "#4E5969"
+          },
           itemStyle: {
-            color: new graphic.LinearGradient(0, 0, 1, 1, [
-              {
-                offset: 0,
-                color: "rgba(30, 231, 255, 1)"
-              },
-              {
-                offset: 0.5,
-                color: "rgba(36, 154, 255, 1)"
-              },
-              {
-                offset: 1,
-                color: "rgba(111, 66, 251, 1)"
-              }
-            ])
+            borderColor: "#fff",
+            borderWidth: 1
           },
-          areaStyle: {
-            opacity: 0.8,
-            color: new graphic.LinearGradient(0, 0, 0, 1, [
-              {
-                offset: 0,
-                color: "rgb(17, 126, 255)"
-              },
-              {
-                offset: 1,
-                color: "rgb(17, 128, 255, 0)"
+          data: [
+            {
+              value: [148564],
+              name: "Star数",
+              itemStyle: {
+                color: "#249EFF"
               }
-            ])
-          },
-          smooth: true
+            },
+            {
+              value: [334271],
+              name: "Fork数",
+              itemStyle: {
+                color: "#313CA9"
+              }
+            },
+            {
+              value: [445694],
+              name: "Watching数",
+              itemStyle: {
+                color: "#21CCFF"
+              }
+            }
+          ]
         }
       ]
     }
