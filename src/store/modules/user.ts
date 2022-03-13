@@ -2,6 +2,7 @@ import { defineStore } from "pinia"
 import { store } from "@/store"
 import { RouterSysType } from "@/constant/settings"
 import { UserInfo } from "@/model/sys/userModel"
+import { storageSession } from "@/utils/storage"
 
 interface userStore {
   userInfo: UserInfo
@@ -39,7 +40,14 @@ export const useUserStore = defineStore({
     }
   },
   persist: {
-    enabled: true
+    enabled: true,
+    strategies: [
+      {
+        key: "userStore",
+        storage: storageSession,
+        paths: ["userInfo", "routeList", "permissions"]
+      }
+    ]
   }
 })
 

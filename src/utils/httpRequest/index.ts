@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, Method } from "axios"
-import router from "@/router"
 import qs from "qs"
 import { merge } from "lodash"
 import { AuthApi } from "@/api/auth-api"
