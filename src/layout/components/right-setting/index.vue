@@ -85,6 +85,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .right-setting-button {
+  z-index: 1000;
   position: fixed;
   right: 0;
   top: 50%;
