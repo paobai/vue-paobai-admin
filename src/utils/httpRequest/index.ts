@@ -2,8 +2,7 @@ import axios, { AxiosRequestConfig, Method } from "axios"
 import router from "@/router"
 import qs from "qs"
 import { merge } from "lodash"
-import { clearLoginInfo } from "@/utils"
-import { AuthApi } from "@/api/upms-api"
+import { AuthApi } from "@/api/auth-api"
 import { clientId, clientSecret, grantType } from "@/constant"
 import { ApiCodeEnum, ApiPromise, ContentType, CustomAxiosInstance } from "./help"
 import { saveAs } from "file-saver"
@@ -11,6 +10,8 @@ import Cookies from "@/utils/storage/cookie"
 import { loadEnv } from "@/../build/utils"
 import sysConfig from "@/config"
 import { Message } from "@arco-design/web-vue"
+import config from "@/config"
+import { useUserHook } from "@/hooks/user"
 
 const env = loadEnv()
 const apiBaseUrl = env.VITE_API_BASE_URL
@@ -66,7 +67,7 @@ http.adornData = (data = {}, openDefaultParams = true, contentType = ContentType
  */
 http.interceptors.request.use(
   config => {
-    config.headers["X-STEINS-TOKEN"] = "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
+    config.headers[sysConfig.app.appApiTokenName] = "Bearer " + Cookies.get(sysConfig.app.tokenName) // 请求头带上token
     // config.headers['Access-Control-Allow-Origin'] = '*'
     // config.headers['Access-Control-Allow-Methods'] = '*'
     config.headers["X-STEINS-TENANT-ID"] = "1"
@@ -88,7 +89,7 @@ function checkStatus(httpConfig: AxiosRequestConfig) {
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
-      httpConfig.headers["X-STEINS-TOKEN"] = sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
+      httpConfig.headers[sysConfig.app.appApiTokenName] = sysConfig.app.tokenPre + Cookies.get(sysConfig.app.tokenName)
       resolve(http(httpConfig))
     })
   })
@@ -107,7 +108,7 @@ function addSubscriber(callback: () => void) {
 }
 
 function referToken() {
-  const refreshToken = Cookies.get("refresh_token")! as string
+  const refreshToken = Cookies.get(config.app.refreshTokenName)! as string
   AuthApi.refreshToken({
     grant_type: grantType.REFRESH_TOKEN,
     refresh_token: refreshToken,
@@ -131,9 +132,9 @@ function referToken() {
 }
 
 function errorLogin() {
-  clearLoginInfo()
+  const { logoutEvent } = useUserHook()
+  logoutEvent()
   Message.error("登录失效")
-  router.push({ name: "login" })
 }
 /**
  * 响应拦截
@@ -161,8 +162,6 @@ http.interceptors.response.use(
         Message.error("认证失败,client错误,请联系管理员。")
         return Promise.reject(error.response.data)
       }
-
-      console.log("clearLoginInfo")
       const refreshToken = Cookies.get(sysConfig.app.refreshTokenName)
       if (!refreshToken) {
         // 没有refreshToken情况直接返回不需要提示。

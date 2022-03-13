@@ -1,14 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
 import { addRouterFromData, fixResToSys, isGlobalRoute, fixRouteToSysType, MyRouter, MyRouterOptions } from "@/router/routerHelp"
-import { AuthApi } from "@/api/upms-api"
+import { AuthApi } from "@/api/auth-api"
 import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import mainRoutesSource from "./commonLoginRoute/common"
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
-
-const userStore = useUserHook()
 
 const commonFiles = import.meta.globEager("./commonModules/*.ts")
 let commonModules: Array<RouteRecordRaw> = []
@@ -52,6 +50,7 @@ router.beforeEach((to, from, next) => {
     }
     AuthApi.getCurrentUserTree()
       .then(res => {
+        const userStore = useUserHook()
         const { routers: newRoutes, permissions } = fixResToSys(res.data)
         // mainRoutesSource为加入了登录之后的默认route
         // 改变为内部系统使用的sysRouteType

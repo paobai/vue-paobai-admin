@@ -1,4 +1,4 @@
-interface ProxyStorage {
+interface ProxyStorage extends Storage {
   getItem(key: string): any
   setItem(Key: string, value: string): void
   removeItem(key: string): void
@@ -7,6 +7,7 @@ interface ProxyStorage {
 
 //sessionStorage operate
 class sessionStorageProxy implements ProxyStorage {
+  readonly length = 0
   protected storage: ProxyStorage
 
   constructor(storageModel: ProxyStorage) {
@@ -31,6 +32,11 @@ class sessionStorageProxy implements ProxyStorage {
   // 清空
   public clear(): void {
     this.storage.clear()
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
+  key(index: number): string | null {
+    return null
   }
 }
 

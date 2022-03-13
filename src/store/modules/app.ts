@@ -1,19 +1,19 @@
 import { defineStore } from "pinia"
 import { store } from "@/store"
 import config from "@/config"
-import { storageLocal } from "@/utils/storage"
+import { storageLocal, storageSession } from "@/utils/storage"
 
 export const useAppStore = defineStore({
   id: "store-app",
   state: () => ({
-    navbarShow: storageLocal.getItem(config.app.navbarShowKey) === null ? config.custom.navbarShow : storageLocal.getItem(config.app.navbarShowKey),
-    sidebarShow: storageLocal.getItem(config.app.sidebarShowKey) === null ? config.custom.sidebarShow : storageLocal.getItem(config.app.sidebarShowKey),
-    sidebarMenuCollapsed: storageLocal.getItem(config.app.sidebarMenuCollapsedKey) === null ? config.custom.sidebarMenuCollapsed : storageLocal.getItem(config.app.sidebarMenuCollapsedKey),
+    navbarShow: config.custom.navbarShow,
+    sidebarShow: config.custom.sidebarShow,
+    sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
     rightSettingShow: false,
-    footerShow: storageLocal.getItem(config.app.footerShowKey) === null ? config.custom.footerShow : storageLocal.getItem(config.app.footerShowKey),
-    sysColor: storageLocal.getItem(config.app.sysColorKey) === null ? config.custom.sysColor : storageLocal.getItem(config.app.sysColorKey),
-    weakness: storageLocal.getItem(config.app.weaknessKey) === null ? config.custom.weakness : storageLocal.getItem(config.app.weaknessKey),
-    gray: storageLocal.getItem(config.app.grayKey) === null ? config.custom.gray : storageLocal.getItem(config.app.grayKey)
+    footerShow: config.custom.footerShow,
+    sysColor: config.custom.sysColor,
+    weakness: config.custom.weakness,
+    gray: config.custom.gray
   }),
   getters: {
     getNavbarShow(): boolean {
@@ -44,35 +44,43 @@ export const useAppStore = defineStore({
   actions: {
     updateNavbarShow(navbarShow: boolean) {
       this.navbarShow = navbarShow
-      storageLocal.setItem(config.app.navbarShowKey, navbarShow)
     },
     updateSidebarShow(sidebarShow: boolean) {
       this.sidebarShow = sidebarShow
-      storageLocal.setItem(config.app.sidebarShowKey, sidebarShow)
     },
     updateSidebarMenuCollapsed(sidebarMenuCollapsed: boolean) {
       this.sidebarMenuCollapsed = sidebarMenuCollapsed
-      storageLocal.setItem(config.app.sidebarMenuCollapsedKey, sidebarMenuCollapsed)
     },
     updateRightSettingShow(rightSettingShow: boolean) {
       this.rightSettingShow = rightSettingShow
     },
     updateFooterShow(footerShow: boolean) {
       this.footerShow = footerShow
-      storageLocal.setItem(config.app.footerShowKey, footerShow)
     },
     updateSysColor(sysColor: string) {
       this.sysColor = sysColor
-      storageLocal.setItem(config.app.sysColorKey, sysColor)
     },
     updateWeakness(weakness: boolean) {
       this.weakness = weakness
-      storageLocal.setItem(config.app.weaknessKey, weakness)
     },
     updateGray(gray: boolean) {
       this.gray = gray
-      storageLocal.setItem(config.app.grayKey, gray)
     }
+  },
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: "appStore",
+        storage: storageLocal,
+        paths: ["navbarShow", "sidebarShow", "sidebarMenuCollapsed", "footerShow", "sysColor", "weakness", "gray"]
+      },
+      {
+        key: "appStore",
+        storage: storageSession,
+        paths: ["rightSettingShow"]
+      }
+    ]
   }
 })
 

@@ -1,16 +1,5 @@
-import { resetRouter } from "@/router"
-import Cookies from "@/utils/storage/cookie"
-import { storageSession } from "@/utils/storage"
-import sysConfig from "@/config"
 // @ts-ignore
 import { generate } from "@arco-design/color/src/index"
-
-export function clearLoginInfo() {
-  Cookies.remove(sysConfig.app.tokenName)
-  Cookies.remove(sysConfig.app.refreshTokenName)
-  storageSession.setItem(sysConfig.app.permissionName, [])
-  resetRouter()
-}
 
 // Toggle class for the selected element
 export const toggleClass = (ele: HTMLElement, className: string, force?: boolean | undefined) => {

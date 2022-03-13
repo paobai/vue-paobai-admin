@@ -1,5 +1,6 @@
 import cssVariables from "@/styles/_variables.module.less"
 export interface AppConfig {
+  appApiTokenName: string
   tokenPre: string
   tokenName: string
   refreshTokenName: string
@@ -7,17 +8,13 @@ export interface AppConfig {
   loginPageName: string
   redirectPageName: string
   homePagePath: string
-  navbarShowKey: string
-  sidebarShowKey: string
-  sidebarMenuCollapsedKey: string
-  footerShowKey: string
   userInfoKey: string
-  sysColorKey: string
   weaknessKey: string
   grayKey: string
 }
 
 const appConfig: AppConfig = {
+  appApiTokenName: "PAOBAI-ID",
   tokenPre: "Bearer ",
   tokenName: "access_token",
   refreshTokenName: "refresh_token",
@@ -25,12 +22,7 @@ const appConfig: AppConfig = {
   loginPageName: "login",
   redirectPageName: "redirect",
   homePagePath: "/home",
-  navbarShowKey: "layout-nav-bar-show",
-  sidebarShowKey: "layout-side-bar-show",
-  sidebarMenuCollapsedKey: "layout-sidebar-menu-collapsed-",
-  footerShowKey: "layout-footer-",
   userInfoKey: "user-info",
-  sysColorKey: "sys-color",
   weaknessKey: cssVariables.weakNessClassName,
   grayKey: cssVariables.grayClassName
 }

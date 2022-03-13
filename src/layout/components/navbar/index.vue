@@ -67,7 +67,7 @@ export default defineComponent({
     messageBox
   },
   setup() {
-    let { logOutEvent, userInfo } = useUserHook()
+    let { logoutEvent, userInfo } = useUserHook()
     let dropDownState = ref(false)
     const getDropDownState = function (status: boolean) {
       dropDownState.value = status
@@ -80,7 +80,7 @@ export default defineComponent({
         closable: true,
         hideCancel: false,
         onOk: () => {
-          logOutEvent()
+          logoutEvent()
         }
       })
     }

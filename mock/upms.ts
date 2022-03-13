@@ -172,14 +172,23 @@ export default [
         return failResponseWrap(null, "错误账号或者密码")
       }
       const res = {
-        access_token: "123123",
-        userInfo: {
-          userId: 1,
-          username: "paobai",
-          realName: "泡白",
-          avatar: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
-          roles: ["admin"]
-        }
+        access_token: "123123"
+      }
+      return successResponseWrap(res)
+    }
+  },
+  {
+    url: urlPre + "/userInfo",
+    method: "get",
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
+    response: (request: any) => {
+      const res = {
+        userId: 1,
+        username: "paobai",
+        realName: "泡白",
+        avatar: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
+        roles: ["admin"],
+        request: request
       }
       return successResponseWrap(res)
     }

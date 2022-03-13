@@ -1,9 +1,9 @@
 import { useUserStoreWithOut } from "@/store/modules/user"
-import { computed, unref } from "vue"
+import { computed, onBeforeMount, unref } from "vue"
 import { RouterSysType } from "@/constant/settings"
 import { getCanShowRoute, getRouteMap } from "@/utils/menu-help"
 import Cookies from "@/utils/storage/cookie"
-import { storageSession } from "@/utils/storage"
+import { AuthApi } from "@/api/auth-api"
 import router, { resetRouter } from "@/router"
 import config from "@/config"
 import _ from "lodash"
@@ -35,11 +35,11 @@ export function useUserHook() {
     return routeMap.value[key]
   }
 
-  const logOutEvent = function () {
-    Cookies.remove("access_token")
-    Cookies.remove("refresh_token")
-    storageSession.setItem(config.app.permissionName, [])
+  const logoutEvent = function () {
+    Cookies.remove(config.app.tokenName)
+    Cookies.remove(config.app.refreshTokenName)
     resetRouter()
+    updateUserInfo({} as UserInfo)
     updateRouteList([])
     updatePermissions([])
     router.replace({ name: config.app.loginPageName })
@@ -49,7 +49,6 @@ export function useUserHook() {
     userStore.updatePermissions(permissions)
     userStore.updateRouteList(routeList)
     router.options.isAddDynamicMenuRoutes = true
-    storageSession.setItem(config.app.permissionName, permissions)
   }
 
   const updateUserInfo = function (userInfo: UserInfo) {
@@ -60,16 +59,25 @@ export function useUserHook() {
     return userStore.getUserInfo
   })
 
+  const initUser = () => {
+    onBeforeMount(() => {
+      AuthApi.getUserInfo().then(res => {
+        updateUserInfo(res.data)
+      })
+    })
+  }
+
   return {
     routeList,
     showRouteList,
     routeMap,
     getRouteByKey,
-    logOutEvent,
+    logoutEvent,
     updateAuth,
     updateUserInfo,
     userInfo,
     updateRouteList,
-    updatePermissions
+    updatePermissions,
+    initUser
   }
 }

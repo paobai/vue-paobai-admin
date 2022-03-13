@@ -48,14 +48,12 @@ import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
-import { AuthApi } from "@/api/upms-api"
-import { AuthLoginByPasswordReq } from "@/api/upms-api/model"
+import { AuthApi } from "@/api/auth-api"
+import { AuthLoginByPasswordReq } from "@/api/auth-api/model"
 import { grantType } from "@/constant"
-import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
 export default {
   setup() {
-    const userStore = useUserHook()
     let { sysColor } = useAppHook()
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
@@ -65,9 +63,8 @@ export default {
     const router = useRouter()
     const login = async () => {
       AuthApi.login(loginForm).then(res => {
-        Cookies.set("access_token", res.data.access_token)
-        userStore.updateUserInfo(res.data.userInfo)
-        // this.$cookie.set('refresh_token', res.data.refresh_token)
+        Cookies.set(config.app.tokenName, res.data.access_token)
+        Cookies.set(config.app.refreshTokenName, res.data.refresh_token)
         router.replace({ path: config.app.homePagePath })
       })
     }
