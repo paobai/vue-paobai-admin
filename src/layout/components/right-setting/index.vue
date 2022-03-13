@@ -34,6 +34,13 @@
       </div>
       <h3>页面样式风格:</h3>
       <div class="item-line-space-between">
+        暗色模式：
+        <a-switch :default-checked="darkAppTheme" @change="v => (darkAppTheme = v)">
+          <template #checked>开启</template>
+          <template #unchecked>关闭</template>
+        </a-switch>
+      </div>
+      <div class="item-line-space-between">
         色弱模式：
         <a-switch :default-checked="weakness" @change="v => (weakness = v)">
           <template #checked>开启</template>
@@ -65,8 +72,9 @@ import { useAppHook } from "@/hooks/app"
 import { sysColorList } from "@/constant"
 export default defineComponent({
   setup() {
-    const { navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, sysColor, updateFooterShow, footerShow, weakness, gray } = useAppHook()
+    const { darkAppTheme, navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, sysColor, updateFooterShow, footerShow, weakness, gray } = useAppHook()
     return {
+      darkAppTheme,
       showRightSetting,
       updateRightSetting,
       updateNavbar,

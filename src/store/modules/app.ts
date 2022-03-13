@@ -3,9 +3,21 @@ import { store } from "@/store"
 import config from "@/config"
 import { storageLocal, storageSession } from "@/utils/storage"
 
+interface appStore {
+  appTheme: "dark" | "light"
+  navbarShow: boolean
+  sidebarShow: boolean
+  sidebarMenuCollapsed: boolean
+  rightSettingShow: boolean
+  footerShow: boolean
+  sysColor: string
+  weakness: boolean
+  gray: boolean
+}
 export const useAppStore = defineStore({
   id: "store-app",
-  state: () => ({
+  state: (): appStore => ({
+    appTheme: config.custom.appTheme,
     navbarShow: config.custom.navbarShow,
     sidebarShow: config.custom.sidebarShow,
     sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
@@ -16,6 +28,9 @@ export const useAppStore = defineStore({
     gray: config.custom.gray
   }),
   getters: {
+    getTheme(): string {
+      return this.appTheme
+    },
     getNavbarShow(): boolean {
       return this.navbarShow
     },
@@ -42,6 +57,9 @@ export const useAppStore = defineStore({
     }
   },
   actions: {
+    updateAppTheme(appTheme: "light" | "dark") {
+      this.appTheme = appTheme
+    },
     updateNavbarShow(navbarShow: boolean) {
       this.navbarShow = navbarShow
     },

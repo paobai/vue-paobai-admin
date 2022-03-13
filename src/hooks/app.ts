@@ -5,6 +5,7 @@ import { RouterSysType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
+import { toggleTheme } from "@/plugins/arco"
 import config from "@/config"
 
 export function useAppHook() {
@@ -13,6 +14,19 @@ export function useAppHook() {
   const appStore = useAppStoreWithOut()
 
   const route = useRoute()
+
+  const darkAppTheme = computed<boolean>({
+    get: () => appStore.getTheme === "dark",
+    set: val => updateAppTheme(val)
+  })
+
+  const updateAppTheme = function (dark: boolean) {
+    if (dark) appStore.updateAppTheme("dark")
+    else appStore.updateAppTheme("light")
+    toggleTheme(dark)
+    // 风格改变也会改变颜色
+    updateSysColor(sysColor.value)
+  }
 
   const navbarShow = computed({
     get: () => appStore.getNavbarShow,
@@ -63,7 +77,7 @@ export function useAppHook() {
 
   const updateSysColor = (color: string) => {
     appStore.updateSysColor(color)
-    changeArcoPrimaryColor(color)
+    changeArcoPrimaryColor(color, darkAppTheme.value)
   }
 
   const weakness = computed({
@@ -176,13 +190,15 @@ export function useAppHook() {
 
   const initSys = () => {
     return onMounted(() => {
-      changeArcoPrimaryColor(sysColor.value)
+      updateAppTheme(darkAppTheme.value)
+      updateSysColor(sysColor.value)
       updateWeakness(weakness.value)
       updateGray(gray.value)
     })
   }
 
   return {
+    darkAppTheme,
     navbarShow,
     updateNavbar,
     updateSidebar,
@@ -208,3 +224,4 @@ export function useAppHook() {
     initSys
   }
 }
+export default useAppHook

@@ -12,11 +12,12 @@ export const toggleClass = (ele: HTMLElement, className: string, force?: boolean
 /**
  * 修改
  * @param color 颜色
+ * @param dark 是否暗色模式
  * @param propertyPre 更新类型默认主题色
  */
-export const changeArcoPrimaryColor = (color: string, propertyPre = "--primary-") => {
+export const changeArcoPrimaryColor = (color: string, dark = false, propertyPre = "--primary-") => {
   if (!color) return
-  const colors = getArcoColors(color, false)
+  const colors = getArcoColors(color, dark)
   const colorsSplit = colors.map((color: string) => color.split("(")[1].split(")")[0]) as string[]
   const body = document.body
   for (let i = 0; i <= 9; i++) {

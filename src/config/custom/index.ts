@@ -1,5 +1,6 @@
 import { arcoDefaultColorName, arcoPresetColors } from "@/plugins/arco"
 export interface CustomConfig {
+  appTheme: "light" | "dark"
   htmlTitle: string
   navbarShow: boolean
   sidebarShow: boolean
@@ -11,6 +12,7 @@ export interface CustomConfig {
 }
 
 const customConfig: CustomConfig = {
+  appTheme: "light",
   htmlTitle: "PAOBAI-ADMIN",
   navbarShow: true,
   sidebarShow: true,

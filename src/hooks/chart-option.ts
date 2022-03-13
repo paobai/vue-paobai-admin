@@ -1,5 +1,6 @@
 import { computed } from "vue"
 import { EChartsOption } from "echarts"
+import useAppHook from "@/hooks/app"
 
 // for code hints
 // import { SeriesOption } from 'echarts';
@@ -10,8 +11,9 @@ interface optionsFn {
 }
 
 export default function useChartOption(sourceOption: optionsFn) {
+  const appHook = useAppHook()
   const isDark = computed(() => {
-    return false
+    return appHook.darkAppTheme.value
   })
   // echarts support https://echarts.apache.org/zh/theme-builder.html
   // It's not used here

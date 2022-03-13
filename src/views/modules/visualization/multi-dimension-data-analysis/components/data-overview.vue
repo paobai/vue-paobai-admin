@@ -23,8 +23,8 @@ import { LineSeriesOption } from "echarts"
 import { queryDataOverview } from "@/api/visualization"
 import useLoading from "@/hooks/loading"
 import { ToolTipFormatterParams } from "@/types/echarts"
-import useThemes from "@/hooks/themes"
 import useChartOption from "@/hooks/chart-option"
+import userAppHook from "@/hooks/app"
 
 const tooltipItemsHtmlString = (items: ToolTipFormatterParams[]) => {
   return items
@@ -74,7 +74,7 @@ const generateSeries = (name: string, lineColor: string, itemBorderColor: string
 export default defineComponent({
   setup() {
     const { loading, setLoading } = useLoading(true)
-    const { isDark } = useThemes()
+    const { darkAppTheme: isDark } = userAppHook()
     const renderData = computed(() => [
       {
         title: "内容生产量",
