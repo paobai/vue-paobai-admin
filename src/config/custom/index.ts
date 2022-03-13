@@ -1,3 +1,4 @@
+import { arcoDefaultColorName, arcoPresetColors } from "@/plugins/arco"
 export interface CustomConfig {
   htmlTitle: string
   navbarShow: boolean
@@ -15,7 +16,7 @@ const customConfig: CustomConfig = {
   sidebarShow: true,
   sidebarMenuCollapsed: false,
   footerShow: false,
-  sysColor: "",
+  sysColor: arcoPresetColors[arcoDefaultColorName].primary,
   weakness: false,
   gray: false
 }

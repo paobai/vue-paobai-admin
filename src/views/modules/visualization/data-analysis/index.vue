@@ -52,7 +52,7 @@ export default defineComponent({
 
 .title-fix {
   margin: 0 0 12px 0;
-  font-size: 14;
+  font-size: 14px;
 }
 :deep(.section-titile) {
   margin: 0 0 12px 0;

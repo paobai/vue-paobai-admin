@@ -2,6 +2,8 @@ import { resetRouter } from "@/router"
 import Cookies from "@/utils/storage/cookie"
 import { storageSession } from "@/utils/storage"
 import sysConfig from "@/config"
+// @ts-ignore
+import { generate } from "@arco-design/color/src/index"
 
 export function clearLoginInfo() {
   Cookies.remove(sysConfig.app.tokenName)
@@ -25,38 +27,14 @@ export const toggleClass = (ele: HTMLElement, className: string, force?: boolean
  */
 export const changeArcoPrimaryColor = (color: string, propertyPre = "--primary-") => {
   if (!color) return
-  const tintColor = (color: string, tint: number) => {
-    if (!color) return ""
-    let red = 0
-    let blue = 0
-    let green = 0
-    if (color.indexOf("#") !== -1) {
-      color = color.replace("#", "")
-      red = parseInt(color.slice(0, 2), 16)
-      green = parseInt(color.slice(2, 4), 16)
-      blue = parseInt(color.slice(4, 6), 16)
-    } else {
-      const colorList = color.match(/\d+/g)!
-      red = +colorList[0]
-      green = +colorList[1]
-      blue = +colorList[2]
-    }
-
-    if (tint === 0) {
-      // when primary color is in its rgb space
-      return [red, green, blue].join(",")
-    } else {
-      red += Math.round(tint * (255 - red))
-      green += Math.round(tint * (255 - green))
-      blue += Math.round(tint * (255 - blue))
-      return `${red},${green},${blue}`
-    }
-  }
-  const clusters = []
+  const colors = getArcoColors(color, false)
+  const colorsSplit = colors.map((color: string) => color.split("(")[1].split(")")[0]) as string[]
   const body = document.body
   for (let i = 0; i <= 9; i++) {
-    const tgbText = tintColor(color, Number(((i - 5) / 10).toFixed(2)))
-    clusters.push(tgbText)
-    body.style.setProperty(propertyPre + (i + 1), tgbText)
+    body.style.setProperty(propertyPre + (i + 1), colorsSplit[i])
   }
+}
+
+export function getArcoColors(color: string, dark = false) {
+  return generate(color, { dark: dark, list: true, index: 6, format: "rgb" }) as string[]
 }
