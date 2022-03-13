@@ -1,6 +1,6 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
-    <a-card :bordered="false" :style="cardStyle">
+    <a-card :bordered="false" :style="cardStyle" style="width: 100%">
       <div class="content-wrap">
         <div class="content">
           <a-statistic :title="title" :value="renderData.count" :value-from="0" animation show-group-separator />
