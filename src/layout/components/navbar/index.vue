@@ -140,7 +140,7 @@ export default defineComponent({
     .username {
       padding: 0 10px;
       font-size: 14px;
-      color: #ffffff;
+      color: var(--color-white);
       line-height: 19px;
     }
     .avatar {

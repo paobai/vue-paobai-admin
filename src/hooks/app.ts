@@ -24,8 +24,6 @@ export function useAppHook() {
     if (dark) appStore.updateAppTheme("dark")
     else appStore.updateAppTheme("light")
     toggleTheme(dark)
-    // 风格改变也会改变颜色
-    updateSysColor(sysColor.value)
   }
 
   const navbarShow = computed({
@@ -79,6 +77,11 @@ export function useAppHook() {
     appStore.updateSysColor(color)
     changeArcoPrimaryColor(color, darkAppTheme.value)
   }
+
+  // 改变theme也会改变颜色
+  watch([() => unref(darkAppTheme)], ([darkAppTheme]) => {
+    changeArcoPrimaryColor(sysColor.value, darkAppTheme)
+  })
 
   const weakness = computed({
     get: () => appStore.getWeakness,

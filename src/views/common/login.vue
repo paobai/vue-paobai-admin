@@ -110,7 +110,7 @@ export default {
           text-align: center;
           font-size: 50px;
           font-weight: 400;
-          color: #ffffff;
+          color: var(--color-white);
           line-height: 70px;
         }
       }
@@ -120,7 +120,7 @@ export default {
         text-align: center;
         font-size: 44px;
         font-weight: normal;
-        color: #ffffff;
+        color: var(--color-white);
         line-height: 61px;
       }
     }
@@ -136,7 +136,7 @@ export default {
     justify-content: center;
     .login-form-wrapper {
       width: 540px;
-      background: #ffffff;
+      background: var(--color-white);
       border-radius: 8px;
       padding: 60px;
       .login-title {

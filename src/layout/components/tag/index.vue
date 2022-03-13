@@ -185,16 +185,20 @@ export default defineComponent({
       border-radius: 4px;
       &.active {
         background: @primary-color;
-        color: #ffffff;
+        color: var(--color-white);
         border-color: @primary-color;
         .tag-options {
-          border-color: #ffffff;
+          border-color: var(--color-white);
+        }
+        .tag-name {
+          color: var(--color-white);
         }
       }
       & + .tag-item-card {
         margin-left: 16px;
       }
       .tag-name {
+        color: var(--color-text-2);
         cursor: pointer;
         display: inline-block;
         line-height: 18px;

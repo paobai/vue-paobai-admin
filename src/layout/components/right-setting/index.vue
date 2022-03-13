@@ -123,7 +123,7 @@ export default defineComponent({
       flex-wrap: wrap;
       .color-item {
         text-align: center;
-        color: #ffffff;
+        color: var(--color-white);
         cursor: pointer;
         flex-shrink: 0;
         border-radius: 8px;
