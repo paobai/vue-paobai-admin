@@ -13,7 +13,7 @@
       <a-typography-paragraph>
         <ul>
           <li>Vue 全家桶，基于Vue3, Vite, Vue Router 开发</li>
-          <li>Typescript。使用Typescript开发</li>
+          <li>Typescript。应用程序级 JavaScript 的语言</li>
           <li>UI库来自字节跳动开源的<a-link href="https://arco.design/vue/docs/start">Arco Design</a-link>框架</li>
           <li>状态管理工具使用<a-link href="https://pinia.vuejs.org/">Pinia</a-link></li>
           <li>图表使用<a-link href="https://echarts.apache.org/zh/index.html">Echarts</a-link></li>
