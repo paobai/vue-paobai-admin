@@ -126,7 +126,7 @@ export default {
     }
   }
   .right-wrapper {
-    //background: url("/src/assets/images/login/login-bak.png") no-repeat;
+    //background: url("/src/assets/images/login/xxx.png") no-repeat;
     //background-size: cover;
     padding: 20px;
     flex: 1;
