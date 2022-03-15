@@ -4,7 +4,7 @@
       <a-col class="panel-col" :span="6">
         <a-space>
           <a-avatar :size="54" class="col-avatar">
-            <img alt="avatar" src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image" />
+            <img alt="avatar" src="http://p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image" />
           </a-avatar>
           <a-statistic title="线上总内容" :value="373.5" :precision="1" :value-from="0" animation show-group-separator>
             <template #suffix> W+ <span class="unit">个</span> </template>
@@ -14,7 +14,7 @@
       <a-col class="panel-col" :span="6">
         <a-space>
           <a-avatar :size="54" class="col-avatar">
-            <img alt="avatar" src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/bf579bf45e307c554c7526da1ba56710.svg~tplv-49unhts6dw-image.image" />
+            <img alt="avatar" src="http:////p3-armor.byteimg.com/tos-cn-i-49unhts6dw/bf579bf45e307c554c7526da1ba56710.svg~tplv-49unhts6dw-image.image" />
           </a-avatar>
           <a-statistic title="投放中内容" :value="368" :value-from="0" animation show-group-separator>
             <template #suffix>
@@ -26,7 +26,7 @@
       <a-col class="panel-col" :span="6">
         <a-space>
           <a-avatar :size="54" class="col-avatar">
-            <img alt="avatar" src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77d74c9a245adeae1ec7fb5d4539738d.svg~tplv-49unhts6dw-image.image" />
+            <img alt="avatar" src="http:////p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77d74c9a245adeae1ec7fb5d4539738d.svg~tplv-49unhts6dw-image.image" />
           </a-avatar>
           <a-statistic title="日新增评论" :value="8874" :value-from="0" animation show-group-separator>
             <template #suffix>
@@ -38,7 +38,7 @@
       <a-col class="panel-col" :span="6">
         <a-space>
           <a-avatar :size="54" class="col-avatar">
-            <img alt="avatar" src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/c8b36e26d2b9bb5dbf9b74dd6d7345af.svg~tplv-49unhts6dw-image.image" />
+            <img alt="avatar" src="http:////p3-armor.byteimg.com/tos-cn-i-49unhts6dw/c8b36e26d2b9bb5dbf9b74dd6d7345af.svg~tplv-49unhts6dw-image.image" />
           </a-avatar>
           <a-statistic title="较昨日新增" :value="2.8" :precision="1" :value-from="0" animation>
             <template #suffix> % <a-icon-caret-up class="up-icon" /> </template>

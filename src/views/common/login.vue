@@ -126,8 +126,8 @@ export default {
     }
   }
   .right-wrapper {
-    background: url("/src/assets/images/login/login-bak.png") no-repeat;
-    background-size: cover;
+    //background: url("/src/assets/images/login/login-bak.png") no-repeat;
+    //background-size: cover;
     padding: 20px;
     flex: 1;
     display: flex;
@@ -135,6 +135,8 @@ export default {
     align-items: center;
     justify-content: center;
     .login-form-wrapper {
+      border: 1px solid var(--color-border);
+      box-shadow: 0 0 5px #0000004d;
       width: 540px;
       background: var(--color-white);
       border-radius: 8px;
