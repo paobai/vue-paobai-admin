@@ -74,6 +74,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .login-wrapper {
+  background-color: rgba(var(--primary-1), 0.5);
   width: 100%;
   height: 100%;
   display: flex;
