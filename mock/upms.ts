@@ -186,7 +186,7 @@ export default [
         userId: 1,
         username: "paobai",
         realName: "泡白",
-        avatar: "https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
+        avatar: "./images/avatar.jpg",
         roles: ["admin"],
         request: request
       }

@@ -2,19 +2,19 @@
   <div class="app-container">
     <a-space direction="vertical" :size="12" fill>
       <a-row :gutter="[16, 16]" justify="start">
-        <a-col :xs="24" :md="24" :xl="14" style="height: 400px">
+        <a-col :xs="24" :md="24" :xl="14" class="first-line">
           <tip></tip>
         </a-col>
-        <a-col :xs="24" :md="24" :xl="10" style="height: 400px">
+        <a-col :xs="24" :md="24" :xl="10" class="first-line">
           <welcome></welcome>
         </a-col>
-        <a-col :xs="24" :md="12" :xl="8" style="height: 450px">
+        <a-col :xs="24" :md="12" :xl="8" class="second-line">
           <star-chart></star-chart>
         </a-col>
-        <a-col :xs="24" :md="12" :xl="8" style="height: 450px">
+        <a-col :xs="24" :md="12" :xl="8" class="second-line">
           <view-chart></view-chart>
         </a-col>
-        <a-col :xs="24" :md="24" :xl="8" style="height: 450px">
+        <a-col :xs="24" :md="24" :xl="8" class="second-line">
           <comp-chart></comp-chart>
         </a-col>
       </a-row>
@@ -75,6 +75,12 @@ export default defineComponent({
   margin: 20px;
   border-radius: 4px;
   :deep(.arco-col) {
+    &.first-line {
+      height: 390px;
+    }
+    &.second-line {
+      height: 430px;
+    }
     .arco-spin {
       height: 100%;
       width: 100%;

@@ -215,6 +215,7 @@ export default defineComponent({
     }
   }
   .app-tag-options {
+    color: var(--color-text-1);
     flex-shrink: 0;
     .options-item {
       cursor: pointer;

@@ -15,7 +15,7 @@ export const getMessageList = () => {
     {
       id: 2,
       type: "message",
-      title: "宁波",
+      title: "紫馨",
       subTitle: "的回复",
       avatar: "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
       content: "此处 bug 已经修复",
@@ -24,7 +24,7 @@ export const getMessageList = () => {
     {
       id: 3,
       type: "message",
-      title: "宁波",
+      title: "产品",
       subTitle: "的回复",
       avatar: "//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp",
       content: "此处 bug 已经修复",

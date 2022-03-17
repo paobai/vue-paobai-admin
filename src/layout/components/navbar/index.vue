@@ -158,13 +158,9 @@ export default defineComponent({
         padding: 0 10px;
       }
 
-      a {
-        color: var(--color-text-1);
-        text-decoration: none;
-      }
       .nav-btn {
-        color: rgb(var(--gray-2));
-        border-color: rgb(var(--gray-2));
+        color: var(--color-white);
+        border-color: var(--color-white);
         font-size: 16px;
       }
       .trigger-btn,
