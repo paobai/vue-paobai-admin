@@ -38,23 +38,23 @@ export default defineComponent({
             {
               type: "text",
               left: "center",
-              top: "40%",
+              top: "42%",
               style: {
-                text: "项目占比",
+                text: "总数",
                 textAlign: "center",
                 fill: isDark ? "#ffffffb3" : "#4E5969",
-                fontSize: 14
+                fontSize: 16
               }
             },
             {
               type: "text",
               left: "center",
-              top: "50%",
+              top: "53%",
               style: {
-                text: "928,531",
+                text: "334",
                 textAlign: "center",
                 fill: isDark ? "#ffffffb3" : "#1D2129",
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: 500
               }
             }
@@ -76,21 +76,21 @@ export default defineComponent({
             },
             data: [
               {
-                value: [148564],
+                value: [184],
                 name: "Star数",
                 itemStyle: {
                   color: isDark ? "#3D72F6" : "#249EFF"
                 }
               },
               {
-                value: [334271],
+                value: [63],
                 name: "Fork数",
                 itemStyle: {
                   color: isDark ? "#A079DC" : "#313CA9"
                 }
               },
               {
-                value: [445694],
+                value: [87],
                 name: "Watching数",
                 itemStyle: {
                   color: isDark ? "#6CAAF5" : "#21CCFF"
