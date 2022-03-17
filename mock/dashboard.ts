@@ -1,4 +1,4 @@
-import { successResponseWrap } from "../src/utils/mock"
+import { successResponseWrap } from "@/utils/mock"
 import dayjs from "dayjs"
 
 export default [
