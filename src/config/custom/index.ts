@@ -1,4 +1,6 @@
 import { arcoDefaultColorName, arcoPresetColors } from "@/plugins/arco"
+import { getAppEnvConfig } from "@/utils"
+const { VITE_GLOB_APP_TITLE } = getAppEnvConfig()
 export interface CustomConfig {
   appTheme: "light" | "dark"
   htmlTitle: string
@@ -13,7 +15,7 @@ export interface CustomConfig {
 
 const customConfig: CustomConfig = {
   appTheme: "light",
-  htmlTitle: "PAOBAI-ADMIN",
+  htmlTitle: VITE_GLOB_APP_TITLE,
   navbarShow: true,
   sidebarShow: true,
   sidebarMenuCollapsed: false,

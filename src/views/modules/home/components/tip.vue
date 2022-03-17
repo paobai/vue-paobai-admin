@@ -8,7 +8,7 @@
         比如vue-il8n国际化，这个对项目耦合度太高了。我相信开发给国内用户的人来说不需要国际化，那就非常不希望代码里面出现$t这个东西存在了。
         加之很多框架对用户权限菜单支持不是特别好。以及目前没有（可能我不知道）基于Arco Design的admin所以我打算开发一个这样的框架。</a-typography-paragraph
       >
-      <a-typography-title :heading="4"><a-link href="https://gitee.com/zheng_yc/paobai">paobai</a-link>框架简介</a-typography-title>
+      <a-typography-title :heading="4"><a-link href="https://gitee.com/zheng_yc/paobai" style="font-size: 24px">PAOBAI-ADMIN</a-link>框架简介</a-typography-title>
       <a-typography-title :heading="5">技术栈</a-typography-title>
       <a-typography-paragraph>
         <ul>
@@ -40,7 +40,7 @@
             </ul>
           </li>
           <li>页面setting在右侧悬浮设置按钮上，请尝试使用</li>
-          <li>若有疑问或bug，请提issue至<a-link href="https://gitee.com/zheng_yc/paobai">paobai</a-link></li>
+          <li>若有疑问或bug，请提issue至<a-link href="https://gitee.com/zheng_yc/paobai">PAOBAI-ADMIN</a-link></li>
         </ul></a-typography-paragraph
       >
     </a-typography>

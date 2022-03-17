@@ -6,13 +6,13 @@ import { clientId, clientSecret, grantType } from "@/constant"
 import { ApiCodeEnum, ApiPromise, ContentType, CustomAxiosInstance } from "./help"
 import { saveAs } from "file-saver"
 import Cookies from "@/utils/storage/cookie"
-import { loadEnv } from "@/../build/utils"
+import { getAppEnvConfig } from "@/utils"
 import sysConfig from "@/config"
 import { Message } from "@arco-design/web-vue"
 import config from "@/config"
 import { useUserHook } from "@/hooks/user"
 
-const env = loadEnv()
+const env = getAppEnvConfig()
 const apiBaseUrl = env.VITE_API_BASE_URL
 
 const http: CustomAxiosInstance = axios.create({

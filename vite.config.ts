@@ -1,19 +1,8 @@
-// import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue'
-//
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [vue()]
-// })
-
 import { resolve } from "path"
 import { UserConfigExport, ConfigEnv, loadEnv } from "vite"
-import vue from "@vitejs/plugin-vue"
-import vueJsx from "@vitejs/plugin-vue-jsx"
-import { warpperEnv } from "./build/utils"
-import { createProxy } from "./build/proxy"
-import { viteMockServe } from "vite-plugin-mock"
-import styleImport from "vite-plugin-style-import"
+import { wrapperEnv } from "./build/utils"
+// import { createProxy } from "./build/proxy"
+import { createVitePlugins } from "./build/vite/plugin"
 
 const pathResolve = (dir: string): any => {
   return resolve(__dirname, ".", dir)
@@ -28,8 +17,10 @@ const alias: Record<string, string> = {
 const root: string = process.cwd()
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY } = warpperEnv(loadEnv(mode, root))
-  const prodMock = true
+  const env = loadEnv(mode, root)
+  const viteEnv = wrapperEnv(env)
+  const { VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
+  const isBuild = command === "build"
   return {
     /**
      * 基本公共路径
@@ -65,34 +56,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       // 本地跨域代理
       // proxy: createProxy(VITE_PROXY)
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      styleImport({
-        libs: [
-          {
-            libraryName: "@arco-design/web-vue",
-            esModule: true,
-            resolveStyle: name => {
-              // css
-              return `@arco-design/web-vue/es/${name}/style/css.js`
-              // less
-              return `@arco-design/web-vue/es/${name}/style/index.js`
-            }
-          }
-        ]
-      }),
-      viteMockServe({
-        mockPath: "mock",
-        localEnabled: command === "serve",
-        prodEnabled: command !== "serve" && prodMock,
-        injectCode: `
-          import { setupProdMockServer } from '../mock/mockProdServer';
-          setupProdMockServer();
-        `,
-        logger: true
-      })
-    ],
+    plugins: createVitePlugins(viteEnv, isBuild),
     optimizeDeps: {
       include: []
     },

@@ -28,3 +28,7 @@ export const changeArcoPrimaryColor = (color: string, dark = false, propertyPre 
 export function getArcoColors(color: string, dark = false) {
   return generate(color, { dark: dark, list: true, index: 6, format: "rgb" }) as string[]
 }
+
+export function getAppEnvConfig() {
+  return import.meta.env
+}
