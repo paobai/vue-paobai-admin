@@ -1,0 +1,1 @@
+import{_ as t}from"../entry/index.js";import{o as a,p as o,G as s,H as _,v as c}from"./vendor.js";const n={data(){return{}}},r=e=>(s("data-v-479476aa"),e=e(),_(),e),d={class:"menu3-1"},p=r(()=>c("h1",null,"path3",-1)),u=[p];function i(e,l,m,v,h,f){return a(),o("div",d,u)}var $=t(n,[["render",i],["__scopeId","data-v-479476aa"]]);export{$ as default};
