@@ -47,8 +47,8 @@
         ></a-button>
         <template #content>
           <a-doption value="logout">登出</a-doption>
-          <a-doption>Option 2</a-doption>
-          <a-doption>Option 3</a-doption>
+          <a-doption>修改密码</a-doption>
+          <a-doption>个人信息</a-doption>
         </template>
       </a-dropdown>
     </div>
