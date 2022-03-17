@@ -1,8 +1,8 @@
 <template>
   <div class="app-sidebar" :class="{ 'menu-collapse': collapse }">
     <div class="logo-wrapper">
-      <img class="logo logo-big" src="/src/assets/images/common/logo/logo-with-text-small.png" />
-      <img class="logo logo-small" src="/src/assets/images/common/logo/logo.png" />
+      <img class="logo logo-big" src="/images/logo/logo-with-text-small.png" />
+      <img class="logo logo-small" src="/images/logo/logo.png" />
     </div>
     <menu-main></menu-main>
   </div>

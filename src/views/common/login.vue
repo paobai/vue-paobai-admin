@@ -15,7 +15,7 @@
       <div class="login-form-wrapper">
         <div class="login-title">
           <div class="logo-wrapper">
-            <img class="logo" src="/src/assets/images/common/logo/logo-with-text-bottom.png" />
+            <img class="logo" src="/images/logo/logo-with-text-bottom.png" />
           </div>
           <div>用户登录</div>
         </div>
