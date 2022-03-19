@@ -1,12 +1,13 @@
 import { useAppStoreWithOut } from "@/store/modules/app"
 import { useUserHook } from "./user"
 import { computed, onMounted, ref, unref, watch } from "vue"
-import { RouterSysType, RouteType } from "@/constant/settings"
+import { MenuPosition, RouterSysType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
 import { toggleTheme } from "@/plugins/arco"
 import config from "@/config"
+import { layoutModeList } from "@/constant"
 
 export function useAppHook() {
   const { showRouteList, getRouteByKey } = useUserHook()
@@ -31,6 +32,40 @@ export function useAppHook() {
     set: val => {
       updateNavbar(val)
     }
+  })
+
+  const layoutMode = computed({
+    get: () => appStore.layoutMode,
+    set: val => {
+      updateLayoutModel(val)
+    }
+  })
+
+  const updateLayoutModel = function (layoutModel: string) {
+    const findFix = layoutModeList.find(e => e.value === layoutModel) || layoutModeList[0]
+    updateMenuPosition(findFix.menuPosition)
+    updateSidebar(findFix.sidebarShow)
+    updateNavbar(findFix.navbarShow)
+    appStore.updateLayoutMode(layoutModel)
+  }
+
+  const menuPosition = computed({
+    get: () => appStore.getMenuPosition,
+    set: val => {
+      updateMenuPosition(val)
+    }
+  })
+
+  const updateMenuPosition = function (menuPosition: MenuPosition) {
+    appStore.updateMenuPosition(menuPosition)
+  }
+
+  const navbarMenuShow = computed(() => {
+    return menuPosition.value !== MenuPosition.SIDEBAR
+  })
+
+  const sidebarMenuShow = computed(() => {
+    return menuPosition.value !== MenuPosition.NAVBAR
   })
 
   const updateNavbar = function (res: boolean) {
@@ -109,6 +144,7 @@ export function useAppHook() {
 
   const fixSidebarShow = computed(() => {
     // nav显示 同时选择的第一个为page ，则侧边栏为空，所以应该隐藏
+    if (menuPosition.value === MenuPosition.SIDEBAR) return true
     if (navbarShow.value && nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page) {
       return false
     }
@@ -157,15 +193,15 @@ export function useAppHook() {
       return sideRouteMap[key]
     }
     watch(
-      [() => unref(nowFirstRouteKey), () => unref(navbarShow)],
-      ([nowKey, navbarShow]) => {
+      [() => unref(nowFirstRouteKey), () => unref(menuPosition)],
+      ([nowKey, menuPosition]) => {
         let dist: RouterSysType[] = []
-        // navbar显示 sidebar route情况
-        if (navbarShow) {
+        // mix情况左部需要为所选的子集
+        if (menuPosition === MenuPosition.MIX) {
           const parentDist = sourceRouteList.value.filter(item => item.key === unref(nowKey))[0]
           if (parentDist) dist = parentDist.children || []
         } else {
-          // 顶部不显示 sidebar route情况
+          // 其他情况都返回就好
           dist = sourceRouteList.value
         }
         routeSidebarList.value = dist || []
@@ -193,6 +229,7 @@ export function useAppHook() {
 
   const initSys = () => {
     return onMounted(() => {
+      updateLayoutModel(layoutMode.value)
       updateAppTheme(darkAppTheme.value)
       updateSysColor(sysColor.value)
       updateWeakness(weakness.value)
@@ -201,6 +238,10 @@ export function useAppHook() {
   }
 
   return {
+    layoutMode,
+    updateLayoutModel,
+    navbarMenuShow,
+    sidebarMenuShow,
     darkAppTheme,
     navbarShow,
     updateNavbar,
@@ -208,6 +249,8 @@ export function useAppHook() {
     collapse,
     updateCollapse,
     updateRightSetting,
+    menuPosition,
+    updateMenuPosition,
     showRightSetting,
     nowFirstRouteKey,
     nowFirstRoute,

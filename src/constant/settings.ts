@@ -7,6 +7,15 @@ export enum TokenStorageName {
 }
 
 /**
+ * 菜单位置信息
+ */
+export enum MenuPosition {
+  NAVBAR = "navbar",
+  SIDEBAR = "sidebar",
+  MIX = "mix"
+}
+
+/**
  * route的类型
  */
 export enum RouteType {

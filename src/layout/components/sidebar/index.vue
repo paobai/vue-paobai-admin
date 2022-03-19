@@ -4,7 +4,7 @@
       <img class="logo logo-big" src="/images/logo/logo-with-text-small.png" />
       <img class="logo logo-small" src="/images/logo/logo.png" />
     </div>
-    <menu-main></menu-main>
+    <menu-main v-if="sidebarMenuShow"></menu-main>
   </div>
 </template>
 
@@ -17,9 +17,10 @@ export default defineComponent({
     menuMain
   },
   setup() {
-    let { collapse } = useAppHook()
+    let { collapse, sidebarMenuShow } = useAppHook()
     return {
-      collapse
+      collapse,
+      sidebarMenuShow
     }
   }
 })

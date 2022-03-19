@@ -4,7 +4,7 @@
       <div class="logo-wrapper">
         <img class="logo" src="/images/logo/logo-with-text-small.png" />
       </div>
-      <menu-main></menu-main>
+      <menu-main v-if="navbarMenuShow"></menu-main>
     </div>
     <div class="right-wrapper">
       <ul class="right-side">
@@ -58,6 +58,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import { useUserHook } from "@/hooks/user"
+import { useAppHook } from "@/hooks/app"
 import ArcoModal from "@arco-design/web-vue/es/modal"
 import menuMain from "./menu-main.vue"
 import messageBox from "./message-box/index.vue"
@@ -67,6 +68,7 @@ export default defineComponent({
     messageBox
   },
   setup() {
+    let { navbarMenuShow } = useAppHook()
     let { logoutEvent, userInfo } = useUserHook()
     let dropDownState = ref(false)
     const getDropDownState = function (status: boolean) {
@@ -104,7 +106,8 @@ export default defineComponent({
       tagSelect,
       userInfo,
       setPopoverVisible,
-      refBtn
+      refBtn,
+      navbarMenuShow
     }
   }
 })
