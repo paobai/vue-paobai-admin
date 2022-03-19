@@ -14,6 +14,7 @@
               <a-typography-paragraph> 今日温度：5~17℃。</a-typography-paragraph>
               <a-typography-paragraph> 东南风3-4级，晴。</a-typography-paragraph>
               <a-typography-title :heading="4">你若安好，便是晴天。</a-typography-title>
+              <a-typography-paragraph  type="secondary">听说动动小手点点star就马上加薪啊，喂。</a-typography-paragraph>
             </a-typography>
           </div>
         </a-col>
