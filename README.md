@@ -42,7 +42,7 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 - 获取项目代码
 
 ```bash
-git clone https://gitee.com/zheng_yc/paobai.git
+git clone https://github.com/paobai/paobai.git
 ```
 
 - 安装依赖
@@ -67,11 +67,12 @@ npm run build
 
 ## 项目地址
 
-- [PAOBAI](https://gitee.com/zheng_yc/paobai)
+- [PAOBAI](https://gitee.com/zheng_yc/paobai) gitee
+- [PAOBAI](https://github.com/paobai/paobai) github
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://gitee.com/zheng_yc/paobai/issues) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://github.com/paobai/paobai/issues) 或者提交一个 Pull Request。
 
 **Pull Request:**
 

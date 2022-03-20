@@ -4,7 +4,14 @@
       <a-icon-settings :style="{ color: '#ffffff', fontSize: '30pX' }" />
     </a-button>
   </div>
-  <a-drawer :visible="showRightSetting" unmountOnClose @cancel="updateRightSetting(false)" :closable="false" cancel-text="关闭" :width="300">
+  <a-drawer
+    :visible="showRightSetting"
+    unmountOnClose
+    @cancel="updateRightSetting(false)"
+    :closable="false"
+    cancel-text="关闭"
+    :width="300"
+  >
     <template #title> 全局设置 </template>
     <template #footer>
       <a-button @click="updateRightSetting(false)" type="primary">关闭</a-button>
@@ -12,18 +19,10 @@
     <div class="right-setting-wrapper">
       <h3>页面布局:</h3>
       <div class="item-line-space-between">
-        显示顶部：
-        <a-switch :disabled="!sidebarShow" :default-checked="navbarShow" @change="v => (navbarShow = v)">
-          <template #checked>显示</template>
-          <template #unchecked>不显示</template>
-        </a-switch>
-      </div>
-      <div class="item-line-space-between">
-        显示左部：
-        <a-switch :disabled="!navbarShow" :default-checked="sidebarShow" @change="v => (sidebarShow = v)">
-          <template #checked>显示</template>
-          <template #unchecked>不显示</template>
-        </a-switch>
+        <div>布局方式：</div>
+        <a-radio-group v-model="layoutMode">
+          <a-radio v-for="item in layoutModeList" :key="item.value" :value="item.value">{{ item.name }}</a-radio>
+        </a-radio-group>
       </div>
       <div class="item-line-space-between">
         显示内容底部(页脚)：
@@ -57,7 +56,13 @@
       <div class="color-pick">
         <div>主题颜色：</div>
         <div class="color-pick-wrapper">
-          <div v-for="color in sysColorList" :key="color" class="color-item" :style="{ backgroundColor: color }" @click="sysColor = color">
+          <div
+            v-for="color in sysColorList"
+            :key="color"
+            class="color-item"
+            :style="{ backgroundColor: color }"
+            @click="sysColor = color"
+          >
             <template v-if="color === sysColor">√</template>
           </div>
         </div>
@@ -69,18 +74,28 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import { useAppHook } from "@/hooks/app"
-import { sysColorList } from "@/constant"
+import { sysColorList, layoutModeList } from "@/constant"
 export default defineComponent({
   setup() {
-    const { darkAppTheme, navbarShow, updateNavbar, sidebarShow, updateSidebar, updateRightSetting, showRightSetting, sysColor, updateFooterShow, footerShow, weakness, gray } = useAppHook()
+    const {
+      layoutMode,
+      updateLayoutModel,
+      darkAppTheme,
+      updateRightSetting,
+      showRightSetting,
+      sysColor,
+      updateFooterShow,
+      footerShow,
+      weakness,
+      gray
+    } = useAppHook()
     return {
+      layoutModeList,
+      layoutMode,
+      updateLayoutModel,
       darkAppTheme,
       showRightSetting,
       updateRightSetting,
-      updateNavbar,
-      navbarShow,
-      sidebarShow,
-      updateSidebar,
       sysColor,
       sysColorList,
       updateFooterShow,
@@ -109,10 +124,12 @@ export default defineComponent({
 .right-setting-wrapper {
   padding: 8px;
   .item-line-space-between {
-    line-height: 36px;
+    line-height: 26px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
     :deep(.arco-switch) {
       min-width: 70px;
     }

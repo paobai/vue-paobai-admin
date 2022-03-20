@@ -2,11 +2,14 @@ import { defineStore } from "pinia"
 import { store } from "@/store"
 import config from "@/config"
 import { storageLocal, storageSession } from "@/utils/storage"
+import { MenuPosition } from "@/constant/settings"
 
 interface appStore {
   appTheme: "dark" | "light"
+  layoutMode: string
   navbarShow: boolean
   sidebarShow: boolean
+  menuPosition: MenuPosition
   sidebarMenuCollapsed: boolean
   rightSettingShow: boolean
   footerShow: boolean
@@ -17,9 +20,11 @@ interface appStore {
 export const useAppStore = defineStore({
   id: "store-app",
   state: (): appStore => ({
+    layoutMode: config.custom.layoutMode,
     appTheme: config.custom.appTheme,
     navbarShow: config.custom.navbarShow,
     sidebarShow: config.custom.sidebarShow,
+    menuPosition: MenuPosition.MIX,
     sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
     rightSettingShow: false,
     footerShow: config.custom.footerShow,
@@ -31,11 +36,17 @@ export const useAppStore = defineStore({
     getTheme(): string {
       return this.appTheme
     },
+    getLayoutMode(): string {
+      return this.layoutMode
+    },
     getNavbarShow(): boolean {
       return this.navbarShow
     },
     getSidebarShow(): boolean {
       return this.sidebarShow
+    },
+    getMenuPosition(): MenuPosition {
+      return this.menuPosition
     },
     getSidebarMenuCollapsed(): boolean {
       return this.sidebarMenuCollapsed
@@ -66,6 +77,12 @@ export const useAppStore = defineStore({
     updateSidebarShow(sidebarShow: boolean) {
       this.sidebarShow = sidebarShow
     },
+    updateMenuPosition(menuPosition: MenuPosition) {
+      this.menuPosition = menuPosition
+    },
+    updateLayoutMode(layoutMode: string) {
+      this.layoutMode = layoutMode
+    },
     updateSidebarMenuCollapsed(sidebarMenuCollapsed: boolean) {
       this.sidebarMenuCollapsed = sidebarMenuCollapsed
     },
@@ -91,7 +108,7 @@ export const useAppStore = defineStore({
       {
         key: "appStore",
         storage: storageLocal,
-        paths: ["navbarShow", "sidebarShow", "sidebarMenuCollapsed", "footerShow", "sysColor", "weakness", "gray"]
+        paths: ["sidebarMenuCollapsed", "footerShow", "sysColor", "weakness", "gray", "layoutMode"]
       },
       {
         key: "appStore",

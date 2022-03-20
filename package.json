@@ -7,7 +7,8 @@
     "build-tsc": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@arco-design/web-vue": "2.17.0",
@@ -35,6 +36,8 @@
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/clipboard": "^2.0.1",
     "@types/file-saver": "^2.0.3",
     "@types/lodash": "^4.14.172",
@@ -52,6 +55,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.17.0",
+    "husky": "^7.0.4",
     "prettier": "^2.3.2",
     "prettier-eslint": "^13.0.0",
     "stylelint-config-prettier": "^8.0.2",

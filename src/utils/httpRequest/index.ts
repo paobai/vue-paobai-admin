@@ -77,14 +77,14 @@ http.interceptors.request.use(
   }
 )
 
-let isRefreshing = true
+let isRefreshing = false
 
 function checkStatus(httpConfig: AxiosRequestConfig) {
   // 刷新token的函数,这需要添加一个开关，防止重复请求
-  if (isRefreshing) {
+  if (!isRefreshing) {
     referToken()
   }
-  isRefreshing = false
+  isRefreshing = true
   // 将token刷新成功后的回调请求缓存
   const retryOriginalRequest = new Promise(resolve => {
     addSubscriber(() => {
@@ -120,12 +120,13 @@ function referToken() {
       onAccessTokenFetched()
     })
     .catch(() => {
+      subscribers = []
       errorLogin()
     })
     .finally(() => {
       // 延迟几秒再将刷新token的开关放开，不然偶尔还是会重复提交刷新token的请求
       setTimeout(() => {
-        isRefreshing = true
+        isRefreshing = false
       }, 3000)
     })
 }
