@@ -6,7 +6,6 @@ import Cookies from "@/utils/storage/cookie"
 import { AuthApi } from "@/api/auth-api"
 import router, { resetRouter } from "@/router"
 import config from "@/config"
-import _ from "lodash"
 import { UserInfo } from "@/model/sys/userModel"
 
 export function useUserHook() {
