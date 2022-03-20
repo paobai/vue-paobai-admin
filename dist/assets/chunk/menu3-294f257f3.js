@@ -1,0 +1,1 @@
+import{_ as t}from"../entry/index69258f68.js";import{o,p as s,G as a,H as _,v as c}from"./vendor2d25431d.js";const d={data(){return{}}},n=e=>(a("data-v-22eaacfd"),e=e(),_(),e),r={class:"menu3-1"},p=n(()=>c("h1",null,"menu3-2.vue",-1)),u=[p];function i(e,f,m,v,l,h){return o(),s("div",r,u)}var $=t(d,[["render",i],["__scopeId","data-v-22eaacfd"]]);export{$ as default};

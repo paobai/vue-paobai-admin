@@ -1,1 +1,0 @@
-import{_ as e}from"../entry/index.js";import{o as t,p as _}from"./vendor.js";const n={data(){return{}}},r={class:"menu3-1"};function o(s,a,c,d,p,u){return t(),_("div",r,"menu3-3")}var f=e(n,[["render",o],["__scopeId","data-v-fea6353e"]]);export{f as default};

@@ -1,1 +1,0 @@
-import{_ as t}from"../entry/index.js";import{o,p as s,G as _,H as c,v as a}from"./vendor.js";const n={data(){return{}}},r=e=>(_("data-v-72cc8682"),e=e(),c(),e),d={class:"menu3-1"},p=r(()=>a("h1",null,"menu3-1.vue",-1)),u=[p];function i(e,m,v,l,f,h){return o(),s("div",d,u)}var $=t(n,[["render",i],["__scopeId","data-v-72cc8682"]]);export{$ as default};

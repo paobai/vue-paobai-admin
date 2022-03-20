@@ -1,1 +1,0 @@
-import{j as s,L as n,J as c,o as p,p as u}from"./vendor.js";const f=s({setup(i){const{currentRoute:t,replace:a}=n(),{params:r,query:o}=c(t),{path:e}=r;return Array.isArray(e)&&e.join("/"),a({path:r.distPath,query:o}),(m,_)=>(p(),u("div"))}});export{f as default};
