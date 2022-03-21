@@ -20,8 +20,9 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 
 ## 预览
 
-- [PAOBAI](http://110.40.186.235/) - 完整版中文站点
-- [PAOBAI-gh-pages]() - 完整版 github 站点(暂无)
+- [PAOBAI-gh-pages](https://paobai.github.io/paobai) - github pages 站点（推荐-速度快）
+- [PAOBAI-gh-pages](https://zheng_yc.gitee.io/paobai) - gitee pages 站点
+- [PAOBAI](http://110.40.186.235/) - 自建站点(带宽小)
 
 测试账号: paobai/paobai
 
@@ -111,7 +112,8 @@ npm run build
 
 ## 维护者
 
-[@Zheng_yc](https://gitee.com/zheng_yc)
+[@Zheng_yc-gitee](https://gitee.com/zheng_yc)
+[@Zheng_yc-github](https://github.com/paobai)
 
 ## 交流
 
