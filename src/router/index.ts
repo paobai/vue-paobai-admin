@@ -1,5 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router"
-import { addRouterFromData, fixResToSys, isGlobalRoute, fixRouteToSysType, MyRouter, MyRouterOptions } from "@/router/routerHelp"
+import {
+  addRouterFromData,
+  fixResToSys,
+  isGlobalRoute,
+  fixRouteToSysType,
+  MyRouter,
+  MyRouterOptions
+} from "@/router/routerHelp"
 import { AuthApi } from "@/api/auth-api"
 import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"

@@ -17,5 +17,11 @@ export const layoutModeList = [
   { value: "1", name: "混合模式", menuPosition: MenuPosition.MIX, navbarShow: true, sidebarShow: true },
   { value: "2", name: "不显示侧边栏模式", menuPosition: MenuPosition.NAVBAR, navbarShow: true, sidebarShow: false },
   { value: "3", name: "不显示导航栏", menuPosition: MenuPosition.SIDEBAR, navbarShow: false, sidebarShow: true },
-  { value: "4", name: "混合模式+菜单只在侧边栏", menuPosition: MenuPosition.SIDEBAR, navbarShow: true, sidebarShow: true }
+  {
+    value: "4",
+    name: "混合模式+菜单只在侧边栏",
+    menuPosition: MenuPosition.SIDEBAR,
+    navbarShow: true,
+    sidebarShow: true
+  }
 ]

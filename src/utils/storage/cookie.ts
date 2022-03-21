@@ -16,7 +16,11 @@ class Cookies {
       expires: 1
     }
     merge(currentCookieSetting, cookieSetting)
-    tsCookies.set(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`, value, currentCookieSetting)
+    tsCookies.set(
+      `${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`,
+      value,
+      currentCookieSetting
+    )
   }
   /**
    * 拿到 cookie 值

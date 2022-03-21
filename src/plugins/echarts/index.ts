@@ -4,7 +4,17 @@ import { CanvasRenderer } from "echarts/renderers"
 import Chart from "./chart/index.vue"
 import { App } from "vue"
 
-import { GridComponent, TitleComponent, LegendComponent, ToolboxComponent, TooltipComponent, DataZoomComponent, VisualMapComponent, GraphicComponent, RadarComponent } from "echarts/components"
+import {
+  GridComponent,
+  TitleComponent,
+  LegendComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  DataZoomComponent,
+  VisualMapComponent,
+  GraphicComponent,
+  RadarComponent
+} from "echarts/components"
 
 const { use, registerTheme } = echarts
 

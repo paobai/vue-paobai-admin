@@ -1,5 +1,4 @@
 import { App, Component, Directive } from "vue"
-import config from "@/config"
 import * as directives from "./directives"
 import iconfont from "@/components/iconfont.vue"
 import { setupStore } from "@/store"

@@ -27,7 +27,12 @@
               </a-badge>
             </div>
           </a-tooltip>
-          <a-popover trigger="click" :arrow-style="{ display: 'none' }" :content-style="{ padding: 0, minWidth: '400px' }" content-class="message-popover">
+          <a-popover
+            trigger="click"
+            :arrow-style="{ display: 'none' }"
+            :content-style="{ padding: 0, minWidth: '400px' }"
+            content-class="message-popover"
+          >
             <div ref="refBtn" class="ref-btn"></div>
             <template #content>
               <message-box />

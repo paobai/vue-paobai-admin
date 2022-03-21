@@ -1,5 +1,10 @@
 <template>
-  <a-card class="general-card" title="最近访问" :header-style="{ paddingBottom: '0' }" :body-style="{ paddingTop: '26px' }">
+  <a-card
+    class="general-card"
+    title="最近访问"
+    :header-style="{ paddingBottom: '0' }"
+    :body-style="{ paddingTop: '26px' }"
+  >
     <div style="margin-bottom: -1rem">
       <a-row :gutter="8">
         <a-col v-for="link in links" :key="link.text" :span="8" class="wrapper">

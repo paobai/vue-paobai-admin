@@ -23,7 +23,9 @@
         <div class="text-404__headline">
           {{ message }}
         </div>
-        <div class="text-404__info">Please check that the URL you entered is correct, or click the button below to return to the homepage.</div>
+        <div class="text-404__info">
+          Please check that the URL you entered is correct, or click the button below to return to the homepage.
+        </div>
         <div @click="goHome" class="text-404__return-home">Back to home</div>
       </div>
     </div>

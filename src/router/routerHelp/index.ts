@@ -48,7 +48,11 @@ export function fixResToSys(sourceApiData: any): {
  * @param parentKey
  * @param parent
  */
-export function fixRouteToSysType(routeList: RouterApiType[], parentKey: string[] = [], parent?: RouterSysType): RouterSysType[] {
+export function fixRouteToSysType(
+  routeList: RouterApiType[],
+  parentKey: string[] = [],
+  parent?: RouterSysType
+): RouterSysType[] {
   const resList: RouterSysType[] = []
   routeList.forEach(item => {
     const resItem: RouterSysType = {
