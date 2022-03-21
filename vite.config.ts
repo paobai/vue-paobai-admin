@@ -63,6 +63,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     build: {
       brotliSize: false,
       // 消除打包大小超过500kb警告
+      outDir: `docs`,
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
