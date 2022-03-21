@@ -108,7 +108,7 @@ export const useAppStore = defineStore({
       {
         key: "appStore",
         storage: storageLocal,
-        paths: ["sidebarMenuCollapsed", "footerShow", "sysColor", "weakness", "gray", "layoutMode"]
+        paths: ["sidebarMenuCollapsed", "footerShow", "sysColor", "weakness", "gray", "layoutMode", "appTheme"]
       },
       {
         key: "appStore",
