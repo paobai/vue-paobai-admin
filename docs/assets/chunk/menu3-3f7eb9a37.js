@@ -1,0 +1,1 @@
+import{_ as e}from"../entry/indexfa44c11a.js";import{o as t,p as a}from"./vendorfcaffdeb.js";const _={data(){return{}}},n={class:"menu3-1"};function r(o,s,c,d,p,f){return t(),a("div",n,"menu3-3")}var i=e(_,[["render",r],["__scopeId","data-v-fea6353e"]]);export{i as default};
