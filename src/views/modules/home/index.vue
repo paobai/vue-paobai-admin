@@ -79,7 +79,7 @@ export default defineComponent({
       height: 390px;
     }
     &.second-line {
-      height: 430px;
+      height: 450px;
     }
     .arco-spin {
       height: 100%;

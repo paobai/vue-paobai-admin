@@ -19,8 +19,9 @@ const root: string = process.cwd()
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
   const viteEnv = wrapperEnv(env)
-  const { VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
+  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_APP_VERSION } = viteEnv
   const isBuild = command === "build"
+  const packVersion = VITE_APP_VERSION.replace(/\./g, "-")
   return {
     /**
      * 基本公共路径
@@ -62,13 +63,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     },
     build: {
       brotliSize: false,
+      emptyOutDir: false,
+      outDir: `dist/${packVersion}`,
       // 消除打包大小超过500kb警告
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
-          entryFileNames: `assets/entry/[name].js`,
-          chunkFileNames: `assets/chunk/[name].js`,
-          assetFileNames: `assets/file/[name].[ext]`
+          entryFileNames: `assets/entry/[name][hash].js`,
+          chunkFileNames: `assets/chunk/[name][hash].js`,
+          assetFileNames: `assets/file/[name][hash].[ext]`
         }
       }
     },

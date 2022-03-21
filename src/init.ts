@@ -8,8 +8,6 @@ import "@/styles/index.less"
 import { useArco } from "@/plugins/arco"
 import "@/utils/prototype-plus"
 export function initApp(app: App) {
-  const dist = document.getElementsByTagName("title")[0]
-  dist.innerHTML = config.custom.htmlTitle
   app.component("iconfont", iconfont as unknown as Component)
   setupStore(app)
   app.use(useArco)
