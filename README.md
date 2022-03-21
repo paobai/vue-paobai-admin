@@ -19,9 +19,9 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 - **组件** 二次封装了多个常用的组件
 
 ## 预览
-
+以下带宽都很慢
 - [PAOBAI](http://110.40.186.235/) - 完整版中文站点
-- [PAOBAI-gh-pages]() - 完整版 github 站点(暂无)
+- [PAOBAI-gh-pages](https://zheng_yc.gitee.io/paobai) - gitee 站点
 
 测试账号: paobai/paobai
 
