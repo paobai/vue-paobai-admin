@@ -1,0 +1,1 @@
+import{_ as e}from"../entry/indexdb6be7df.js";import{o as t,p as _}from"./vendor2d25431d.js";const n={data(){return{}}},r={class:"menu3-1"};function o(s,a,d,c,p,u){return t(),_("div",r,"menu3-3")}var i=e(n,[["render",o],["__scopeId","data-v-fea6353e"]]);export{i as default};

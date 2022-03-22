@@ -1,0 +1,1 @@
+import{_ as t}from"../entry/indexdb6be7df.js";import{o as a,p as o,G as s,H as _,v as d}from"./vendor2d25431d.js";const c={data(){return{}}},n=e=>(s("data-v-479476aa"),e=e(),_(),e),r={class:"menu3-1"},p=n(()=>d("h1",null,"path3",-1)),u=[p];function i(e,l,m,v,f,h){return a(),o("div",r,u)}var $=t(c,[["render",i],["__scopeId","data-v-479476aa"]]);export{$ as default};

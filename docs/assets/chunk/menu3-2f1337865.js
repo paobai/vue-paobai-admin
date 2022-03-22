@@ -1,1 +1,0 @@
-import{_ as a}from"../entry/indexfa44c11a.js";import{o as t,p as o,G as s,H as _,v as c}from"./vendorfcaffdeb.js";const d={data(){return{}}},n=e=>(s("data-v-22eaacfd"),e=e(),_(),e),r={class:"menu3-1"},p=n(()=>c("h1",null,"menu3-2.vue",-1)),u=[p];function f(e,i,m,v,l,h){return t(),o("div",r,u)}var $=a(d,[["render",f],["__scopeId","data-v-22eaacfd"]]);export{$ as default};
