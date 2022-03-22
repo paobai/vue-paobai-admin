@@ -1,0 +1,1 @@
+import{_ as o}from"../entry/indexfa44c11a.js";import{j as r,r as n,o as t,k as s}from"./vendorfcaffdeb.js";const a=r({});function c(f,p,_,i,d,m){const e=n("router-view");return t(),s(e)}var x=o(a,[["render",c]]);export{x as default};

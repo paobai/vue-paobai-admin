@@ -1,0 +1,1 @@
+import{_ as e}from"../entry/indexfa44c11a.js";import{j as o,o as t,p as a}from"./vendorfcaffdeb.js";const n=o({});function r(s,c,p,f,_,d){return t(),a("h1",null,"path1")}var l=e(n,[["render",r]]);export{l as default};
