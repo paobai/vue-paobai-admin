@@ -35,6 +35,7 @@ export interface RouterApiType {
   children?: RouterApiType[]
   title: string
   notShow?: boolean
+  sort?: number
 }
 
 /**
@@ -50,6 +51,7 @@ export interface RouterSysType {
   title: string
   parentKey?: string[]
   notShow?: boolean
+  sort?: number
   [k: string]: any
 }
 

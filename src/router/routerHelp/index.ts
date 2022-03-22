@@ -130,6 +130,19 @@ export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: Rout
   })
 }
 
+/**
+ * 把RouteList进行排序
+ * @param routeList
+ */
+export function sortRouteSys(routeList: RouterSysType[]): RouterSysType[] {
+  return routeList
+    .sort((a, b) => (a.sort || 10000) - (b.sort || 10000))
+    .map(e => {
+      if (e.children) e.children = sortRouteSys(e.children)
+      return e
+    })
+}
+
 export function buildRouteName(route: RouterSysType) {
   return route.title + "-" + route.key
 }

@@ -17,6 +17,7 @@ export default [
             key: "menu-header-1",
             type: RouteType.Menu,
             icon: "iconfont-store-fill",
+            sort: 2,
             children: [
               {
                 key: "dashboard",
@@ -59,7 +60,7 @@ export default [
             ]
           },
           {
-            title: "菜单二",
+            title: "菜单一",
             path: "",
             key: "menu-header-2",
             icon: "iconfont-cecurity-protection-fill",
@@ -143,18 +144,11 @@ export default [
             ]
           },
           {
-            title: "菜单三",
+            title: "菜单二",
             path: "",
             key: "menu-header-3",
             icon: "iconfont-Customermanagement-fill",
             type: RouteType.Page
-          },
-          {
-            title: "菜单四",
-            path: "",
-            key: "menu-header-4",
-            type: RouteType.Page,
-            icon: "iconfont-set1"
           }
         ],
         permissions: []
