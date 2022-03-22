@@ -29,7 +29,6 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: "/error/401",
     component: () => import("@/views/common/error-page/401.vue"),
-    // redirect: "noredirect",
     name: "Page401",
     meta: {
       title: "错误页面",
@@ -39,7 +38,6 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: "/error/404",
     component: () => import("@/views/common/error-page/404.vue"),
-    // redirect: "noredirect",
     name: "Page404",
     meta: {
       title: "找不到页面",

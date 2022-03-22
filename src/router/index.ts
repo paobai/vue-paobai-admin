@@ -4,6 +4,7 @@ import {
   fixResToSys,
   isGlobalRoute,
   fixRouteToSysType,
+  sortRouteSys,
   MyRouter,
   MyRouterOptions
 } from "@/router/routerHelp"
@@ -61,7 +62,8 @@ router.beforeEach((to, from, next) => {
         const { routers: newRoutes, permissions } = fixResToSys(res.data)
         // mainRoutesSource为加入了登录之后的默认route
         // 改变为内部系统使用的sysRouteType
-        const finalSysRoutes = [...mainRoutesSource, ...fixRouteToSysType(newRoutes)]
+        // 如果后台做了排序那么这个处理可以省略
+        const finalSysRoutes = sortRouteSys([...mainRoutesSource, ...fixRouteToSysType(newRoutes)])
         userStore.updateAuth(finalSysRoutes, permissions)
         // clearRouter()
         addRouterFromData(finalSysRoutes, modulesRoutes, router)

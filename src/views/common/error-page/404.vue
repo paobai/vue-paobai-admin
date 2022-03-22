@@ -26,7 +26,7 @@
         <div class="text-404__info">
           Please check that the URL you entered is correct, or click the button below to return to the homepage.
         </div>
-        <div @click="goHome" class="text-404__return-home">Back to home</div>
+        <a-button @click="goHome" class="text-404__return-home">Back to home</a-button>
       </div>
     </div>
   </div>
@@ -205,7 +205,7 @@ export default defineComponent({
       font-size: 32px;
       font-weight: bold;
       line-height: 40px;
-      color: #1482f0;
+      color: @primary-color;
       opacity: 0;
       margin-bottom: 20px;
       animation-name: slideUp;
@@ -216,7 +216,6 @@ export default defineComponent({
     &__headline {
       font-size: 20px;
       line-height: 24px;
-      color: #222;
       font-weight: bold;
       opacity: 0;
       margin-bottom: 10px;
@@ -229,7 +228,7 @@ export default defineComponent({
     &__info {
       font-size: 13px;
       line-height: 21px;
-      color: grey;
+      color: var(--color-text-2);
       opacity: 0;
       margin-bottom: 30px;
       animation-name: slideUp;
@@ -243,7 +242,7 @@ export default defineComponent({
       float: left;
       width: 110px;
       height: 36px;
-      background: #1482f0;
+      background: @primary-color;
       border-radius: 100px;
       text-align: center;
       color: var(--color-white);
