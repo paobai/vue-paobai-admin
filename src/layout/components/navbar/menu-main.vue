@@ -1,6 +1,11 @@
 <template>
   <div class="menu-main">
-    <a-menu mode="horizontal" :default-selected-keys="['1']" :selected-keys="[nowFirstRouteKey]" @menu-item-click="clickMenu">
+    <a-menu
+      mode="horizontal"
+      :default-selected-keys="['1']"
+      :selected-keys="[nowFirstRouteKey]"
+      @menu-item-click="clickMenu"
+    >
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key" :class="{ 'arco-menu-selected': route.key === nowFirstRouteKey }">

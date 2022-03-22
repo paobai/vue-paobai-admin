@@ -237,7 +237,12 @@ export const deleteRequest = <T>(url: any, params?: any, data?: any): ApiPromise
 }
 
 // 下载文件方法
-export function downloadFile(url: any, params?: any, method = "get", fileName: string | undefined = undefined): ApiPromise {
+export function downloadFile(
+  url: any,
+  params?: any,
+  method = "get",
+  fileName: string | undefined = undefined
+): ApiPromise {
   url = http.adornUrl(url)
   return new Promise(() => {
     http({
@@ -248,7 +253,8 @@ export function downloadFile(url: any, params?: any, method = "get", fileName: s
       responseType: "blob"
     }).then(res => {
       fileName = fileName || "download"
-      const contentDisposition = (res as any).__headers["content-disposition"] || (res as any).__headers["Content-disposition"]
+      const contentDisposition =
+        (res as any).__headers["content-disposition"] || (res as any).__headers["Content-disposition"]
       if (contentDisposition) {
         fileName = fileName || window.decodeURI(contentDisposition.split("''")[1])
       }

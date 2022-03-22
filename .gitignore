@@ -9,3 +9,4 @@ dist-ssr
 *.njsproj
 *.sln
 package-lock.json
+stats.html

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container none-scrollbar">
     <a-space direction="vertical" :size="12" fill>
       <a-row :gutter="[16, 16]" justify="start">
         <a-col :xs="24" :md="24" :xl="14" class="first-line">
@@ -72,8 +72,11 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .app-container {
-  margin: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
   border-radius: 4px;
+  overflow-y: auto;
   :deep(.arco-col) {
     &.first-line {
       height: 390px;

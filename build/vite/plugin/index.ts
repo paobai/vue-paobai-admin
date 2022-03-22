@@ -6,9 +6,10 @@ import { configStyleImportPlugin } from "./styleImport"
 import { configHtmlPlugin } from "./html"
 import { configCompressPlugin } from "./compress"
 import { configSvgIconsPlugin } from "./svgSprite"
+import { configRollupVisualizerPlugin } from "./rollup-visualizer"
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
+  const { VITE_USE_MOCK, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE, VITE_BUILD_VIS } = viteEnv
 
   const vitePlugins: (Plugin | Plugin[])[] = [
     // have to
@@ -27,6 +28,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // vite-plugin-svg-icons
   vitePlugins.push(configSvgIconsPlugin(isBuild))
+
+  // rollup-plugin-visualizer
+  VITE_BUILD_VIS && vitePlugins.push(configRollupVisualizerPlugin())
 
   // The following plugins only work in the production environment
   if (isBuild) {

@@ -21,7 +21,11 @@
       <div class="item-line-space-between">
         <div>布局方式：</div>
         <a-radio-group v-model="layoutMode">
-          <a-radio v-for="item in layoutModeList" :key="item.value" :value="item.value">{{ item.name }}</a-radio>
+          <a-tooltip :content="item.details" v-for="item in layoutModeList" :key="item.value" position="lt">
+            <a-radio :value="item.value">
+              <span>{{ item.name }}</span>
+            </a-radio>
+          </a-tooltip>
         </a-radio-group>
       </div>
       <div class="item-line-space-between">

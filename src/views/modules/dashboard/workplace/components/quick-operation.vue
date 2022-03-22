@@ -1,5 +1,10 @@
 <template>
-  <a-card class="general-card" title="快捷操作" :header-style="{ paddingBottom: '0' }" :body-style="{ padding: '24px 20px 0 20px' }">
+  <a-card
+    class="general-card"
+    title="快捷操作"
+    :header-style="{ paddingBottom: '0' }"
+    :body-style="{ padding: '24px 20px 0 20px' }"
+  >
     <template #extra>
       <a-link>管理</a-link>
     </template>

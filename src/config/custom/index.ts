@@ -22,7 +22,7 @@ const customConfig: CustomConfig = {
   navbarShow: true,
   sidebarShow: true,
   sidebarMenuCollapsed: false,
-  footerShow: false,
+  footerShow: true,
   sysColor: arcoPresetColors[arcoDefaultColorName].primary,
   weakness: false,
   gray: false

@@ -21,14 +21,24 @@
         </div>
         <div class="login-content-wrapper">
           <a-form class="login-form-content" :model="loginForm" @submit-success="login">
-            <a-form-item hide-asterisk hide-label :rules="[{ required: true, message: '用户名/手机号码不可为空' }]" field="userName">
+            <a-form-item
+              hide-asterisk
+              hide-label
+              :rules="[{ required: true, message: '用户名/手机号码不可为空' }]"
+              field="userName"
+            >
               <a-input allow-clear v-model="loginForm.userName" placeholder="用户名/手机号码">
                 <template #prefix>
                   <a-icon-user :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
               </a-input>
             </a-form-item>
-            <a-form-item hide-asterisk hide-label field="passWord" :rules="[{ required: true, message: '密码不可为空' }]">
+            <a-form-item
+              hide-asterisk
+              hide-label
+              field="passWord"
+              :rules="[{ required: true, message: '密码不可为空' }]"
+            >
               <a-input-password v-model="loginForm.passWord" placeholder="密码">
                 <template #prefix>
                   <a-icon-lock :style="{ fontSize: '20px', color: '#BABABA' }" />
@@ -39,6 +49,7 @@
           </a-form>
         </div>
       </div>
+      <div class="right-round"></div>
     </div>
   </div>
 </template>
@@ -74,16 +85,17 @@ export default {
 </script>
 <style lang="less" scoped>
 .login-wrapper {
-  background-color: rgba(var(--primary-1), 0.5);
+  background-color: rgba(var(--primary-1), 1);
   width: 100%;
   height: 100%;
   display: flex;
+  overflow-y: hidden;
   .left-wrapper {
     @media screen and (max-width: 1048px) {
       display: none;
     }
     overflow: hidden;
-    max-width: 700px;
+    max-width: 750px;
     width: 0;
     flex: 1;
     background: @primary-color;
@@ -93,7 +105,6 @@ export default {
     align-items: center;
     .content-wrapper {
       width: 100%;
-      transform: translateY(-100px);
       .title {
         position: relative;
         .english {
@@ -135,17 +146,18 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     .login-form-wrapper {
+      z-index: 1;
       border: 1px solid var(--color-border);
       box-shadow: 0 0 5px #0000004d;
       width: 540px;
-      background: var(--color-white);
+      background: var(--color-bg-1);
       border-radius: 8px;
       padding: 60px;
       .login-title {
         font-size: 28px;
         font-weight: bold;
-        color: #191919;
         line-height: 32px;
         display: flex;
         justify-content: space-between;
@@ -176,6 +188,36 @@ export default {
           width: 100%;
           font-size: 20px;
         }
+      }
+    }
+    .right-round {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(var(--primary-1), 1);
+      border-radius: 50%;
+      left: calc(50% - 40px);
+      top: -50%;
+      transform: translate(-50%, 50%);
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(var(--primary-1), 0.5);
+        border-radius: 50%;
+        left: -20px;
+        top: 25%;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(var(--primary-1), 0.2);
+        border-radius: 50%;
+        left: -20px;
+        top: -25%;
       }
     }
   }

@@ -12,7 +12,13 @@
       </a-breadcrumb>
     </div>
     <div class="app-tag-main">
-      <a-dropdown trigger="contextMenu" :style="{ display: 'block' }" v-for="(item, index) in appTagList" :key="item.key" @select="value => tagSelect(value, item, index)">
+      <a-dropdown
+        trigger="contextMenu"
+        :style="{ display: 'block' }"
+        v-for="(item, index) in appTagList"
+        :key="item.key"
+        @select="value => tagSelect(value, item, index)"
+      >
         <div class="tag-item-card" :class="{ active: activeRouteKey === item.key }">
           <div class="tag-name" @click="gotoTag(item)">{{ item.title }}</div>
           <div class="tag-options" @click="deleteTag(item, index)">

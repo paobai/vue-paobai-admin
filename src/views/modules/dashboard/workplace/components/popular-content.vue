@@ -1,6 +1,10 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
-    <a-card class="general-card" :header-style="{ paddingBottom: '0' }" :body-style="{ padding: '17px 20px 21px 20px' }">
+    <a-card
+      class="general-card"
+      :header-style="{ paddingBottom: '0' }"
+      :body-style="{ padding: '17px 20px 21px 20px' }"
+    >
       <template #title> 线上热门内容 </template>
       <template #extra>
         <a-link>查看更多</a-link>

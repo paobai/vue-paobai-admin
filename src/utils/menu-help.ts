@@ -20,7 +20,10 @@ export function getRouteList(routeList: RouterSysType[], sourceArray: any[] = []
  * @param routeList
  * @param sourceMap
  */
-export function getRouteMap(routeList: RouterSysType[], sourceMap: { [key: string]: RouterSysType } = {}): { [key: string]: RouterSysType } {
+export function getRouteMap(
+  routeList: RouterSysType[],
+  sourceMap: { [key: string]: RouterSysType } = {}
+): { [key: string]: RouterSysType } {
   routeList.forEach(item => {
     sourceMap[item.key] = item
     if (item.children) {

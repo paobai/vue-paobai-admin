@@ -56,7 +56,10 @@
         </div>
       </a-space>
     </template>
-    <div v-if="renderList.length && renderList.length < 3" :style="{ height: (showMax - renderList.length) * 86 + 'px' }"></div>
+    <div
+      v-if="renderList.length && renderList.length < 3"
+      :style="{ height: (showMax - renderList.length) * 86 + 'px' }"
+    ></div>
   </a-list>
 </template>
 

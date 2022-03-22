@@ -148,7 +148,12 @@ export default [
       })
       return successResponseWrap({
         xAxis,
-        data: [generateLineData("内容生产量"), generateLineData("内容点击量"), generateLineData("内容曝光量"), generateLineData("活跃用户数")]
+        data: [
+          generateLineData("内容生产量"),
+          generateLineData("内容点击量"),
+          generateLineData("内容曝光量"),
+          generateLineData("活跃用户数")
+        ]
       })
     }
   }

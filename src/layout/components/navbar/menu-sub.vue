@@ -4,7 +4,11 @@
       <template #expand-icon-down>
         <a-icon-down :style="{ color: 'rgba(255, 255, 255, 0.7)' }" />
       </template>
-      <menu-sub v-for="childrenRoute in menuItem.children" :menuItem="childrenRoute" :key="childrenRoute.key"></menu-sub>
+      <menu-sub
+        v-for="childrenRoute in menuItem.children"
+        :menuItem="childrenRoute"
+        :key="childrenRoute.key"
+      ></menu-sub>
     </a-sub-menu>
   </template>
   <template v-else>
