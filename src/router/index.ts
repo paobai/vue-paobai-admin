@@ -62,6 +62,8 @@ router.beforeEach((to, from, next) => {
         // mainRoutesSource为加入了登录之后的默认route
         // 改变为内部系统使用的sysRouteType
         const finalSysRoutes = [...mainRoutesSource, ...fixRouteToSysType(newRoutes)]
+        // 设置该参数为判断获取过动态路由
+        router.options.isAddDynamicMenuRoutes = true
         userStore.updateAuth(finalSysRoutes, permissions)
         // clearRouter()
         addRouterFromData(finalSysRoutes, modulesRoutes, router)
