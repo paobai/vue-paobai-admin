@@ -47,7 +47,6 @@ export function useUserHook() {
   const updateAuth = function (routeList: RouterSysType[], permissions: string[]) {
     userStore.updatePermissions(permissions)
     userStore.updateRouteList(routeList)
-    router.options.isAddDynamicMenuRoutes = true
   }
 
   const updateUserInfo = function (userInfo: UserInfo) {
