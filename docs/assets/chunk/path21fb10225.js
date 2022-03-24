@@ -1,1 +1,0 @@
-import{_ as e}from"../entry/indexdb6be7df.js";import{j as o,o as t,p as n}from"./vendor2d25431d.js";const r=o({});function a(s,p,c,d,f,_){return t(),n("h1",null,"path2")}var l=e(r,[["render",a]]);export{l as default};
