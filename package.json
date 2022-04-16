@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@arco-design/web-vue": "2.17.0",
+    "@arco-design/web-vue": "2.24.1",
     "@arco-themes/react-paobai": "0.0.1",
     "axios": "^0.21.1",
     "clipboard": "^2.0.6",
@@ -21,6 +21,7 @@
     "element-plus": "1.1.0-beta.19",
     "element-resize-detector": "^1.2.3",
     "file-saver": "^2.0.5",
+    "js-base64": "^3.7.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "lodash": "^4.17.21",
@@ -70,5 +71,8 @@
     "vite-plugin-svg-icons": "^1.0.5",
     "vite-svg-loader": "^2.2.0",
     "vue-tsc": "^0.2.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

@@ -62,6 +62,7 @@ export default defineComponent({
         openKeys.value = []
         return
       }
+      // @ts-ignore
       openKeys.value = (unref(nowMenu).parentKey || []).concat(unref(nowMenu).key)
     })
     let onClickSubMenu = function (key: string, getOpenKeys: string[]) {

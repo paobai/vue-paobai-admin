@@ -53,12 +53,12 @@ export default defineComponent({
     const clickMenu = function (key: string) {
       let dist = getRouteByKey(key)
       if (!dist) return
-      if (dist.type === RouteType.Page) {
-        router.push({ name: dist.routeName })
-      } else {
+      if (dist.type === RouteType.Menu) {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
         router.push({ name: find.routeName })
+      } else {
+        router.push({ name: dist.routeName })
       }
     }
     return {
