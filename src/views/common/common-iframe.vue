@@ -10,7 +10,6 @@ import { Base64 } from "js-base64"
 
 let route = useRoute()
 let iframePath = Base64.decode(route.fullPath.split("-path-")[1])
-console.log("iframPa", iframePath)
 </script>
 
 <style lang="less" scoped>
