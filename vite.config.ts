@@ -3,6 +3,7 @@ import { UserConfigExport, ConfigEnv, loadEnv } from "vite"
 import { wrapperEnv } from "./build/utils"
 // import { createProxy } from "./build/proxy"
 import { createVitePlugins } from "./build/vite/plugin"
+import { createViteBuildConfig } from "./build/vite/build"
 
 const pathResolve = (dir: string): any => {
   return resolve(__dirname, ".", dir)
@@ -19,9 +20,8 @@ const root: string = process.cwd()
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
   const viteEnv = wrapperEnv(env)
-  const { VITE_PORT, VITE_PUBLIC_PATH, VITE_APP_VERSION } = viteEnv
+  const { VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
   const isBuild = command === "build"
-  const packVersion = VITE_APP_VERSION.replace(/\./g, "-")
   return {
     /**
      * 基本公共路径
@@ -61,32 +61,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     optimizeDeps: {
       include: []
     },
-    build: {
-      brotliSize: false,
-      emptyOutDir: false,
-      outDir: `dist/${packVersion}`,
-      // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000,
-      // cssCodeSplit: false, // css合并
-      rollupOptions: {
-        output: {
-          entryFileNames: `assets/entry/[name][hash].js`,
-          chunkFileNames: `assets/chunk/[name][hash].js`,
-          assetFileNames: `assets/file/[name][hash].[ext]`,
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              return "vendor" //代码分割为第三方包
-            }
-            if (id.includes("views/modules")) {
-              return "views-modules" //代码分割为业务视图
-            }
-            if (id.includes("views/common")) {
-              return "views-common" //代码分割为common页面
-            }
-          }
-        }
-      }
-    },
+    build: createViteBuildConfig(viteEnv),
     define: {
       __INTLIFY_PROD_DEVTOOLS__: false
     }
