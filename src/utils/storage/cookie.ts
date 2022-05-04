@@ -16,7 +16,11 @@ class Cookies {
       expires: 1
     }
     merge(currentCookieSetting, cookieSetting)
-    tsCookies.setCookie(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`, value, currentCookieSetting)
+    tsCookies.setCookie(
+      `${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`,
+      value,
+      currentCookieSetting
+    )
   }
   /**
    * 拿到 cookie 值
@@ -38,7 +42,7 @@ class Cookies {
    * @param name
    */
   remove(name = "default") {
-    tsCookies.remove(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`)
+    tsCookies.removeCookie(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`)
   }
 }
 

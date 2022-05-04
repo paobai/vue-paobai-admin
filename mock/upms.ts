@@ -20,7 +20,9 @@ const testUserInfo = {
   roles: []
 }
 function getUserId(request: any) {
-  return request.headers.cookie.includes(testUserInfo.token) ? testUserInfo.userId : paobaiUserInfo.userId
+  return request.headers["paobai-id"] && request.headers["paobai-id"].includes(testUserInfo.token)
+    ? testUserInfo.userId
+    : paobaiUserInfo.userId
 }
 
 export default [
