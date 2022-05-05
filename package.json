@@ -35,9 +35,11 @@
     "vue": "^3.2.19",
     "vue-echarts": "^6.0.0",
     "vue-image-crop-upload": "^2.5.0",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "nprogress": "^0.2.0"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.0",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@types/clipboard": "^2.0.1",
