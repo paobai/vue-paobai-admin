@@ -118,7 +118,6 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
     width: 100%;
     height: 48px;
     font-size: 1.5em;
-    color: #1c1e21;
     border-radius: 6px;
 
     span[role="img"] {

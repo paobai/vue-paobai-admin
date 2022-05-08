@@ -20,7 +20,6 @@
   height: 44px;
   padding: 0 16px;
   font-size: 12px;
-  color: #666;
   background-color: var(--color-bg-1);
   border-top: 1px solid var(--color-border);
   border-radius: 0 0 16px 16px;
