@@ -10,7 +10,7 @@
       <ul class="right-side">
         <li>
           <a-tooltip content="搜索">
-            <a-button class="nav-btn" type="outline" :shape="'circle'">
+            <a-button class="nav-btn" type="outline" :shape="'circle'" @click="showAppSearch">
               <template #icon>
                 <a-icon-search />
               </template>
@@ -57,20 +57,23 @@
         </template>
       </a-dropdown>
     </div>
+    <app-search ref="appSearch"></app-search>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import { defineComponent, Ref, ref, unref } from "vue"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
 import ArcoModal from "@arco-design/web-vue/es/modal"
 import menuMain from "./menu-main.vue"
 import messageBox from "./message-box/index.vue"
+import appSearch from "@/components/search/index.vue"
 export default defineComponent({
   components: {
     menuMain,
-    messageBox
+    messageBox,
+    appSearch
   },
   setup() {
     let { navbarMenuShow } = useAppHook()
@@ -105,6 +108,10 @@ export default defineComponent({
       })
       refBtn.value.dispatchEvent(event)
     }
+    const appSearch: Ref<ElRef> = ref(null)
+    const showAppSearch = () => {
+      appSearch.value.showSearch()
+    }
     return {
       getDropDownState,
       dropDownState,
@@ -112,7 +119,9 @@ export default defineComponent({
       userInfo,
       setPopoverVisible,
       refBtn,
-      navbarMenuShow
+      navbarMenuShow,
+      appSearch,
+      showAppSearch
     }
   }
 })
