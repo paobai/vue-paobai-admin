@@ -39,7 +39,6 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
           path: e.path,
           icon: e.icon
         })
-        debugger
         deepFlatRoutes(e.children || [], res)
       })
       return res
