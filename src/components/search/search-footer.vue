@@ -12,9 +12,7 @@
 
 <script lang="ts" setup></script>
 <style lang="less" scoped>
-@prefix-cls: ~"app-search-footer";
-
-.@{prefix-cls} {
+.app-search-footer {
   position: relative;
   display: flex;
   height: 44px;
