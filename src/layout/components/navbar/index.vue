@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref, unref } from "vue"
+import { defineComponent, Ref, ref } from "vue"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
 import ArcoModal from "@arco-design/web-vue/es/modal"
@@ -110,7 +110,7 @@ export default defineComponent({
     }
     const appSearch: Ref<ElRef> = ref(null)
     const showAppSearch = () => {
-      appSearch.value.showSearch()
+      ;(appSearch as any).value.showSearch()
     }
     return {
       getDropDownState,
