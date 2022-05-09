@@ -83,9 +83,7 @@ defineExpose({ showSearch })
 const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0)
 </script>
 <style scoped lang="less">
-@prefix-cls: ~"app-search-modal";
-@footer-prefix-cls: ~"app-search-footer";
-.@{prefix-cls} {
+.app-search-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -135,7 +133,6 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
     display: flex;
     width: 100%;
     height: 100px;
-    font-size: 0.9;
     color: rgb(150 159 175);
     align-items: center;
     justify-content: center;
@@ -175,7 +172,7 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
         color: #fff;
         background-color: @primary-color;
 
-        .@{prefix-cls}-list__item-enter {
+        .app-search-modal-list__item-enter {
           opacity: 100%;
         }
       }

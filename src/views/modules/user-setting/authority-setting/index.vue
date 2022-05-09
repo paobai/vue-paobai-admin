@@ -7,11 +7,15 @@
     <div>
       <h3>切换用户：</h3>
       <a-button size="large" type="primary" @click="changeUser('paobai')">切换为高级用户</a-button>
-      <a-button size="large" type="primary" style="margin-left: 20px" @click="changeUser('test')">切换为低级用户</a-button>
+      <a-button size="large" type="primary" style="margin-left: 20px" @click="changeUser('test')"
+        >切换为低级用户</a-button
+      >
     </div>
     <div style="margin-top: 40px">
       <h3>权限控制显隐按钮：</h3>
-      <a-button v-permission="'high-power-button'" type="primary" style="margin-right: 20px">高级权限可以看按钮（元素）</a-button>
+      <a-button v-permission="'high-power-button'" type="primary" style="margin-right: 20px"
+        >高级权限可以看按钮（元素）</a-button
+      >
       <a-button v-permission="'low-power-button'" type="primary">低级权限也可以看按钮（元素）</a-button>
     </div>
   </div>
@@ -55,7 +59,7 @@ export default {
 .authority-setting {
   width: calc(100% - 40px);
   height: calc(100% - 40px);
-  background: #ffffff;
+  background: var(--color-bg-1);
   padding: 20px;
   margin: 20px;
   line-height: 40px;
