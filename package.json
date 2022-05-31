@@ -72,7 +72,8 @@
     "vite-plugin-style-import": "^1.4.1",
     "vite-plugin-svg-icons": "^1.0.5",
     "vite-svg-loader": "^2.2.0",
-    "vue-tsc": "^0.2.2"
+    "vue-tsc": "^0.2.2",
+    "vue-eslint-parser": "^8.0.0"
   },
   "engines": {
     "node": ">=14.0.0"

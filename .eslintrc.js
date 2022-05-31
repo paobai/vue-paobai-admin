@@ -34,7 +34,8 @@ module.exports = {
   },
   extends: [
     "plugin:vue/vue3-essential",
-    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:@typescript-eslint/recommended",
     "@vue/typescript/recommended",
     "@vue/prettier",
     "@vue/prettier/@typescript-eslint"
@@ -59,7 +60,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-this-alias": "off",
     "prefer-rest-params": "off",
-    "finally": "off",
+    finally: "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
