@@ -1,4 +1,5 @@
-export function createViteBuildConfig(viteEnv: ViteEnv) {
+import { BuildOptions } from "vite"
+export function createViteBuildConfig(viteEnv: ViteEnv): BuildOptions {
   const { VITE_APP_VERSION } = viteEnv
   const packVersion = VITE_APP_VERSION.replace(/\./g, "-")
   return {

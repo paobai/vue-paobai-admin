@@ -17,7 +17,9 @@ const nodeList: FlushList = new Map()
 let startClick: MouseEvent
 
 if (!isServer) {
+  // @ts-ignore
   on(document, "mousedown", (e: MouseEvent) => (startClick = e))
+  // @ts-ignore
   on(document, "mouseup", (e: MouseEvent) => {
     for (const { documentHandler } of nodeList.values()) {
       documentHandler(e, startClick)
