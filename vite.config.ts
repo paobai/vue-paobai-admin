@@ -20,7 +20,7 @@ const root: string = process.cwd()
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
   const viteEnv = wrapperEnv(env)
-  const { VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
+  const { VITE_HOST, VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
   const isBuild = command === "build"
   return {
     /**
@@ -52,7 +52,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
        * 端口号
        * @default 3000
        */
-      host: "0.0.0.0",
+      host: VITE_HOST,
       port: VITE_PORT
       // 本地跨域代理
       // proxy: createProxy(VITE_PROXY)
