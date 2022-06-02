@@ -17,7 +17,7 @@ class Cookies {
     }
     merge(currentCookieSetting, cookieSetting)
     tsCookies.setCookie(
-      `${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`,
+      `${Cookies.env.VITE_GLOB_APP_SHORT_NAME}-${Cookies.env.VITE_APP_VERSION}-${name}`,
       value,
       currentCookieSetting
     )
@@ -28,7 +28,7 @@ class Cookies {
    * @returns
    */
   get(name = "default") {
-    return tsCookies.getCookie(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`)
+    return tsCookies.getCookie(`${Cookies.env.VITE_GLOB_APP_SHORT_NAME}-${Cookies.env.VITE_APP_VERSION}-${name}`)
   }
   /**
    * 拿到 cookie 全部的值
@@ -42,7 +42,7 @@ class Cookies {
    * @param name
    */
   remove(name = "default") {
-    tsCookies.removeCookie(`${Cookies.env.VITE_GLOB_APP_TITLE}-${Cookies.env.VITE_APP_VERSION}-${name}`)
+    tsCookies.removeCookie(`${Cookies.env.VITE_GLOB_APP_SHORT_NAME}-${Cookies.env.VITE_APP_VERSION}-${name}`)
   }
 }
 
