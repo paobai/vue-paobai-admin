@@ -1,38 +1,36 @@
 <template>
   <Teleport to="body">
     <transition name="zoom-fade" mode="out-in">
-      <div class="app-search-modal" v-if="visible">
-        <div class="app-search-modal-content" v-click-outside="handleClose">
+      <div v-if="visible" class="app-search-modal">
+        <div v-click-outside="handleClose" class="app-search-modal-content">
           <div class="app-search-modal-input__wrapper">
             <a-input
+              ref="inputRef"
               class="app-search-modal-input"
               placeholder="请输入关键字"
-              ref="inputRef"
               allow-clear
-              @input="handleSearch"
-            >
+              @input="handleSearch">
               <template #prefix>
                 <a-icon-search />
               </template>
             </a-input>
           </div>
 
-          <div class="app-search-modal-not-data" v-if="getIsNotData">暂无搜索结果</div>
-          <ul class="app-search-modal-list" v-else ref="scrollWrap">
+          <div v-if="getIsNotData" class="app-search-modal-not-data">暂无搜索结果</div>
+          <ul v-else ref="scrollWrap" class="app-search-modal-list">
             <li
-              :ref="setRefs(index)"
               v-for="(item, index) in searchResult"
+              :ref="setRefs(index)"
               :key="item.path"
               :data-index="index"
-              @mouseenter="handleMouseenter"
-              @click="handleEnter"
               :class="[
                 'app-search-modal-list__item',
                 {
                   [`app-search-modal-list__item--active`]: activeIndex === index
                 }
               ]"
-            >
+              @mouseenter="handleMouseenter"
+              @click="handleEnter">
               <div class="app-search-modal-list__item-icon">
                 <a-icon-list size="22" />
               </div>

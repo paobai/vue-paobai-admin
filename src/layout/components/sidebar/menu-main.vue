@@ -1,14 +1,13 @@
 <template>
   <div class="menu-wrapper">
     <a-menu
-      showCollapseButton
+      v-model:collapsed="collapse"
+      show-collapse-button
       :selected-keys="[nowMenuKey]"
       :auto-open-selected="true"
       :open-keys="openKeys"
       @menu-item-click="clickMenu"
-      @sub-menu-click="onClickSubMenu"
-      v-model:collapsed="collapse"
-    >
+      @sub-menu-click="onClickSubMenu">
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key">
@@ -22,7 +21,7 @@
             <template #expand-icon-down>
               <a-icon-down />
             </template>
-            <menu-sub v-for="routSub in route.children" :menuItem="routSub" :key="routSub.key"></menu-sub>
+            <menu-sub v-for="routSub in route.children" :key="routSub.key" :menu-item="routSub"></menu-sub>
           </a-sub-menu>
         </template>
         <template v-else>

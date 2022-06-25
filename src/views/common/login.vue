@@ -25,9 +25,8 @@
               hide-asterisk
               hide-label
               :rules="[{ required: true, message: '用户名/手机号码不可为空' }]"
-              field="userName"
-            >
-              <a-input allow-clear v-model="loginForm.userName" placeholder="用户名/手机号码">
+              field="userName">
+              <a-input v-model="loginForm.userName" allow-clear placeholder="用户名/手机号码">
                 <template #prefix>
                   <a-icon-user :style="{ fontSize: '20px', color: '#BABABA' }" />
                 </template>
@@ -37,8 +36,7 @@
               hide-asterisk
               hide-label
               field="passWord"
-              :rules="[{ required: true, message: '密码不可为空' }]"
-            >
+              :rules="[{ required: true, message: '密码不可为空' }]">
               <a-input-password v-model="loginForm.passWord" placeholder="密码">
                 <template #prefix>
                   <a-icon-lock :style="{ fontSize: '20px', color: '#BABABA' }" />

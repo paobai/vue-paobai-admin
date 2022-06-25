@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "single-page"
+  name: "SinglePage"
 }
 </script>
 

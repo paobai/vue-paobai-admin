@@ -13,12 +13,11 @@
     </div>
     <div class="app-tag-main">
       <a-dropdown
-        trigger="contextMenu"
-        :style="{ display: 'block' }"
         v-for="(item, index) in appTagList"
         :key="item.key"
-        @select="value => tagSelect(value, item, index)"
-      >
+        trigger="contextMenu"
+        :style="{ display: 'block' }"
+        @select="value => tagSelect(value, item, index)">
         <div class="tag-item-card" :class="{ active: activeRouteKey === item.key }">
           <div class="tag-name" @click="gotoTag(item)">{{ item.title }}</div>
           <div class="tag-options" @click="deleteTag(item, index)">
@@ -54,10 +53,10 @@
       <div title="关闭当前" class="options-item" @click="optionsClick('close')">
         <a-icon-close />
       </div>
-      <div title="全屏" class="options-item" v-if="fullScreenStatus === 0" @click="optionsClick('fullScreen')">
+      <div v-if="fullScreenStatus === 0" title="全屏" class="options-item" @click="optionsClick('fullScreen')">
         <a-icon-fullscreen />
       </div>
-      <div title="退出全屏" class="options-item" v-else @click="optionsClick('exitFullScreen')">
+      <div v-else title="退出全屏" class="options-item" @click="optionsClick('exitFullScreen')">
         <a-icon-fullscreen-exit />
       </div>
     </div>

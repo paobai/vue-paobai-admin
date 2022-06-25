@@ -3,8 +3,7 @@
     :body-style="{ overflowY: 'auto', display: 'flex' }"
     :loading="loading"
     class="welcome-card"
-    :title="'欢迎回来！' + userInfo.realName"
-  >
+    :title="'欢迎回来！' + userInfo.realName">
     <div class="welcome-content">
       <a-row align="center" :gutter="24" justify="space-between">
         <a-col style="flex: 1 1 200px; margin-bottom: 20px; text-align: center">

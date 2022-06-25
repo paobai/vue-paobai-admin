@@ -9,8 +9,7 @@
       paddingTop: '16px',
       display: 'flex',
       flexFlow: 'column'
-    }"
-  >
+    }">
     <a-space :size="8">
       <a-select style="width: 86px" default-value="all">
         <a-option value="all"> 全部 </a-option>

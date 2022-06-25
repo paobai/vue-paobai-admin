@@ -29,7 +29,7 @@ import { AuthApi } from "@/api/auth-api"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 export default {
-  name: "authority-setting",
+  name: "AuthoritySetting",
   setup() {
     const { userInfo } = useUserHook()
     const changeUser = function (userName: string) {

@@ -10,8 +10,7 @@
             background: isDark
               ? 'linear-gradient(180deg, #284991 0%, #122B62 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)'
-          }"
-        />
+          }" />
       </a-col>
       <a-col :span="6">
         <ChainItem
@@ -22,8 +21,7 @@
             background: isDark
               ? ' linear-gradient(180deg, #3D492E 0%, #263827 100%)'
               : 'linear-gradient(180deg, #F5FEF2 0%, #E6FEEE 100%)'
-          }"
-        />
+          }" />
       </a-col>
       <a-col :span="6">
         <ChainItem
@@ -34,16 +32,14 @@
             background: isDark
               ? 'linear-gradient(180deg, #294B94 0%, #0F275C 100%)'
               : 'linear-gradient(180deg, #f2f9fe 0%, #e6f4fe 100%)'
-          }"
-        />
+          }" />
       </a-col>
       <a-col :span="6">
         <ChainItem
           title="分享总量"
           quota="share"
           chart-type="pie"
-          :card-style="{ background: 'linear-gradient(180deg, #F7F7FF 0%, #ECECFF 100%)' }"
-        />
+          :card-style="{ background: 'linear-gradient(180deg, #F7F7FF 0%, #ECECFF 100%)' }" />
       </a-col>
     </a-row>
   </a-card>
