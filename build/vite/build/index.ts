@@ -4,8 +4,8 @@ export function createViteBuildConfig(viteEnv: ViteEnv): BuildOptions {
   const packVersion = VITE_APP_VERSION.replace(/\./g, "-")
   return {
     brotliSize: false,
-    emptyOutDir: false,
-    outDir: `dist/${packVersion}`,
+    emptyOutDir: true,
+    outDir: `docs`,
     // 消除打包大小超过500kb警告
     chunkSizeWarningLimit: 2000,
     // cssCodeSplit: false, // css合并
