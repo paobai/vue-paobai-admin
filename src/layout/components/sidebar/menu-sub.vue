@@ -6,9 +6,8 @@
       </template>
       <menu-sub
         v-for="childrenRoute in menuItem.children"
-        :menuItem="childrenRoute"
         :key="childrenRoute.key"
-      ></menu-sub>
+        :menu-item="childrenRoute"></menu-sub>
     </a-sub-menu>
   </template>
   <template v-else>

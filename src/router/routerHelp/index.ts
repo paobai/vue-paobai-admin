@@ -1,4 +1,5 @@
 import { RouterOptions, RouteRecordRaw, Router } from "vue-router"
+import { Base64 } from "js-base64"
 
 export declare interface MyRouterOptions extends RouterOptions {
   isAddDynamicMenuRoutes?: Boolean
@@ -104,16 +105,19 @@ export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: Rout
     }
     return
   }
-  if (item.type === RouteType.Button) return
   let findModule = modulesRoutes["/src/views/common/wait-dev.vue"]
   let modulePath = item.path
-  if (modulePath) {
+  if (item.type === RouteType.Iframe && modulePath) {
+    findModule = modulesRoutes["/src/views/common/common-iframe.vue"]
+    modulePath = "iframe" + item.key + "-path-" + Base64.encodeURI(modulePath)
+    console.log("modulePath", modulePath)
+  } else if (modulePath) {
     if (modulePath[0] !== "/") modulePath = "/" + modulePath
     const componentPath = `/src/views/modules${modulePath}.vue`
     const componentIndexPath = `/src/views/modules${modulePath}/index.vue`
     findModule = modulesRoutes[componentPath] || modulesRoutes[componentIndexPath] || findModule
   } else {
-    modulePath = "temp-Path-" + item.key
+    modulePath = "temp-path-" + item.key
   }
   inList.push({
     path: modulePath,

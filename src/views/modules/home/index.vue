@@ -2,10 +2,10 @@
   <div class="app-container none-scrollbar">
     <a-space direction="vertical" :size="12" fill>
       <a-row :gutter="[16, 16]" justify="start">
-        <a-col :xs="24" :md="24" :xl="14" class="first-line">
+        <a-col :xs="24" :md="24" :xl="13" class="first-line">
           <tip></tip>
         </a-col>
-        <a-col :xs="24" :md="24" :xl="10" class="first-line">
+        <a-col :xs="24" :md="24" :xl="11" class="first-line">
           <welcome></welcome>
         </a-col>
         <a-col :xs="24" :md="12" :xl="8" class="second-line">

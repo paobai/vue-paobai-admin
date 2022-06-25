@@ -9,8 +9,7 @@
         showCheckedAll: true
       }"
       :border="false"
-      :pagination="false"
-    />
+      :pagination="false" />
     <a-typography-text type="secondary" class="data-statistic-list-tip">
       轮播次数 {{ data.length }}
       节目单观众不可见

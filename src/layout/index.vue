@@ -4,8 +4,7 @@
     :class="{
       'not-show-app-navbar': !navbarShow,
       'not-show-sidebar': !fixSidebarShow
-    }"
-  >
+    }">
     <navbar></navbar>
     <div class="bottom-wrapper">
       <div class="bottom-left-wrapper">

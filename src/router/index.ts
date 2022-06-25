@@ -13,6 +13,9 @@ import { useUserHook } from "@/hooks/user"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import mainRoutesSource from "./commonLoginRoute/common"
+import NProgress from "nprogress" // progress bar
+
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const modulesRoutes = import.meta.glob("/src/views/**/*.vue")
 
@@ -44,15 +47,18 @@ export function clearRouter() {
 }
 
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   // 添加动态(菜单)路由
   // 1. 已经添加 or 全局路由, 直接访问
   // 2. 获取菜单列表, 添加并保存本地存储
   if (router.options.isAddDynamicMenuRoutes || isGlobalRoute(to as any, constantRoutes)) {
+    NProgress.done()
     next()
   } else {
     // TODO 获取路由
     const token = Cookies.get(config.app.tokenName)
     if (!token) {
+      NProgress.done()
       router.push({ name: "login" })
       return
     }
@@ -74,6 +80,9 @@ router.beforeEach((to, from, next) => {
       .catch(e => {
         console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, "color:blue")
         router.push({ name: "login" })
+      })
+      .finally(() => {
+        NProgress.done()
       })
   }
 })

@@ -145,7 +145,7 @@ export function useAppHook() {
   const fixSidebarShow = computed(() => {
     // nav显示 同时选择的第一个为page ，则侧边栏为空，所以应该隐藏
     if (menuPosition.value === MenuPosition.SIDEBAR) return true
-    if (navbarShow.value && nowFirstRoute.value && nowFirstRoute.value.type === RouteType.Page) {
+    if (navbarShow.value && nowFirstRoute.value && nowFirstRoute.value.type !== RouteType.Menu) {
       return false
     }
     return sidebarShow.value

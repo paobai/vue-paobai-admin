@@ -3,8 +3,7 @@
     <a-card
       class="general-card"
       :header-style="{ paddingBottom: '0' }"
-      :body-style="{ padding: '17px 20px 21px 20px' }"
-    >
+      :body-style="{ padding: '17px 20px 21px 20px' }">
       <template #title> 线上热门内容 </template>
       <template #extra>
         <a-link>查看更多</a-link>
@@ -23,8 +22,7 @@
                 <a-typography-paragraph
                   :ellipsis="{
                     rows: 1
-                  }"
-                >
+                  }">
                   {{ record.title }}
                 </a-typography-paragraph>
               </template>
@@ -35,8 +33,7 @@
               data-index="increases"
               :sortable="{
                 sortDirections: ['ascend', 'descend']
-              }"
-            >
+              }">
               <template #cell="{ record }">
                 <div class="increases-cell">
                   <span>{{ record.increases }}%</span>

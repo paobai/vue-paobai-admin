@@ -26,7 +26,7 @@
         <div class="text-404__info">
           Please check that the URL you entered is correct, or click the button below to return to the homepage.
         </div>
-        <a-button @click="goHome" class="text-404__return-home">Back to home</a-button>
+        <a-button class="text-404__return-home" @click="goHome">Back to home</a-button>
       </div>
     </div>
   </div>

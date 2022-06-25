@@ -3,15 +3,14 @@ import { UserConfigExport, ConfigEnv, loadEnv } from "vite"
 import { wrapperEnv } from "./build/utils"
 // import { createProxy } from "./build/proxy"
 import { createVitePlugins } from "./build/vite/plugin"
+import { createViteBuildConfig } from "./build/vite/build"
 
 const pathResolve = (dir: string): any => {
   return resolve(__dirname, ".", dir)
 }
 
 const alias: Record<string, string> = {
-  "@": pathResolve("src"),
-  //解决开发环境下的警告 You are running the esm-bundler build of vue-i18n. It is recommended to configure your bundler to explicitly replace feature flag globals with boolean literals to get proper tree-shaking in the final bundle.
-  "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
+  "@": pathResolve("src")
 }
 
 const root: string = process.cwd()
@@ -19,7 +18,7 @@ const root: string = process.cwd()
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const env = loadEnv(mode, root)
   const viteEnv = wrapperEnv(env)
-  const { VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
+  const { VITE_HOST, VITE_PORT, VITE_PUBLIC_PATH } = viteEnv
   const isBuild = command === "build"
   return {
     /**
@@ -51,7 +50,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
        * 端口号
        * @default 3000
        */
-      host: "0.0.0.0",
+      host: VITE_HOST,
       port: VITE_PORT
       // 本地跨域代理
       // proxy: createProxy(VITE_PROXY)
@@ -60,31 +59,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     optimizeDeps: {
       include: []
     },
-    build: {
-      brotliSize: false,
-      // 消除打包大小超过500kb警告
-      outDir: `docs`,
-      chunkSizeWarningLimit: 2000,
-      // cssCodeSplit: false, // css合并
-      rollupOptions: {
-        output: {
-          entryFileNames: `assets/entry/[name][hash].js`,
-          chunkFileNames: `assets/chunk/[name][hash].js`,
-          assetFileNames: `assets/file/[name][hash].[ext]`,
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              return "vendor" //代码分割为第三方包
-            }
-            if (id.includes("views/modules")) {
-              return "views-modules" //代码分割为业务视图
-            }
-            if (id.includes("views/common")) {
-              return "views-common" //代码分割为common页面
-            }
-          }
-        }
-      }
-    },
+    build: createViteBuildConfig(viteEnv),
     define: {
       __INTLIFY_PROD_DEVTOOLS__: false
     }

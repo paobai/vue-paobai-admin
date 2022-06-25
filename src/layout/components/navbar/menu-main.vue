@@ -4,8 +4,7 @@
       mode="horizontal"
       :default-selected-keys="['1']"
       :selected-keys="[nowFirstRouteKey]"
-      @menu-item-click="clickMenu"
-    >
+      @menu-item-click="clickMenu">
       <template v-for="route in routeList">
         <template v-if="route.children && route.children.length > 0">
           <a-sub-menu :key="route.key" :class="{ 'arco-menu-selected': route.key === nowFirstRouteKey }">
@@ -20,7 +19,7 @@
             <template #expand-icon-down>
               <a-icon-down class="right-suffix" />
             </template>
-            <menu-sub v-for="routSub in route.children" :menuItem="routSub" :key="routSub.key"></menu-sub>
+            <menu-sub v-for="routSub in route.children" :key="routSub.key" :menu-item="routSub"></menu-sub>
           </a-sub-menu>
         </template>
         <template v-else>
@@ -53,12 +52,12 @@ export default defineComponent({
     const clickMenu = function (key: string) {
       let dist = getRouteByKey(key)
       if (!dist) return
-      if (dist.type === RouteType.Page) {
-        router.push({ name: dist.routeName })
-      } else {
+      if (dist.type === RouteType.Menu) {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
         router.push({ name: find.routeName })
+      } else {
+        router.push({ name: dist.routeName })
       }
     }
     return {

@@ -5,8 +5,7 @@
       :header-style="{ paddingBottom: '0' }"
       :body-style="{
         padding: '20px'
-      }"
-    >
+      }">
       <template #title> 内容类型占比 </template>
       <Chart height="310px" :option="chartOption" />
     </a-card>

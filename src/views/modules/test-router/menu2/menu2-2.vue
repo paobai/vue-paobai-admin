@@ -1,5 +1,5 @@
 <template>
-  <h1>path2</h1>
+  <h1>menu2-2</h1>
 </template>
 
 <script lang="ts">

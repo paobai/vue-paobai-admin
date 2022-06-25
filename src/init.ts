@@ -7,7 +7,7 @@ import "@/styles/index.less"
 import { useArco } from "@/plugins/arco"
 import "@/utils/prototype-plus"
 export function initApp(app: App) {
-  app.component("iconfont", iconfont as unknown as Component)
+  app.component("Iconfont", iconfont as unknown as Component)
   setupStore(app)
   app.use(useArco)
   // 自定义指令

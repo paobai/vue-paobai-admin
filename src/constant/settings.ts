@@ -21,7 +21,7 @@ export enum MenuPosition {
 export enum RouteType {
   Menu,
   Page,
-  Button
+  Iframe
 }
 
 /**
@@ -61,6 +61,7 @@ export declare interface RouteMetaCustom extends RouteMeta {
   key: string
   type: RouteType
   notShow?: boolean
+  iframePath?: string
 }
 /**
  * 自定义的route储存结构

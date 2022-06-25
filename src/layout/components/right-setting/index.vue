@@ -6,22 +6,21 @@
   </div>
   <a-drawer
     :visible="showRightSetting"
-    unmountOnClose
-    @cancel="updateRightSetting(false)"
+    unmount-on-close
     :closable="false"
     cancel-text="关闭"
     :width="300"
-  >
+    @cancel="updateRightSetting(false)">
     <template #title> 全局设置 </template>
     <template #footer>
-      <a-button @click="updateRightSetting(false)" type="primary">关闭</a-button>
+      <a-button type="primary" @click="updateRightSetting(false)">关闭</a-button>
     </template>
     <div class="right-setting-wrapper">
       <h3>页面布局:</h3>
       <div class="item-line-space-between">
         <div>布局方式：</div>
         <a-radio-group v-model="layoutMode">
-          <a-tooltip :content="item.details" v-for="item in layoutModeList" :key="item.value" position="lt">
+          <a-tooltip v-for="item in layoutModeList" :key="item.value" :content="item.details" position="lt">
             <a-radio :value="item.value">
               <span>{{ item.name }}</span>
             </a-radio>
@@ -65,8 +64,7 @@
             :key="color"
             class="color-item"
             :style="{ backgroundColor: color }"
-            @click="sysColor = color"
-          >
+            @click="sysColor = color">
             <template v-if="color === sysColor">√</template>
           </div>
         </div>

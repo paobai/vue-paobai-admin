@@ -6,8 +6,7 @@
       :body-style="{
         paddingTop: '20px'
       }"
-      title="内容数据"
-    >
+      title="内容数据">
       <template #extra>
         <a-link>查看更多</a-link>
       </template>

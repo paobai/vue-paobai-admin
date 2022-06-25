@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@arco-design/web-vue": "2.17.0",
+    "@arco-design/web-vue": "2.24.1",
     "@arco-themes/react-paobai": "0.0.1",
     "axios": "^0.21.1",
     "clipboard": "^2.0.6",
@@ -21,6 +21,7 @@
     "element-plus": "1.1.0-beta.19",
     "element-resize-detector": "^1.2.3",
     "file-saver": "^2.0.5",
+    "js-base64": "^3.7.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "lodash": "^4.17.21",
@@ -30,13 +31,15 @@
     "pinia-plugin-persist": "^1.0.0",
     "qs": "^6.10.1",
     "screenfull": "^5.0.2",
-    "typescript-cookie": "^1.0.0",
+    "typescript-cookie": "^1.0.3",
     "vue": "^3.2.19",
     "vue-echarts": "^6.0.0",
     "vue-image-crop-upload": "^2.5.0",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "nprogress": "^0.2.0"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.0",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
     "@types/clipboard": "^2.0.1",
@@ -69,6 +72,10 @@
     "vite-plugin-style-import": "^1.4.1",
     "vite-plugin-svg-icons": "^1.0.5",
     "vite-svg-loader": "^2.2.0",
-    "vue-tsc": "^0.2.2"
+    "vue-tsc": "^0.2.2",
+    "vue-eslint-parser": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

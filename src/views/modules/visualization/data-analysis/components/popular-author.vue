@@ -14,16 +14,14 @@
             data-index="contentCount"
             :sortable="{
               sortDirections: ['ascend', 'descend']
-            }"
-          >
+            }">
           </a-table-column>
           <a-table-column
             title="点击量"
             data-index="clickCount"
             :sortable="{
               sortDirections: ['ascend', 'descend']
-            }"
-          >
+            }">
           </a-table-column>
         </template>
       </a-table>

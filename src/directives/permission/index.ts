@@ -10,8 +10,9 @@ import { Directive } from "vue"
 
 export const permission: Directive = {
   mounted(el, binding) {
-    const { value } = binding
+    let { value } = binding
     const permissions = useUserStoreWithOut().getPermissions
+    if (typeof value === "string") value = [value]
     if (value && value instanceof Array && value.length > 0) {
       let res = true
       value.every(item => {
