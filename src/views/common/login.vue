@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrapper">
+  <div ref="rootRef" class="login-wrapper">
     <div class="left-wrapper">
       <div class="content-wrapper">
         <div class="title">
@@ -12,7 +12,7 @@
         <div class="name">{{ title }}</div>
       </div>
     </div>
-    <div class="right-wrapper">
+    <div ref="rightWrapper" class="right-wrapper">
       <div class="login-form-wrapper">
         <div class="login-title">
           <div class="logo-wrapper">
@@ -48,7 +48,9 @@
           </a-form>
         </div>
       </div>
-      <div class="right-round"></div>
+      <div ref="roundWrapperRef" class="right-round-wrapper">
+        <div class="right-round"></div>
+      </div>
     </div>
     <a-button type="text" class="theme-btn" size="medium" @click="toggleAppTheme">
       <template #icon>
@@ -64,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { reactive } from "vue"
+import { reactive, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
@@ -72,9 +74,24 @@ import { AuthApi } from "@/api/auth-api"
 import { AuthLoginByPasswordReq } from "@/api/auth-api/model"
 import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
+import { useMouseInElement } from "@vueuse/core"
+
 export default {
   setup() {
     let { sysColor, darkAppTheme, toggleAppTheme } = useAppHook()
+    let rootRef = ref<ElRef>(null)
+    let roundWrapperRef = ref<ElRef>(null)
+    let { x, y } = useMouseInElement(rootRef)
+    watch([x, y], ([x, y]) => {
+      let rootElement = rootRef.value!
+      let roundWrapperElement = roundWrapperRef.value!
+      let width = rootElement.clientWidth
+      let height = rootElement.clientHeight
+      let transX = ((-1 * (x - width / 2)) / 30).toFixed(0)
+      let transY = ((-1 * (y - height / 2)) / 30).toFixed(0)
+      roundWrapperElement.style.transform = `translate(${transX}px, ${transY}px)`
+      console.log(transX, transY)
+    })
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
       passWord: "paobai",
@@ -88,17 +105,27 @@ export default {
         router.replace({ path: config.app.homePagePath })
       })
     }
-    return { login, loginForm, title: config.custom.htmlTitle, sysColor, toggleAppTheme, darkAppTheme }
+    return {
+      login,
+      loginForm,
+      title: config.custom.htmlTitle,
+      sysColor,
+      toggleAppTheme,
+      darkAppTheme,
+      rootRef,
+      roundWrapperRef
+    }
   }
 }
 </script>
 <style lang="less" scoped>
+@loginBkColor: var(--primary-1);
 .login-wrapper {
-  background-color: rgba(var(--primary-1), 1);
+  background-color: rgba(@loginBkColor, 1);
   width: 100%;
   height: 100%;
   display: flex;
-  overflow-y: hidden;
+  overflow: hidden;
   .left-wrapper {
     @media screen and (max-width: 1048px) {
       display: none;
@@ -221,34 +248,42 @@ export default {
         }
       }
     }
-    .right-round {
+    .right-round-wrapper {
       position: absolute;
+      left: 0;
+      right: 0;
       width: 100%;
       height: 100%;
-      background: rgba(var(--primary-1), 1);
-      border-radius: 50%;
-      left: calc(50% - 40px);
-      top: -50%;
-      transform: translate(-50%, 50%);
-      &:before {
-        content: "";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .right-round {
         position: absolute;
         width: 100%;
         height: 100%;
-        background: rgba(var(--primary-1), 0.5);
+        background: rgba(@loginBkColor, 1);
         border-radius: 50%;
-        left: -20px;
-        top: 25%;
-      }
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(var(--primary-1), 0.2);
-        border-radius: 50%;
-        left: -20px;
-        top: -25%;
+        //left: calc(50% - 40px);
+        //top: -50%;
+        transform: translateX(-40px);
+        &:before {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(@loginBkColor, 0.5);
+          border-radius: 50%;
+          top: 30%;
+        }
+        &:after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(@loginBkColor, 0.2);
+          border-radius: 50%;
+          top: -30%;
+        }
       }
     }
   }
