@@ -4,7 +4,8 @@
       <div class="content-wrapper">
         <div class="title">
           <div class="english">
-            <img class="welcome" src="/src/assets/images/login/welcome-en.png" />
+            <div class="welcome">WELCOME</div>
+            <div class="welcome">WELCOME</div>
           </div>
           <div class="chinese">欢迎回来</div>
         </div>
@@ -49,6 +50,16 @@
       </div>
       <div class="right-round"></div>
     </div>
+    <a-button type="text" class="theme-btn" size="medium" @click="toggleAppTheme">
+      <template #icon>
+        <template v-if="darkAppTheme">
+          <a-icon-moon-fill size="20" />
+        </template>
+        <template v-else>
+          <a-icon-sun-fill size="20" />
+        </template>
+      </template>
+    </a-button>
   </div>
 </template>
 
@@ -63,7 +74,7 @@ import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
 export default {
   setup() {
-    let { sysColor } = useAppHook()
+    let { sysColor, darkAppTheme, toggleAppTheme } = useAppHook()
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
       passWord: "paobai",
@@ -77,7 +88,7 @@ export default {
         router.replace({ path: config.app.homePagePath })
       })
     }
-    return { login, loginForm, title: config.custom.htmlTitle, sysColor }
+    return { login, loginForm, title: config.custom.htmlTitle, sysColor, toggleAppTheme, darkAppTheme }
   }
 }
 </script>
@@ -111,8 +122,30 @@ export default {
           top: 0;
           position: absolute;
           .welcome {
-            width: 422px;
-            height: 64px;
+            opacity: 0.1;
+            font-size: 84px;
+            color: #ffffff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -16%);
+            //width: 422px;
+            //height: 64px;
+            &:nth-child(2) {
+              opacity: 0.5;
+              animation: animation 8s ease-in-out infinite;
+            }
+            @keyframes animation {
+              0%,
+              100% {
+                -webkit-clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
+                clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
+              }
+              50% {
+                -webkit-clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
+                clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
+              }
+            }
           }
         }
         .chinese {
@@ -218,6 +251,11 @@ export default {
         top: -25%;
       }
     }
+  }
+  .theme-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
 }
 </style>
