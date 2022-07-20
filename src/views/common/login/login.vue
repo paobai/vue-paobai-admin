@@ -1,5 +1,5 @@
 <template>
-  <div ref="rootRef" class="login-wrapper">
+  <div class="login-wrapper">
     <div class="left-wrapper">
       <div class="content-wrapper">
         <div class="title">
@@ -13,6 +13,7 @@
       </div>
     </div>
     <div ref="rightWrapper" class="right-wrapper">
+      <bk-round style="position: absolute; z-index: 1"></bk-round>
       <div class="login-form-wrapper">
         <div class="login-title">
           <div class="logo-wrapper">
@@ -48,7 +49,7 @@
           </a-form>
         </div>
       </div>
-      <div ref="roundWrapperRef" class="right-round-wrapper">
+      <div class="right-round-wrapper">
         <div class="right-round"></div>
       </div>
     </div>
@@ -66,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref, watch } from "vue"
+import { reactive, ref } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
@@ -74,24 +75,14 @@ import { AuthApi } from "@/api/auth-api"
 import { AuthLoginByPasswordReq } from "@/api/auth-api/model"
 import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
-import { useMouseInElement } from "@vueuse/core"
+import bkRound from "./components/bk-round.vue"
 
 export default {
+  components: {
+    bkRound
+  },
   setup() {
     let { sysColor, darkAppTheme, toggleAppTheme } = useAppHook()
-    let rootRef = ref<ElRef>(null)
-    let roundWrapperRef = ref<ElRef>(null)
-    let { x, y } = useMouseInElement(rootRef)
-    watch([x, y], ([x, y]) => {
-      let rootElement = rootRef.value!
-      let roundWrapperElement = roundWrapperRef.value!
-      let width = rootElement.clientWidth
-      let height = rootElement.clientHeight
-      let transX = ((-1 * (x - width / 2)) / 30).toFixed(0)
-      let transY = ((-1 * (y - height / 2)) / 30).toFixed(0)
-      roundWrapperElement.style.transform = `translate(${transX}px, ${transY}px)`
-      console.log(transX, transY)
-    })
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
       passWord: "paobai",
@@ -111,9 +102,7 @@ export default {
       title: config.custom.htmlTitle,
       sysColor,
       toggleAppTheme,
-      darkAppTheme,
-      rootRef,
-      roundWrapperRef
+      darkAppTheme
     }
   }
 }
@@ -206,7 +195,7 @@ export default {
     justify-content: center;
     position: relative;
     .login-form-wrapper {
-      z-index: 1;
+      z-index: 2;
       border: 1px solid var(--color-border);
       box-shadow: 0 0 5px #0000004d;
       width: 540px;
@@ -288,6 +277,7 @@ export default {
     }
   }
   .theme-btn {
+    z-index: 3;
     position: absolute;
     top: 20px;
     right: 20px;
