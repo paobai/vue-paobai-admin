@@ -49,9 +49,6 @@
           </a-form>
         </div>
       </div>
-      <div class="right-round-wrapper">
-        <div class="right-round"></div>
-      </div>
     </div>
     <a-button type="text" class="theme-btn" size="medium" @click="toggleAppTheme">
       <template #icon>
@@ -123,7 +120,7 @@ export default {
     max-width: 750px;
     width: 0;
     flex: 1;
-    background: @primary-color;
+    background: linear-gradient(to right, @primary-color, rgb(@loginBkColor));
     opacity: 0.95;
     display: flex;
     justify-content: center;
@@ -138,6 +135,7 @@ export default {
           top: 0;
           position: absolute;
           .welcome {
+            font-weight: bold;
             opacity: 0.1;
             font-size: 84px;
             color: #ffffff;
@@ -148,7 +146,7 @@ export default {
             //width: 422px;
             //height: 64px;
             &:nth-child(2) {
-              opacity: 0.5;
+              opacity: 0.7;
               animation: animation 8s ease-in-out infinite;
             }
             @keyframes animation {
@@ -234,44 +232,6 @@ export default {
           height: 54px;
           width: 100%;
           font-size: 20px;
-        }
-      }
-    }
-    .right-round-wrapper {
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .right-round {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(@loginBkColor, 1);
-        border-radius: 50%;
-        //left: calc(50% - 40px);
-        //top: -50%;
-        transform: translateX(-40px);
-        &:before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: rgba(@loginBkColor, 0.5);
-          border-radius: 50%;
-          top: 30%;
-        }
-        &:after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: rgba(@loginBkColor, 0.2);
-          border-radius: 50%;
-          top: -30%;
         }
       }
     }

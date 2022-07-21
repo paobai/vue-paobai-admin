@@ -67,7 +67,7 @@ export default {
     position: absolute;
     background: rgba(var(--primary-6), 1);
     border-radius: 50%;
-    animation: flashAnimation 4s linear infinite;
+    animation: flashAnimation 4s ease-in-out infinite;
     &:after {
       position: absolute;
       bottom: 15%;
