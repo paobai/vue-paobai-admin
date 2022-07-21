@@ -15,6 +15,8 @@ export default {
   setup() {
     let roundList = reactive<roundConfigType[]>([
       { left: 15, top: 10, step: 0.1, size: 80, blur: 1 },
+      { left: -10, top: 30, step: 0.02, size: 80, blur: 10 },
+      { left: -30, bottom: 15, step: 0.01, size: 80, blur: 20 },
       { right: 80, top: 80, step: 0.01, size: 40, blur: 20 },
       { left: 20, bottom: 50, step: 0.01, size: 80, blur: 30 },
       { right: 40, top: 10, step: 0.02, size: 60, blur: 5 },
@@ -62,7 +64,43 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  //overflow: hidden;
+  animation: autoMove 20s linear infinite;
+  @keyframes autoMove {
+    0% {
+      transform: translate(0px, 0px);
+    }
+    10% {
+      transform: translate(10px, 10px);
+    }
+    20% {
+      transform: translate(20px, px);
+    }
+    30% {
+      transform: translate(30px, 0px);
+    }
+    40% {
+      transform: translate(20px, -5px);
+    }
+    50% {
+      transform: translate(10px, -10px);
+    }
+    60% {
+      transform: translate(15px, -20px);
+    }
+    70% {
+      transform: translate(10px, -15px);
+    }
+    80% {
+      transform: translate(10px, -12px);
+    }
+    90% {
+      transform: translate(5px, -6px);
+    }
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }
   .round-item {
     position: absolute;
     background: rgba(var(--primary-6), 1);

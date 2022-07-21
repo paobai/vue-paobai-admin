@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref } from "vue"
+import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
