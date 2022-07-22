@@ -6,6 +6,7 @@ import echarts from "@/plugins/echarts"
 import "@/styles/index.less"
 import { useArco } from "@/plugins/arco"
 import "@/utils/prototype-plus"
+import "animate.css"
 export function initApp(app: App) {
   app.component("Iconfont", iconfont as unknown as Component)
   setupStore(app)

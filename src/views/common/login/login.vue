@@ -14,7 +14,7 @@
     </div>
     <div ref="rightWrapper" class="right-wrapper">
       <bk-round style="position: absolute; z-index: 1"></bk-round>
-      <div class="login-form-wrapper">
+      <div class="login-form-wrapper animate__animated animate__fadeInUp">
         <div class="login-title">
           <div class="logo-wrapper">
             <img class="logo" src="/images/logo/logo-with-text-bottom.png" />

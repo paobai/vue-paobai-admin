@@ -11,6 +11,7 @@ import { watch } from "vue"
 type directType = "left" | "right" | "top" | "bottom"
 type otherConfig = "blur"
 type roundConfigType = Partial<Record<directType | otherConfig, number>> & Record<"step" | "size", number>
+import anime from "animejs"
 export default {
   setup() {
     let roundList = reactive<roundConfigType[]>([
@@ -40,6 +41,21 @@ export default {
           roundRef.style.animationDelay = (Math.random() * 4).toFixed(1) + "s"
         })
       })
+      let randomMove = () => {
+        anime({
+          targets: rootRef.value,
+          translateX: function () {
+            return anime.random(0, 40)
+          },
+          translateY: function () {
+            return anime.random(0, 40)
+          },
+          easing: "linear",
+          duration: 5000,
+          complete: randomMove
+        })
+      }
+      randomMove()
     })
     let { x, y } = useMouseInElement(rootRef as MaybeRef<MaybeElement>)
     watch([x, y], ([x, y]) => {
@@ -65,42 +81,6 @@ export default {
   height: 100%;
   position: relative;
   //overflow: hidden;
-  animation: autoMove 20s linear infinite;
-  @keyframes autoMove {
-    0% {
-      transform: translate(0px, 0px);
-    }
-    10% {
-      transform: translate(10px, 10px);
-    }
-    20% {
-      transform: translate(20px, px);
-    }
-    30% {
-      transform: translate(30px, 0px);
-    }
-    40% {
-      transform: translate(20px, -5px);
-    }
-    50% {
-      transform: translate(10px, -10px);
-    }
-    60% {
-      transform: translate(15px, -20px);
-    }
-    70% {
-      transform: translate(10px, -15px);
-    }
-    80% {
-      transform: translate(10px, -12px);
-    }
-    90% {
-      transform: translate(5px, -6px);
-    }
-    100% {
-      transform: translate(0px, 0px);
-    }
-  }
   .round-item {
     position: absolute;
     background: rgba(var(--primary-6), 1);
