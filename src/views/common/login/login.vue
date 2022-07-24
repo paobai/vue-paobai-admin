@@ -53,10 +53,10 @@
     <a-button type="text" class="theme-btn" size="medium" @click="toggleAppTheme">
       <template #icon>
         <template v-if="darkAppTheme">
-          <a-icon-moon-fill size="20" />
+          <a-icon-moon-fill />
         </template>
         <template v-else>
-          <a-icon-sun-fill size="20" />
+          <a-icon-sun-fill />
         </template>
       </template>
     </a-button>
@@ -241,6 +241,9 @@ export default {
     position: absolute;
     top: 20px;
     right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
   }
 }
 </style>

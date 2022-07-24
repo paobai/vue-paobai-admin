@@ -1,6 +1,8 @@
 <template>
   <div ref="rootRef" class="bk-wrapper">
-    <div v-for="(item, index) in roundList" :key="index" :ref="el => (roundRefs[index] = el)" class="round-item"></div>
+    <div v-for="(item, index) in roundList" :key="index" class="round-item-wrapper">
+      <div :ref="el => (roundRefs[index] = el)" class="round-item"></div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +31,10 @@ export default {
     let roundRefs = ref<ElRef[]>([])
     let rootRef = ref<ElRef>()
     onMounted(() => {
-      roundRefs.value.forEach((roundRef, index) => {
+      let roundWrapperDomList = Array.from(rootRef.value!.querySelectorAll(".round-item-wrapper")) as HTMLElement[]
+      let roundDomList = Array.from(rootRef.value!.querySelectorAll(".round-item-wrapper .round-item")) as HTMLElement[]
+      // round-item init
+      roundWrapperDomList.forEach((roundRef, index) => {
         if (!roundRef) return
         let setList: directType[] = ["left", "right", "bottom", "top"]
         setList.forEach(setItem => {
@@ -41,14 +46,29 @@ export default {
           roundRef.style.animationDelay = (Math.random() * 4).toFixed(1) + "s"
         })
       })
+      // round-item mouse move
+      let { x, y } = useMouseInElement(rootRef as MaybeRef<MaybeElement>)
+      watch([x, y], ([x, y]) => {
+        let rootElement = rootRef.value!
+        let width = rootElement.clientWidth
+        let height = rootElement.clientHeight
+        roundDomList.forEach((roundRef, index) => {
+          if (!roundRef) return
+          let roundConfig = roundList[index]
+          let transX = (-1 * (x - width / 2) * roundConfig.step).toFixed(0)
+          let transY = (-1 * (y - height / 2) * roundConfig.step).toFixed(0)
+          roundRef.style.transform = `translate(${transX}px, ${transY}px)`
+        })
+      })
+      // root wrapper auto move
       let randomMove = () => {
         anime({
-          targets: rootRef.value,
+          targets: roundWrapperDomList,
           translateX: function () {
-            return anime.random(0, 40)
+            return anime.random(-20, 20)
           },
           translateY: function () {
-            return anime.random(0, 40)
+            return anime.random(-20, 20)
           },
           easing: "linear",
           duration: 5000,
@@ -56,19 +76,6 @@ export default {
         })
       }
       randomMove()
-    })
-    let { x, y } = useMouseInElement(rootRef as MaybeRef<MaybeElement>)
-    watch([x, y], ([x, y]) => {
-      let rootElement = rootRef.value!
-      let width = rootElement.clientWidth
-      let height = rootElement.clientHeight
-      roundRefs.value.forEach((roundRef, index) => {
-        if (!roundRef) return
-        let roundConfig = roundList[index]
-        let transX = (-1 * (x - width / 2) * roundConfig.step).toFixed(0)
-        let transY = (-1 * (y - height / 2) * roundConfig.step).toFixed(0)
-        roundRef.style.transform = `translate(${transX}px, ${transY}px)`
-      })
     })
     return { roundList, roundRefs, rootRef }
   }
@@ -80,33 +87,37 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  //overflow: hidden;
-  .round-item {
+  .round-item-wrapper {
     position: absolute;
-    background: rgba(var(--primary-6), 1);
-    border-radius: 50%;
-    animation: flashAnimation 4s ease-in-out infinite;
-    &:after {
-      position: absolute;
-      bottom: 15%;
-      right: 15%;
-      content: "";
-      width: 30%;
-      height: 30%;
-      background: #fff;
-      opacity: 0.5;
-      filter: blur(10px);
+    .round-item {
+      position: relative;
+      background: rgba(var(--primary-6), 1);
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      animation: flashAnimation 4s ease-in-out infinite;
+      &:after {
+        position: absolute;
+        bottom: 15%;
+        right: 15%;
+        content: "";
+        width: 30%;
+        height: 30%;
+        background: #fff;
+        opacity: 0.5;
+        filter: blur(10px);
+      }
     }
-  }
-  @keyframes flashAnimation {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 1;
+    @keyframes flashAnimation {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   }
 }
