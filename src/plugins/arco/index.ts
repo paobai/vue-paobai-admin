@@ -23,3 +23,5 @@ export function toggleTheme(dark: boolean) {
     document.body.removeAttribute("arco-theme")
   }
 }
+
+export default useArco
