@@ -11,7 +11,7 @@ const UserManagerRouter: Array<RouteRecordRaw> = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/common/login.vue"),
+    component: () => import("@/views/common/login/login.vue"),
     meta: {
       title: "登录",
       icon: "#icondashboard"

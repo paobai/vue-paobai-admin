@@ -5,18 +5,19 @@
  * @LastEditors: ZY
  * @LastEditTime: 2020-12-23 16:49:30
  */
-import { createApp } from "vue"
+import { App } from "vue"
 
 /**
  * @description 加载所有 Plugins
- * @param  {ReturnType<typeofcreateApp>} app 整个应用的实例
+ * @param  {App} app 整个应用的实例
  */
-export function loadAllPlugins(app: ReturnType<typeof createApp>) {
-  // const files = require.context('.', true, /\.ts$/)
-  const files = import.meta.globEager("./*.ts")
+export function loadAllPlugins(app: App) {
+  const files = import.meta.globEager("./**/index.ts")
   Object.keys(files).forEach(key => {
     if (typeof files[key].default === "function") {
-      if (key !== "./index.ts") files[key].default(app)
+      files[key].default(app)
+    } else {
+      app.use(files[key].default)
     }
   })
 }

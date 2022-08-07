@@ -4,15 +4,17 @@
       <div class="content-wrapper">
         <div class="title">
           <div class="english">
-            <img class="welcome" src="/src/assets/images/login/welcome-en.png" />
+            <div class="welcome">WELCOME</div>
+            <div class="welcome">WELCOME</div>
           </div>
           <div class="chinese">欢迎回来</div>
         </div>
         <div class="name">{{ title }}</div>
       </div>
     </div>
-    <div class="right-wrapper">
-      <div class="login-form-wrapper">
+    <div ref="rightWrapper" class="right-wrapper">
+      <bk-round style="position: absolute; z-index: 1"></bk-round>
+      <div class="login-form-wrapper animate__animated animate__fadeInUp">
         <div class="login-title">
           <div class="logo-wrapper">
             <img class="logo" src="/images/logo/logo-with-text-bottom.png" />
@@ -47,8 +49,17 @@
           </a-form>
         </div>
       </div>
-      <div class="right-round"></div>
     </div>
+    <a-button type="text" class="theme-btn" size="medium" @click="toggleAppTheme">
+      <template #icon>
+        <template v-if="darkAppTheme">
+          <a-icon-moon-fill />
+        </template>
+        <template v-else>
+          <a-icon-sun-fill />
+        </template>
+      </template>
+    </a-button>
   </div>
 </template>
 
@@ -58,12 +69,17 @@ import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import { AuthApi } from "@/api/auth-api"
-import { AuthLoginByPasswordReq } from "@/api/auth-api/model"
+import { AuthLoginByPasswordReq } from "@/api/auth-api"
 import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
+import bkRound from "./components/bk-round.vue"
+
 export default {
+  components: {
+    bkRound
+  },
   setup() {
-    let { sysColor } = useAppHook()
+    let { sysColor, darkAppTheme, toggleAppTheme } = useAppHook()
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
       passWord: "paobai",
@@ -77,17 +93,25 @@ export default {
         router.replace({ path: config.app.homePagePath })
       })
     }
-    return { login, loginForm, title: config.custom.htmlTitle, sysColor }
+    return {
+      login,
+      loginForm,
+      title: config.custom.htmlTitle,
+      sysColor,
+      toggleAppTheme,
+      darkAppTheme
+    }
   }
 }
 </script>
 <style lang="less" scoped>
+@loginBkColor: var(--primary-1);
 .login-wrapper {
-  background-color: rgba(var(--primary-1), 1);
+  background-color: rgba(@loginBkColor, 1);
   width: 100%;
   height: 100%;
   display: flex;
-  overflow-y: hidden;
+  overflow: hidden;
   .left-wrapper {
     @media screen and (max-width: 1048px) {
       display: none;
@@ -96,7 +120,7 @@ export default {
     max-width: 750px;
     width: 0;
     flex: 1;
-    background: @primary-color;
+    background: linear-gradient(to right, @primary-color, rgb(@loginBkColor));
     opacity: 0.95;
     display: flex;
     justify-content: center;
@@ -111,8 +135,31 @@ export default {
           top: 0;
           position: absolute;
           .welcome {
-            width: 422px;
-            height: 64px;
+            font-weight: bold;
+            opacity: 0.1;
+            font-size: 84px;
+            color: #ffffff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -16%);
+            //width: 422px;
+            //height: 64px;
+            &:nth-child(2) {
+              opacity: 0.7;
+              animation: animation 8s ease-in-out infinite;
+            }
+            @keyframes animation {
+              0%,
+              100% {
+                -webkit-clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
+                clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
+              }
+              50% {
+                -webkit-clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
+                clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
+              }
+            }
           }
         }
         .chinese {
@@ -146,7 +193,7 @@ export default {
     justify-content: center;
     position: relative;
     .login-form-wrapper {
-      z-index: 1;
+      z-index: 2;
       border: 1px solid var(--color-border);
       box-shadow: 0 0 5px #0000004d;
       width: 540px;
@@ -188,36 +235,15 @@ export default {
         }
       }
     }
-    .right-round {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(var(--primary-1), 1);
-      border-radius: 50%;
-      left: calc(50% - 40px);
-      top: -50%;
-      transform: translate(-50%, 50%);
-      &:before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(var(--primary-1), 0.5);
-        border-radius: 50%;
-        left: -20px;
-        top: 25%;
-      }
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(var(--primary-1), 0.2);
-        border-radius: 50%;
-        left: -20px;
-        top: -25%;
-      }
-    }
+  }
+  .theme-btn {
+    z-index: 3;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
   }
 }
 </style>

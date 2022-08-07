@@ -1,4 +1,7 @@
 import { postRequest } from "@/utils/httpRequest"
+import * as ApiType from "./type"
+export * from "./type"
+import { MessageStatus } from "../message"
 
 const haveReadIds: number[] = []
 export const getMessageList = () => {
@@ -70,27 +73,9 @@ export const getMessageList = () => {
 }
 
 export function queryMessageList() {
-  return postRequest<MessageListType>("/api/message/list")
+  return postRequest<ApiType.MessageListType>("/api/message/list")
 }
 
 export function setMessageStatus(data: MessageStatus) {
-  return postRequest<MessageListType>("/api/message/read", data)
+  return postRequest<ApiType.MessageListType>("/api/message/read", data)
 }
-
-export interface MessageRecord {
-  id: number
-  type: string
-  title: string
-  subTitle: string
-  avatar?: string
-  content: string
-  time: string
-  status: 0 | 1
-  messageType?: number
-}
-
-interface MessageStatus {
-  ids: number[]
-}
-
-export type MessageListType = MessageRecord[]

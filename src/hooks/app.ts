@@ -5,7 +5,7 @@ import { MenuPosition, RouterSysType, RouteType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import { useRoute } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
-import { toggleTheme } from "@/plugins/arco"
+import { toggleTheme as toggleArcoTheme } from "@/plugins/arco"
 import config from "@/config"
 import { layoutModeList } from "@/constant"
 
@@ -24,7 +24,11 @@ export function useAppHook() {
   const updateAppTheme = function (dark: boolean) {
     if (dark) appStore.updateAppTheme("dark")
     else appStore.updateAppTheme("light")
-    toggleTheme(dark)
+    toggleArcoTheme(dark)
+  }
+
+  const toggleAppTheme = function () {
+    updateAppTheme(!darkAppTheme.value)
   }
 
   const navbarShow = computed({
@@ -243,6 +247,8 @@ export function useAppHook() {
     navbarMenuShow,
     sidebarMenuShow,
     darkAppTheme,
+    updateAppTheme,
+    toggleAppTheme,
     navbarShow,
     updateNavbar,
     updateSidebar,

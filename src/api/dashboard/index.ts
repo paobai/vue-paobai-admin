@@ -1,21 +1,11 @@
 import { getRequest } from "@/utils/httpRequest"
-
-export interface ContentDataRecord {
-  x: string
-  y: number
-}
+import * as ApiType from "./type"
+export * from "./type"
 
 export function queryContentData() {
-  return getRequest<ContentDataRecord[]>("/api/content-data")
-}
-
-export interface PopularRecord {
-  key: number
-  clickNumber: string
-  title: string
-  increases: number
+  return getRequest<ApiType.ContentDataRecord[]>("/api/content-data")
 }
 
 export function queryPopularList(params: { type: string }) {
-  return getRequest<PopularRecord[]>("/api/popular/list", { params })
+  return getRequest<ApiType.PopularRecord[]>("/api/popular/list", { params })
 }
