@@ -16,16 +16,10 @@
       <a-button type="primary" @click="updateRightSetting(false)">关闭</a-button>
     </template>
     <div class="right-setting-wrapper">
-      <h3>页面布局:</h3>
+      <a-divider orientation="center"><span class="title">页面布局</span></a-divider>
       <div class="item-line-space-between">
-        <div>布局方式：</div>
-        <a-radio-group v-model="layoutMode">
-          <a-tooltip v-for="item in layoutModeList" :key="item.value" :content="item.details" position="lt">
-            <a-radio :value="item.value">
-              <span>{{ item.name }}</span>
-            </a-radio>
-          </a-tooltip>
-        </a-radio-group>
+        <div style="margin-bottom: 16px">布局方式：</div>
+        <layout-mode></layout-mode>
       </div>
       <div class="item-line-space-between">
         显示内容底部(页脚)：
@@ -34,30 +28,30 @@
           <template #unchecked>不显示</template>
         </a-switch>
       </div>
-      <h3>页面样式风格:</h3>
+      <a-divider orientation="center"><span class="title">页面样式风格</span></a-divider>
       <div class="item-line-space-between">
         暗色模式：
         <a-switch :default-checked="darkAppTheme" @change="v => (darkAppTheme = v)">
-          <template #checked>开启</template>
-          <template #unchecked>关闭</template>
+          <template #checked><a-icon-sun-fill size="16px" /></template>
+          <template #unchecked><a-icon-moon-fill size="16px" style="color: var(--color-text-1)" /></template>
         </a-switch>
       </div>
       <div class="item-line-space-between">
         色弱模式：
         <a-switch :default-checked="weakness" @change="v => (weakness = v)">
-          <template #checked>开启</template>
-          <template #unchecked>关闭</template>
+          <template #checked>开</template>
+          <template #unchecked>关</template>
         </a-switch>
       </div>
       <div class="item-line-space-between">
         灰色模式：
         <a-switch :default-checked="gray" @change="v => (gray = v)">
-          <template #checked>开启</template>
-          <template #unchecked>关闭</template>
+          <template #checked>开</template>
+          <template #unchecked>关</template>
         </a-switch>
       </div>
       <div class="color-pick">
-        <div>主题颜色：</div>
+        <a-divider orientation="center"><span class="title">主题颜色</span></a-divider>
         <div class="color-pick-wrapper">
           <div
             v-for="color in sysColorList"
@@ -76,12 +70,14 @@
 <script lang="ts">
 import { defineComponent } from "vue"
 import { useAppHook } from "@/hooks/app"
-import { sysColorList, layoutModeList } from "@/constant"
+import { sysColorList } from "@/constant"
+import LayoutMode from "./components/layout-mode.vue"
 export default defineComponent({
+  components: {
+    LayoutMode
+  },
   setup() {
     const {
-      layoutMode,
-      updateLayoutModel,
       darkAppTheme,
       updateRightSetting,
       showRightSetting,
@@ -92,9 +88,6 @@ export default defineComponent({
       gray
     } = useAppHook()
     return {
-      layoutModeList,
-      layoutMode,
-      updateLayoutModel,
       darkAppTheme,
       showRightSetting,
       updateRightSetting,
@@ -125,21 +118,35 @@ export default defineComponent({
 }
 .right-setting-wrapper {
   padding: 8px;
+  .arco-divider {
+    margin: 30px 0;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  .item-line {
+    margin-bottom: 16px;
+  }
   .item-line-space-between {
+    font-size: 16px;
+    font-weight: bold;
     line-height: 26px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 16px;
+    .item-line;
     :deep(.arco-switch) {
-      min-width: 70px;
+      min-width: 50px;
     }
   }
   .color-pick {
     .color-pick-wrapper {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-gap: 12px;
+      grid-template-columns: repeat(auto-fill, 20px);
       .color-item {
         text-align: center;
         color: var(--color-white);
