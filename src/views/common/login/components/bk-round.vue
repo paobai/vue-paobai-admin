@@ -65,10 +65,10 @@ export default {
         anime({
           targets: roundWrapperDomList,
           translateX: function () {
-            return anime.random(-20, 20)
+            return anime.random(-40, 40)
           },
           translateY: function () {
-            return anime.random(-20, 20)
+            return anime.random(-40, 40)
           },
           easing: "linear",
           duration: 5000,
