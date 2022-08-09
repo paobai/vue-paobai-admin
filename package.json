@@ -7,9 +7,11 @@
     "vis": "vite build --mode vis",
     "build-tsc": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "prepare": "husky install"
+    "lint:stylelint": "stylelint **/*.{css,scss,sass,vue}  --fix --custom-syntax postcss-scss",
+    "lint-staged": "npx lint-staged",
+    "init": "husky install"
   },
   "dependencies": {
     "@arco-design/web-vue": "2.33.0",
@@ -27,6 +29,7 @@
     "js-base64": "^3.7.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^3.0.0",
     "mockjs": "^1.1.0",
@@ -68,6 +71,10 @@
     "prettier-eslint": "^13.0.0",
     "rollup-plugin-visualizer": "^5.6.0",
     "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-less": "^1.0.6",
+    "stylelint-order": "^5.0.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.2",
     "vite-plugin-compression": "^0.5.1",
@@ -81,5 +88,20 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.vue": [
+      "stylelint --fix",
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{less,css}": [
+      "stylelint --fix --custom-syntax postcss-scss",
+      "prettier --write"
+    ]
   }
 }

@@ -1,0 +1,7 @@
+public
+dist
+*.d.ts
+package.json
+node_modules/*
+.gitignore
+static
