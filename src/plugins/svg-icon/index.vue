@@ -52,10 +52,10 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .svg-icon {
-  color: transparent;
+  position: relative;
   width: 1em;
   height: 1em;
-  position: relative;
-  fill: currentColor;
+  color: transparent;
+  fill: currentcolor;
 }
 </style>

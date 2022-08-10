@@ -11,8 +11,8 @@
 
 <style lang="less" scoped>
 .app-footer {
-  text-align: center;
   line-height: 20px;
-  color: #999999;
+  color: #999;
+  text-align: center;
 }
 </style>

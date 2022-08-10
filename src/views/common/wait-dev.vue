@@ -15,11 +15,11 @@ let title = route.meta.title
 
 <style lang="less" scoped>
 .wait-dev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 32px;
 }
 </style>

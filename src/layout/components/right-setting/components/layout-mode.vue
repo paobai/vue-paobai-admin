@@ -28,81 +28,91 @@ export default {
 .layout-mode {
   display: flex;
   justify-content: space-between;
+
   .chose-item {
-    background: var(--color-fill-2);
-    border-radius: 4px;
-    cursor: pointer;
+    position: relative;
     width: 50px;
     height: 50px;
-    box-shadow: 0 1px 2.5px #0000002e;
-    position: relative;
     overflow: hidden;
+    cursor: pointer;
+    background: var(--color-fill-2);
+    border-radius: 4px;
+    box-shadow: 0 1px 2.5px #0000002e;
+
     & + .chose-item {
       margin-left: 16px;
     }
+
     &.active {
       border: 2px solid @primary-color;
     }
+
     &::before,
     &::after {
-      color: #ffffff;
       position: absolute;
-      content: "";
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #fff;
+      content: "";
     }
+
     &.mode-1 {
-      &:before {
-        content: "M";
+      &::before {
         top: 0;
         left: 0;
         z-index: 1;
         width: 33%;
         height: 100%;
+        content: "M";
         background-color: @primary-color;
       }
-      &:after {
-        content: "M";
+
+      &::after {
         top: 0;
         left: 0;
         width: 100%;
         height: 25%;
+        content: "M";
         background-color: @primary-color;
       }
     }
+
     &.mode-2 {
-      &:after {
-        content: "M";
+      &::after {
         top: 0;
         left: 0;
         width: 100%;
         height: 25%;
+        content: "M";
         background-color: @primary-color;
       }
     }
+
     &.mode-3 {
-      &:before {
-        content: "M";
+      &::before {
         top: 0;
         left: 0;
         z-index: 1;
         width: 33%;
         height: 100%;
+        content: "M";
         background-color: @primary-color;
       }
     }
+
     &.mode-4 {
-      &:before {
-        content: "M";
+      &::before {
         top: 0;
         left: 0;
         z-index: 1;
         width: 33%;
         height: 100%;
+        content: "M";
         background-color: @primary-color;
       }
-      &:after {
+
+      &::after {
         top: 0;
         left: 0;
         width: 100%;

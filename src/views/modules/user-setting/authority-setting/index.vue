@@ -59,9 +59,9 @@ export default {
 .authority-setting {
   width: calc(100% - 40px);
   height: calc(100% - 40px);
-  background: var(--color-bg-1);
   padding: 20px;
   margin: 20px;
   line-height: 40px;
+  background: var(--color-bg-1);
 }
 </style>

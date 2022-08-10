@@ -64,10 +64,10 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .container {
-  background-color: var(--color-fill-2);
+  display: flex;
   padding: 16px 20px;
   padding-bottom: 0;
-  display: flex;
+  background-color: var(--color-fill-2);
 }
 
 .left-side {
@@ -81,21 +81,37 @@ export default defineComponent({
 }
 
 .panel {
+  overflow: auto;
   background-color: var(--color-bg-2);
   border-radius: 4px;
-  overflow: auto;
 }
+
 :deep(.panel-border) {
   margin-bottom: 0;
   border-bottom: 1px solid rgb(var(--gray-2));
 }
+
 .moduler-wrap {
-  border-radius: 4px;
   background-color: var(--color-bg-2);
+  border-radius: 4px;
+
   :deep(.text) {
     font-size: 12px;
-    text-align: center;
     color: rgb(var(--gray-8));
+    text-align: center;
+  }
+
+  :deep(.icon) {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 4px;
+    font-size: 16px;
+    line-height: 32px;
+    color: rgb(var(--dark-gray-1));
+    text-align: center;
+    background-color: rgb(var(--gray-1));
+    border-radius: 4px;
   }
 
   :deep(.wrapper) {
@@ -108,28 +124,17 @@ export default defineComponent({
         margin-bottom: 0;
       }
     }
+
     &:hover {
       .icon {
         color: rgb(var(--arcoblue-6));
         background-color: #e8f3ff;
       }
+
       .text {
         color: rgb(var(--arcoblue-6));
       }
     }
-  }
-
-  :deep(.icon) {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    margin-bottom: 4px;
-    color: rgb(var(--dark-gray-1));
-    line-height: 32px;
-    font-size: 16px;
-    text-align: center;
-    background-color: rgb(var(--gray-1));
-    border-radius: 4px;
   }
 }
 </style>

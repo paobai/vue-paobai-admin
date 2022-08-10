@@ -103,60 +103,68 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .right-setting-button {
-  z-index: 1000;
   position: fixed;
-  right: 0;
   top: 50%;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
   height: 50px;
-  display: flex;
   background: rgb(var(--primary-5));
-  justify-content: center;
-  align-items: center;
   border-radius: 8px 0 0 8px;
   transform: translateY(-100%);
 }
+
 .right-setting-wrapper {
   padding: 8px;
+
   .arco-divider {
     margin: 30px 0;
   }
+
   .title {
-    font-weight: bold;
     font-size: 18px;
+    font-weight: bold;
     white-space: nowrap;
   }
+
   .item-line {
     margin-bottom: 16px;
   }
+
   .item-line-space-between {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
     font-size: 16px;
     font-weight: bold;
     line-height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
     .item-line;
+
     :deep(.arco-switch) {
       min-width: 50px;
     }
   }
+
   .color-pick {
     .color-pick-wrapper {
       display: grid;
-      grid-gap: 12px;
       grid-template-columns: repeat(auto-fill, 20px);
+      grid-gap: 12px;
+
       .color-item {
-        text-align: center;
-        color: var(--color-white);
-        cursor: pointer;
         flex-shrink: 0;
-        border-radius: 8px;
         width: 20px;
         height: 20px;
         margin-top: 10px;
         margin-right: 20px;
+        color: var(--color-white);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
       }
     }
   }

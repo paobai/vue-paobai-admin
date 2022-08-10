@@ -130,44 +130,53 @@ export default defineComponent({
 .app-navbar {
   display: flex;
   justify-content: space-between;
+
   .left-wrapper {
-    width: 0;
-    flex: auto;
     display: flex;
-    align-items: center;
+    flex: auto;
     flex-wrap: nowrap;
+    align-items: center;
+    width: 0;
+
     .logo-wrapper {
-      white-space: pre;
       width: @app-sidebar-width;
       height: 100%;
       line-height: @app-navbar-height;
       text-align: center;
+      white-space: pre;
+
       .logo {
-        vertical-align: middle;
         width: 130px;
+        vertical-align: middle;
       }
     }
   }
+
   .right-wrapper {
+    position: relative;
     display: flex;
     align-items: center;
     padding-right: 18px;
-    position: relative;
+
     .username {
       padding: 0 10px;
       font-size: 14px;
-      color: var(--color-white);
       line-height: 19px;
+      color: var(--color-white);
     }
+
     .avatar {
     }
+
     .right-side {
       display: flex;
       padding-right: 20px;
       list-style: none;
+
       :deep(.locale-select) {
         border-radius: 20px;
       }
+
       li {
         display: flex;
         align-items: center;
@@ -175,15 +184,17 @@ export default defineComponent({
       }
 
       .nav-btn {
+        font-size: 16px;
         color: var(--color-white);
         border-color: var(--color-white);
-        font-size: 16px;
       }
+
       .trigger-btn,
       .ref-btn {
         position: absolute;
         bottom: 14px;
       }
+
       .trigger-btn {
         margin-left: 14px;
       }

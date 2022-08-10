@@ -30,36 +30,43 @@ export default defineComponent({
 .app-sidebar {
   display: flex;
   flex-direction: column;
-  &.menu-collapse {
-    .logo-wrapper {
-      .logo-big {
-        display: none;
-      }
-      .logo-small {
-        display: unset;
-      }
-    }
-  }
+
   .logo-wrapper {
     display: none;
     width: 100%;
     height: @app-navbar-height;
     line-height: @app-navbar-height;
     text-align: center;
+
     .logo {
       vertical-align: middle;
     }
+
     .logo-big {
       width: 130px;
     }
+
     .logo-small {
-      width: 40px;
       display: none;
+      width: 40px;
     }
   }
+
+  &.menu-collapse {
+    .logo-wrapper {
+      .logo-big {
+        display: none;
+      }
+
+      .logo-small {
+        display: unset;
+      }
+    }
+  }
+
   .menu-wrapper {
-    height: 0;
     flex: 1;
+    height: 0;
   }
 }
 </style>

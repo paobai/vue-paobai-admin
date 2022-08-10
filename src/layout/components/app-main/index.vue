@@ -21,6 +21,7 @@ export default defineComponent({})
 .app-main {
   width: 100%;
   height: 100%;
+
   .app-main-container {
     width: 100%;
     height: 100%;

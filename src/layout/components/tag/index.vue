@@ -166,68 +166,81 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .app-tag {
-  box-shadow: 0 1px 4px @primary-color;
   display: flex;
+  box-shadow: 0 1px 4px @primary-color;
+
   .app-left-tag {
     flex-shrink: 0;
     padding: 0 16px;
     line-height: 30px;
+
     .menu-tag {
       padding: 0 8px;
       border-right: 1px solid @primary-color;
     }
   }
+
   .app-tag-main {
-    white-space: pre;
-    padding: 3px;
     flex: auto;
+    padding: 3px;
     overflow: hidden;
+    white-space: pre;
+
     .tag-item-card {
       display: inline-block;
-      border: 1px solid @primary-color;
-      padding: 2px 4px;
       height: 24px;
+      padding: 2px 4px;
+      border: 1px solid @primary-color;
       border-radius: 4px;
+
+      .tag-name {
+        display: inline-block;
+        height: 18px;
+        padding: 0 4px;
+        margin-right: 6px;
+        line-height: 18px;
+        color: var(--color-text-2);
+        cursor: pointer;
+      }
+
+      .tag-options {
+        display: inline-block;
+        padding-left: 4px;
+        cursor: pointer;
+        border-left: 1px solid @primary-color;
+      }
+
       &.active {
-        background: @primary-color;
         color: var(--color-white);
+        background: @primary-color;
         border-color: @primary-color;
+
         .tag-options {
           border-color: var(--color-white);
         }
+
         .tag-name {
           color: var(--color-white);
         }
       }
+
       & + .tag-item-card {
         margin-left: 16px;
       }
-      .tag-name {
-        color: var(--color-text-2);
-        cursor: pointer;
-        display: inline-block;
-        line-height: 18px;
-        height: 18px;
-        padding: 0 4px;
-        margin-right: 6px;
-      }
-      .tag-options {
-        border-left: 1px solid @primary-color;
-        cursor: pointer;
-        padding-left: 4px;
-        display: inline-block;
-      }
     }
   }
+
   .app-tag-options {
-    color: var(--color-text-1);
     flex-shrink: 0;
+    color: var(--color-text-1);
+
     .options-item {
-      cursor: pointer;
+      display: inline-block;
       padding: 0 8px;
       font-size: 16px;
       line-height: 30px;
-      display: inline-block;
+      cursor: pointer;
+
       & + .options-item {
         border-left: 1px solid @primary-color;
       }

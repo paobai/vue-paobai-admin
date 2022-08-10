@@ -71,35 +71,42 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .menu-main {
-  height: 100%;
   flex: auto;
+  height: 100%;
+
   :deep(.arco-menu) {
     height: 100%;
     background-color: @app-navbar-bk-color;
+
     .arco-menu-inner {
-      overflow-y: hidden;
       padding: 0;
+      overflow-y: hidden;
+
       .arco-menu-overflow-wrap {
-        white-space: nowrap;
         height: 100%;
+        white-space: nowrap;
       }
+
       .arco-menu-item,
       .arco-menu-pop {
-        padding: 0 30px;
-        background-color: @app-navbar-bk-color;
         height: 100%;
-        line-height: @app-navbar-height;
-        border-radius: 0;
-        color: var(--color-white);
+        padding: 0 30px;
         font-size: 18px;
+        line-height: @app-navbar-height;
+        color: var(--color-white);
+        background-color: @app-navbar-bk-color;
+        border-radius: 0;
+
         &:hover,
         &.arco-menu-selected {
           background: @app-navbar-bk-chose-color;
         }
+
         .arco-menu-title {
-          padding-right: 20px;
           display: inline-block;
+          padding-right: 20px;
         }
+
         .arco-icon,
         .iconfont {
           font-size: 20px;
@@ -107,9 +114,10 @@ export default defineComponent({
         }
       }
     }
+
     &.arco-menu-horizontal .arco-menu-item:not(:first-child),
     &.arco-menu-horizontal .arco-menu-pop:not(:first-child) {
-      margin-left: 0px;
+      margin-left: 0;
     }
   }
 }

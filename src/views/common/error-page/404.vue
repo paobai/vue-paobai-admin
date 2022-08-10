@@ -53,10 +53,10 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .wscn-http404-container {
-  transform: translate(-50%, -50%);
   position: absolute;
   top: 40%;
   left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .wscn-http404 {
@@ -79,42 +79,42 @@ export default defineComponent({
       position: absolute;
 
       &.left {
-        width: 80px;
         top: 17px;
         left: 220px;
+        width: 80px;
         opacity: 0;
-        animation-name: cloudLeft;
+        animation-name: cloud-left;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-fill-mode: forwards;
         animation-delay: 1s;
+        animation-fill-mode: forwards;
       }
 
       &.mid {
-        width: 46px;
         top: 10px;
         left: 420px;
+        width: 46px;
         opacity: 0;
-        animation-name: cloudMid;
+        animation-name: cloud-mid;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-fill-mode: forwards;
         animation-delay: 1.2s;
+        animation-fill-mode: forwards;
       }
 
       &.right {
-        width: 62px;
         top: 100px;
         left: 500px;
+        width: 62px;
         opacity: 0;
-        animation-name: cloudRight;
+        animation-name: cloud-right;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-fill-mode: forwards;
         animation-delay: 1s;
+        animation-fill-mode: forwards;
       }
 
-      @keyframes cloudLeft {
+      @keyframes cloud-left {
         0% {
           top: 17px;
           left: 220px;
@@ -140,7 +140,7 @@ export default defineComponent({
         }
       }
 
-      @keyframes cloudMid {
+      @keyframes cloud-mid {
         0% {
           top: 10px;
           left: 420px;
@@ -166,7 +166,7 @@ export default defineComponent({
         }
       }
 
-      @keyframes cloudRight {
+      @keyframes cloud-right {
         0% {
           top: 100px;
           left: 500px;
@@ -202,36 +202,36 @@ export default defineComponent({
     overflow: hidden;
 
     &__oops {
+      margin-bottom: 20px;
       font-size: 32px;
       font-weight: bold;
       line-height: 40px;
       color: @primary-color;
       opacity: 0;
-      margin-bottom: 20px;
-      animation-name: slideUp;
+      animation-name: slide-up;
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     }
 
     &__headline {
-      font-size: 20px;
-      line-height: 24px;
-      font-weight: bold;
-      opacity: 0;
       margin-bottom: 10px;
-      animation-name: slideUp;
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 24px;
+      opacity: 0;
+      animation-name: slide-up;
       animation-duration: 0.5s;
       animation-delay: 0.1s;
       animation-fill-mode: forwards;
     }
 
     &__info {
+      margin-bottom: 30px;
       font-size: 13px;
       line-height: 21px;
       color: var(--color-text-2);
       opacity: 0;
-      margin-bottom: 30px;
-      animation-name: slideUp;
+      animation-name: slide-up;
       animation-duration: 0.5s;
       animation-delay: 0.2s;
       animation-fill-mode: forwards;
@@ -242,29 +242,29 @@ export default defineComponent({
       float: left;
       width: 110px;
       height: 36px;
-      background: @primary-color;
-      border-radius: 100px;
-      text-align: center;
-      color: var(--color-white);
-      opacity: 0;
       font-size: 14px;
       line-height: 36px;
+      color: var(--color-white);
+      text-align: center;
       cursor: pointer;
-      animation-name: slideUp;
+      background: @primary-color;
+      border-radius: 100px;
+      opacity: 0;
+      animation-name: slide-up;
       animation-duration: 0.5s;
       animation-delay: 0.3s;
       animation-fill-mode: forwards;
     }
 
-    @keyframes slideUp {
+    @keyframes slide-up {
       0% {
-        transform: translateY(60px);
         opacity: 0;
+        transform: translateY(60px);
       }
 
       100% {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
       }
     }
   }

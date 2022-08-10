@@ -49,10 +49,10 @@ export default defineComponent({
       width: 20px;
       height: 20px;
       margin-right: 4px;
-      color: var(--color-text-3);
       font-size: 14px;
-      border-radius: 50%;
+      color: var(--color-text-3);
       cursor: pointer;
+      border-radius: 50%;
 
       &:hover {
         background-color: rgb(var(--gray-3));

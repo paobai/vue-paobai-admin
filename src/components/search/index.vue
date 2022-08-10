@@ -87,27 +87,27 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
   left: 0;
   z-index: 800;
   display: flex;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding-top: @app-navbar-height;
   background-color: rgb(0 0 0 / 25%);
-  justify-content: center;
 
   &-content {
     position: relative;
+    flex-direction: column;
     width: 632px;
     margin: 0 auto auto;
     background-color: var(--color-bg-1);
     border-radius: 16px;
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
-    flex-direction: column;
   }
 
   &-input__wrapper {
     display: flex;
-    padding: 14px 14px 0;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 14px 14px 0;
   }
 
   &-input {
@@ -129,11 +129,11 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
 
   &-not-data {
     display: flex;
-    width: 100%;
-    height: 100px;
-    color: rgb(150 159 175);
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100px;
+    color: rgb(150, 159, 175);
   }
 
   &-list {
@@ -147,6 +147,7 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
     &__item {
       position: relative;
       display: flex;
+      align-items: center;
       width: 100%;
       height: 56px;
       padding-bottom: 4px;
@@ -158,7 +159,6 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
       background-color: var(--color-bg-1);
       border-radius: 4px;
       box-shadow: 0 1px 3px 0 #d4d9e1;
-      align-items: center;
 
       > div:first-child,
       > div:last-child {
@@ -166,12 +166,17 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
         align-items: center;
       }
 
+      &-enter {
+        width: 40px;
+        opacity: 0;
+      }
+
       &--active {
         color: #fff;
         background-color: @primary-color;
 
         .app-search-modal-list__item-enter {
-          opacity: 100%;
+          opacity: 1;
         }
       }
 
@@ -182,11 +187,6 @@ const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0
       &-text {
         flex: 1;
         font-size: 16px;
-      }
-
-      &-enter {
-        width: 40px;
-        opacity: 0%;
       }
     }
   }
