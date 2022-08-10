@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["stylelint-config-standard", "stylelint-config-recess-order"],
+  extends: ["stylelint-config-standard", "stylelint-config-recess-order", "stylelint-config-prettier"],
   defaultSeverity: "warning",
   plugins: ["stylelint-order"],
   overrides: [
@@ -21,12 +21,13 @@ module.exports = {
         except: ["after-single-line-comment", "first-nested"]
       }
     ],
-    "selector-pseudo-element-no-unknown": [
+    "selector-pseudo-class-no-unknown": [
       true,
       {
-        ignorePseudoElements: ["v-deep"]
+        ignorePseudoClasses: ["deep"]
       }
     ],
+    "color-function-notation": null,
     "font-family-no-missing-generic-family-keyword": null,
     "selector-class-pattern": null,
     "block-no-empty": null,
