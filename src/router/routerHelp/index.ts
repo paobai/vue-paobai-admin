@@ -1,4 +1,4 @@
-import { RouterOptions, RouteRecordRaw, Router } from "vue-router"
+import type { RouterOptions, RouteRecordRaw, Router } from "vue-router"
 import { Base64 } from "js-base64"
 
 export declare interface MyRouterOptions extends RouterOptions {
@@ -8,8 +8,9 @@ export declare interface MyRouter extends Router {
   readonly options: MyRouterOptions
 }
 
-import Layout from "@/layout/Index.vue"
-import { RouterSysType, RouterCustomType, RouteType, RouterApiType } from "@/constant/settings"
+import Layout from "@/layout/index.vue"
+import { RouteType } from "@/constant/settings"
+import type { RouterSysType, RouterCustomType, RouterApiType } from "@/constant/settings"
 import { buildMenuName } from "@/utils/menu-help"
 import config from "@/config"
 

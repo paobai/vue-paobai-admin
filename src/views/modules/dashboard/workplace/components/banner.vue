@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from "vue"
-import { useUserStoreWithOut } from "@/store/modules/user.ts"
+import { useUserStoreWithOut } from "@/store/modules/user"
 export default defineComponent({
   setup() {
     const userStore = useUserStoreWithOut()

@@ -1,4 +1,5 @@
-import { RouterApiType, RouteType } from "@/constant/settings"
+import { RouteType } from "@/constant/settings"
+import type { RouterApiType } from "@/constant/settings"
 import { fixRouteToSysType } from "@/router/routerHelp"
 import config from "@/config"
 

@@ -1,4 +1,4 @@
-import { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
+import type { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
 
 export enum TokenStorageName {
   LocalStorage = "localStorage",

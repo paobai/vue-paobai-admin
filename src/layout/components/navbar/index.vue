@@ -61,7 +61,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, ref } from "vue"
+import { defineComponent, ref } from "vue"
+import type { Ref } from "vue"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
 import ArcoModal from "@arco-design/web-vue/es/modal"

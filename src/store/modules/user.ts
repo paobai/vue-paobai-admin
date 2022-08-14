@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { store } from "@/store"
-import { RouterSysType } from "@/constant/settings"
-import { UserInfo } from "@/model/sys/userModel"
+import type { RouterSysType } from "@/constant/settings"
+import type { UserInfo } from "@/model/sys/userModel"
 import { storageSession } from "@/utils/storage"
 
 interface userStore {

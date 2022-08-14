@@ -25,8 +25,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
-import { ChatRecord } from "@/api/message"
+import { defineComponent } from "vue"
+import type { PropType } from "vue"
+import type { ChatRecord } from "@/api/message"
 
 export default defineComponent({
   props: {

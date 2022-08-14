@@ -6,8 +6,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
-import { ChatRecord } from "@/api/message"
+import { defineComponent } from "vue"
+import type { PropType } from "vue"
+import type { ChatRecord } from "@/api/message"
 import ChatItem from "./chat-item.vue"
 
 export default defineComponent({

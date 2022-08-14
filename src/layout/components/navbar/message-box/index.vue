@@ -19,7 +19,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs, computed } from "vue"
-import { queryMessageList, setMessageStatus, MessageRecord, MessageListType } from "@/api/message-box"
+import { queryMessageList, setMessageStatus } from "@/api/message-box"
+import type { MessageRecord, MessageListType } from "@/api/message-box"
 import useLoading from "@/hooks/loading"
 import List from "./list.vue"
 

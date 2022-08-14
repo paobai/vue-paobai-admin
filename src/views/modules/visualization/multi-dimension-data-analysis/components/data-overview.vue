@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue"
-import { LineSeriesOption } from "echarts"
+import type { LineSeriesOption } from "echarts"
 import { queryDataOverview } from "@/api/visualization"
 import useLoading from "@/hooks/loading"
-import { ToolTipFormatterParams } from "@/types/echarts"
+import type { ToolTipFormatterParams } from "@/types/echarts"
 import useChartOption from "@/hooks/chart-option"
 import userAppHook from "@/hooks/app"
 

@@ -67,7 +67,7 @@
 import { computed, defineComponent, ref, unref, watch } from "vue"
 import type { Ref } from "vue"
 import { useRouter, useRoute } from "vue-router"
-import { RouteLocationNormalizedLoadedCustom, tagType } from "@/constant/settings"
+import type { RouteLocationNormalizedLoadedCustom, tagType } from "@/constant/settings"
 import config from "@/config"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"

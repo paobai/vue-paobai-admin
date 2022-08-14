@@ -1,8 +1,8 @@
 import { postRequest, getRequest } from "@/utils/httpRequest"
-import * as ApiType from "./type"
+import type * as ApiType from "./type"
 export * from "./type"
-import { RouterApiType } from "@/constant/settings"
-import { UserInfo } from "@/model/sys/userModel"
+import type { RouterApiType } from "@/constant/settings"
+import type { UserInfo } from "@/model/sys/userModel"
 const groupPre = "/upms"
 // 用户管理
 

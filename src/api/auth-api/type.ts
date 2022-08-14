@@ -1,5 +1,5 @@
-import { UserInfo } from "@/model/sys/userModel"
-import { grantType } from "@/constant"
+import type { UserInfo } from "@/model/sys/userModel"
+import type { grantType } from "@/constant"
 
 // 用户管理
 export type AuthLoginByPasswordReq = {

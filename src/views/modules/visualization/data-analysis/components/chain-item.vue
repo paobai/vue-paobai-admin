@@ -21,9 +21,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, PropType, CSSProperties } from "vue"
+import { defineComponent, ref } from "vue"
+import type { PropType, CSSProperties } from "vue"
 import useLoading from "@/hooks/loading"
-import { queryPublicOpinionAnalysis, PublicOpinionAnalysis, PublicOpinionAnalysisRes } from "@/api/visualization"
+import { queryPublicOpinionAnalysis } from "@/api/visualization"
+import type { PublicOpinionAnalysis, PublicOpinionAnalysisRes } from "@/api/visualization"
 import useChartOption from "@/hooks/chart-option"
 
 const barChartOptionsFactory = () => {

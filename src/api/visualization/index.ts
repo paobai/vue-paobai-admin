@@ -1,6 +1,6 @@
-import { GeneralChart } from "@/types/global"
+import type { GeneralChart } from "@/types/global"
 import { getRequest, postRequest } from "@/utils/httpRequest"
-import * as ApiType from "./type"
+import type * as ApiType from "./type"
 export * from "./type"
 
 export function queryDataChainGrowth(data: ApiType.DataChainGrowth) {

@@ -1,12 +1,12 @@
 import { useUserStoreWithOut } from "@/store/modules/user"
 import { computed, onBeforeMount, unref } from "vue"
-import { RouterSysType } from "@/constant/settings"
+import type { RouterSysType } from "@/constant/settings"
 import { getCanShowRoute, getRouteMap } from "@/utils/menu-help"
 import Cookies from "@/utils/storage/cookie"
 import { AuthApi } from "@/api/auth-api"
 import router, { resetRouter } from "@/router"
 import config from "@/config"
-import { UserInfo } from "@/model/sys/userModel"
+import type { UserInfo } from "@/model/sys/userModel"
 
 export function useUserHook() {
   const userStore = useUserStoreWithOut()

@@ -1,4 +1,5 @@
-import { RouterApiType, RouterSysType, RouteType } from "@/constant/settings"
+import { RouteType } from "@/constant/settings"
+import type { RouterApiType, RouterSysType } from "@/constant/settings"
 
 /**
  *

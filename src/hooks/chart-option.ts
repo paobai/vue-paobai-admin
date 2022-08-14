@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { EChartsOption } from "echarts"
+import type { EChartsOption } from "echarts"
 import useAppHook from "@/hooks/app"
 
 // for code hints

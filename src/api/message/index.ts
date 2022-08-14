@@ -1,5 +1,5 @@
 import { postRequest } from "@/utils/httpRequest"
-import * as ApiType from "./type"
+import type * as ApiType from "./type"
 export * from "./type"
 
 export function queryMessageList() {

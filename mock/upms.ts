@@ -1,5 +1,6 @@
-import { MockMethod } from "vite-plugin-mock"
+import type { MockMethod } from "vite-plugin-mock"
 import { RouteType } from "@/constant/settings"
+import type { RouterApiType } from "@/constant/settings"
 import { failResponseWrap, successResponseWrap } from "@/utils/mock"
 
 const urlPre = "/upms"
@@ -202,12 +203,12 @@ export default [
           ]
         }
       ]
-      const data = {
+      const data: { routers: RouterApiType[]; permissions: string[] } = {
         routers: commonRouters,
         permissions: ["low-power-button"]
       }
       if (getUserId(request) === paobaiUserInfo.userId) {
-        data.routers[4].children.push({
+        data.routers[4].children!.push({
           title: "高权限页面",
           key: "authority-setting-high-power-page",
           type: RouteType.Page,

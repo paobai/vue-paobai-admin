@@ -19,10 +19,11 @@
 import { defineComponent, ref } from "vue"
 import { graphic } from "echarts"
 import useLoading from "@/hooks/loading"
-import { queryContentData, ContentDataRecord } from "@/api/dashboard"
+import { queryContentData } from "@/api/dashboard"
+import type { ContentDataRecord } from "@/api/dashboard"
 import useChartOption from "@/hooks/chart-option"
-import { ToolTipFormatterParams } from "@/types/echarts"
-import { AnyObject } from "@/types/global"
+import type { ToolTipFormatterParams } from "@/types/echarts"
+import type { AnyObject } from "@/types/global"
 
 function graphicFactory(side: AnyObject) {
   return {

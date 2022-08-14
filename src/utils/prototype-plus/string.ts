@@ -1,3 +1,4 @@
+// @ts-ignore
 String.prototype.format = function (args: string | string[]) {
   if (arguments.length > 0) {
     let result = this

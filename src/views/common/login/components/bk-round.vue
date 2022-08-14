@@ -8,7 +8,8 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted } from "vue"
-import { MaybeElement, MaybeRef, useMouseInElement } from "@vueuse/core"
+import { useMouseInElement } from "@vueuse/core"
+import type { MaybeElement, MaybeRef } from "@vueuse/core"
 import { watch } from "vue"
 type directType = "left" | "right" | "top" | "bottom"
 type otherConfig = "blur"

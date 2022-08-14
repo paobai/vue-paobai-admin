@@ -51,7 +51,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, unref, ref, watch, nextTick, Ref } from "vue"
+import { computed, unref, ref, watch, nextTick } from "vue"
+import type { Ref } from "vue"
 import { useMenuSearch } from "./useMenuSearch"
 import { useRefs } from "@/hooks/core"
 import SearchFooter from "./search-footer.vue"

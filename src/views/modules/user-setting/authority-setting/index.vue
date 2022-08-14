@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { useUserHook } from "@/hooks/user"
-import { AuthLoginByPasswordReq } from "@/api/auth-api"
+import type { AuthLoginByPasswordReq } from "@/api/auth-api"
 import { grantType } from "@/constant"
 import { AuthApi } from "@/api/auth-api"
 import Cookies from "@/utils/storage/cookie"

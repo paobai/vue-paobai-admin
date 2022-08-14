@@ -51,7 +51,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import useLoading from "@/hooks/loading"
-import { queryPopularList, PopularRecord } from "@/api/dashboard"
+import { queryPopularList } from "@/api/dashboard"
+import type { PopularRecord } from "@/api/dashboard"
 
 export default defineComponent({
   setup() {

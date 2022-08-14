@@ -12,9 +12,10 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue"
-import { ToolTipFormatterParams } from "@/types/echarts"
+import type { ToolTipFormatterParams } from "@/types/echarts"
 import useLoading from "@/hooks/loading"
-import { queryContentPublish, ContentPublishRecord } from "@/api/visualization"
+import { queryContentPublish } from "@/api/visualization"
+import type { ContentPublishRecord } from "@/api/visualization"
 import useChartOption from "@/hooks/chart-option"
 
 const tooltipItemsHtmlString = (items: ToolTipFormatterParams[]) => {

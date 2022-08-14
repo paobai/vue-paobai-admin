@@ -1,5 +1,5 @@
 import { successResponseWrap } from "@/utils/mock"
-import { MockPostData } from "@/types/global"
+import type { MockPostData } from "@/types/global"
 import Mock from "mockjs"
 
 export default [

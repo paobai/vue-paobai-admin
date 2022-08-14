@@ -6,7 +6,7 @@
  * @LastEditTime: 2020-12-28 13:46:23
  */
 import { useUserStoreWithOut } from "@/store/modules/user"
-import { Directive } from "vue"
+import type { Directive } from "vue"
 
 export const permission: Directive = {
   mounted(el, binding) {

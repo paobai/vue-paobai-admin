@@ -62,8 +62,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
-import { MessageRecord, MessageListType } from "@/api/message-box"
+import { defineComponent } from "vue"
+import type { PropType } from "vue"
+import type { MessageRecord, MessageListType } from "@/api/message-box"
 
 export default defineComponent({
   props: {
