@@ -4,18 +4,17 @@ import { computed, onMounted, ref, unref, watch } from "vue"
 import { MenuPosition, RouteType } from "@/constant/settings"
 import type { RouterSysType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
-import { useRoute } from "vue-router"
+import type { RouteLocationNormalized } from "vue-router"
 import { changeArcoPrimaryColor, toggleClass } from "@/utils"
 import { toggleTheme as toggleArcoTheme } from "@/plugins/arco"
 import config from "@/config"
 import { layoutModeList } from "@/constant"
+import { listenerRouteChange } from "@/utils/route-listener"
 
 export function useAppHook() {
   const { showRouteList, getRouteByKey } = useUserHook()
 
   const appStore = useAppStoreWithOut()
-
-  const route = useRoute()
 
   const darkAppTheme = computed<boolean>({
     get: () => appStore.getTheme === "dark",
@@ -167,9 +166,12 @@ export function useAppHook() {
     return appStore.getRightSettingShow
   })
 
-  const nowMenuKey = computed(() => {
-    return route.meta.key as string
-  })
+  const nowMenuKey = ref("")
+
+  // 当router发生变化会触发mitt事件，改变nowMenuKey。
+  listenerRouteChange((route: RouteLocationNormalized) => {
+    nowMenuKey.value = route.meta.key as string
+  }, true)
 
   const nowMenu = computed(() => {
     return getRouteByKey(nowMenuKey.value)
