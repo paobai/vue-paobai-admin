@@ -99,7 +99,7 @@
       "prettier --write"
     ],
     "*.vue": [
-      "stylelint --fix",
+      "stylelint --fix --custom-syntax postcss-less",
       "prettier --write",
       "eslint --fix"
     ],
