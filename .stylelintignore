@@ -6,3 +6,7 @@ node_modules/*
 .gitignore
 static
 iconfont.css
+**/*.ts
+**/*.tsx
+**/*.jsx
+**/*.js
