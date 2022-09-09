@@ -1,4 +1,5 @@
 import type { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
+import type { FileStatus } from "@arco-design/web-vue/es/upload/interfaces"
 
 export enum TokenStorageName {
   LocalStorage = "localStorage",
@@ -85,4 +86,14 @@ export type tagType = {
   key: string
   name: string
   path: string
+}
+
+/**
+ * fileUpload
+ */
+export const FileState = {
+  INIT: "init" as FileStatus,
+  UPLOADING: "uploading" as FileStatus,
+  SUCCESS: "done" as FileStatus,
+  ERROR: "error" as FileStatus
 }
