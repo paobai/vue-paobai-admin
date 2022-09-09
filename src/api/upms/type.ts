@@ -1,3 +1,5 @@
+import type { RouterApiType } from "@/constant/settings"
+
 export namespace ResourceApiType {
   export type resourceItem = {
     groupId: AppIdType
@@ -12,4 +14,8 @@ export namespace ResourceApiType {
     groupId: AppIdType
     groupName: string
   }
+}
+
+export namespace MenuApiType {
+  export type get = { terminal: AppIdType; terminalDescription: string; menuTree: RouterApiType[] }[]
 }

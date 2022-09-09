@@ -1,7 +1,9 @@
-import { getRequest, postRequest, deleteRequest, downloadFile, uploadFile } from "@/utils/httpRequest"
+import { getRequest, postRequest, deleteRequest, downloadFile, uploadFile, putRequest } from "@/utils/httpRequest"
 import type * as ApiType from "./type"
 export * from "./type"
 import { BaseApi } from "@/api/help"
+
+const groupPre = "/upms"
 
 // 角色接口
 export class RoleApi extends BaseApi {
