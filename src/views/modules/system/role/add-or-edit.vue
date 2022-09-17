@@ -27,14 +27,16 @@
       </a-row>
       <a-row :gutter="16">
         <a-col :span="24">
-          <a-form-item field="menuIds" label="选择权限：">
+          <a-form-item field="routerKeys" label="选择权限：">
             <a-tree
-              v-model:checked-keys="formData.menuIds"
-              checked-strategy="child"
+              ref="menuTree"
+              v-model:checked-keys="formData.routerKeys"
+              only-check-leaf
+              checked-strategy="all"
               style="width: 100%; max-height: 500px; overflow-y: auto"
               :field-names="{
-                key: 'id',
-                title: 'menuName',
+                key: 'key',
+                title: 'title',
                 children: 'children',
                 icon: ''
               }"
@@ -43,8 +45,9 @@
               <template #title="data">
                 <span v-if="data.type === 0">菜单：</span>
                 <span v-else-if="data.type === 1">页面：</span>
-                <span v-else-if="data.type === 2">按钮：</span>
-                <span>{{ data.menuName }}</span>
+                <span v-else-if="data.type === 2">外链：</span>
+                <span v-else-if="data.type === 3">按钮：</span>
+                <span>{{ data.title }}</span>
               </template>
             </a-tree>
           </a-form-item>
@@ -59,7 +62,7 @@ import { defineComponent, reactive, onBeforeMount, ref, getCurrentInstance } fro
 import { modalMixins, useModalInner } from "@/components/base-modal"
 import type { modalInnerInfoType } from "@/components/base-modal"
 import { MenuApi, RoleApi } from "@/api/upms"
-import { Message } from "@arco-design/web-vue"
+import { Message, Tree } from "@arco-design/web-vue"
 import { resetFormData } from "@/utils/form-data"
 import { getArcoFormRef } from "@/hooks/arco"
 
@@ -73,9 +76,9 @@ export default defineComponent({
       roleName: "",
       roleCode: "",
       description: "",
-      menuIds: [],
-      menus: []
+      routerKeys: [] as string[]
     }
+    let menuTree = ref<InstanceType<typeof Tree>>()
     let formData = reactive(resetFormData({}, sourceFormData))
     let instance = getCurrentInstance()
     let treeData = ref()
@@ -91,23 +94,15 @@ export default defineComponent({
     }
     let { modalInnerRegister, modalInnerInfo } = useModalInner(props, context, initFunction)
     let fixSourceMenuTree = (source: any[]) => {
-      let result: any[] = []
-      source.forEach(item => {
-        result.push({
-          id: "root-" + item.terminal,
-          children: item.menuTree,
-          terminal: item.terminal,
-          menuName: item.terminalDescription
-        })
-      })
-      return result
+      return source
     }
     let handleOk = () => {
       getArcoFormRef(instance).validate(error => {
         if (error) return
         let methods: PromiseFn = RoleApi.add.bind(RoleApi)
         if (formData.id) methods = RoleApi.update.bind(RoleApi)
-        formData.menus = formData.menuIds
+        let choseList = menuTree.value!.getCheckedNodes({ checkedStrategy: "all", includeHalfChecked: true })
+        formData.routerKeys = choseList.filter(e => e).map(e => e!.key as string)
         methods(formData, formData.id).then(() => {
           Message.success("成功")
           modalInnerInfo.closeModal()
@@ -119,7 +114,7 @@ export default defineComponent({
       modalInnerInfo.closeModal()
     }
     onBeforeMount(() => {
-      MenuApi.get({ attachResources: true }).then(res => {
+      MenuApi.get({ attachButton: true }).then(res => {
         treeData.value = fixSourceMenuTree(res.data)
       })
     })
@@ -129,7 +124,8 @@ export default defineComponent({
       treeData,
       checkedKeys,
       handleOk,
-      handleCancel
+      handleCancel,
+      menuTree
     }
   }
 })

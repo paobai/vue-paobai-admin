@@ -53,6 +53,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onBeforeMount, ref } from "vue"
 import { RoleApi } from "@/api/upms"
+import type { RoleApiType } from "@/api/upms"
 import addOrEdit from "./add-or-edit.vue"
 import { useModal } from "@/components/base-modal"
 import { Message } from "@arco-design/web-vue"
@@ -63,10 +64,10 @@ export default defineComponent({
     let queryParams = reactive({
       keyword: ""
     })
-    let roleList = ref([])
+    let roleList = ref<RoleApiType.roleItem[]>([])
     let queryRoleList = () => {
-      RoleApi.get(queryParams).then(res => {
-        roleList.value = res.data
+      RoleApi.getList(queryParams).then(res => {
+        roleList.value = res.data as RoleApiType.roleItem[]
       })
     }
     let { modalRegister, modalInfo } = useModal()

@@ -13,19 +13,19 @@
     </div>
     <div style="margin-top: 40px">
       <h3>权限控制显隐按钮：</h3>
-      <a-button v-permission="'high-power-button'" type="primary" style="margin-right: 20px"
+      <a-button v-permission="'high-permission-button'" type="primary" style="margin-right: 20px"
         >高级权限可以看按钮（元素）</a-button
       >
-      <a-button v-permission="'low-power-button'" type="primary">低级权限也可以看按钮（元素）</a-button>
+      <a-button v-permission="'low-permission-button'" type="primary">低级权限也可以看按钮（元素）</a-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { useUserHook } from "@/hooks/user"
-import type { AuthLoginByPasswordReq } from "@/api/auth-api"
+import type { AuthLoginByPasswordReq } from "@/api/upms"
 import { grantType } from "@/constant"
-import { AuthApi } from "@/api/auth-api"
+import { UserApi } from "@/api/upms"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 export default {
@@ -39,7 +39,7 @@ export default {
         grant_type: grantType.PASSWORD
       }
       const login = async () => {
-        AuthApi.login(loginForm).then(res => {
+        UserApi.login(loginForm).then(res => {
           Cookies.set(config.app.tokenName, res.data.access_token)
           Cookies.set(config.app.refreshTokenName, res.data.refresh_token)
           location.reload()

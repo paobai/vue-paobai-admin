@@ -12,21 +12,13 @@
       <a-col flex="auto"> </a-col>
     </a-row>
     <div style="flex: 1; height: 0; margin-top: 16px">
-      <base-table :data="menuTree" row-key="id">
+      <base-table :data="menuTree" row-key="key">
         <template #columns>
-          <!--          <a-table-column title="序号" data-index="name" :width="100">-->
-          <!--            <template #cell="{ rowIndex }"> {{ rowIndex + 1 }}</template>-->
-          <!--          </a-table-column>-->
-          <a-table-column title="名称" data-index="menuName" :width="300"></a-table-column>
-          <a-table-column title="锁定" data-index="lockFlag">
-            <template #cell="{ record }">
-              {{ record.lockFlag ? "是" : "否" }}
-            </template>
-          </a-table-column>
+          <a-table-column title="名称" data-index="title" :width="300"></a-table-column>
           <a-table-column title="图标" data-index="icon">
             <template #cell="{ record }">
               <template v-if="record.icon">
-                <icon-svg :name="record.icon" size="18"></icon-svg>
+                <iconfont :class="record.icon" size="18"></iconfont>
               </template>
               <template v-else>
                 {{ record.icon }}
@@ -35,7 +27,10 @@
           </a-table-column>
           <a-table-column title="类型" data-index="type">
             <template #cell="{ record }">
-              {{ record.type === 0 ? "菜单" : record.type === 1 ? "页面" : "按钮" }}
+              <span v-if="record.type === 0">菜单</span>
+              <span v-else-if="record.type === 1">页面</span>
+              <span v-else-if="record.type === 2">外链</span>
+              <span v-else-if="record.type === 3">按钮</span>
             </template>
           </a-table-column>
           <a-table-column title="排序号" data-index="sort"></a-table-column>
@@ -60,7 +55,7 @@
                   type="outline"
                   shape="circle"
                   size="small"
-                  @click="deleteMenu(record.id)"
+                  @click="deleteMenu(record.key)"
                   ><a-icon-delete
                 /></a-button>
               </a-space>
@@ -80,29 +75,20 @@ import type { RouterApiType } from "@/constant/settings"
 import { useModal } from "@/components/base-modal"
 import menuMgnDetails from "./menu-mng-details.vue"
 import { Modal, Message } from "@arco-design/web-vue"
+import Iconfont from "@/components/iconfont.vue"
 
-type menuType = Partial<RouterApiType> & { terminal: AppIdType; rootNode?: boolean }
+type menuType = Partial<RouterApiType>
 
 export default defineComponent({
-  components: { menuMgnDetails },
+  components: { Iconfont, menuMgnDetails },
   setup() {
     let menuTree = ref<menuType[]>([])
     let { modalRegister, modalInfo } = useModal()
     const fixSourceMenuTree = (sourceData: ExtractApiDataRes<typeof MenuApi.get>) => {
-      let result: menuType[] = []
-      sourceData.forEach(item => {
-        result.push({
-          id: "root-" + item.terminal,
-          rootNode: true,
-          children: item.menuTree,
-          terminal: item.terminal,
-          menuName: item.terminalDescription
-        })
-      })
-      return result
+      return sourceData
     }
     const refreshData = () => {
-      MenuApi.get().then(res => {
+      MenuApi.get({ attachButton: true }).then(res => {
         menuTree.value = fixSourceMenuTree(res.data)
       })
     }
@@ -110,11 +96,7 @@ export default defineComponent({
       modalInfo.initFunction(menu)
     }
     const editMenu = (menu: menuType) => {
-      if (menu && menu.parentId === "0") {
-        if (menu.terminal === "1") menu.parentId = "root-1"
-        else menu.parentId = "root-2"
-      }
-      modalInfo.initFunction(menu)
+      menu.parentKey = modalInfo.initFunction(menu)
     }
     const deleteMenu = (id: AppIdType) => {
       Modal.confirm({

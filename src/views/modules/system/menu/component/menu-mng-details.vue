@@ -3,21 +3,21 @@
     <a-form ref="arcoForm" :model="formData" :inline="true" auto-label-width>
       <a-row :gutter="16">
         <a-col :span="12">
-          <a-form-item label="菜单名称：" field="menuName" :rules="[{ required: true, message: '请输入' }]">
-            <a-input v-model="formData.menuName"></a-input>
+          <a-form-item label="菜单名称：" field="title" :rules="[{ required: true, message: '请输入' }]">
+            <a-input v-model="formData.title"></a-input>
           </a-form-item>
         </a-col>
         <a-col :span="12"
-          ><a-form-item label="菜单标识：" field="menuKey"> <a-input v-model="formData.menuKey"></a-input> </a-form-item
+          ><a-form-item label="菜单标识：" field="menuKey"> <a-input v-model="formData.key"></a-input> </a-form-item
         ></a-col>
         <a-col :span="12">
-          <a-form-item label="上级菜单：" field="parentName">
+          <a-form-item label="上级菜单：" field="parentTitle">
             <a-tree-select
-              v-model="formData.parentId"
+              v-model="formData.parentKey"
               :data="menuTree"
               :field-names="{
-                key: 'id',
-                title: 'menuName',
+                key: 'key',
+                title: 'title',
                 children: 'children',
                 icon: 'icon2'
               }"></a-tree-select>
@@ -27,48 +27,20 @@
           ><a-form-item label="菜单路由：" field="path"> <a-input v-model="formData.path"></a-input> </a-form-item
         ></a-col>
         <a-col :span="12"
-          ><a-form-item label="终端设备类型：" field="terminal">
-            <a-select v-model="formData.terminal" disabled>
-              <a-option v-for="item in terminalType" :key="item.value" :value="item.value" :label="item.name">
+          ><a-form-item label="菜单类型：" field="type">
+            <a-select v-model="formData.type">
+              <a-option v-for="item in RouteTypeMap" :key="item.value" :value="item.value" :label="item.name">
               </a-option>
             </a-select> </a-form-item
         ></a-col>
-        <a-col :span="12"
-          ><a-form-item label="菜单类型：" field="type">
-            <a-select v-model="formData.type">
-              <a-option v-for="item in menuType" :key="item.value" :value="item.value" :label="item.name"> </a-option>
-            </a-select> </a-form-item
-        ></a-col>
-        <a-col :span="12"
-          ><a-form-item label="是否锁定：" field="lockFlag">
-            <a-radio-group v-model="formData.lockFlag" style="width: 220px">
-              <a-radio :value="false">否</a-radio>
-              <a-radio :value="true">是</a-radio>
-            </a-radio-group>
-          </a-form-item></a-col
-        >
         <a-col :span="12"
           ><a-form-item label="排序号：" field="sort">
             <a-input-number v-model="formData.sort" :min="0" label="排序号"></a-input-number> </a-form-item
         ></a-col>
         <a-col :span="12"
-          ><a-form-item v-if="formData.type !== 2" label="菜单图标：" field="icon">
+          ><a-form-item v-if="formData.type !== RouteType.Button" label="菜单图标：" field="icon">
             <a-input v-model="formData.icon" placeholder="菜单图标名称"></a-input> </a-form-item
         ></a-col>
-        <a-col :span="24">
-          <a-form-item field="permissions" label="资源权限：">
-            <a-tree
-              v-model:checked-keys="formData.permissions"
-              :checkable="true"
-              :data="resourceList"
-              checked-strategy="child"
-              :field-names="{
-                key: 'key',
-                title: 'label',
-                children: 'children'
-              }" />
-          </a-form-item>
-        </a-col>
       </a-row>
     </a-form>
   </base-modal>
@@ -78,10 +50,11 @@
 import { defineComponent, reactive, ref, onBeforeMount, inject, getCurrentInstance } from "vue"
 import { useModalInner, modalMixins } from "@/components/base-modal"
 import type { modalInnerInfoType } from "@/components/base-modal"
-import { MenuApi, ResourceApi } from "@/api/upms"
+import { MenuApi } from "@/api/upms"
 import { Message } from "@arco-design/web-vue"
 import { resetFormData } from "@/utils/form-data"
 import { getArcoFormRef } from "@/hooks/arco"
+import { RouteType, RouteTypeMap } from "@/constant/settings"
 
 export default defineComponent({
   mixins: [modalMixins],
@@ -90,19 +63,16 @@ export default defineComponent({
     let fixSourceMenuTree = inject("fixSourceMenuTree") as Function
     let sourceFormData = {
       id: "",
-      menuName: "",
-      parentId: null,
-      parentName: "",
+      title: "",
+      parentKey: null,
+      parentTitle: "",
       path: "",
       sort: 0,
       icon: "",
-      keepAlive: true,
       // lockFlag是否禁用
-      lockFlag: false,
-      menuKey: "",
-      terminal: "1",
+      key: "",
       type: 0,
-      permissions: [],
+      // permissions: [],
       children: undefined
     }
     let instance = getCurrentInstance()
@@ -114,45 +84,17 @@ export default defineComponent({
       getArcoFormRef(instance).clearValidate()
     }
     let { modalInnerRegister, modalInnerInfo } = useModalInner(props, context, initFunction)
-    const terminalType = [
-      { name: "PC端", value: "1" },
-      { name: "手机", value: "2" }
-    ]
-    const menuType = [
-      { name: "菜单", value: 0 },
-      { name: "页面", value: 1 },
-      { name: "按钮", value: 2 }
-    ]
     let menuTree = ref()
-    let resourceList = ref()
-    const getResourceList = () => {
-      ResourceApi.get().then(res => {
-        let resourceGroupList = res.data
-        resourceGroupList.forEach((item: any) => {
-          item.key = "group-" + item.groupId
-          item.label = item.groupName
-          item.children.forEach((e: any) => {
-            e.key = e.permissionCode
-            e.label = e.resourceName
-          })
-          resourceList.value = resourceGroupList
-        })
-      })
-    }
     onBeforeMount(() => {
-      MenuApi.get().then(res => {
+      MenuApi.get({ attachButton: true }).then(res => {
         menuTree.value = fixSourceMenuTree(res.data)
       })
-      getResourceList()
     })
     const getPostData = () => {
       let result = JSON.parse(JSON.stringify(formData))
       if (result.parentId && result.parentId.indexOf("root-") === 0) {
         result.parentId = null
       }
-      result.permissions = result.permissions.filter((e: string) => {
-        return e.indexOf("group-") !== 0
-      })
       return result
     }
     const confirm = () => {
@@ -175,11 +117,10 @@ export default defineComponent({
     return {
       modalInnerRegister,
       formData,
-      terminalType,
-      menuType,
+      RouteTypeMap,
       menuTree,
       confirm,
-      resourceList
+      RouteType
     }
   }
 })
