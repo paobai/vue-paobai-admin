@@ -1,13 +1,13 @@
 import { successResponseWrap } from "@/utils/mock"
-import type { MockPostData } from "@/types/global"
 import Mock from "mockjs"
+import type { MockRequestType } from "./help"
 
 export default [
   {
     url: new RegExp("/api/public-opinion-analysis"),
     method: "post",
     timeout: 1000,
-    response: (request: MockPostData) => {
+    response: (request: MockRequestType) => {
       const { quota = "visitors" } = request.body
       if (["visitors", "comment"].includes(quota)) {
         const year = new Date().getFullYear()
@@ -113,7 +113,7 @@ export default [
     url: new RegExp("/api/data-chain-growth"),
     method: "post",
     timeout: 1000,
-    response: (request: MockPostData) => {
+    response: (request: MockRequestType) => {
       const { quota } = request.body
       const getLineData = () => {
         return {

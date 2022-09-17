@@ -1,4 +1,5 @@
 import { successResponseWrap } from "@/utils/mock"
+import type { MockRequestType } from "./help"
 
 const haveReadIds: number[] = []
 const getMessageList = () => {
@@ -81,7 +82,7 @@ export default [
   {
     url: new RegExp("/api/message/read"),
     method: "post",
-    response: (request: any) => {
+    response: (request: MockRequestType) => {
       const { ids } = request.body
       haveReadIds.push(...(ids || []))
       return successResponseWrap(true)

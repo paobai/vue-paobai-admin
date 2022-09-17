@@ -37,7 +37,7 @@ export function isGlobalRoute(route: RouteRecordRaw, globalRoutes: any = []): an
  */
 export function fixResToSys(sourceApiData: any): {
   permissions: string[]
-  routers: RouterSysType[]
+  routers: RouterApiType[]
 } {
   return {
     permissions: sourceApiData.permissions,
@@ -111,7 +111,6 @@ export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: Rout
   if (item.type === RouteType.Iframe && modulePath) {
     findModule = modulesRoutes["/src/views/common/common-iframe.vue"]
     modulePath = "iframe" + item.key + "-path-" + Base64.encodeURI(modulePath)
-    console.log("modulePath", modulePath)
   } else if (modulePath) {
     if (modulePath[0] !== "/") modulePath = "/" + modulePath
     const componentPath = `/src/views/modules${modulePath}.vue`

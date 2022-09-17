@@ -68,8 +68,8 @@ import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
-import { AuthApi } from "@/api/auth-api"
-import type { AuthLoginByPasswordReq } from "@/api/auth-api"
+import { UserApi } from "@/api/upms"
+import type { AuthLoginByPasswordReq } from "@/api/upms"
 import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
 import bkRound from "./components/bk-round.vue"
@@ -87,7 +87,7 @@ export default {
     })
     const router = useRouter()
     const login = async () => {
-      AuthApi.login(loginForm).then(res => {
+      UserApi.login(loginForm).then(res => {
         Cookies.set(config.app.tokenName, res.data.access_token)
         Cookies.set(config.app.refreshTokenName, res.data.refresh_token)
         router.replace({ path: config.app.homePagePath })

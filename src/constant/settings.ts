@@ -22,9 +22,19 @@ export enum MenuPosition {
 export enum RouteType {
   Menu,
   Page,
-  Iframe
+  Iframe,
+  Button
 }
 
+/**
+ * route的类型
+ */
+export const RouteTypeMap = [
+  { name: "菜单", value: 0 },
+  { name: "页面", value: 1 },
+  { name: "外链", value: 2 },
+  { name: "按钮", value: 3 }
+]
 /**
  * api返回的route结构
  */
@@ -37,6 +47,8 @@ export interface RouterApiType {
   title: string
   notShow?: boolean
   sort?: number
+  parentKey?: string
+  parentTitle?: string
 }
 
 /**

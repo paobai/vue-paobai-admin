@@ -2,6 +2,8 @@ import { getRequest, postRequest, deleteRequest, downloadFile, uploadFile, putRe
 import type * as ApiType from "./type"
 export * from "./type"
 import { BaseApi } from "@/api/help"
+import type { RouterApiType } from "@/constant/settings"
+import type { UserInfo } from "@/model/sys/userModel"
 
 const groupPre = "/upms"
 
@@ -23,17 +25,6 @@ export class MenuApi extends BaseApi {
   // 菜单管理-删除菜单
   static async deleteMenu(params: any) {
     return deleteRequest(groupPre + "/menus/batch", params)
-  }
-}
-
-// 权限资源
-export class ResourceApi extends BaseApi {
-  static baseUrlPre = groupPre + "/resources"
-  static async get(data?: any) {
-    return getRequest<ApiType.ResourceApiType.resourceGroupItem[]>(this.baseUrlPre, data)
-  }
-  static async deleteByIds(ids: string) {
-    return deleteRequest(this.baseUrlPre + `/batch`, { resourceIds: ids })
   }
 }
 
@@ -77,14 +68,21 @@ export class PersonApi extends BaseApi {
 // UserApi
 export class UserApi extends BaseApi {
   static baseUrlPre = groupPre + "/users"
+  // 用户登录
+  static async login(data: ApiType.AuthLoginByPasswordReq) {
+    return postRequest<ApiType.AuthLoginRes>(UserApi.baseUrlPre + "/login", data)
+  }
+  static async refreshToken(data: ApiType.AuthRefreshToken) {
+    return postRequest<ApiType.AuthLoginRes>(UserApi.baseUrlPre + "/login", data)
+  }
   // 获取用户可以访问菜单树
   static async getCurrentUserTree() {
-    return getRequest(this.baseUrlPre + "/current/menus")
+    return getRequest<{ routers: RouterApiType[]; permissions: string[] }>(UserApi.baseUrlPre + "/current/menus")
   }
 
   // 用户管理-获取用户信息
   static async getCurrentUserInfo() {
-    return getRequest(this.baseUrlPre + "/info")
+    return getRequest<UserInfo>(UserApi.baseUrlPre + "/current/userInfo")
   }
 
   // 用户管理-获取用户信息
@@ -98,7 +96,7 @@ export class UserApi extends BaseApi {
 }
 
 // DeptApi
-export class DeptApi extends BaseApi2 {
+export class DeptApi extends BaseApi {
   static baseUrlPre = groupPre + "/dept"
   static async getDeptManTree() {
     return getRequest(this.baseUrlPre + "/tree")

@@ -4,7 +4,7 @@ import { addRouterFromData, fixResToSys, fixRouteToSysType, isGlobalRoute, sortR
 import type { MyRouter } from "@/router/routerHelp"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
-import { AuthApi } from "@/api/auth-api"
+import { UserApi } from "@/api/upms"
 import { useUserHook } from "@/hooks/user"
 import mainRoutesSource from "@/router/commonLoginRoute/common"
 import { constantRoutes } from "@/router"
@@ -35,7 +35,7 @@ export default function createRouteGuard(router: MyRouter) {
         router.push({ name: "login" })
         return
       }
-      AuthApi.getCurrentUserTree()
+      UserApi.getCurrentUserTree()
         .then(res => {
           const userStore = useUserHook()
           const { routers: newRoutes, permissions } = fixResToSys(res.data)

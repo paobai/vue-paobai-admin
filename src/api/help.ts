@@ -1,3 +1,5 @@
+import { getRequest, postRequest, deleteRequest, putRequest } from "@/utils/httpRequest"
+
 export class BaseApi {
   static baseUrlPre = ""
   static async getList(params?: any) {

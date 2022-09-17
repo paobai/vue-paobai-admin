@@ -2,11 +2,11 @@ import { getCurrentInstance, onMounted, reactive } from "vue"
 
 export function useModal() {
   const modalInfo = reactive({
-    modalInstance: {} as ComponentRef,
+    modalInstance: {} as ComponentRef<any>,
     initFunction: ((): any => {}) as Function,
     moreInfo: {} as any
   })
-  const modalRegister = (modalInstance: ComponentRef, initFunction: Function, moreInfo?: any) => {
+  const modalRegister = (modalInstance: ComponentRef<any>, initFunction: Function, moreInfo?: any) => {
     modalInfo.modalInstance = modalInstance
     modalInfo.initFunction = initFunction
     modalInfo.moreInfo = moreInfo
@@ -20,7 +20,7 @@ export function useModal() {
 export type modalInnerInfoType = {
   showModal: Function
   closeModal: Function
-  modalInnerInstance: ComponentRef
+  modalInnerInstance: ComponentRef<any>
   moreInfo: any
 }
 
@@ -48,7 +48,7 @@ export function useModalInner(
   const modalInnerInfo: modalInnerInfoType = reactive({
     showModal: ((): any => {}) as Function,
     closeModal: ((): any => {}) as Function,
-    modalInnerInstance: {} as ComponentRef,
+    modalInnerInstance: {} as ComponentRef<any>,
     moreInfo: {} as any
   })
   const modalInnerRegister = (

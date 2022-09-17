@@ -10,7 +10,7 @@
     v-bind="$attrs"
     @success="successEvent">
     <template #upload-item="data">
-      <sk-file-card
+      <base-file-card
         :key="data.fileItem.uid"
         :edit-model="canEdit"
         class="arco-upload-list-item"
@@ -18,7 +18,7 @@
         :file-url="data.fileItem.url"
         :file-name="data.fileItem.name"
         :progress="data.fileItem.percent * 100"
-        @clickDelete="() => itemDelete(data.fileItem)"></sk-file-card>
+        @clickDelete="() => itemDelete(data.fileItem)"></base-file-card>
       <!--      {{ JSON.stringify(data.fileItem) }}-->
     </template>
   </a-upload>
@@ -30,10 +30,10 @@ import type { FileItem, RequestOption } from "@arco-design/web-vue/es/upload/int
 import { FileState } from "@/constant/settings"
 import { fileUpload } from "@/api/upms"
 import { Message } from "@arco-design/web-vue"
-import skFileCard from "../sk-file-card.vue"
+import baseFileCard from "../base-file-card.vue"
 
 export default defineComponent({
-  components: { skFileCard },
+  components: { baseFileCard },
   props: {
     requiredTypes: {
       type: String,
