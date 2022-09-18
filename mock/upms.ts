@@ -277,7 +277,10 @@ const routersConfig = fixSourceRouterConfig(routersConfigPre)
 
 const adminRouter = cloneDeep(routersConfig)
 const normalUserRouters = cloneDeep(routersConfig)
-normalUserRouters[4].children!.splice(2, 1)
+normalUserRouters[4].children!.splice(
+  normalUserRouters[4].children!.findIndex(e => e.key === "authority-setting-high-permission-page"),
+  1
+)
 normalUserRouters[4].children![0].children!.splice(1, 1)
 
 // 把按钮从router里面分离出来，并把button key 加到permissions里面
