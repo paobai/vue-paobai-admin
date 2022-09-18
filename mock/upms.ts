@@ -426,12 +426,17 @@ export default [
         return failResponseWrap(dist, "菜单标识复")
       }
       const parentKey = request.body.parentKey
-      const parent = routerKeyMap.get(parentKey) as RouterApiType
       const obj = request.body as RouterApiType
       obj.id = idStart++
-      obj.parentKey = parent.key
-      obj.parentTitle = parent.title
-      parent!.children?.push(obj)
+      if (parentKey) {
+        const parent = routerKeyMap.get(parentKey) as RouterApiType
+        obj.parentKey = parent.key
+        obj.parentTitle = parent.title
+        parent!.children?.push(obj)
+      } else {
+        routersConfig.push(obj)
+      }
+
       routerKeyMap.set(obj.key, obj)
       routerIdMap.set(obj.id, obj)
       return successResponseWrap({ routersConfig })
