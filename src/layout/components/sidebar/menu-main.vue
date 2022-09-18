@@ -93,6 +93,31 @@ export default defineComponent({
     height: 100%;
     background-color: @app-sidebar-bk-color;
 
+    .arco-menu-item,
+    .arco-menu-pop {
+      padding-right: 0;
+      margin-bottom: 0;
+      .menu-item-common();
+    }
+
+    &.arco-menu-collapsed {
+      .arco-menu-item,
+      .arco-menu-pop {
+        line-height: 80px;
+      }
+
+      .arco-icon,
+      .iconfont {
+        font-size: 60px !important;
+        vertical-align: -10px;
+      }
+
+      &.arco-menu-vertical .arco-menu-pop-header,
+      .arco-menu-item {
+        padding-left: 9px;
+      }
+    }
+
     .menu-item-common {
       line-height: 48px;
       color: var(--color-white);
@@ -119,31 +144,6 @@ export default defineComponent({
         .iconfont {
           color: var(--color-white);
         }
-      }
-    }
-
-    .arco-menu-item,
-    .arco-menu-pop {
-      padding-right: 0;
-      margin-bottom: 0;
-      .menu-item-common();
-    }
-
-    &.arco-menu-collapsed {
-      .arco-menu-item,
-      .arco-menu-pop {
-        line-height: 80px;
-      }
-
-      .arco-icon,
-      .iconfont {
-        font-size: 60px !important;
-        vertical-align: -10px;
-      }
-
-      &.arco-menu-vertical .arco-menu-pop-header,
-      .arco-menu-item {
-        padding-left: 9px;
       }
     }
 
