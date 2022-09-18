@@ -105,12 +105,25 @@ export default defineComponent({
         .arco-menu-title {
           display: inline-block;
           padding-right: 20px;
+          vertical-align: top;
         }
 
-        .arco-icon,
-        .iconfont {
-          font-size: 20px;
-          color: var(--color-white);
+        .arco-menu-icon {
+          .arco-icon,
+          .iconfont {
+            font-size: 26px;
+            color: var(--color-white);
+          }
+        }
+
+        .arco-menu-icon-suffix {
+          display: inline-block;
+          vertical-align: top;
+
+          .arco-icon,
+          .iconfont {
+            color: var(--color-white);
+          }
         }
       }
     }

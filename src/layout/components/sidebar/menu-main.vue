@@ -106,10 +106,19 @@ export default defineComponent({
         border-right: 4px solid @app-sidebar-border-color;
       }
 
-      .arco-icon,
-      .iconfont {
-        font-size: 18px;
-        color: var(--color-white);
+      .arco-menu-icon {
+        .arco-icon,
+        .iconfont {
+          font-size: 26px;
+          color: var(--color-white);
+        }
+      }
+
+      .arco-menu-icon-suffix {
+        .arco-icon,
+        .iconfont {
+          color: var(--color-white);
+        }
       }
     }
 
