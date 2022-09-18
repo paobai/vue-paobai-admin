@@ -1,5 +1,6 @@
-import { RouterSysType } from "@/constant/settings"
-import { ref, unref, Ref, nextTick, computed, ComputedRef } from "vue"
+import type { RouterSysType } from "@/constant/settings"
+import { ref, unref, nextTick, computed } from "vue"
+import type { Ref, ComputedRef } from "vue"
 import { useScrollTo } from "@/hooks/event/useScrollTo"
 import { onKeyStroke, useDebounceFn } from "@vueuse/core"
 import { useRouter } from "vue-router"

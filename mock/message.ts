@@ -1,5 +1,6 @@
 import { successResponseWrap } from "@/utils/mock"
 import Mock from "mockjs"
+import type { MockRequestType } from "./help"
 
 export default [
   {
@@ -24,7 +25,7 @@ export default [
   {
     url: new RegExp("/api/popular/list"),
     method: "get",
-    response: (request: any) => {
+    response: (request: MockRequestType) => {
       const { type = "text" } = request.query
       if (type === "image") {
         return successResponseWrap([...videoList])

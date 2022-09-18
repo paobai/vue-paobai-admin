@@ -8,7 +8,8 @@
 
 <script lang="ts">
 import { reactive, ref, onMounted } from "vue"
-import { MaybeElement, MaybeRef, useMouseInElement } from "@vueuse/core"
+import { useMouseInElement } from "@vueuse/core"
+import type { MaybeElement, MaybeRef } from "@vueuse/core"
 import { watch } from "vue"
 type directType = "left" | "right" | "top" | "bottom"
 type otherConfig = "blur"
@@ -84,37 +85,43 @@ export default {
 
 <style lang="less" scoped>
 .bk-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
+
   .round-item-wrapper {
     position: absolute;
+
     .round-item {
       position: relative;
-      background: rgba(var(--primary-6), 1);
-      border-radius: 50%;
       width: 100%;
       height: 100%;
-      animation: flashAnimation 4s ease-in-out infinite;
-      &:after {
+      background: rgba(var(--primary-6), 1);
+      border-radius: 50%;
+      animation: flash-animation 4s ease-in-out infinite;
+
+      &::after {
         position: absolute;
-        bottom: 15%;
         right: 15%;
-        content: "";
+        bottom: 15%;
         width: 30%;
         height: 30%;
+        content: "";
         background: #fff;
-        opacity: 0.5;
         filter: blur(10px);
+        opacity: 0.5;
       }
     }
-    @keyframes flashAnimation {
+
+    @keyframes flash-animation {
       0% {
         opacity: 1;
       }
+
       50% {
         opacity: 0.5;
       }
+
       100% {
         opacity: 1;
       }

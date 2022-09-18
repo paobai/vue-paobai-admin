@@ -65,15 +65,16 @@ export default defineComponent({
   width: 100%;
   height: 24px;
   margin-bottom: 4px;
+
   .item-content {
     flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     margin-left: 4px;
+    overflow: hidden;
+    font-size: 13px;
     color: var(--color-text-2);
     text-decoration: none;
-    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     cursor: pointer;
   }
 }

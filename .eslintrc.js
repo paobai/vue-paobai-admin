@@ -51,6 +51,7 @@ module.exports = {
     }
   },
   rules: {
+    "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-explicit-any": "off", // any
     "no-debugger": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off", // setup()

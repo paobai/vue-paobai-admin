@@ -12,3 +12,5 @@ dist/
 *.sln
 package-lock.json
 stats.html
+yarn-error.log
+.eslintcache

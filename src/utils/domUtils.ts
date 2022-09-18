@@ -154,6 +154,7 @@ export function off(element: Element | HTMLElement | Document | Window, event: s
 export function once(el: HTMLElement, event: string, fn: EventListener): void {
   const listener = function (this: any, ...args: unknown[]) {
     if (fn) {
+      // @ts-ignore
       fn.apply(this, args)
     }
     off(el, event, listener)

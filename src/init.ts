@@ -1,6 +1,7 @@
-import { App, Component, Directive } from "vue"
+import type { App, Component, Directive } from "vue"
 import * as directives from "./directives"
 import iconfont from "@/components/iconfont.vue"
+import baseTable from "@/components/base-table"
 import { setupStore } from "@/store"
 import "@/styles/index.less"
 import { loadAllPlugins } from "@/plugins"
@@ -9,6 +10,7 @@ import "virtual:svg-icons-register"
 import "animate.css"
 export function initApp(app: App) {
   app.component("Iconfont", iconfont as unknown as Component)
+  app.component("BaseTable", baseTable as unknown as Component)
   setupStore(app)
   // load插件
   loadAllPlugins(app)

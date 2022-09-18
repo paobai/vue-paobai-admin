@@ -1,5 +1,5 @@
 import { getRequest } from "@/utils/httpRequest"
-import * as ApiType from "./type"
+import type * as ApiType from "./type"
 export * from "./type"
 
 export function queryContentData() {

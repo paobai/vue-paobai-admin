@@ -32,7 +32,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import useLoading from "@/hooks/loading"
-import { queryPopularAuthor, PopularAuthorRes } from "@/api/visualization"
+import { queryPopularAuthor } from "@/api/visualization"
+import type { PopularAuthorRes } from "@/api/visualization"
 
 export default defineComponent({
   setup() {

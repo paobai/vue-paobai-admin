@@ -1,4 +1,5 @@
-import { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
+import type { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
+import type { FileStatus } from "@arco-design/web-vue/es/upload/interfaces"
 
 export enum TokenStorageName {
   LocalStorage = "localStorage",
@@ -21,13 +22,24 @@ export enum MenuPosition {
 export enum RouteType {
   Menu,
   Page,
-  Iframe
+  Iframe,
+  Button
 }
 
+/**
+ * route的类型
+ */
+export const RouteTypeMap = [
+  { name: "菜单", value: 0 },
+  { name: "页面", value: 1 },
+  { name: "外链", value: 2 },
+  { name: "按钮", value: 3 }
+]
 /**
  * api返回的route结构
  */
 export interface RouterApiType {
+  id: number
   key: string
   path?: string
   type: RouteType
@@ -36,12 +48,15 @@ export interface RouterApiType {
   title: string
   notShow?: boolean
   sort?: number
+  parentKey?: string
+  parentTitle?: string
 }
 
 /**
  * 系统中使用的的route结构
  */
 export interface RouterSysType {
+  id: AppIdType
   key: string
   path?: string
   routeName: string
@@ -85,4 +100,14 @@ export type tagType = {
   key: string
   name: string
   path: string
+}
+
+/**
+ * fileUpload
+ */
+export const FileState = {
+  INIT: "init" as FileStatus,
+  UPLOADING: "uploading" as FileStatus,
+  SUCCESS: "done" as FileStatus,
+  ERROR: "error" as FileStatus
 }

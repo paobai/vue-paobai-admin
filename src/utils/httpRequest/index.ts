@@ -1,9 +1,11 @@
-import axios, { AxiosRequestConfig, Method } from "axios"
+import axios from "axios"
+import type { AxiosRequestConfig, Method } from "axios"
 import qs from "qs"
 import { merge } from "lodash"
-import { AuthApi } from "@/api/auth-api"
+import { UserApi } from "@/api/upms"
 import { clientId, clientSecret, grantType } from "@/constant"
-import { ApiCodeEnum, ApiPromise, ContentType, CustomAxiosInstance } from "./help"
+import { ApiCodeEnum, ContentType } from "./help"
+import type { ApiPromise, CustomAxiosInstance } from "./help"
 import { saveAs } from "file-saver"
 import Cookies from "@/utils/storage/cookie"
 import { getAppEnvConfig } from "@/utils"
@@ -108,7 +110,7 @@ function addSubscriber(callback: () => void) {
 
 function referToken() {
   const refreshToken = Cookies.get(config.app.refreshTokenName)! as string
-  AuthApi.refreshToken({
+  UserApi.refreshToken({
     grant_type: grantType.REFRESH_TOKEN,
     refresh_token: refreshToken,
     client_id: clientId,

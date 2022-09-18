@@ -68,25 +68,27 @@ export default defineComponent({
   height: 100%;
   padding-top: 100px;
   overflow-y: auto;
+
   .errPage-container {
     width: 800px;
     max-width: 100%;
     margin: 0 auto;
+
     .back-btn {
-      background: #008489;
       color: #fff;
+      background: #008489;
       border: none !important;
     }
 
     .some-gif {
-      margin: 0 auto;
       display: block;
+      margin: 0 auto;
     }
 
     .some-img {
       display: block;
-      margin: 0 auto;
       width: 100%;
+      margin: 0 auto;
     }
 
     .text-jumbo {

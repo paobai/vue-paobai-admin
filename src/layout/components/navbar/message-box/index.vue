@@ -19,7 +19,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs, computed } from "vue"
-import { queryMessageList, setMessageStatus, MessageRecord, MessageListType } from "@/api/message-box"
+import { queryMessageList, setMessageStatus } from "@/api/message-box"
+import type { MessageRecord, MessageListType } from "@/api/message-box"
 import useLoading from "@/hooks/loading"
 import List from "./list.vue"
 
@@ -117,12 +118,15 @@ export default defineComponent({
 :deep(.arco-list-item-meta) {
   align-items: flex-start;
 }
+
 :deep(.arco-tabs-nav) {
   padding: 14px 0 12px 16px;
   border-bottom: 1px solid var(--color-neutral-3);
 }
+
 :deep(.arco-tabs-content) {
   padding-top: 0;
+
   .arco-result-subtitle {
     color: rgb(var(--gray-6));
   }

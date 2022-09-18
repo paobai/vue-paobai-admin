@@ -37,7 +37,7 @@
               <template #cell="{ record }">
                 <div class="increases-cell">
                   <span>{{ record.increases }}%</span>
-                  <a-icon-caret-up v-if="record.increases !== 0" style="color: #f53f3f; font-size: 8px" />
+                  <a-icon-caret-up v-if="record.increases !== 0" style="font-size: 8px; color: #f53f3f" />
                 </div>
               </template>
             </a-table-column>
@@ -51,7 +51,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import useLoading from "@/hooks/loading"
-import { queryPopularList, PopularRecord } from "@/api/dashboard"
+import { queryPopularList } from "@/api/dashboard"
+import type { PopularRecord } from "@/api/dashboard"
 
 export default defineComponent({
   setup() {
@@ -87,15 +88,19 @@ export default defineComponent({
 .general-card {
   min-height: 388px;
 }
+
 :deep(.arco-table-tr) {
   height: 44px;
+
   .arco-typography {
     margin-bottom: 0;
   }
 }
+
 .increases-cell {
   display: flex;
   align-items: center;
+
   span {
     margin-right: 4px;
   }

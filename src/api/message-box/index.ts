@@ -1,7 +1,7 @@
 import { postRequest } from "@/utils/httpRequest"
-import * as ApiType from "./type"
+import type * as ApiType from "./type"
 export * from "./type"
-import { MessageStatus } from "../message"
+import type { MessageStatus } from "../message"
 
 const haveReadIds: number[] = []
 export const getMessageList = () => {

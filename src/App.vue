@@ -15,9 +15,10 @@ export default defineComponent({
 </script>
 
 <style>
-@import url("assets/css/iconfont.css");
+@import "assets/css/iconfont.css";
+
 .iconfont {
   font-size: unset;
-  fill: currentColor;
+  fill: currentcolor;
 }
 </style>

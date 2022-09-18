@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue"
-import { LineSeriesOption } from "echarts"
+import type { LineSeriesOption } from "echarts"
 import { queryDataOverview } from "@/api/visualization"
 import useLoading from "@/hooks/loading"
-import { ToolTipFormatterParams } from "@/types/echarts"
+import type { ToolTipFormatterParams } from "@/types/echarts"
 import useChartOption from "@/hooks/chart-option"
 import userAppHook from "@/hooks/app"
 
@@ -252,22 +252,24 @@ export default defineComponent({
 <style scoped lang="less">
 :deep(.arco-statistic) {
   .arco-statistic-title {
-    color: rgb(var(--gray-10));
     font-weight: bold;
+    color: rgb(var(--gray-10));
   }
+
   .arco-statistic-value {
     display: flex;
     align-items: center;
   }
 }
+
 .statistic-prefix {
   display: inline-block;
   width: 32px;
   height: 32px;
   margin-right: 8px;
-  color: var(--color-white);
   font-size: 16px;
   line-height: 32px;
+  color: var(--color-white);
   text-align: center;
   vertical-align: middle;
   border-radius: 6px;

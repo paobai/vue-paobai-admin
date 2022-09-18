@@ -75,26 +75,31 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   padding: 20px;
-  border-radius: 4px;
   overflow-y: auto;
+  border-radius: 4px;
+
   :deep(.arco-col) {
     &.first-line {
       height: 390px;
     }
+
     &.second-line {
       height: 450px;
     }
+
     .arco-spin {
-      height: 100%;
       width: 100%;
-    }
-    .arco-card {
       height: 100%;
+    }
+
+    .arco-card {
       display: flex;
       flex-direction: column;
+      height: 100%;
+
       .arco-card-body {
-        height: 0;
         flex: 1;
+        height: 0;
         overflow-y: auto;
       }
     }

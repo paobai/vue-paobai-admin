@@ -6,8 +6,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
-import { ChatRecord } from "@/api/message"
+import { defineComponent } from "vue"
+import type { PropType } from "vue"
+import type { ChatRecord } from "@/api/message"
 import ChatItem from "./chat-item.vue"
 
 export default defineComponent({
@@ -49,10 +50,10 @@ export default defineComponent({
       width: 20px;
       height: 20px;
       margin-right: 4px;
-      color: var(--color-text-3);
       font-size: 14px;
-      border-radius: 50%;
+      color: var(--color-text-3);
       cursor: pointer;
+      border-radius: 50%;
 
       &:hover {
         background-color: rgb(var(--gray-3));

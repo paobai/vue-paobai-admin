@@ -12,7 +12,7 @@
           </a-avatar>
         </a-col>
         <a-col flex="auto" style="text-align: center">
-          <div style="text-align: left; display: inline-block">
+          <div style="display: inline-block; text-align: left">
             <a-typography>
               <a-typography-title style="margin-top: 0" :heading="4">{{
                 new Date().format("yyyy-MM-dd HH:mm")
@@ -26,7 +26,7 @@
             </a-typography>
           </div>
         </a-col>
-        <a-col style="text-align: center; flex: 1 1 200px">
+        <a-col style="flex: 1 1 200px; text-align: center">
           <a-statistic animation style="margin-right: 64px" title="待办事项" :value="6" />
           <a-statistic animation title="待查信息" :value="18" />
         </a-col>
@@ -51,22 +51,26 @@ export default defineComponent({
 <style lang="less" scoped>
 .welcome-card {
   .welcome-content {
-    margin-top: 20px;
-    flex: 1;
-    padding: 20px;
     display: flex;
+    flex: 1;
     flex-direction: column;
+    padding: 20px;
+    margin-top: 20px;
+
     .header-wrapper {
       display: flex;
+
       .left-avatar {
         display: flex;
         align-items: center;
       }
+
       .center-content {
-        margin: 0 30px;
-        width: 0;
         flex: 1;
+        width: 0;
+        margin: 0 30px;
       }
+
       .right-content {
         display: flex;
         align-items: center;

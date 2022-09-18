@@ -6,7 +6,8 @@
 
 <script lang="ts">
 import "./iconfont"
-import { defineComponent, computed, PropType, toRefs } from "vue"
+import { defineComponent, computed, toRefs } from "vue"
+import type { PropType } from "vue"
 
 export default defineComponent({
   name: "SvgIcon",
@@ -52,10 +53,10 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .svg-icon {
-  color: transparent;
+  position: relative;
   width: 1em;
   height: 1em;
-  position: relative;
-  fill: currentColor;
+  color: transparent;
+  fill: currentcolor;
 }
 </style>

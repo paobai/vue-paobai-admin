@@ -19,7 +19,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue"
 import useLoading from "@/hooks/loading"
-import { queryDataChainGrowth, DataChainGrowth } from "@/api/visualization"
+import { queryDataChainGrowth } from "@/api/visualization"
+import type { DataChainGrowth } from "@/api/visualization"
 import useChartOption from "@/hooks/chart-option"
 
 export default defineComponent({
@@ -124,15 +125,18 @@ export default defineComponent({
 .general-card {
   min-height: 204px;
 }
+
 .content {
   display: flex;
   align-items: center;
   width: 100%;
   margin-bottom: 12px;
 }
+
 .percent-text {
   margin-left: 16px;
 }
+
 .chart {
   width: 100%;
   height: 80px;

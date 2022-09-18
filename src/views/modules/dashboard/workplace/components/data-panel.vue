@@ -66,29 +66,35 @@ export default defineComponent({})
 
 <style lang="less" scoped>
 .arco-col.panel {
+  padding: 16px 20px 0;
   margin-bottom: 0;
-  padding: 16px 20px 0 20px;
 }
+
 .panel-col {
   padding-left: 43px;
   border-right: 1px solid rgb(var(--gray-2));
+
   &:first-child {
     padding-left: 0;
   }
+
   &:last-child {
     border-right: none;
   }
 }
+
 .col-avatar {
   margin-right: 12px;
   background-color: var(--color-fill-2);
 }
+
 .up-icon {
   color: rgb(var(--red-6));
 }
+
 .unit {
   margin-left: 8px;
-  color: rgb(var(--gray-8));
   font-size: 12px;
+  color: rgb(var(--gray-8));
 }
 </style>

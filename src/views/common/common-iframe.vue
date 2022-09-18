@@ -17,6 +17,7 @@ let iframePath = Base64.decode(route.fullPath.split("-path-")[1])
   width: 100%;
   height: 100%;
   overflow: hidden;
+
   iframe {
     width: 100%;
     height: 100%;

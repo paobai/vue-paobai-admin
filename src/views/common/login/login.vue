@@ -68,8 +68,8 @@ import { reactive } from "vue"
 import { useRouter } from "vue-router"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
-import { AuthApi } from "@/api/auth-api"
-import { AuthLoginByPasswordReq } from "@/api/auth-api"
+import { UserApi } from "@/api/upms"
+import type { AuthLoginByPasswordReq } from "@/api/upms"
 import { grantType } from "@/constant"
 import { useAppHook } from "@/hooks/app"
 import bkRound from "./components/bk-round.vue"
@@ -87,7 +87,7 @@ export default {
     })
     const router = useRouter()
     const login = async () => {
-      AuthApi.login(loginForm).then(res => {
+      UserApi.login(loginForm).then(res => {
         Cookies.set(config.app.tokenName, res.data.access_token)
         Cookies.set(config.app.refreshTokenName, res.data.refresh_token)
         router.replace({ path: config.app.homePagePath })
@@ -106,42 +106,49 @@ export default {
 </script>
 <style lang="less" scoped>
 @loginBkColor: var(--primary-1);
+
 .login-wrapper {
-  background-color: rgba(@loginBkColor, 1);
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
   overflow: hidden;
+  background-color: rgba(@loginBkColor, 1);
+
   .left-wrapper {
     @media screen and (max-width: 1048px) {
       display: none;
     }
-    overflow: hidden;
-    max-width: 750px;
-    width: 0;
+
+    display: flex;
     flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    max-width: 750px;
+    overflow: hidden;
     background: linear-gradient(to right, @primary-color, rgb(@loginBkColor));
     opacity: 0.95;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     .content-wrapper {
       width: 100%;
+
       .title {
         position: relative;
+
         .english {
+          position: absolute;
+          top: 0;
           width: 100%;
           text-align: center;
-          top: 0;
-          position: absolute;
+
           .welcome {
-            font-weight: bold;
-            opacity: 0.1;
-            font-size: 84px;
-            color: #ffffff;
             position: absolute;
-            left: 50%;
             top: 50%;
+            left: 50%;
+            font-size: 84px;
+            font-weight: bold;
+            color: #fff;
+            opacity: 0.1;
             transform: translate(-50%, -16%);
             //width: 422px;
             //height: 64px;
@@ -149,98 +156,111 @@ export default {
               opacity: 0.7;
               animation: animation 8s ease-in-out infinite;
             }
+
             @keyframes animation {
               0%,
               100% {
-                -webkit-clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
                 clip-path: polygon(0 0, 20% 0, 20% 100%, 0% 100%);
               }
+
               50% {
-                -webkit-clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
                 clip-path: polygon(80% 0, 100% 0, 100% 100%, 80% 100%);
               }
             }
           }
         }
+
         .chinese {
           width: 100%;
-          text-align: center;
           font-size: 50px;
           font-weight: 400;
-          color: var(--color-white);
           line-height: 70px;
+          color: var(--color-white);
+          text-align: center;
         }
       }
+
       .name {
-        margin-top: 50px;
         width: 100%;
-        text-align: center;
+        margin-top: 50px;
         font-size: 44px;
         font-weight: normal;
-        color: var(--color-white);
         line-height: 61px;
+        color: var(--color-white);
+        text-align: center;
       }
     }
   }
+
   .right-wrapper {
-    //background: url("/src/assets/images/login/xxx.png") no-repeat;
-    //background-size: cover;
-    padding: 20px;
-    flex: 1;
+    position: relative;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
+    //background: url("/src/assets/images/login/xxx.png") no-repeat;
+    //background-size: cover;
+    padding: 20px;
+
     .login-form-wrapper {
       z-index: 2;
-      border: 1px solid var(--color-border);
-      box-shadow: 0 0 5px #0000004d;
       width: 540px;
-      background: var(--color-bg-1);
-      border-radius: 8px;
       padding: 60px;
+      background: var(--color-bg-1);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      box-shadow: 0 0 5px #0000004d;
+
       .login-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 28px;
         font-weight: bold;
         line-height: 32px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+
         .logo-wrapper {
           display: inline-block;
+
           .logo {
             width: 40px;
           }
         }
       }
+
       .login-content-wrapper {
         margin-top: 40px;
+
         .arco-input-wrapper {
-          border-width: 0 0 1px 0;
           height: 44px;
           line-height: 44px;
+          border-width: 0 0 1px;
+
           & + .arco-input-wrapper {
             margin-top: 40px;
           }
+
           :deep(.arco-input.arco-input-size-medium) {
             font-size: 20px;
           }
         }
+
         .sub-bt {
-          margin-top: 20px;
-          height: 54px;
           width: 100%;
+          height: 54px;
+          margin-top: 20px;
           font-size: 20px;
         }
       }
     }
   }
+
   .theme-btn {
-    z-index: 3;
     position: absolute;
     top: 20px;
     right: 20px;
+    z-index: 3;
     width: 40px;
     height: 40px;
     font-size: 40px;

@@ -6,10 +6,12 @@
     "build": "vite build",
     "vis": "vite build --mode vis",
     "build-tsc": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview",
+    "preview": "vite preview",
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "prepare": "husky install"
+    "lint:stylelint": "stylelint **/*.{css,scss,sass,vue}  --fix --custom-syntax postcss-less",
+    "lint-staged": "npx lint-staged",
+    "init": "husky install"
   },
   "dependencies": {
     "@arco-design/web-vue": "2.33.0",
@@ -27,6 +29,7 @@
     "js-base64": "^3.7.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
     "lowdb": "^3.0.0",
     "mockjs": "^1.1.0",
@@ -39,7 +42,8 @@
     "vue": "^3.2.19",
     "vue-echarts": "^6.0.0",
     "vue-image-crop-upload": "^2.5.0",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "mitt": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
@@ -59,15 +63,23 @@
     "@vue/compiler-sfc": "^3.0.5",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/tsconfig": "^0.1.3",
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.17.0",
     "husky": "^7.0.4",
+    "postcss-html": "^1.5.0",
+    "postcss-less": "^6.0.0",
     "prettier": "^2.3.2",
     "prettier-eslint": "^13.0.0",
     "rollup-plugin-visualizer": "^5.6.0",
+    "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-less": "^1.0.6",
+    "stylelint-order": "^5.0.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.2",
     "vite-plugin-compression": "^0.5.1",
@@ -81,5 +93,20 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.vue": [
+      "stylelint --fix --custom-syntax postcss-less",
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{less,css}": [
+      "stylelint --fix --custom-syntax postcss-less",
+      "prettier --write"
+    ]
   }
 }

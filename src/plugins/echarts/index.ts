@@ -2,7 +2,7 @@ import * as echarts from "echarts/core"
 import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts"
 import { CanvasRenderer } from "echarts/renderers"
 import Chart from "./chart/index.vue"
-import { App } from "vue"
+import type { App } from "vue"
 
 import {
   GridComponent,
