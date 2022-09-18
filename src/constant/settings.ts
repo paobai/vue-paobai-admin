@@ -39,6 +39,7 @@ export const RouteTypeMap = [
  * api返回的route结构
  */
 export interface RouterApiType {
+  id: number
   key: string
   path?: string
   type: RouteType
@@ -55,6 +56,7 @@ export interface RouterApiType {
  * 系统中使用的的route结构
  */
 export interface RouterSysType {
+  id: AppIdType
   key: string
   path?: string
   routeName: string

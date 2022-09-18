@@ -47,9 +47,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, onBeforeMount, inject, getCurrentInstance } from "vue"
-import { useModalInner, modalMixins } from "@/components/base-modal"
+import { defineComponent, getCurrentInstance, inject, onBeforeMount, reactive, ref } from "vue"
 import type { modalInnerInfoType } from "@/components/base-modal"
+import { modalMixins, useModalInner } from "@/components/base-modal"
 import { MenuApi } from "@/api/upms"
 import { Message } from "@arco-design/web-vue"
 import { resetFormData } from "@/utils/form-data"
@@ -91,18 +91,16 @@ export default defineComponent({
       })
     })
     const getPostData = () => {
-      let result = JSON.parse(JSON.stringify(formData))
-      if (result.parentId && result.parentId.indexOf("root-") === 0) {
-        result.parentId = null
-      }
-      return result
+      const res = JSON.parse(JSON.stringify(formData))
+      res.children = undefined
+      return res
     }
     const confirm = () => {
       getArcoFormRef(instance).validate(error => {
         if (error) return
         let postData = getPostData()
         let apiMethods: Function = MenuApi.add
-        if (formData.id) {
+        if (postData.id) {
           apiMethods = MenuApi.update
         }
         apiMethods

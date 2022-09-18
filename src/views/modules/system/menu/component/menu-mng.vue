@@ -46,7 +46,7 @@
                 <a-button v-if="!record.rootNode" type="outline" shape="circle" size="small" @click="editMenu(record)"
                   ><a-icon-edit
                 /></a-button>
-                <a-button type="outline" shape="circle" size="small" @click="addMenu({ parentId: record.id })"
+                <a-button type="outline" shape="circle" size="small" @click="addMenu({ parentKey: record.key })"
                   ><a-icon-plus
                 /></a-button>
                 <a-button
@@ -96,7 +96,7 @@ export default defineComponent({
       modalInfo.initFunction(menu)
     }
     const editMenu = (menu: menuType) => {
-      menu.parentKey = modalInfo.initFunction(menu)
+      modalInfo.initFunction(menu)
     }
     const deleteMenu = (id: AppIdType) => {
       Modal.confirm({

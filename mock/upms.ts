@@ -46,7 +46,7 @@ function getUserId(request: MockRequestType) {
     : paobaiUserInfo.userId
 }
 
-const routersConfig: RouterApiType[] = [
+const routersConfigPre: any[] = [
   {
     title: "Arco Design Pro",
     path: "",
@@ -254,9 +254,15 @@ const routersConfig: RouterApiType[] = [
     ]
   }
 ]
+const routerIdMap = new Map<AppIdType, RouterApiType>()
+const routerKeyMap = new Map<AppIdType, RouterApiType>()
 
-function fixSourceRouterConfig(routersConfig: RouterApiType[], parent?: RouterApiType) {
+let idStart = 1
+function fixSourceRouterConfig(routersConfig: RouterApiType[], parent?: RouterApiType): RouterApiType[] {
   routersConfig.forEach(e => {
+    e.id = idStart++
+    routerIdMap.set(e.id, e)
+    routerKeyMap.set(e.key, e)
     if (parent) {
       e.parentKey = parent.key
       e.parentTitle = parent.title
@@ -265,8 +271,9 @@ function fixSourceRouterConfig(routersConfig: RouterApiType[], parent?: RouterAp
       fixSourceRouterConfig(e.children, e)
     }
   })
+  return routersConfig
 }
-fixSourceRouterConfig(routersConfig)
+const routersConfig = fixSourceRouterConfig(routersConfigPre)
 
 const adminRouter = cloneDeep(routersConfig)
 const normalUserRouters = cloneDeep(routersConfig)
@@ -410,15 +417,31 @@ export default [
     method: "post",
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
     response: (request: MockRequestType) => {
-      return successResponseWrap({})
+      const key = request.body.key
+      const dist = routerKeyMap.get(key)
+      if (dist) {
+        return failResponseWrap(dist, "菜单标识复")
+      }
+      const parentKey = request.body.parentKey
+      const parent = routerKeyMap.get(parentKey) as RouterApiType
+      const obj = request.body as RouterApiType
+      obj.id = idStart++
+      obj.parentKey = parent.key
+      obj.parentTitle = parent.title
+      parent!.children?.push(obj)
+      routerKeyMap.set(obj.key, obj)
+      routerIdMap.set(obj.id, obj)
+      return successResponseWrap({ routersConfig })
     }
   },
   {
     url: urlPre + "/menus/:id",
     method: "put",
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
     response: (request: MockRequestType) => {
-      return successResponseWrap({})
+      const id = request.query.id
+      const dist = routerIdMap.get(+id)
+      dist && Object.assign(dist, request.body)
+      return successResponseWrap(id)
     }
   }
 ] as MockMethod[]
