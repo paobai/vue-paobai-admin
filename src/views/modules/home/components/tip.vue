@@ -10,7 +10,8 @@
         Design的admin，所以我打算开发一个这样的框架。</a-typography-paragraph
       >
       <a-typography-title :heading="4"
-        ><a-link href="https://gitee.com/zheng_yc/paobai" style="font-size: 24px">PAOBAI-ADMIN</a-link
+        ><a-link href="https://github.com/paobai/vue-paobai-admin" style="font-size: 24px" target="_blank"
+          >PAOBAI-ADMIN</a-link
         >框架简介</a-typography-title
       >
       <a-typography-title :heading="5">技术栈</a-typography-title>
@@ -49,7 +50,11 @@
             </ul>
           </li>
           <li>页面setting在右侧悬浮设置按钮上，请尝试使用</li>
-          <li>若有疑问或bug，请提issue至<a-link href="https://gitee.com/zheng_yc/paobai">PAOBAI-ADMIN</a-link></li>
+          <li>
+            若有疑问或bug，请提issue至<a-link href="https://github.com/paobai/vue-paobai-admin/issues" target="_blank"
+              >PAOBAI-ADMIN</a-link
+            >
+          </li>
         </ul></a-typography-paragraph
       >
     </a-typography>
