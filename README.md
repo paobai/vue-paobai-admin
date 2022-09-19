@@ -22,7 +22,8 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 
 - [PAOBAI-github-pages](https://paobai.github.io/paobai) - github pages 站点（推荐-速度快）
 - [PAOBAI-gitee-pages](https://zheng_yc.gitee.io/paobai) - gitee pages 站点
-- [PAOBAI](https://arco.paobai.club) - 自建站点(带宽小)
+
+[comment]: <> (- [PAOBAI]&#40;https://arco.paobai.club&#41; - 自建站点&#40;带宽小&#41;)
 
 测试账号: paobai/paobai
 
