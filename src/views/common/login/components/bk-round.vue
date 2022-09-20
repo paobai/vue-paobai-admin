@@ -91,6 +91,7 @@ export default {
 
   .round-item-wrapper {
     position: absolute;
+    animation: flash-animation 2s ease-in-out infinite alternate;
 
     .round-item {
       position: relative;
@@ -98,7 +99,6 @@ export default {
       height: 100%;
       background: rgba(var(--primary-6), 1);
       border-radius: 50%;
-      animation: flash-animation 4s ease-in-out infinite;
 
       &::after {
         position: absolute;
@@ -118,12 +118,8 @@ export default {
         opacity: 1;
       }
 
-      50% {
-        opacity: 0.5;
-      }
-
       100% {
-        opacity: 1;
+        opacity: 0.5;
       }
     }
   }
