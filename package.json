@@ -100,12 +100,12 @@
       "prettier --write"
     ],
     "*.vue": [
-      "stylelint --fix --custom-syntax postcss-less",
+      "stylelint --fix --custom-syntax postcss-less --allow-empty-input",
       "prettier --write",
       "eslint --fix"
     ],
     "*.{less,css}": [
-      "stylelint --fix --custom-syntax postcss-less",
+      "stylelint --fix --custom-syntax postcss-less --allow-empty-input",
       "prettier --write"
     ]
   }

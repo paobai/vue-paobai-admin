@@ -1,5 +1,6 @@
 import { resolve } from "path"
-import { UserConfigExport, ConfigEnv, loadEnv } from "vite"
+import { loadEnv } from "vite"
+import type { UserConfigExport, ConfigEnv } from "vite"
 import { wrapperEnv } from "./build/utils"
 // import { createProxy } from "./build/proxy"
 import { createVitePlugins } from "./build/vite/plugin"

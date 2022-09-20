@@ -20,9 +20,10 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 
 ## 预览
 
-- [PAOBAI-github-pages](https://paobai.github.io/paobai) - github pages 站点（推荐-速度快）
-- [PAOBAI-gitee-pages](https://zheng_yc.gitee.io/paobai) - gitee pages 站点
-- [PAOBAI](https://arco.paobai.club) - 自建站点(带宽小)
+- [PAOBAI-github-pages](https://paobai.github.io/vue-paobai-admin) - github pages 站点（推荐-速度快）
+- [PAOBAI-gitee-pages](https://zheng_yc.gitee.io/vue-paobai-admin) - gitee pages 站点
+
+[comment]: <> (- [PAOBAI]&#40;https://arco.paobai.club&#41; - 自建站点&#40;带宽小&#41;)
 
 测试账号: paobai/paobai
 
@@ -43,13 +44,13 @@ PAOBAI 是一个免费开源的中后台模版。使用了最新的`vue3`,`vite2
 - 获取项目代码
 
 ```bash
-git clone https://github.com/paobai/paobai.git
+git clone git@github.com:paobai/vue-paobai-admin.git
 ```
 
 - 安装依赖
 
 ```bash
-cd paobai
+cd vue-paobai-admin
 
 npm install
 ```
@@ -68,12 +69,12 @@ npm run build
 
 ## 项目地址
 
-- [PAOBAI](https://gitee.com/zheng_yc/paobai) gitee
-- [PAOBAI](https://github.com/paobai/paobai) github
+- [PAOBAI](https://gitee.com/zheng_yc/vue-paobai-admin) gitee
+- [PAOBAI](https://github.com/paobai/vue-paobai-admin) github
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://github.com/paobai/paobai/issues) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://github.com/paobai/vue-paobai-admin/issues) 或者提交一个 Pull Request。
 
 **Pull Request:**
 
