@@ -1,6 +1,6 @@
-import { successResponseWrap } from "@/utils/mock"
-import Mock from "mockjs"
+import { successResponseWrap } from "./help"
 import type { MockRequestType } from "./help"
+import Mock from "mockjs"
 
 export default [
   {

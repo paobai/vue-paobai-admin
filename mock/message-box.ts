@@ -1,4 +1,4 @@
-import { successResponseWrap } from "@/utils/mock"
+import { successResponseWrap } from "./help"
 import type { MockRequestType } from "./help"
 
 const haveReadIds: number[] = []
