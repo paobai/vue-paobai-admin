@@ -1,4 +1,4 @@
-import { getRequest } from "@/utils/httpRequest"
+import { getRequest } from "@/utils/http-request"
 import type * as ApiType from "./type"
 export * from "./type"
 

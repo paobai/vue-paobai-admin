@@ -1,4 +1,4 @@
-import { getRequest, postRequest, deleteRequest, downloadFile, uploadFile, putRequest } from "@/utils/httpRequest"
+import { getRequest, postRequest, deleteRequest, downloadFile, uploadFile, putRequest } from "@/utils/http-request"
 import type * as ApiType from "./type"
 export * from "./type"
 import { BaseApi } from "@/api/help"

@@ -1,4 +1,4 @@
-import { postRequest } from "@/utils/httpRequest"
+import { postRequest } from "@/utils/http-request"
 import type * as ApiType from "./type"
 export * from "./type"
 
