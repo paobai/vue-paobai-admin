@@ -34,3 +34,8 @@ declare type AnyFunction<T> = (...args: any[]) => T
 declare type ExtractApiRes<T> = ReturnType<T> extends PromiseLike<infer R> ? R : any
 
 declare type ExtractApiDataRes<T> = ExtractApiRes<T> extends { data: infer R } ? R : any
+
+declare module '*.less' {
+  const resource: {[key: string]: string};
+  export = resource;
+}
