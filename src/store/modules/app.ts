@@ -2,14 +2,14 @@ import { defineStore } from "pinia"
 import { store } from "@/store"
 import config from "@/config"
 import { storageLocal, storageSession } from "@/utils/storage"
-import { MenuPosition } from "@/constant/settings"
+import { MenuPositionEnum } from "@/enums/app"
 
 interface appStore {
   appTheme: "dark" | "light"
   layoutMode: string
   navbarShow: boolean
   sidebarShow: boolean
-  menuPosition: MenuPosition
+  menuPosition: MenuPositionEnum
   sidebarMenuCollapsed: boolean
   rightSettingShow: boolean
   footerShow: boolean
@@ -24,7 +24,7 @@ export const useAppStore = defineStore({
     appTheme: config.custom.appTheme,
     navbarShow: config.custom.navbarShow,
     sidebarShow: config.custom.sidebarShow,
-    menuPosition: MenuPosition.MIX,
+    menuPosition: MenuPositionEnum.MIX,
     sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
     rightSettingShow: false,
     footerShow: config.custom.footerShow,
@@ -45,7 +45,7 @@ export const useAppStore = defineStore({
     getSidebarShow(): boolean {
       return this.sidebarShow
     },
-    getMenuPosition(): MenuPosition {
+    getMenuPositionEnum(): MenuPositionEnum {
       return this.menuPosition
     },
     getSidebarMenuCollapsed(): boolean {
@@ -77,7 +77,7 @@ export const useAppStore = defineStore({
     updateSidebarShow(sidebarShow: boolean) {
       this.sidebarShow = sidebarShow
     },
-    updateMenuPosition(menuPosition: MenuPosition) {
+    updateMenuPositionEnum(menuPosition: MenuPositionEnum) {
       this.menuPosition = menuPosition
     },
     updateLayoutMode(layoutMode: string) {

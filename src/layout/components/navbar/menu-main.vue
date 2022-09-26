@@ -38,7 +38,7 @@
 import { defineComponent } from "vue"
 import { useUserHook } from "@/hooks//user"
 import { useAppHook } from "@/hooks/app"
-import { RouteType } from "@/constant/settings"
+import { RouteEnum } from "@/enums/app"
 import router from "@/router"
 import { getFirstMenuItem } from "@/utils/menu-help"
 import menuSub from "./menu-sub.vue"
@@ -52,7 +52,7 @@ export default defineComponent({
     const clickMenu = function (key: string) {
       let dist = getRouteByKey(key)
       if (!dist) return
-      if (dist.type === RouteType.Menu) {
+      if (dist.type === RouteEnum.Menu) {
         let find = getFirstMenuItem(dist.children)
         if (!find) return
         router.push({ name: find.routeName })

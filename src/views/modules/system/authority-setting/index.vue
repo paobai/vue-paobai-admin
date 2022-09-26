@@ -24,7 +24,7 @@
 <script lang="ts">
 import { useUserHook } from "@/hooks/user"
 import type { AuthLoginByPasswordReq } from "@/api/upms"
-import { grantType } from "@/constant"
+import { GrantTypeEnum } from "@/enums/app"
 import { UserApi } from "@/api/upms"
 import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
@@ -36,7 +36,7 @@ export default {
       let loginForm: AuthLoginByPasswordReq = {
         userName: userName,
         passWord: userName,
-        grant_type: grantType.PASSWORD
+        grant_type: GrantTypeEnum.PASSWORD
       }
       const login = async () => {
         UserApi.login(loginForm).then(res => {
