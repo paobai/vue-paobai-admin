@@ -39,3 +39,9 @@ declare module '*.less' {
   const resource: {[key: string]: string};
   export = resource;
 }
+// 接口返回的列表数据
+declare type ApiListData<T> = {
+  total: number
+  list: T
+  [propName: string]: unknown
+}

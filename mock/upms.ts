@@ -98,6 +98,13 @@ const routersConfigPre: any[] = [
     ]
   },
   {
+    title: "文件系统",
+    path: "/file/main",
+    key: "file",
+    icon: "iconfont-all-fill",
+    type: RouteEnum.Page
+  },
+  {
     title: "多菜单",
     path: "",
     key: "menu-multi",
@@ -277,11 +284,12 @@ const routersConfig = fixSourceRouterConfig(routersConfigPre)
 
 const adminRouter = cloneDeep(routersConfig)
 const normalUserRouters = cloneDeep(routersConfig)
-normalUserRouters[4].children!.splice(
-  normalUserRouters[4].children!.findIndex(e => e.key === "authority-setting-high-permission-page"),
+const findMenuFixIndex = normalUserRouters.findIndex(e => e.key === "menu-system-setting")
+normalUserRouters[findMenuFixIndex].children!.splice(
+  normalUserRouters[findMenuFixIndex].children!.findIndex(e => e.key === "authority-setting-high-permission-page"),
   1
 )
-normalUserRouters[4].children![0].children!.splice(1, 1)
+normalUserRouters[findMenuFixIndex].children![0].children!.splice(1, 1)
 
 // 把按钮从router里面分离出来，并把button key 加到permissions里面
 function splitButtonFromRouter(routersConfig: RouterApiType[], permissions: string[] = [], start = true) {
