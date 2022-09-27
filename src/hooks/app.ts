@@ -234,6 +234,10 @@ export function useAppHook() {
     return dist
   })
 
+  const getAppTagList = () => {
+    return appStore.appTagList
+  }
+
   const initSys = () => {
     return onMounted(() => {
       updateLayoutModel(layoutMode.value)
@@ -276,7 +280,8 @@ export function useAppHook() {
     updateFooterShow,
     weakness,
     gray,
-    initSys
+    initSys,
+    getAppTagList
   }
 }
 export default useAppHook

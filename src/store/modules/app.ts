@@ -3,6 +3,7 @@ import { store } from "@/store"
 import config from "@/config"
 import { storageLocal, storageSession } from "@/utils/storage"
 import { MenuPositionEnum } from "@/enums/app"
+import type { tagType } from "@/constant/settings"
 
 interface appStore {
   appTheme: "dark" | "light"
@@ -16,6 +17,7 @@ interface appStore {
   sysColor: string
   weakness: boolean
   gray: boolean
+  appTagList: tagType[]
 }
 export const useAppStore = defineStore({
   id: "store-app",
@@ -30,7 +32,8 @@ export const useAppStore = defineStore({
     footerShow: config.custom.footerShow,
     sysColor: config.custom.sysColor,
     weakness: config.custom.weakness,
-    gray: config.custom.gray
+    gray: config.custom.gray,
+    appTagList: []
   }),
   getters: {
     getTheme(): string {
@@ -113,7 +116,7 @@ export const useAppStore = defineStore({
       {
         key: "appStore",
         storage: storageSession,
-        paths: ["rightSettingShow"]
+        paths: ["rightSettingShow", "appTagList"]
       }
     ]
   }
