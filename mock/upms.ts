@@ -105,6 +105,14 @@ const routersConfigPre: any[] = [
     type: RouteEnum.Page
   },
   {
+    title: "文件详情",
+    path: "/file/detail",
+    key: "file-detail",
+    icon: "iconfont-all-fill",
+    type: RouteEnum.Page,
+    notShow: true
+  },
+  {
     title: "多菜单",
     path: "",
     key: "menu-multi",

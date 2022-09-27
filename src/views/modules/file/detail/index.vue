@@ -2,10 +2,10 @@
   <div class="file-detail">
     <section class="left">
       <div>
-        <a-button @click="back"><icon-left /></a-button>
+        <a-button @click="back"><a-icon-left /></a-button>
       </div>
       <div class="view-box">
-        <PreImage></PreImage>
+        <pre-image></pre-image>
       </div>
     </section>
     <section class="right">
@@ -32,16 +32,16 @@
       <a-row justify="end" class="foot-btn">
         <a-space>
           <a-button>
-            <template #icon><icon-download :size="16" /></template>
+            <template #icon><a-icon-download :size="16" /></template>
           </a-button>
           <a-button>
-            <template #icon><icon-share-alt :size="16" /></template>
+            <template #icon><a-icon-share-alt :size="16" /></template>
           </a-button>
           <a-button>
-            <template #icon><icon-drag-arrow :size="16" /></template>
+            <template #icon><a-icon-drag-arrow :size="16" /></template>
           </a-button>
           <a-button>
-            <template #icon><icon-delete :size="16" /></template>
+            <template #icon><a-icon-delete :size="16" /></template>
           </a-button>
         </a-space>
       </a-row>
@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts" name="FileDetail">
-import PreImage from "./PreImage.vue"
+import PreImage from "./pre-image.vue"
 import { useRouter } from "vue-router"
 const router = useRouter()
 

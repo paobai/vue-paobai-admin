@@ -9,26 +9,26 @@
     <a-row justify="space-between">
       <a-space>
         <a-button type="primary" @click="handle('rotateLeft')">
-          <template #icon><icon-rotate-left /></template>
+          <template #icon><a-icon-rotate-left /></template>
         </a-button>
         <a-button type="primary" @click="handle('rotateRight')">
-          <template #icon><icon-rotate-right /></template>
+          <template #icon><a-icon-rotate-right /></template>
         </a-button>
         <a-button type="primary" @click="handle('scaleMinus')">
-          <template #icon><icon-minus /></template>
+          <template #icon><a-icon-minus /></template>
         </a-button>
         <section class="zoom-proportion">{{ zoomProportion }}</section>
         <a-button type="primary" @click="handle('scalePlus')">
-          <template #icon><icon-plus /></template>
+          <template #icon><a-icon-plus /></template>
         </a-button>
       </a-space>
 
       <a-space>
         <a-button type="primary">
-          <template #icon><icon-edit /></template>
+          <template #icon><a-icon-edit /></template>
         </a-button>
         <a-button type="primary" @click="handle('fullScreen')">
-          <template #icon><icon-fullscreen /></template>
+          <template #icon><a-icon-fullscreen /></template>
         </a-button>
       </a-space>
     </a-row>

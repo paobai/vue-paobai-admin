@@ -1,7 +1,7 @@
 <template>
   <div class="file-manage">
-    <FileAside></FileAside>
-    <FileMain></FileMain>
+    <file-aside></file-aside>
+    <file-main></file-main>
   </div>
 </template>
 
