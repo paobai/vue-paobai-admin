@@ -64,13 +64,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, unref, watch } from "vue"
+import { computed, defineComponent, ref, unref } from "vue"
 import type { Ref } from "vue"
-import { useRouter, useRoute } from "vue-router"
-import type { RouteLocationNormalizedLoadedCustom, tagType } from "@/constant/settings"
+import { useRouter } from "vue-router"
+import type { tagType } from "@/constant/settings"
 import config from "@/config"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
+import { listenerRouteChange } from "@/utils/route-listener"
+
 export default defineComponent({
   setup() {
     let { getRouteByKey } = useUserHook()
@@ -88,7 +90,6 @@ export default defineComponent({
     })
     const router = useRouter()
     const fullScreenStatus = ref(0)
-    const route: RouteLocationNormalizedLoadedCustom = useRoute() as RouteLocationNormalizedLoadedCustom
     let activeRouteKey: Ref<String> = ref("")
     let appTagList: Ref<Array<tagType>> = ref([])
     const deleteTag = function (item: tagType, index: number) {
@@ -134,22 +135,18 @@ export default defineComponent({
         fullScreenStatus.value = 0
       }
     }
-    watch(
-      () => route.path,
-      () => {
-        activeRouteKey.value = route.meta.key
-        let find = appTagList.value.find(item => item.key === route.meta.key)
-        if (find) return
-        if (route.meta.notShow) return
-        appTagList.value.unshift({
-          title: route.meta.title as string,
-          key: route.meta.key as string,
-          name: route.name as string,
-          path: route.path as string
-        })
-      },
-      { immediate: true }
-    )
+    listenerRouteChange((route: RouteLocationNormalized) => {
+      activeRouteKey.value = route.meta.key
+      let find = appTagList.value.find(item => item.key === route.meta.key)
+      if (find) return
+      // if (route.meta.notShow) return
+      appTagList.value.unshift({
+        title: route.meta.title as string,
+        key: route.meta.key as string,
+        name: route.name as string,
+        path: route.path as string
+      })
+    }, true)
     return {
       appTagList,
       deleteTag,
