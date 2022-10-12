@@ -14,7 +14,7 @@
     "init": "husky install"
   },
   "dependencies": {
-    "@arco-design/web-vue": "2.33.0",
+    "@arco-design/web-vue": "2.37.4",
     "@arco-themes/react-paobai": "0.0.1",
     "@vueuse/core": "^8.9.4",
     "animate.css": "^4.1.1",
