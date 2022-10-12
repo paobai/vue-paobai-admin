@@ -40,7 +40,7 @@ export default function createRouteGuard(router: MyRouter) {
           const userStore = useUserHook()
           const { routers: newRoutes, permissions } = fixResToSys(res.data)
           // mainRoutesSource为加入了登录之后的默认route
-          // 改变为内部系统使用的sysRouteType
+          // 改变为内部系统使用的sysRouteEnum
           // 如果后台做了排序那么这个处理可以省略
           const finalSysRoutes = sortRouteSys([...mainRoutesSource, ...fixRouteToSysType(newRoutes)])
           // 设置该参数为判断获取过动态路由

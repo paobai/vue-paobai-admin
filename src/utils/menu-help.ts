@@ -1,4 +1,4 @@
-import { RouteType } from "@/constant/settings"
+import { RouteEnum } from "@/enums/app"
 import type { RouterApiType, RouterSysType } from "@/constant/settings"
 
 /**
@@ -39,7 +39,7 @@ export function getFirstMenuItem(routeList?: RouterSysType[]): undefined | Route
   if (!routeList || routeList.length === 0) return dist
   for (let i = 0; i < routeList.length; i++) {
     dist = routeList[i]
-    if (dist.type === RouteType.Page) return dist
+    if (dist.type === RouteEnum.Page) return dist
     dist = getFirstMenuItem(dist.children)
     if (dist) return dist
   }

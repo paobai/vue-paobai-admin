@@ -2,20 +2,22 @@ import { defineStore } from "pinia"
 import { store } from "@/store"
 import config from "@/config"
 import { storageLocal, storageSession } from "@/utils/storage"
-import { MenuPosition } from "@/constant/settings"
+import { MenuPositionEnum } from "@/enums/app"
+import type { tagType } from "@/constant/settings"
 
 interface appStore {
   appTheme: "dark" | "light"
   layoutMode: string
   navbarShow: boolean
   sidebarShow: boolean
-  menuPosition: MenuPosition
+  menuPosition: MenuPositionEnum
   sidebarMenuCollapsed: boolean
   rightSettingShow: boolean
   footerShow: boolean
   sysColor: string
   weakness: boolean
   gray: boolean
+  appTagList: tagType[]
 }
 export const useAppStore = defineStore({
   id: "store-app",
@@ -24,13 +26,14 @@ export const useAppStore = defineStore({
     appTheme: config.custom.appTheme,
     navbarShow: config.custom.navbarShow,
     sidebarShow: config.custom.sidebarShow,
-    menuPosition: MenuPosition.MIX,
+    menuPosition: MenuPositionEnum.SIDEBAR,
     sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
     rightSettingShow: false,
     footerShow: config.custom.footerShow,
     sysColor: config.custom.sysColor,
     weakness: config.custom.weakness,
-    gray: config.custom.gray
+    gray: config.custom.gray,
+    appTagList: []
   }),
   getters: {
     getTheme(): string {
@@ -45,7 +48,7 @@ export const useAppStore = defineStore({
     getSidebarShow(): boolean {
       return this.sidebarShow
     },
-    getMenuPosition(): MenuPosition {
+    getMenuPositionEnum(): MenuPositionEnum {
       return this.menuPosition
     },
     getSidebarMenuCollapsed(): boolean {
@@ -77,7 +80,7 @@ export const useAppStore = defineStore({
     updateSidebarShow(sidebarShow: boolean) {
       this.sidebarShow = sidebarShow
     },
-    updateMenuPosition(menuPosition: MenuPosition) {
+    updateMenuPositionEnum(menuPosition: MenuPositionEnum) {
       this.menuPosition = menuPosition
     },
     updateLayoutMode(layoutMode: string) {
@@ -113,7 +116,7 @@ export const useAppStore = defineStore({
       {
         key: "appStore",
         storage: storageSession,
-        paths: ["rightSettingShow"]
+        paths: ["rightSettingShow", "appTagList"]
       }
     ]
   }

@@ -1,7 +1,7 @@
 import { useAppStoreWithOut } from "@/store/modules/app"
 import { useUserHook } from "./user"
 import { computed, onMounted, ref, unref, watch } from "vue"
-import { MenuPosition, RouteType } from "@/constant/settings"
+import { MenuPositionEnum, RouteEnum } from "@/enums/app"
 import type { RouterSysType } from "@/constant/settings"
 import { getRouteMap } from "@/utils/menu-help"
 import type { RouteLocationNormalized } from "vue-router"
@@ -47,29 +47,29 @@ export function useAppHook() {
 
   const updateLayoutModel = function (layoutModel: string) {
     const findFix = layoutModeList.find(e => e.value === layoutModel) || layoutModeList[0]
-    updateMenuPosition(findFix.menuPosition)
+    updateMenuPositionEnum(findFix.menuPosition)
     updateSidebar(findFix.sidebarShow)
     updateNavbar(findFix.navbarShow)
     appStore.updateLayoutMode(layoutModel)
   }
 
   const menuPosition = computed({
-    get: () => appStore.getMenuPosition,
+    get: () => appStore.getMenuPositionEnum,
     set: val => {
-      updateMenuPosition(val)
+      updateMenuPositionEnum(val)
     }
   })
 
-  const updateMenuPosition = function (menuPosition: MenuPosition) {
-    appStore.updateMenuPosition(menuPosition)
+  const updateMenuPositionEnum = function (menuPosition: MenuPositionEnum) {
+    appStore.updateMenuPositionEnum(menuPosition)
   }
 
   const navbarMenuShow = computed(() => {
-    return menuPosition.value !== MenuPosition.SIDEBAR
+    return menuPosition.value !== MenuPositionEnum.SIDEBAR
   })
 
   const sidebarMenuShow = computed(() => {
-    return menuPosition.value !== MenuPosition.NAVBAR
+    return menuPosition.value !== MenuPositionEnum.NAVBAR
   })
 
   const updateNavbar = function (res: boolean) {
@@ -148,8 +148,8 @@ export function useAppHook() {
 
   const fixSidebarShow = computed(() => {
     // nav显示 同时选择的第一个为page ，则侧边栏为空，所以应该隐藏
-    if (menuPosition.value === MenuPosition.SIDEBAR) return true
-    if (navbarShow.value && nowFirstRoute.value && nowFirstRoute.value.type !== RouteType.Menu) {
+    if (menuPosition.value === MenuPositionEnum.SIDEBAR) return true
+    if (navbarShow.value && nowFirstRoute.value && nowFirstRoute.value.type !== RouteEnum.Menu) {
       return false
     }
     return sidebarShow.value
@@ -204,7 +204,7 @@ export function useAppHook() {
       ([nowKey, menuPosition]) => {
         let dist: RouterSysType[] = []
         // mix情况左部需要为所选的子集
-        if (menuPosition === MenuPosition.MIX) {
+        if (menuPosition === MenuPositionEnum.MIX) {
           const parentDist = sourceRouteList.value.filter(item => item.key === unref(nowKey))[0]
           if (parentDist) dist = parentDist.children || []
         } else {
@@ -234,6 +234,10 @@ export function useAppHook() {
     return dist
   })
 
+  const getAppTagList = () => {
+    return appStore.appTagList
+  }
+
   const initSys = () => {
     return onMounted(() => {
       updateLayoutModel(layoutMode.value)
@@ -259,7 +263,7 @@ export function useAppHook() {
     updateCollapse,
     updateRightSetting,
     menuPosition,
-    updateMenuPosition,
+    updateMenuPositionEnum,
     showRightSetting,
     nowFirstRouteKey,
     nowFirstRoute,
@@ -276,7 +280,8 @@ export function useAppHook() {
     updateFooterShow,
     weakness,
     gray,
-    initSys
+    initSys,
+    getAppTagList
   }
 }
 export default useAppHook

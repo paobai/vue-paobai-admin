@@ -1,48 +1,24 @@
 import type { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw } from "vue-router"
 import type { FileStatus } from "@arco-design/web-vue/es/upload/interfaces"
-
-export enum TokenStorageName {
-  LocalStorage = "localStorage",
-  SessionStorage = "sessionStorage",
-  Cookie = "cookie"
-}
-
-/**
- * 菜单位置信息
- */
-export enum MenuPosition {
-  NAVBAR = "navbar",
-  SIDEBAR = "sidebar",
-  MIX = "mix"
-}
+import { RouteEnum } from "@/enums/app"
 
 /**
  * route的类型
  */
-export enum RouteType {
-  Menu,
-  Page,
-  Iframe,
-  Button
-}
-
-/**
- * route的类型
- */
-export const RouteTypeMap = [
-  { name: "菜单", value: 0 },
-  { name: "页面", value: 1 },
-  { name: "外链", value: 2 },
-  { name: "按钮", value: 3 }
+export const RouteEnumMap: { name: string; value: RouteEnum }[] = [
+  { name: "菜单", value: RouteEnum.Menu },
+  { name: "页面", value: RouteEnum.Page },
+  { name: "外链", value: RouteEnum.Iframe },
+  { name: "按钮", value: RouteEnum.Button }
 ]
 /**
  * api返回的route结构
  */
 export interface RouterApiType {
-  id: number
+  id: AppIdType
   key: string
   path?: string
-  type: RouteType
+  type: RouteEnum
   icon?: string
   children?: RouterApiType[]
   title: string
@@ -60,7 +36,7 @@ export interface RouterSysType {
   key: string
   path?: string
   routeName: string
-  type: RouteType
+  type: RouteEnum
   icon?: string
   children?: RouterSysType[]
   title: string
@@ -74,7 +50,7 @@ export declare interface RouteMetaCustom extends RouteMeta {
   icon?: string
   title: string
   key: string
-  type: RouteType
+  type: RouteEnum
   notShow?: boolean
   iframePath?: string
 }

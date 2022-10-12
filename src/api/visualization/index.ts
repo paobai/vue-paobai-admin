@@ -1,5 +1,5 @@
 import type { GeneralChart } from "@/types/global"
-import { getRequest, postRequest } from "@/utils/httpRequest"
+import { getRequest, postRequest } from "@/utils/http-request"
 import type * as ApiType from "./type"
 export * from "./type"
 

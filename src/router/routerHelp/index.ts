@@ -9,7 +9,7 @@ export declare interface MyRouter extends Router {
 }
 
 import Layout from "@/layout/index.vue"
-import { RouteType } from "@/constant/settings"
+import { RouteEnum } from "@/enums/app"
 import type { RouterSysType, RouterCustomType, RouterApiType } from "@/constant/settings"
 import { buildMenuName } from "@/utils/menu-help"
 import config from "@/config"
@@ -98,7 +98,7 @@ export function addRouterFromData(routes: RouterSysType[], modulesRoutes: any, r
 }
 
 export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: RouterCustomType[] = []) {
-  if (item.type === RouteType.Menu) {
+  if (item.type === RouteEnum.Menu) {
     if (item.children && item.children.length > 0) {
       item.children.forEach(child => {
         buildRoute(child, modulesRoutes, inList)
@@ -108,7 +108,7 @@ export function buildRoute(item: RouterSysType, modulesRoutes: any, inList: Rout
   }
   let findModule = modulesRoutes["/src/views/common/wait-dev.vue"]
   let modulePath = item.path
-  if (item.type === RouteType.Iframe && modulePath) {
+  if (item.type === RouteEnum.Iframe && modulePath) {
     findModule = modulesRoutes["/src/views/common/common-iframe.vue"]
     modulePath = "iframe" + item.key + "-path-" + Base64.encodeURI(modulePath)
   } else if (modulePath) {

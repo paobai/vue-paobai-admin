@@ -1,4 +1,4 @@
-import { getRequest, postRequest, deleteRequest, putRequest } from "@/utils/httpRequest"
+import { getRequest, postRequest, deleteRequest, putRequest } from "@/utils/http-request"
 
 export class BaseApi {
   static baseUrlPre = ""

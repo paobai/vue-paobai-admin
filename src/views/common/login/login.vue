@@ -70,7 +70,7 @@ import Cookies from "@/utils/storage/cookie"
 import config from "@/config"
 import { UserApi } from "@/api/upms"
 import type { AuthLoginByPasswordReq } from "@/api/upms"
-import { grantType } from "@/constant"
+import { GrantTypeEnum } from "@/enums/app"
 import { useAppHook } from "@/hooks/app"
 import bkRound from "./components/bk-round.vue"
 
@@ -83,7 +83,7 @@ export default {
     let loginForm: AuthLoginByPasswordReq = reactive({
       userName: "paobai",
       passWord: "paobai",
-      grant_type: grantType.PASSWORD
+      grant_type: GrantTypeEnum.PASSWORD
     })
     const router = useRouter()
     const login = async () => {

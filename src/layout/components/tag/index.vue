@@ -64,17 +64,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, unref, watch } from "vue"
+import { computed, defineComponent, ref, unref } from "vue"
 import type { Ref } from "vue"
-import { useRouter, useRoute } from "vue-router"
-import type { RouteLocationNormalizedLoadedCustom, tagType } from "@/constant/settings"
+import { useRouter } from "vue-router"
+import type { tagType } from "@/constant/settings"
+import type { RouteLocationNormalized } from "vue-router"
 import config from "@/config"
 import { useUserHook } from "@/hooks/user"
 import { useAppHook } from "@/hooks/app"
+import { listenerRouteChange } from "@/utils/route-listener"
+
 export default defineComponent({
   setup() {
     let { getRouteByKey } = useUserHook()
-    let { nowMenu } = useAppHook()
+    let { nowMenu, getAppTagList } = useAppHook()
     let leftTag = computed(() => {
       if (!unref(nowMenu)) {
         return
@@ -88,9 +91,8 @@ export default defineComponent({
     })
     const router = useRouter()
     const fullScreenStatus = ref(0)
-    const route: RouteLocationNormalizedLoadedCustom = useRoute() as RouteLocationNormalizedLoadedCustom
     let activeRouteKey: Ref<String> = ref("")
-    let appTagList: Ref<Array<tagType>> = ref([])
+    let appTagList: Ref<Array<tagType>> = ref(getAppTagList())
     const deleteTag = function (item: tagType, index: number) {
       appTagList.value.splice(index, 1)
       if (appTagList.value.length === 0) {
@@ -134,22 +136,18 @@ export default defineComponent({
         fullScreenStatus.value = 0
       }
     }
-    watch(
-      () => route.path,
-      () => {
-        activeRouteKey.value = route.meta.key
-        let find = appTagList.value.find(item => item.key === route.meta.key)
-        if (find) return
-        if (route.meta.notShow) return
-        appTagList.value.unshift({
-          title: route.meta.title as string,
-          key: route.meta.key as string,
-          name: route.name as string,
-          path: route.path as string
-        })
-      },
-      { immediate: true }
-    )
+    listenerRouteChange((route: RouteLocationNormalized) => {
+      activeRouteKey.value = route.meta.key as string
+      let find = appTagList.value.find(item => item.key === route.meta.key)
+      if (find) return
+      // if (route.meta.notShow) return
+      appTagList.value.push({
+        title: route.meta.title as string,
+        key: route.meta.key as string,
+        name: route.name as string,
+        path: route.path as string
+      })
+    }, true)
     return {
       appTagList,
       deleteTag,
@@ -171,8 +169,11 @@ export default defineComponent({
 
   .app-left-tag {
     flex-shrink: 0;
+    min-width: 250px;
     padding: 0 16px;
+    margin-right: 12px;
     line-height: 30px;
+    box-shadow: inset -7px 0 11px -6px #888;
 
     .menu-tag {
       padding: 0 8px;

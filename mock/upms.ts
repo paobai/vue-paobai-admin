@@ -1,7 +1,7 @@
 import type { MockMethod } from "vite-plugin-mock"
 import type { RouterApiType } from "@/constant/settings"
-import { RouteType } from "@/constant/settings"
-import { failResponseWrap, successResponseWrap } from "@/utils/mock"
+import { RouteEnum } from "@/enums/app"
+import { failResponseWrap, successResponseWrap } from "./help"
 import { cloneDeep } from "lodash"
 import type { MockRequestType } from "./help"
 
@@ -48,83 +48,123 @@ function getUserId(request: MockRequestType) {
 
 const routersConfigPre: any[] = [
   {
-    title: "Arco Design Pro",
-    path: "",
-    key: "menu-header-1",
-    type: RouteType.Menu,
-    icon: "iconfont-store-fill",
     sort: 2,
+    key: "workplace",
+    title: "工作台",
+    type: RouteEnum.Page,
+    icon: "iconfont-apparel",
+    path: "/dashboard/workplace/index"
+  },
+  {
+    sort: 3,
+    key: "monitor",
+    title: "实时监控",
+    type: RouteEnum.Page,
+    icon: "iconfont-store-fill",
+    path: "/dashboard/monitor/index"
+  },
+  {
+    sort: 4,
+    key: "visualization",
+    title: "分析数据可视化",
+    type: RouteEnum.Menu,
+    icon: "iconfont-fenxi_analyze",
     children: [
       {
-        key: "workplace",
-        title: "工作台",
-        type: RouteType.Page,
-        icon: "iconfont-apparel",
-        path: "/dashboard/workplace/index"
+        key: "data-analysis",
+        title: "数据分析",
+        type: RouteEnum.Page,
+        path: "/visualization/data-analysis/index"
       },
       {
-        key: "monitor",
-        title: "实时监控",
-        type: RouteType.Page,
-        path: "/dashboard/monitor/index"
-      },
-      {
-        key: "visualization",
-        title: "分析数据可视化",
-        type: RouteType.Menu,
-        icon: "iconfont-integral",
-        children: [
-          {
-            key: "data-analysis",
-            title: "数据分析",
-            type: RouteType.Page,
-            path: "/visualization/data-analysis/index"
-          },
-          {
-            key: "multi-dimension-data-analysis",
-            title: "多维数据分析",
-            type: RouteType.Page,
-            path: "/visualization/multi-dimension-data-analysis/index"
-          }
-        ]
-      },
-      {
-        title: "其他页面",
-        path: "http://vue-pro.arco.design/",
-        key: "arco-design-pro",
-        icon: "iconfont-homepage-ads-fill",
-        type: RouteType.Iframe
+        key: "multi-dimension-data-analysis",
+        title: "多维数据分析",
+        type: RouteEnum.Page,
+        path: "/visualization/multi-dimension-data-analysis/index"
       }
     ]
+  },
+  {
+    sort: 5,
+    title: "文档",
+    path: "",
+    key: "arco-design-pro",
+    icon: "iconfont-document",
+    type: RouteEnum.Menu,
+    children: [
+      {
+        title: "Arco-design-vue文档",
+        path: "https://arco.design/vue/docs/start",
+        key: "arco-design-vue",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
+      },
+      {
+        title: "Vue3文档",
+        path: "https://cn.vuejs.org/",
+        key: "vue3-iframe",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
+      },
+      {
+        title: "掘金",
+        path: "https://juejin.cn/frontend",
+        key: "juejin-iframe",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
+      },
+      {
+        title: "Typescript文档",
+        path: "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html",
+        key: "typescript-iframe",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
+      }
+    ]
+  },
+  {
+    title: "文件系统",
+    path: "/file/main",
+    key: "file",
+    icon: "iconfont-all-fill",
+    type: RouteEnum.Page
+  },
+  {
+    title: "文件详情",
+    path: "/file/detail",
+    key: "file-detail",
+    icon: "iconfont-all-fill",
+    type: RouteEnum.Page,
+    notShow: true
   },
   {
     title: "多菜单",
     path: "",
     key: "menu-multi",
-    icon: "iconfont-all-fill",
-    type: RouteType.Menu,
+    icon: "iconfont-menu",
+    type: RouteEnum.Menu,
     children: [
       {
         key: "1",
         title: "menu1",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         path: "/test-router/menu1"
       },
       {
         key: "2",
         title: "menu2",
-        type: RouteType.Menu,
+        type: RouteEnum.Menu,
         children: [
           {
             key: "2_1",
             title: "menu2-1",
-            type: RouteType.Page,
+            type: RouteEnum.Page,
             path: "/test-router/menu2/menu2-1"
           },
           {
             key: "2_2",
             title: "menu2-2",
-            type: RouteType.Page,
+            type: RouteEnum.Page,
             path: "/test-router/menu2/menu2-2"
           }
         ]
@@ -132,23 +172,23 @@ const routersConfigPre: any[] = [
       {
         key: "3",
         title: "menu3",
-        type: RouteType.Menu,
+        type: RouteEnum.Menu,
         children: [
           {
             key: "3_1",
             title: "menu3-1",
-            type: RouteType.Menu,
+            type: RouteEnum.Menu,
             children: [
               {
                 key: "3_1_1",
                 title: "menu3-1-1",
-                type: RouteType.Page,
+                type: RouteEnum.Page,
                 path: "/test-router/menu3/menu3-1/menu3-1-1"
               },
               {
                 key: "3_2_2",
                 title: "menu3-1-2",
-                type: RouteType.Page,
+                type: RouteEnum.Page,
                 path: "/test-router/menu3/menu3-1/menu3-1-2"
               }
             ]
@@ -156,13 +196,13 @@ const routersConfigPre: any[] = [
           {
             key: "3_2",
             title: "menu3-2",
-            type: RouteType.Page,
+            type: RouteEnum.Page,
             path: "/test-router/menu3/menu3-2"
           },
           {
             key: "3_3",
             title: "menu3-3",
-            type: RouteType.Page,
+            type: RouteEnum.Page,
             path: "/test-router/menu3/menu3-3"
           }
         ]
@@ -170,57 +210,43 @@ const routersConfigPre: any[] = [
       {
         key: "cd2-3_1",
         title: "菜单2的页面1",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         path: ""
       },
       {
         key: "cd2-3_2",
         title: "菜单2的页面2",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         path: ""
       }
     ]
-  },
-  {
-    title: "单页面",
-    path: "/test-router/single-page",
-    key: "menu-single",
-    icon: "iconfont-homepage-ads-fill",
-    type: RouteType.Page
-  },
-  {
-    title: "Iframe页面",
-    path: "https://arco.design/vue/docs/pro/start",
-    key: "menu-iframe",
-    icon: "iconfont-homepage-ads-fill",
-    type: RouteType.Iframe
   },
   {
     title: "系统设置",
     path: "",
     key: "menu-system-setting",
     icon: "iconfont-set1",
-    type: RouteType.Menu,
+    type: RouteEnum.Menu,
     children: [
       {
         title: "权限设置",
         path: "/system/authority-setting/index",
         key: "authority-setting",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         icon: "iconfont-fencengpeizhi",
         children: [
           {
             title: "低权限按钮",
             path: "",
             key: "low-permission-button",
-            type: RouteType.Button,
+            type: RouteEnum.Button,
             icon: ""
           },
           {
             title: "高权限按钮",
             path: "",
             key: "high-permission-button",
-            type: RouteType.Button,
+            type: RouteEnum.Button,
             icon: ""
           }
         ]
@@ -229,26 +255,26 @@ const routersConfigPre: any[] = [
         title: "角色管理",
         path: "/system/role",
         key: "system-role",
-        type: RouteType.Page
+        type: RouteEnum.Page
       },
       {
         title: "菜单管理",
         path: "/system/menu",
         key: "system-menu",
-        type: RouteType.Page
+        type: RouteEnum.Page
       },
       {
         title: "低权限页面",
         path: "/system/authority-setting/low-permission",
         key: "authority-setting-low-permission-page",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         icon: "iconfont-component"
       },
       {
         title: "高权限页面",
         path: "/system/authority-setting/high-permission",
         key: "authority-setting-high-permission-page",
-        type: RouteType.Page,
+        type: RouteEnum.Page,
         icon: "iconfont-component"
       }
     ]
@@ -277,22 +303,23 @@ const routersConfig = fixSourceRouterConfig(routersConfigPre)
 
 const adminRouter = cloneDeep(routersConfig)
 const normalUserRouters = cloneDeep(routersConfig)
-normalUserRouters[4].children!.splice(
-  normalUserRouters[4].children!.findIndex(e => e.key === "authority-setting-high-permission-page"),
+const findMenuFixIndex = normalUserRouters.findIndex(e => e.key === "menu-system-setting")
+normalUserRouters[findMenuFixIndex].children!.splice(
+  normalUserRouters[findMenuFixIndex].children!.findIndex(e => e.key === "authority-setting-high-permission-page"),
   1
 )
-normalUserRouters[4].children![0].children!.splice(1, 1)
+normalUserRouters[findMenuFixIndex].children![0].children!.splice(1, 1)
 
 // 把按钮从router里面分离出来，并把button key 加到permissions里面
 function splitButtonFromRouter(routersConfig: RouterApiType[], permissions: string[] = [], start = true) {
   if (start) routersConfig = cloneDeep(routersConfig)
   routersConfig.forEach(e => {
-    if (e.type === RouteType.Page && e.children) {
+    if (e.type === RouteEnum.Page && e.children) {
       permissions.push(...e.children.map(buttonConfig => buttonConfig.key))
       e.children = undefined
-    } else if (e.type === RouteType.Iframe) {
+    } else if (e.type === RouteEnum.Iframe) {
       return
-    } else if (e.type === RouteType.Menu && e.children) {
+    } else if (e.type === RouteEnum.Menu && e.children) {
       splitButtonFromRouter(e.children, permissions, false)
     }
   })

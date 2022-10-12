@@ -17,7 +17,7 @@ export interface CustomConfig {
 
 const customConfig: CustomConfig = {
   appTheme: "light",
-  layoutMode: layoutModeList[0].value,
+  layoutMode: layoutModeList[3].value,
   htmlTitle: VITE_GLOB_APP_TITLE,
   navbarShow: true,
   sidebarShow: true,

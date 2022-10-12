@@ -4,7 +4,7 @@
       <router-view>
         <template #default="{ Component, route }">
           <transition mode="out-in" appear name="fade">
-            <component :is="Component" :key="route.fullPath" />
+            <component :is="Component" :key="route.path" />
           </transition>
         </template>
       </router-view>

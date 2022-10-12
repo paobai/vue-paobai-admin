@@ -29,7 +29,7 @@
         <a-col :span="12"
           ><a-form-item label="菜单类型：" field="type">
             <a-select v-model="formData.type">
-              <a-option v-for="item in RouteTypeMap" :key="item.value" :value="item.value" :label="item.name">
+              <a-option v-for="item in RouteEnumMap" :key="item.value" :value="item.value" :label="item.name">
               </a-option>
             </a-select> </a-form-item
         ></a-col>
@@ -38,7 +38,7 @@
             <a-input-number v-model="formData.sort" :min="0" label="排序号"></a-input-number> </a-form-item
         ></a-col>
         <a-col :span="12"
-          ><a-form-item v-if="formData.type !== RouteType.Button" label="菜单图标：" field="icon">
+          ><a-form-item v-if="formData.type !== RouteEnum.Button" label="菜单图标：" field="icon">
             <a-input v-model="formData.icon" placeholder="菜单图标名称"></a-input> </a-form-item
         ></a-col>
       </a-row>
@@ -54,7 +54,8 @@ import { MenuApi } from "@/api/upms"
 import { Message } from "@arco-design/web-vue"
 import { resetFormData } from "@/utils/form-data"
 import { getArcoFormRef } from "@/hooks/arco"
-import { RouteType, RouteTypeMap } from "@/constant/settings"
+import { RouteEnum } from "@/enums/app"
+import { RouteEnumMap } from "@/constant/settings"
 
 export default defineComponent({
   mixins: [modalMixins],
@@ -115,10 +116,10 @@ export default defineComponent({
     return {
       modalInnerRegister,
       formData,
-      RouteTypeMap,
+      RouteEnumMap,
       menuTree,
       confirm,
-      RouteType
+      RouteEnum
     }
   }
 })
