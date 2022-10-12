@@ -169,12 +169,11 @@ export default defineComponent({
 
   .app-left-tag {
     flex-shrink: 0;
-    min-width: 250px;
+    min-width: 170px;
     padding: 0 16px;
     margin-right: 12px;
     line-height: 30px;
-    box-shadow: inset -7px 0 11px -6px #888;
-
+    //box-shadow: inset -7px 0 11px -6px #888;
     .menu-tag {
       padding: 0 8px;
       border-right: 1px solid @primary-color;
