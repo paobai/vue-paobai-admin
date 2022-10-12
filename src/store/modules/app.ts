@@ -26,7 +26,7 @@ export const useAppStore = defineStore({
     appTheme: config.custom.appTheme,
     navbarShow: config.custom.navbarShow,
     sidebarShow: config.custom.sidebarShow,
-    menuPosition: MenuPositionEnum.MIX,
+    menuPosition: MenuPositionEnum.SIDEBAR,
     sidebarMenuCollapsed: config.custom.sidebarMenuCollapsed,
     rightSettingShow: false,
     footerShow: config.custom.footerShow,
