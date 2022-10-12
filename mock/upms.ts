@@ -48,51 +48,76 @@ function getUserId(request: MockRequestType) {
 
 const routersConfigPre: any[] = [
   {
-    title: "Arco Design Pro",
-    path: "",
-    key: "menu-header-1",
-    type: RouteEnum.Menu,
-    icon: "iconfont-store-fill",
     sort: 2,
+    key: "workplace",
+    title: "工作台",
+    type: RouteEnum.Page,
+    icon: "iconfont-apparel",
+    path: "/dashboard/workplace/index"
+  },
+  {
+    sort: 3,
+    key: "monitor",
+    title: "实时监控",
+    type: RouteEnum.Page,
+    icon: "iconfont-store-fill",
+    path: "/dashboard/monitor/index"
+  },
+  {
+    sort: 4,
+    key: "visualization",
+    title: "分析数据可视化",
+    type: RouteEnum.Menu,
+    icon: "iconfont-fenxi_analyze",
     children: [
       {
-        key: "workplace",
-        title: "工作台",
+        key: "data-analysis",
+        title: "数据分析",
         type: RouteEnum.Page,
-        icon: "iconfont-apparel",
-        path: "/dashboard/workplace/index"
+        path: "/visualization/data-analysis/index"
       },
       {
-        key: "monitor",
-        title: "实时监控",
+        key: "multi-dimension-data-analysis",
+        title: "多维数据分析",
         type: RouteEnum.Page,
-        path: "/dashboard/monitor/index"
+        path: "/visualization/multi-dimension-data-analysis/index"
+      }
+    ]
+  },
+  {
+    sort: 5,
+    title: "文档",
+    path: "",
+    key: "arco-design-pro",
+    icon: "iconfont-document",
+    type: RouteEnum.Menu,
+    children: [
+      {
+        title: "Arco-design-vue文档",
+        path: "https://arco.design/vue/docs/start",
+        key: "arco-design-vue",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
       },
       {
-        key: "visualization",
-        title: "分析数据可视化",
-        type: RouteEnum.Menu,
-        icon: "iconfont-integral",
-        children: [
-          {
-            key: "data-analysis",
-            title: "数据分析",
-            type: RouteEnum.Page,
-            path: "/visualization/data-analysis/index"
-          },
-          {
-            key: "multi-dimension-data-analysis",
-            title: "多维数据分析",
-            type: RouteEnum.Page,
-            path: "/visualization/multi-dimension-data-analysis/index"
-          }
-        ]
+        title: "Vue3文档",
+        path: "https://cn.vuejs.org/",
+        key: "vue3-iframe",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
       },
       {
-        title: "其他页面",
-        path: "http://vue-pro.arco.design/",
-        key: "arco-design-pro",
-        icon: "iconfont-homepage-ads-fill",
+        title: "掘金",
+        path: "https://juejin.cn/frontend",
+        key: "juejin-iframe",
+        icon: "iconfont-iframe",
+        type: RouteEnum.Iframe
+      },
+      {
+        title: "Typescript文档",
+        path: "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html",
+        key: "typescript-iframe",
+        icon: "iconfont-iframe",
         type: RouteEnum.Iframe
       }
     ]
@@ -116,7 +141,7 @@ const routersConfigPre: any[] = [
     title: "多菜单",
     path: "",
     key: "menu-multi",
-    icon: "iconfont-all-fill",
+    icon: "iconfont-menu",
     type: RouteEnum.Menu,
     children: [
       {
@@ -195,20 +220,6 @@ const routersConfigPre: any[] = [
         path: ""
       }
     ]
-  },
-  {
-    title: "单页面",
-    path: "/test-router/single-page",
-    key: "menu-single",
-    icon: "iconfont-homepage-ads-fill",
-    type: RouteEnum.Page
-  },
-  {
-    title: "Iframe页面",
-    path: "https://arco.design/vue/docs/pro/start",
-    key: "menu-iframe",
-    icon: "iconfont-homepage-ads-fill",
-    type: RouteEnum.Iframe
   },
   {
     title: "系统设置",
