@@ -4,8 +4,9 @@ import dataAnalysis from "./data-analysis"
 import msBox from "./message-box"
 import dashboard from "./dashboard"
 import msg from "./message"
+import file from "./file"
 import Mock from "mockjs"
-export const mockModules = [...umps, ...msBox, ...dataAnalysis, ...dashboard, ...msg]
+export const mockModules = [...umps, ...msBox, ...dataAnalysis, ...dashboard, ...msg, ...file]
 export function setupProdMockServer() {
   createProdMockServer(mockModules)
   Mock.setup({
